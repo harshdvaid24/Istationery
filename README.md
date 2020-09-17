@@ -29,7 +29,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/harshdvaid24"><img src="https://avatars2.githubusercontent.com/u/6594232?v=4" width="100px;" alt="Dmytro Portenko"/><br /><sub><b>Dmytro Portenko</b></sub></a><br /><a href="https://github.com/troublediehard/magento-react-native/commits?author=troublediehard" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/harshdvaid24"><br /><sub><b>Harsh Vaid</b></sub></a><br /></td>
     
   </tr>
 </table>
