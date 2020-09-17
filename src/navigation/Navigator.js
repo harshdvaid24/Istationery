@@ -1,0 +1,179 @@
+import React from 'react';
+import {
+  createSwitchNavigator,
+  createAppContainer,
+} from 'react-navigation';
+import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { DrawerActions } from 'react-navigation-drawer';
+
+import { Icon } from 'react-native-elements';
+
+import Category from '../components/catalog/Category';
+import CategoryTree from '../components/catalog/CategoryTree';
+import Product from '../components/catalog/Product';
+import Cart from '../components/cart/Cart';
+import Checkout from '../components/checkout/Checkout';
+import Login from '../components/account/Login';
+import Signin from '../components/account/Signin';
+import Account from '../components/account/Account';
+import AuthLoading from '../components/account/AuthLoading';
+import PasswordReset from '../components/account/PasswordReset';
+import HomeScreen from '../components/home/HomeScreen';
+import SearchScreen from '../components/search/SearchScreen';
+import OrdersScreen from '../components/account/OrdersScreen';
+import OrderScreen from '../components/account/OrderScreen';
+import AddressScreen from '../components/account/AddressScreen';
+import DrawerScreen from '../components/catalog/DrawerScreen';
+
+
+import CartBadge from '../components/cart/CartBadge';
+
+import * as routes from './routes';
+
+import { theme } from '../theme';
+
+const defaultHeader = {
+  
+  headerStyle: {
+    elevation: 0,
+    backgroundColor: theme.colors.white,
+    height: 40,
+  },
+  headerTitleStyle: {
+    ...theme.typography.titleTextSemiBold,
+    alignSelf: 'center',
+  },
+  headerBackTitle: null,
+  headerTintColor: theme.colors.appbarTint,
+};
+
+const HomeStack = createStackNavigator(
+  {
+    [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
+    [routes.NAVIGATION_CATEGORY_PATH]: Category,
+    [routes.NAVIGATION_HOME_PRODUCT_PATH]: Product,
+  },
+  {
+    initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
+    navigationOptions: defaultHeader,
+  },
+);
+
+const AuthStack = createStackNavigator({
+  [routes.NAVIGATION_LOGIN_PATH]: Login,
+  [routes.NAVIGATION_SIGNIN_PATH]: Signin,
+  [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
+}, {
+  navigationOptions: defaultHeader,
+});
+
+const AccountStack = createStackNavigator({
+  [routes.NAVIGATION_ACCOUNT_PATH]: Account,
+  [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
+  [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
+  [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
+}, {
+  navigationOptions: defaultHeader,
+});
+
+const AccountSwitch = createSwitchNavigator({
+  [routes.NAVIGATION_AUTH_LOADING_SWITCH]: AuthLoading,
+  [routes.NAVIGATION_LOGIN_STACK_PATH]: AuthStack,
+  [routes.NAVIGATION_ACCOUNT_STACK_PATH]: AccountStack,
+});
+
+const SearchStack = createStackNavigator({
+  [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
+  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: Product,
+}, {
+  navigationOptions: defaultHeader,
+});
+
+const CartStack = createStackNavigator({
+  [routes.NAVIGATION_CART_PATH]: Cart,
+}, {
+  navigationOptions: defaultHeader,
+});
+
+const MainAppNavigator = createBottomTabNavigator(
+  {
+    [routes.NAVIGATION_HOME_STACK_PATH]: {
+      screen: HomeStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => <Icon name="md-home" type="ionicon" color={tintColor} />,
+      }),
+    },
+    [routes.NAVIGATION_SEARCH_SCREEN_PATH]: {
+      screen: SearchStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => <Icon name="md-search" type="ionicon" color={tintColor} />,
+      }),
+    },
+    [routes.NAVIGATION_CART_PATH]: {
+      screen: CartStack,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => <CartBadge color={tintColor} />,
+      }),
+    },
+    [routes.NAVIGATION_AUTH_STACK_PATH]: {
+      screen: AccountSwitch,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => <Icon name="md-person" type="ionicon" color={tintColor} />,
+      }),
+    },
+  
+  },
+  {
+    // initialRouteName: NAVIGATION_AUTH_STACK_PATH,
+    tabBarOptions: {
+      showLabel: false,
+      activeTintColor: theme.colors.secondary,
+      inactiveTintColor: theme.colors.tabBarIconInactive,
+      activeBackgroundColor: theme.colors.tabBarBackground,
+      inactiveBackgroundColor: theme.colors.tabBarBackground,
+    },
+  },
+ { navigationOptions: defaultHeader}
+);
+
+const Drawer = createDrawerNavigator({
+  [routes.BOTTOM_TAB_NAVIGATOR]: {
+    screen: MainAppNavigator,
+  },
+  [routes.NAVIGATION_DRAWER_SCREEN]: {
+    screen: DrawerScreen,
+    navigationOptions: { header: null },
+  },
+}, {
+  contentComponent: CategoryTree,
+});
+
+const DrawerNavigator = createDrawerNavigator(
+  {
+    Drawer,
+  },
+  {
+    navigationOptions: defaultHeader,
+  },
+  {
+    contentComponent: DrawerScreen,
+    getCustomActionCreators: (route, stateKey) => ({
+      toggleFilterDrawer: () => DrawerActions.toggleDrawer({ key: stateKey }),
+    }),
+  },
+);
+
+const Nav = createStackNavigator({
+  [routes.NAVIGATION_DRAWER_NAVIGATOR]: {
+    screen: DrawerNavigator,
+    navigationOptions: defaultHeader,
+  },
+  [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
+},
+{
+  headerBackTitleVisible: false,
+});
+
+export const Navigator = createAppContainer(Nav);
