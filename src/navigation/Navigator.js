@@ -12,7 +12,7 @@ import { Icon } from 'react-native-elements';
 
 import Category from '../components/catalog/Category';
 import CategoryTree from '../components/catalog/CategoryTree';
-import Product from '../components/catalog/Product';
+
 import Cart from '../components/cart/Cart';
 import Checkout from '../components/checkout/Checkout';
 import Login from '../components/account/Login';
@@ -33,6 +33,8 @@ import CartBadge from '../components/cart/CartBadge';
 import * as routes from './routes';
 
 import { theme } from '../theme';
+import { ProductScreen } from '../components/catalog/ProductScreen';
+
 
 const defaultHeader = {
   
@@ -53,7 +55,7 @@ const HomeStack = createStackNavigator(
   {
     [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
-    [routes.NAVIGATION_HOME_PRODUCT_PATH]: Product,
+    [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
@@ -86,7 +88,7 @@ const AccountSwitch = createSwitchNavigator({
 
 const SearchStack = createStackNavigator({
   [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
-  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: Product,
+  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
 }, {
   navigationOptions: defaultHeader,
 });
@@ -111,6 +113,13 @@ const MainAppNavigator = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon name="md-search" type="ionicon" color={tintColor} />,
       }),
     },
+    // [routes.NAVIGATION_CART_PATH]: {
+    //   screen: CartStack,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor }) => <CartBadge color={tintColor} />,
+    //   }),
+    // },
+    
     [routes.NAVIGATION_CART_PATH]: {
       screen: CartStack,
       navigationOptions: () => ({
@@ -122,8 +131,7 @@ const MainAppNavigator = createBottomTabNavigator(
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => <Icon name="md-person" type="ionicon" color={tintColor} />,
       }),
-    },
-  
+    }
   },
   {
     // initialRouteName: NAVIGATION_AUTH_STACK_PATH,

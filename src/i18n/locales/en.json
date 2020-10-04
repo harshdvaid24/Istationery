@@ -1,6 +1,6 @@
 {
   "common": {
-    "brandName": "The Print Mania",
+    "brandName": "magento-react-native",
     "ok": "OK!",
     "cancel": "Cancel",
     "continue": "Continue",
@@ -92,7 +92,10 @@
     "removeItemDialogMessage": "Just double-checking you wanted to remove the item"
   },
   "product": {
-    "addToCartButton": "Add to Cart"
+    "addToCartButton": "Add to Cart",
+    "productDetailLabel": "Product Details",
+    "noProductDetail": "No description available!",
+    "relatedProductsTitle":"You may also like"
   },
   "checkout": {
     "title": "Checkout",
@@ -111,6 +114,6 @@
     "searchPlaceholderText": "Type here..."
   },
   "home": {
-    "title": "The Print Mania"
+    "title": "Magento React Native"
   }
 }

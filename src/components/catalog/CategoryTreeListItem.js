@@ -44,7 +44,7 @@ const CategoryTreeListItem = (props) => {
         ? 'ios-arrow-dropdown'
         : 'ios-arrow-dropright';
       return (
-        <TouchableOpacity style={{paddingLeft:20,paddingTop:5,paddingBottom:5}} onPress={onExpandPress}>
+        <TouchableOpacity onPress={onExpandPress} style={{paddingLeft:20,paddingTop:5,paddingBottom:5}} onPress={onExpandPress}>
           <Icon
             iconStyle={styles.dropIcon(theme)}
             size={25}

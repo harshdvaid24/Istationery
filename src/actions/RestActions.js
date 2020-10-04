@@ -151,6 +151,8 @@ export const getHomeData = refreshing => async (dispatch) => {
 const getFeaturedCategoryProducts = async (categoryId, dispatch) => {
   try {
     const products = await magento.admin.getProducts(categoryId);
+    console.log("getFeaturedCategoryProducts:categoryId:",categoryId);
+    console.log("getFeaturedCategoryProducts:",products);
     dispatch({
       type: MAGENTO_GET_FEATURED_PRODUCTS,
       payload: { categoryId, products },
@@ -401,6 +403,7 @@ export const addToCart = ({ cartId, item, customer }) => async (dispatch) => {
     const updatedItem = item;
     if (magento.isCustomerLogin()) {
       const customerCartId = await magento.admin.getCart(customer.id);
+      console.log("customerCartId:",customerCartId);
       dispatch({ type: MAGENTO_CREATE_CART, payload: customerCartId });
       updatedItem.cartItem.quoteId = customerCartId;
       return dispatchAddToCart(dispatch, customerCartId, updatedItem);
@@ -416,6 +419,7 @@ export const addToCart = ({ cartId, item, customer }) => async (dispatch) => {
 };
 
 const dispatchAddToCart = async (dispatch, cartId, item) => {
+  console.log("dispatchAddToCart: cartId, item", cartId, item);
   try {
     let result;
     if (magento.isCustomerLogin()) {
@@ -427,6 +431,8 @@ const dispatchAddToCart = async (dispatch, cartId, item) => {
     dispatch({ type: MAGENTO_ADD_TO_CART, payload: result });
     dispatchGetGuestCart(dispatch, cartId);
   } catch (e) {
+    alert("catch");
+    console.log("catch",e);
     logError(e);
     dispatch({ type: MAGENTO_ADD_TO_CART, payload: e });
   }

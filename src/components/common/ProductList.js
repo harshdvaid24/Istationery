@@ -95,13 +95,13 @@ const ProductList = ({
         onChange={option => performSort(option.key)}
       />
       <View style={styles.separator(theme)} />
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={styles.iconWrapper(theme)}
         onPress={() => navigation.toggleFilterDrawer()}
       >
         <Icon name="filter" size={24} color="#104E8B" />
         <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 
@@ -189,11 +189,12 @@ const styles = StyleSheet.create({
   },
   headerContainerStyle: theme => ({
     flex: 1,
+    backgroundColor:theme.colors.white,
     flexDirection: 'row',
     //  alignItems: 'stretch',
-     justifyContent: 'flex-end',
+     justifyContent: 'space-between',
     // borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
+    borderBottomColor: theme.colors.bodyText,
   }),
   
   iconWrapper: theme => ({

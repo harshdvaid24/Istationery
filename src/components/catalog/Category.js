@@ -38,8 +38,6 @@ const Category = ({
   const theme = useContext(ThemeContext);
   const listTypeGrid = useSelector(({ ui }) => ui.listTypeGrid );
 
-  console.log("Navigation:",navigation);
-  console.log("NavigationService:",NavigationService);
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
     _getProductsForCategoryOrChild(category);
@@ -49,6 +47,7 @@ const Category = ({
     _setCurrentProduct({ product });
     NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
       title: product.name,
+      product: product,
     });
   };
 

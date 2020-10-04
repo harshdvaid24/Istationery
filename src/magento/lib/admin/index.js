@@ -1,4 +1,5 @@
 import { ADMIN_TYPE } from '../../types';
+import { getParamsFromSearchCriterias } from '../../utils/params';
 
 
 const getSortFieldName = (sortOrder) => {
@@ -66,14 +67,20 @@ export default magento => ({
      * 3 = Arrange products in descending order based on their prices
      */
   getSearchCreteriaForCategoryAndChild: (category, pageSize = 10, offset = 1, sortOrder, filter) => {
-    let level = 0;
     const currentPage = parseInt(offset / pageSize, 10) + 1;
-    const result = {
-      'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
-      'searchCriteria[filterGroups][1][filters][0][value]': '4',
-      'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
-      'searchCriteria[pageSize]': pageSize,
-      'searchCriteria[currentPage]': currentPage,
+    const searchCriteria = {
+      groups: [
+        [{
+          field: 'visibility',
+          value: '4',
+          conditionType: 'eq',
+        }],
+        [{
+          field: 'status',
+          value: '1',
+          conditionType: 'eq',
+        }],
+      ],
     };
 
     let categoryIds = '';
@@ -86,41 +93,47 @@ export default magento => ({
     getForCategory(category);
     categoryIds = categoryIds.substr(1);
 
-    result[`searchCriteria[filterGroups][0][filters][${level}][field]`] = 'category_id';
-    result[`searchCriteria[filterGroups][0][filters][${level}][value]`] = categoryIds;
-    result[`searchCriteria[filterGroups][0][filters][${level}][conditionType]`] = 'in';
-
-    if (typeof sortOrder === 'number') {
-      result['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
-      result['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
-    }
+    searchCriteria.groups.push([{
+      field: 'category_id',
+      value: categoryIds,
+      conditionType: 'in',
+    }]);
 
     if (typeof filter !== 'undefined') {
       Object.keys(filter)
         .forEach((key) => {
           let value = filter[key];
           let condition = null;
-          // let subQuery = '';
           if (typeof value === 'object') {
             condition = value.condition;
             value = value.value;
             if (condition.includes('from')) {
               const conditions = condition.split(',');
               const values = value.split(',');
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][field]`] = key;
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][value]`] = values[0];
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][condition_type]`] = conditions[0];
-              level++;
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][field]`] = key;
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][value]`] = values[1];
-              result[`searchCriteria[filterGroups][${level}][filters][${level}][condition_type]`] = conditions[1];
-              level++;
+              searchCriteria.groups.push([{
+                field: key,
+                value: values[0],
+                conditionType: conditions[0],
+              }]);
+              searchCriteria.groups.push([{
+                field: key,
+                value: values[1],
+                conditionType: conditions[1],
+              }]);
             }
           }
         });
     }
+    const params = getParamsFromSearchCriterias(searchCriteria);
+    if (typeof sortOrder === 'number') {
+      params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
+      params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
+    }
 
-    return magento.admin.getProductsWithSearchCritaria(result);
+    params['searchCriteria[pageSize]'] = pageSize;
+    params['searchCriteria[currentPage]'] = currentPage;
+
+    return magento.admin.getProductsWithSearchCritaria(params);
   },
 
   getProducts: (categoryId, pageSize = 10, offset = 0, sortOrder, filter) => magento.admin.getProductsWithAttribute(
@@ -151,6 +164,9 @@ export default magento => ({
       'searchCriteria[filterGroups][1][filters][0][field]': 'visibility',
       'searchCriteria[filterGroups][1][filters][0][value]': '4',
       'searchCriteria[filterGroups][1][filters][0][conditionType]': 'eq',
+      'searchCriteria[filterGroups][2][filters][0][field]': 'status',
+      'searchCriteria[filterGroups][2][filters][0][value]': '1',
+      'searchCriteria[filterGroups][2][filters][0][conditionType]': 'eq',
       'searchCriteria[pageSize]': pageSize,
       'searchCriteria[currentPage]': currentPage,
     };
@@ -170,18 +186,23 @@ export default magento => ({
             if (condition.includes('from')) {
               const conditions = condition.split(',');
               const values = value.split(',');
-              params['searchCriteria[filterGroups][2][filters][0][field]'] = key;
-              params['searchCriteria[filterGroups][2][filters][0][value]'] = values[0];
-              params['searchCriteria[filterGroups][2][filters][0][condition_type]'] = conditions[0];
               params['searchCriteria[filterGroups][3][filters][0][field]'] = key;
-              params['searchCriteria[filterGroups][3][filters][0][value]'] = values[1];
-              params['searchCriteria[filterGroups][3][filters][0][condition_type]'] = conditions[1];
+              params['searchCriteria[filterGroups][3][filters][0][value]'] = values[0];
+              params['searchCriteria[filterGroups][3][filters][0][condition_type]'] = conditions[0];
+              params['searchCriteria[filterGroups][4][filters][0][field]'] = key;
+              params['searchCriteria[filterGroups][4][filters][0][value]'] = values[1];
+              params['searchCriteria[filterGroups][4][filters][0][condition_type]'] = conditions[1];
             }
           }
         });
     }
 
     return magento.admin.getProductsWithSearchCritaria(params);
+  },
+
+  getProductsBy: searchCriteria => {
+    const params = getParamsFromSearchCriterias(searchCriteria);
+    return magento.get('/V1/products', params, undefined, ADMIN_TYPE);
   },
 
   getProductsWithSearchCritaria: searchCriteria => magento.get('/V1/products', searchCriteria, undefined, ADMIN_TYPE),
@@ -225,4 +246,13 @@ export default magento => ({
     };
     return magento.get(path, params, undefined, ADMIN_TYPE);
   },
+
+  getLinkedProducts: (sku, type) => magento.get(`/V1/products/${sku}/links/${type}`, undefined, undefined, ADMIN_TYPE),
+
+  getProductReviews: productId => magento.get(`/V1/mma/review/reviews/${productId}`, undefined, undefined, ADMIN_TYPE),
+
+  getRatingOptions: () => magento.get(`/V1/mma/rating/ratings/${magento.storeId}`, undefined, undefined, ADMIN_TYPE),
+
+  postGuestReview: review => magento.post('/V1/mma/review/guest/post', review, ADMIN_TYPE),
+
 });
