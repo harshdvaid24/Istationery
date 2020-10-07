@@ -47,6 +47,10 @@ class Magento {
   }
 
   get(path, params, data, type = ADMIN_TYPE) {
+    console.log("parsms:path:",path);
+    console.log("parsms:params:",params);
+    console.log("data:",data);
+    console.log("type:",type);
     return this.send(path, 'GET', params, data, type);
   }
 
@@ -91,6 +95,7 @@ class Magento {
         data,
         ...params,
       });
+      console.log("data:",data);
       fetch(uri, { method, headers, body: JSON.stringify(data) })
         .then(response => {
           console.log(response);
@@ -99,14 +104,17 @@ class Magento {
           }
           // Possible 401 or other network error
           return response.json().then(errorResponse => {
+            console.log("errorResponse:",errorResponse);
             logError(errorResponse);
+            resolve(errorResponse);
             Promise.reject(errorResponse);
           });
         })
         .then(responseData => {
           // debugger;
-          console.log(responseData);
           resolve(responseData);
+          console.log(" .then(responseData:",responseData);
+         
         })
         .catch(error => {
           logError(error);

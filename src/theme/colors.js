@@ -8,18 +8,18 @@ export default {
    * Example: If primary color is dark, make appbarTintColor light
    */
   primaryDark: '#000',
-  primary: '#0e0a1f',
+  primary: '#ff9016',
   tabBarBackground: '#fff',
   tabBarIconInactive: '#8c8c8c',
-  appbarTint: '#2F2F4F',
+  appbarTint: '#ff9016',
   /**
    * ========================= Secondary color =========================
    * secondaryLight: to be used for hover state
    * secondary: to be used as default button, checkbox, spinner, radio button and other component color
    * secondaryDark: to be used for active state
    */
-  secondaryLight: '#104E8B',
-  secondary: '#104E8B',
+  secondaryLight: '#ff9016',
+  secondary: '#ff9016',
   secondaryDark: '#42426F',
   /**
    * disabled: To be used for disabled component background
@@ -44,7 +44,9 @@ export default {
   /**
    * Use it for card border
    */
-  border: '#BEBEBE',
+  border:'#A9A9A9',
+
+  lightBorder:'#F5F5F5',
   /**
    * Success messages and icons.
    */
@@ -66,6 +68,7 @@ export default {
    * To be used for hint text component
    */
   captionText: '#8c8c8c',
-  black: '#000000',
+  black: '#101010',
   white: '#ffffff',
+  grey:'#92959e'
 };

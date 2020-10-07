@@ -50,7 +50,7 @@ const CategoryTreeListItem = (props) => {
             size={25}
             name={icon}
             type="ionicon"
-            color="#fff"
+            color="#92959e"
           />
         </TouchableOpacity>
       );
@@ -62,7 +62,7 @@ const CategoryTreeListItem = (props) => {
     const titleStyle = {
       fontSize:16,
       paddingLeft: 10 * category.level,
-      color:'white'
+      color:'#92959e'
     };
 
     return (
@@ -100,7 +100,7 @@ const styles = {
   subItemsContainer:theme => ({
     paddingLeft:20,
     paddingBottom:10,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.white,
     borderBottomWidth: 1,
     borderColor: theme.colors.border,
   }),
@@ -113,7 +113,7 @@ const styles = {
     // borderBottomWidth: 1,
     // borderColor: theme.colors.border,
     // paddingVertical: theme.spacing.small,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.white,
   }),
   dropIcon: theme => ({
     height: 24,

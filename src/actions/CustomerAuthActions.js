@@ -53,6 +53,7 @@ export const auth = (username, password) => async (dispatch) => {
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: true });
     const response = await magento.guest.auth(username, password);
     console.log('token');
+    console.log('auth:response:',response);
     magento.setCustomerToken(response);
     if (response.message) {
       authFail(dispatch, response.message);

@@ -941,6 +941,7 @@ width100p:{width:'100%'},
   paddingTB50: { paddingTop: W(50), paddingBottom: W(50) },
 
   paddingLR10: { paddingLeft: W(10), paddingRight: W(10) },
+  paddingLR15: { paddingLeft: W(15), paddingRight: W(15) },
   paddingLR20: { paddingLeft: W(20), paddingRight: W(20) },
   paddingLR30: { paddingLeft: W(30), paddingRight: W(30) },
   paddingLR40: { paddingLeft: W(40), paddingRight: W(40) },

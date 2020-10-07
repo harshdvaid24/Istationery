@@ -28,7 +28,7 @@ const _colorSet = {
   darkWhite:'#f9f8fb',
   WhiteGrey: '#fafafa',
 
-  btnPrimary:'#1569C7',
+  btnPrimary:'#ff9016',
   btnSecondary:'#850ef6',
   
   appBlack: '#686868',

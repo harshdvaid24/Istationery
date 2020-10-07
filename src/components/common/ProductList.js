@@ -11,6 +11,7 @@ import ModalSelector from 'react-native-modal-selector';
 import { ProductListItem, Spinner, Text } from '.';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { W } from '../../utils/GlobalStyles';
 
 const COLUMN_COUNT = 2;
 
@@ -64,7 +65,7 @@ const ProductList = ({
     <ProductListItem
       viewContainerStyle={{
         width: theme.dimens.WINDOW_WIDTH / COLUMN_COUNT,
-        borderRightColor: theme.colors.border,
+        borderRightColor: theme.colors.lightBorder,
         borderRightWidth: index % COLUMN_COUNT !== (COLUMN_COUNT - 1) ? theme.dimens.productListItemInBetweenSpace : 0,
       }}
       columnContainerStyle={styles.columnContainerStyle}
@@ -156,7 +157,7 @@ const ProductList = ({
 const styles = StyleSheet.create({
   itemSeparator: theme => ({
     height: theme.dimens.productListItemInBetweenSpace,
-    backgroundColor: theme.colors.border,
+    // backgroundColor: theme.colors.border,
     flex: 1,
   }),
   container: {
@@ -200,20 +201,20 @@ const styles = StyleSheet.create({
   iconWrapper: theme => ({
     // flex: 1,
     height: 32,
-    width:120,
+    width:'50%',
     // borderWidth:1,
-    margin: theme.spacing.small,
+     paddingVertical:W(25),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   }),
   headerTextStyle: theme => ({
     textTransform: 'uppercase',
-    color:theme.colors.primary,
+    color:theme.colors.black,
     marginLeft: theme.spacing.small,
   }),
   separator: theme => ({
-    width: 1,
+    width: 0.1,
     backgroundColor: theme.colors.border,
     marginVertical: theme.spacing.small,
   }),

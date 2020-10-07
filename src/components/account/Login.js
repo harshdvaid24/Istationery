@@ -100,6 +100,7 @@ function Login ({
   };
 
   const renderMessages = () => {
+    console.log("renderMessages:",error);
     if (error) {
       return <Text style={styles.error(theme)}>{error}</Text>;
     }

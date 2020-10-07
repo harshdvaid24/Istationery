@@ -3,6 +3,8 @@ import { View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from './Text';
 import { ThemeContext } from '../../theme';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles from './../../utils/GlobalStyles';
 
 const formatPrice = (price, currencyRate) => parseFloat((price * currencyRate).toFixed(2));
 
@@ -28,12 +30,12 @@ const Price = ({
 }) => {
   const theme = useContext(ThemeContext);
   const isBold = () => discountPrice && discountPrice < basePrice;
-  const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}>{`${currencySymbol} ${formatPrice(discountPrice, currencyRate)}`}</Text>);
+  const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}> {' '} {`${currencySymbol} ${formatPrice(discountPrice, currencyRate)}`}</Text>);
 
   return (
     <View style={[styles.container, style]}>
-      {discountPrice && discountPrice < basePrice ? renderDiscountPrice() : null}
       <Text type="label" bold={!isBold()} style={styles.basePriceText(theme,basePrice, discountPrice)}>{`${currencySymbol} ${formatPrice(basePrice, currencyRate)}`}</Text>
+     {discountPrice && discountPrice < basePrice ? renderDiscountPrice() : null}
     </View>
   );
 };

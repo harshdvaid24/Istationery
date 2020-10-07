@@ -8,6 +8,7 @@ import NavigationService from './navigation/NavigationService';
 import { onAppStart } from './helper/app';
 import 'react-native-gesture-handler';
 import { Spinner } from './components/common';
+import FlashMessage from "react-native-flash-message";
 
 onAppStart(store);
 
@@ -20,6 +21,7 @@ const App = () => (
             NavigationService.setTopLevelNavigator(navigatorRef);
           }}
         />
+         <FlashMessage position="top" /> 
       </PersistGate>
     </ThemeProvider>
   </Provider>
