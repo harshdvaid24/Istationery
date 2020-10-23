@@ -13,7 +13,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		531929C2254164D100D94CF3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
+		536150C52541A0560026276F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
 		668E10D8E2384E029075F09F /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF6CD17B4EC4B2F8CF89C15 /* Poppins-Italic.ttf */; };
 		66A62103243BA6DE00B9FA2E /* BridgeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A62102243BA6DE00B9FA2E /* BridgeTest.swift */; };
 		766D43DABB4B4F6AA5918D86 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6C103C267894101BCC61BCB /* Poppins-ExtraBoldItalic.ttf */; };
@@ -360,7 +360,6 @@
 				0B19B0450BC54F6999CE7A59 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				BE0BD8C773774266BEE604FB /* Poppins-Thin.ttf in Resources */,
 				EDD63B26863A4FB1A00E2941 /* Poppins-ThinItalic.ttf in Resources */,
-				531929C2254164D100D94CF3 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,8 +38,9 @@ export const ProductScreen = props => {
     headerBackTitle: ' ',
     headerStyle: {
       backgroundColor:'#F7F6F4',
-      height: 80,
+      height: 50,
       elevation: 0,
+      borderBottomColor:'transparent',
     }
 });
 

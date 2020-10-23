@@ -41,14 +41,23 @@ const defaultHeader = {
   headerStyle: {
     elevation: 0,
     backgroundColor: theme.colors.white,
-    height: 40,
+    height: 0,
+    shadowColor: 'transparent',
+    borderBottomColor:'transparent',
   },
+   style: { shadowColor: 'transparent' },
+  
+ 
   headerTitleStyle: {
     ...theme.typography.titleTextSemiBold,
     alignSelf: 'center',
   },
   headerBackTitle: null,
   headerTintColor: theme.colors.appbarTint,
+};
+
+const defaultHeaderOptions = {
+  headerForceInset: { top: "never", bottom: "never" }
 };
 
 const HomeStack = createStackNavigator(
@@ -60,6 +69,8 @@ const HomeStack = createStackNavigator(
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
     navigationOptions: defaultHeader,
+    
+    defaultNavigationOptions: defaultHeaderOptions
   },
 );
 
@@ -69,6 +80,7 @@ const AuthStack = createStackNavigator({
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
 
 const AccountStack = createStackNavigator({
@@ -78,6 +90,7 @@ const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
 
 const AccountSwitch = createSwitchNavigator({
@@ -91,12 +104,14 @@ const SearchStack = createStackNavigator({
   [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
 
 const CartStack = createStackNavigator({
   [routes.NAVIGATION_CART_PATH]: Cart,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
 
 const MainAppNavigator = createBottomTabNavigator(
@@ -143,7 +158,9 @@ const MainAppNavigator = createBottomTabNavigator(
       inactiveBackgroundColor: theme.colors.tabBarBackground,
     },
   },
- { navigationOptions: defaultHeader}
+ { navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+}
 );
 
 const Drawer = createDrawerNavigator({
@@ -164,6 +181,7 @@ const DrawerNavigator = createDrawerNavigator(
   },
   {
     navigationOptions: defaultHeader,
+    defaultNavigationOptions: defaultHeaderOptions
   },
   {
     contentComponent: DrawerScreen,
@@ -177,6 +195,7 @@ const Nav = createStackNavigator({
   [routes.NAVIGATION_DRAWER_NAVIGATOR]: {
     screen: DrawerNavigator,
     navigationOptions: defaultHeader,
+    defaultNavigationOptions: defaultHeaderOptions
   },
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
 },

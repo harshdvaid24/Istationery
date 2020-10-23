@@ -45,10 +45,15 @@ class HomeScreen extends Component {
     headerRight: <CurrencyPicker />,
     headerStyle: {
       backgroundColor:'white',
-      height: 80,
+      height: 50,
       elevation: 0,
-    }
+      borderBottomColor:'transparent',
+    },
+   
+     
   });
+
+  
 
   componentDidMount() {
     const { navigation } = this.props;
