@@ -2,13 +2,16 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { getProductCustomAttribute } from '../../helper/product';
 import { ModalSelect } from '../common';
 import { ThemeContext } from '../../theme';
 import { getProductMedia, uiProductUpdate } from '../../actions';
 import _ from 'lodash';
+
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
 
 export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) => {
   const theme = useContext(ThemeContext);
@@ -113,16 +116,20 @@ export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) 
     prevOptions.push(option);
 
     return (
-      <ModalSelect
-        style={styles.modalStyle(theme)}
-        disabled={data.length === 0}
-        key={option.id}
-        label={option.label}
-        attribute={option.attribute_id}
-        value={option.id}
-        data={data}
-        onChange={optionSelect}
-      />
+      <View style={[styles.modalStyle(theme),CommonStyle.HorizontalCenter]}>
+          <ModalSelect
+                  style={[CommonStyle.width80p]}
+                  disabled={data.length === 0}
+                  key={option.id}
+                  label={option.label}
+                  attribute={option.attribute_id}
+                  value={option.id}
+                  data={data}
+                  onChange={optionSelect}
+                />
+                  <Image style={[CommonStyle.Icon15,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down-arrow.png")} />
+      </View>
+     
     );
   });
 };
@@ -130,7 +137,11 @@ export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) 
 const styles = StyleSheet.create({
   modalStyle: theme => ({
     // alignSelf: 'center',
-    width: '50%',
+    width: '48%',
+    height:H(30),
+    flexDirection:'row',
+    backgroundColor:'white',
+    // borderWidth:1,
      marginTop: theme.spacing.large,
     marginBottom: theme.spacing.large,
   }),

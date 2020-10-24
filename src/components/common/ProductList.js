@@ -4,15 +4,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   View,
   FlatList,
-  TouchableOpacity,
+  TouchableOpacity,Image,
   StyleSheet,
+  Text
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
-import { ProductListItem, Spinner, Text } from '.';
+import { ProductListItem, Spinner } from '.';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { W } from '../../utils/GlobalStyles';
-
+import { W ,H} from '../../utils/GlobalStyles';
+import  CommonStyle from './../../utils/CommonStyle';
 const COLUMN_COUNT = 2;
 
 const sortData = [
@@ -87,21 +88,25 @@ const ProductList = ({
         customSelector={(
           <TouchableOpacity
             style={styles.iconWrapper(theme)}
-            onPress={() => selector.current.open()}
-          >
-            <Icon name="sort" size={24} color="#104E8B" />
-            <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
+            onPress={() => selector.current.open()}>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/sort.png")} />
+         
+           <View style={[styles.textContainer]}>
+              <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
+           </View>
+          
           </TouchableOpacity>
         )}
         onChange={option => performSort(option.key)}
       />
-      <View style={styles.separator(theme)} />
+      {/* <View style={styles.separator(theme)} /> */}
       <TouchableOpacity
         style={styles.iconWrapper(theme)}
-        onPress={() => navigation.toggleFilterDrawer()}
-      >
-        <Icon name="filter" size={24} color="#104E8B" />
-        <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
+        onPress={() => navigation.toggleFilterDrawer()}>
+        <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/filter.png")} />
+        <View style={[styles.textContainer]}>
+              <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
+           </View>
       </TouchableOpacity>
     </View>
   );
@@ -200,9 +205,10 @@ const styles = StyleSheet.create({
   
   iconWrapper: theme => ({
     // flex: 1,
-    height: 32,
+    height: H(32),
+    // backgroundColor:'green',
     width:'50%',
-    // borderWidth:1,
+    //  borderWidth:1,
      paddingVertical:W(25),
     flexDirection: 'row',
     justifyContent: 'center',
@@ -218,6 +224,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.border,
     marginVertical: theme.spacing.small,
   }),
+  textContainer:  {
+    height: H(32),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 ProductList.propTypes = {

@@ -2,7 +2,7 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext, useState, useEffect } from 'react';
-import { ScrollView,StatusBar, StyleSheet, View } from 'react-native';
+import { ScrollView,StatusBar,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { Button, Input, Price, Spinner, Text } from '../common';
@@ -35,6 +35,13 @@ export const ProductScreen = props => {
 
   ProductScreen['navigationOptions'] = screenProps => ({
     // headerTitle: () => <Title title={navigation.state.params.title.toUpperCase()} />,
+    headerLeft: (props) => (
+      <TouchableOpacity
+        // onPress={() => {    }}
+        >
+        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+        </TouchableOpacity>
+    ),
     headerBackTitle: ' ',
     headerStyle: {
       backgroundColor:'#F7F6F4',
@@ -43,7 +50,6 @@ export const ProductScreen = props => {
       borderBottomColor:'transparent',
     }
 });
-
   console.log("current:",current);
   const dispatch = useDispatch();
   const params = props.navigation?.state?.params
@@ -144,12 +150,17 @@ export const ProductScreen = props => {
 
       
       </View>
-      {renderAddToCartButton()}
+      <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
       <ProductOptions
         product={product}
         currentProduct={currentProduct}
         setSelectedProduct={setSelectedProduct}
       />
+      </View>
+     
+      {renderAddToCartButton()}
+
+     
       <ProductCustomOptions product={product} currentProduct={currentProduct} />
      
       <Text style={styles.errorStyle(theme)}>{cart.errorMessage}</Text>
