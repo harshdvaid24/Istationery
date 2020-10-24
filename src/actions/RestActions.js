@@ -151,8 +151,6 @@ export const getHomeData = refreshing => async (dispatch) => {
 const getFeaturedCategoryProducts = async (categoryId, dispatch) => {
   try {
     const products = await magento.admin.getProducts(categoryId);
-    console.log("getFeaturedCategoryProducts:categoryId:",categoryId);
-    console.log("getFeaturedCategoryProducts:",products);
     dispatch({
       type: MAGENTO_GET_FEATURED_PRODUCTS,
       payload: { categoryId, products },
@@ -270,20 +268,20 @@ export const getSearchProducts = (searchInput, offset, sortOrder, filter) => asy
   }
 };
 
-export const getCustomOptions = sku => async (dispatch) => {
+export const getCustomOptions = (sku, id) => async (dispatch) => {
   try {
     const data = await magento.admin.getProductOptions(sku);
-    dispatch({ type: MAGENTO_GET_CUSTOM_OPTIONS, payload: data });
+    dispatch({ type: MAGENTO_GET_CUSTOM_OPTIONS, payload: { data, id } });
   } catch (e) {
     logError(e);
   }
 };
 
-export const getConfigurableProductOptions = sku => (dispatch) => {
+export const getConfigurableProductOptions = (sku, id) => (dispatch) => {
   magento.admin
     .getConfigurableProductOptions(sku)
     .then((data) => {
-      dispatch({ type: MAGENTO_GET_CONF_OPTIONS, payload: data });
+      dispatch({ type: MAGENTO_GET_CONF_OPTIONS, payload: { data, id } });
       data.forEach((option) => {
         magento.admin
           .getAttributeByCode(option.attribute_id)
@@ -291,6 +289,7 @@ export const getConfigurableProductOptions = sku => (dispatch) => {
             dispatch({
               type: MAGENTO_PRODUCT_ATTRIBUTE_OPTIONS,
               payload: {
+                productId: id,
                 attributeId: option.attribute_id,
                 options: attributeOptions.options,
                 attributeCode: attributeOptions.attribute_code,
@@ -307,7 +306,7 @@ export const getConfigurableProductOptions = sku => (dispatch) => {
     });
 };
 
-const updateConfigurableProductsPrices = (products, dispatch, type) => {
+export const updateConfigurableProductsPrices = (products, dispatch, type) => {
   products.forEach((product) => {
     if (product.type_id === 'configurable') {
       updateConfigurableProductPrice(product, dispatch, type);
@@ -320,20 +319,20 @@ const updateConfigurableProductPrice = async (
   dispatch,
   type = MAGENTO_UPDATE_CONF_PRODUCT,
 ) => {
-  const { sku } = product;
+  const { sku, id } = product;
   try {
     const data = await magento.admin.getConfigurableChildren(sku);
-    dispatch({ type, payload: { sku, children: data } });
+    dispatch({ type, payload: { sku, children: data, id } });
   } catch (e) {
     logError(e);
   }
 };
 
-export const getProductMedia = ({ sku }) => (dispatch) => {
+export const getProductMedia = ({ sku, id }) => (dispatch) => {
   magento.admin
     .getProductMedia(sku)
     .then((media) => {
-      dispatch({ type: MAGENTO_GET_PRODUCT_MEDIA, payload: { sku, media } });
+      dispatch({ type: MAGENTO_GET_PRODUCT_MEDIA, payload: { sku, media, id } });
     })
     .catch((error) => {
       logError(error);
@@ -369,13 +368,32 @@ export const getCart = (refreshing = false) => async (dispatch, getState) => {
 
   try {
     let cart;
+    let cartId = await AsyncStorage.getItem('cartId');
     if (magento.isCustomerLogin()) {
+      if(cartId){
+        /*Merge Cart*/
+        /*the code to merge cart will be here*/
+
+        AsyncStorage.removeItem('cartId');
+      }
       cart = await magento.customer.getCustomerCart();
     } else {
-      const cartId = await magento.guest.createGuestCart();
+      if(cartId){
+        try{
+          cart = await magento.guest.getGuestCart(cartId);
+        }catch(err){
+          logError('Cart id '+cartId+' is no longer exist');
+        }
+      }
+
+      if(!cartId || !cart){
+        cartId = await magento.guest.createGuestCart();
+        AsyncStorage.setItem('cartId', cartId);
+        cart = await magento.guest.getGuestCart(cartId);
+      }
       dispatch({ type: MAGENTO_CREATE_CART, payload: cartId });
-      cart = await magento.guest.getGuestCart(cartId);
     }
+
     dispatch({ type: MAGENTO_GET_CART, payload: cart });
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: false });
   } catch (error) {
@@ -403,7 +421,6 @@ export const addToCart = ({ cartId, item, customer }) => async (dispatch) => {
     const updatedItem = item;
     if (magento.isCustomerLogin()) {
       const customerCartId = await magento.admin.getCart(customer.id);
-      console.log("customerCartId:",customerCartId);
       dispatch({ type: MAGENTO_CREATE_CART, payload: customerCartId });
       updatedItem.cartItem.quoteId = customerCartId;
       return dispatchAddToCart(dispatch, customerCartId, updatedItem);
@@ -419,7 +436,6 @@ export const addToCart = ({ cartId, item, customer }) => async (dispatch) => {
 };
 
 const dispatchAddToCart = async (dispatch, cartId, item) => {
-  console.log("dispatchAddToCart: cartId, item", cartId, item);
   try {
     let result;
     if (magento.isCustomerLogin()) {
@@ -431,8 +447,6 @@ const dispatchAddToCart = async (dispatch, cartId, item) => {
     dispatch({ type: MAGENTO_ADD_TO_CART, payload: result });
     dispatchGetGuestCart(dispatch, cartId);
   } catch (e) {
-    alert("catch");
-    console.log("catch",e);
     logError(e);
     dispatch({ type: MAGENTO_ADD_TO_CART, payload: e });
   }

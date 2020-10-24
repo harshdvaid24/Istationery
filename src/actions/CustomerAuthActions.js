@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento } from '../magento';
+import { getCart } from './RestActions';
 import {
   MAGENTO_PASSWORD_RESET_LOADING,
   MAGENTO_PASSWORD_RESET_SUCCESS,
@@ -73,6 +74,7 @@ const authSuccess = async (dispatch, token) => {
   try {
     await AsyncStorage.setItem('customerToken', token);
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
+    dispatch(getCart());
     NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
   } catch (e) {
     logError(e);
@@ -96,8 +98,10 @@ export const ReseterrorMessage = error => ({ type: MAGENTO_AUTH_ERROR_RESET, pay
 export const logout = () => (dispatch) => {
   dispatch({ type: MAGENTO_AUTH, payload: '' });
   dispatch({ type: MAGENTO_LOGOUT });
+  dispatch(getCart());
   NavigationService.navigate(NAVIGATION_LOGIN_STACK_PATH);
   AsyncStorage.setItem('customerToken', '');
+  magento.setCustomerToken(false);
 };
 
 export const initiatePasswordReset = email => async (dispatch) => {

@@ -129,8 +129,9 @@ export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) 
 
 const styles = StyleSheet.create({
   modalStyle: theme => ({
-    alignSelf: 'center',
-    width: theme.dimens.WINDOW_WIDTH * 0.9,
+    // alignSelf: 'center',
+    width: '50%',
+     marginTop: theme.spacing.large,
     marginBottom: theme.spacing.large,
   }),
 });
