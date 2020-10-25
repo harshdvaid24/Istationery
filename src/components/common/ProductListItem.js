@@ -102,7 +102,7 @@ const styles = {
     flex: 2,
   },
   textStyle:{
-    fontSize:W(14),
+    // fontSize:W(14),
     color:GlobalStyles.colorSet.appBlack
   },
   imageStyle: theme => ({

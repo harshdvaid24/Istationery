@@ -50,7 +50,6 @@ const ProductList = ({
 }) => {
   const theme = useContext(ThemeContext);
   const selector = useRef(null);
-
   const renderItemRow = ({ item, index }) => (
     <ProductListItem
       imageStyle={styles.imageStyle}

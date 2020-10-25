@@ -32,12 +32,11 @@ export const ProductScreen = props => {
     state => mapStateToProps(state),
   );
 
-
+ 
   ProductScreen['navigationOptions'] = screenProps => ({
-    // headerTitle: () => <Title title={navigation.state.params.title.toUpperCase()} />,
-    headerLeft: (props) => (
+    headerLeft: () => (
       <TouchableOpacity
-        // onPress={() => {    }}
+        onPress={() => {props.navigation.goBack() }}
         >
         <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
         </TouchableOpacity>

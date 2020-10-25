@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textStyle:{
-    fontSize:W(14),
+    // fontSize:W(14),
     color:GlobalStyles.colorSet.appBlack,
   },
   textStyle: theme => ({

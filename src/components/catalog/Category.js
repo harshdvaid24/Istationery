@@ -98,9 +98,9 @@ const Category = ({
 Category.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.title.toUpperCase(),
   headerBackTitle: ' ',
-  headerLeft: (props) => (
+  headerLeft: () => (
     <TouchableOpacity
-      // onPress={() => {    }}
+      onPress={() => {navigation.goBack() }}
       >
       <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
