@@ -45,7 +45,7 @@ class HomeScreen extends Component {
         <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={navigation.getParam('toggleDrawer')} />
       </MaterialHeaderButtons>
     ),
-    headerRight: <CurrencyPicker />,
+    // headerRight: <CurrencyPicker />,
     headerStyle: {
       backgroundColor:'white',
       height: 50,
