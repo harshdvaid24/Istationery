@@ -363,7 +363,9 @@ export const createCustomerCart = customerId => async (dispatch) => {
 };
 
 export const getCart = (refreshing = false) => async (dispatch, getState) => {
+  console.log("getCart:");
   if (refreshing) {
+    console.log("getCart:refreshing:");
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: true });
   }
 
@@ -371,24 +373,32 @@ export const getCart = (refreshing = false) => async (dispatch, getState) => {
     let cart;
     let cartId = await AsyncStorage.getItem('cartId');
     if (magento.isCustomerLogin()) {
+      console.log("getCart:isCustomerLogin:");
       if(cartId){
+        console.log("getCart:isCustomerLogin:cartId:",cartId);
         /*Merge Cart*/
         /*the code to merge cart will be here*/
 
         AsyncStorage.removeItem('cartId');
       }
       cart = await magento.customer.getCustomerCart();
+      console.log("getCart: CustomerLogin:cart:",cart);
     } else {
+      console.log("getCart:not CustomerLogin:");
       if(cartId){
         try{
+          console.log("getCart:not CustomerLogin:cartId:",cartId);
           cart = await magento.guest.getGuestCart(cartId);
+          console.log("getCart: not CustomerLogin:cart:",cart);
         }catch(err){
           logError('Cart id '+cartId+' is no longer exist');
         }
       }
 
       if(!cartId || !cart){
+        console.log("getCart: not CustomerLogin:not cartid:");
         cartId = await magento.guest.createGuestCart();
+        console.log("getCart: not CustomerLogin:not cartid:",cartId);
         AsyncStorage.setItem('cartId', cartId);
         cart = await magento.guest.getGuestCart(cartId);
       }

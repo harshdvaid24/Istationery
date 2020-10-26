@@ -46,13 +46,13 @@ const styles = {
   },
   discountPriceText: theme => ({
     // marginTop:10,
-    fontSize:16,
+    // fontSize:16,
     fontWeight:'bold',
     marginEnd: theme.spacing.tiny,
   }),
   basePriceText: (theme,basePrice, discountPrice) => ({
     // marginTop:10,
-    fontSize:16,
+    // fontSize:16,
     fontWeight:'bold',
     color:theme.colors.black,
     textDecorationLine: discountPrice && discountPrice < basePrice ? 'line-through' : 'none',

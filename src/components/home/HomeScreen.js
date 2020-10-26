@@ -16,6 +16,9 @@ import FeaturedProducts from './FeaturedProducts';
 import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles,{H,W} from './../../utils/GlobalStyles';
+
 import FastImage from 'react-native-fast-image';
 const LogoTitle = ( ) => {
   return(
@@ -39,10 +42,10 @@ class HomeScreen extends Component {
     headerBackTitle: ' ',
     headerLeft: (
       <MaterialHeaderButtons>
-        <Item title="menu" iconName="menu" color={'#104E8B'} onPress={navigation.getParam('toggleDrawer')} />
+        <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={navigation.getParam('toggleDrawer')} />
       </MaterialHeaderButtons>
     ),
-    headerRight: <CurrencyPicker />,
+    // headerRight: <CurrencyPicker />,
     headerStyle: {
       backgroundColor:'white',
       height: 50,

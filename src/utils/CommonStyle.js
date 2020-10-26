@@ -1,7 +1,7 @@
 import { StyleSheet, Platform, StatusBar } from 'react-native';
 import GlobalStyle from './GlobalStyles';
 import { W, H } from './GlobalStyles';
-
+ 
 const CommonStyle = StyleSheet.create({
   topPadding: {
     paddingTop: Platform.OS == 'ios' ? 0 : H(47),
@@ -867,6 +867,7 @@ width50p:{width:'50%'},
 width60p:{width:'60%'},
 width70p:{width:'70%'},
 width80p:{width:'80%'},
+width85p:{width:'85%'},
 width90p:{width:'90%'},
 width100p:{width:'100%'},
 

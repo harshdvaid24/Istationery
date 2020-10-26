@@ -128,12 +128,7 @@ const MainAppNavigator = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon name="md-search" type="ionicon" color={tintColor} />,
       }),
     },
-    // [routes.NAVIGATION_CART_PATH]: {
-    //   screen: CartStack,
-    //   navigationOptions: () => ({
-    //     tabBarIcon: ({ tintColor }) => <CartBadge color={tintColor} />,
-    //   }),
-    // },
+   
     
     [routes.NAVIGATION_CART_PATH]: {
       screen: CartStack,

@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   RefreshControl,
+  Image
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -15,6 +16,8 @@ import { Text } from '../common';
 import OrderListItem from './OrderListItem';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
 
 import { NAVIGATION_HOME_SCREEN_PATH } from '../../navigation/routes';
 
@@ -66,13 +69,13 @@ const OrdersScreen = ({
         <Text type="heading" style={styles.textStyle(theme)}>
           {translate('ordersScreen.noOrderMessage')}
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigate(NAVIGATION_HOME_SCREEN_PATH)}
         >
-          <Text type="heading" bold style={styles.buttonTextStyle(theme)}>
+          <Text type="heading"  style={styles.buttonTextStyle(theme)}>
             {translate('common.continueShopping')}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
@@ -87,9 +90,15 @@ const OrdersScreen = ({
   return renderEmptyOrderList();
 };
 
-OrdersScreen.navigationOptions = () => ({
+OrdersScreen.navigationOptions = (props) => ({
   title: translate('ordersScreen.title'),
-  headerBackTitle: ' ',
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {props.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
 });
 
 const styles = {

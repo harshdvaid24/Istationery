@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import {
-  View,
+  View,TouchableOpacity,Image,
   RefreshControl,
 } from 'react-native';
 import PropTypes from 'prop-types';
@@ -17,6 +17,9 @@ import {
   NAVIGATION_HOME_PRODUCT_PATH,
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
+
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
 
 const Category = ({
   canLoadMoreContent,
@@ -95,6 +98,13 @@ const Category = ({
 Category.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.title.toUpperCase(),
   headerBackTitle: ' ',
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
   headerRight: (<HeaderGridToggleIcon />),
 });
 
