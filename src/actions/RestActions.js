@@ -56,6 +56,7 @@ import {
   RESET_FILTERS_DATA,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
   MAGENTO_GET_CUSTOM_OPTIONS,
+  MAGENTO_PRODUCT_STOCK_CHECK
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -702,3 +703,11 @@ const dispatchGetCart = async (dispatch, cartId) => {
     logError(e);
   }
 };
+
+export const getproductIsInStock = (sku) => async (dispatch) =>{
+  console.log('SKU:',sku);
+  magento.admin.getProductIsInStock(sku).then((data=>{
+    dispatch({type: MAGENTO_PRODUCT_STOCK_CHECK,payload: data});
+  }))
+  .catch((error)=>{logError(error)});
+}

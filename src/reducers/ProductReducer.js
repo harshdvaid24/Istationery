@@ -13,6 +13,7 @@ import {
   MAGENTO_RELATED_PRODUCTS_SUCCESS,
   MAGENTO_RELATED_PRODUCTS_ERROR,
   MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT,
+  MAGENTO_PRODUCT_STOCK_CHECK
 } from '../actions/types';
 import { getPriceFromChildren } from '../helper/product';
 
@@ -25,6 +26,8 @@ const INITIAL_STATE = {
       selectedOptions: {},
       selectedCustomOptions: {},
       medias: {},
+      stocks:{},
+      qty:{}
     },
   },
   relatedProducts: {
@@ -168,6 +171,19 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         relatedProducts,
       };
+    }
+    case MAGENTO_PRODUCT_STOCK_CHECK:{
+      const{sku, product_id, is_in_stock, qty} = action.payload;
+      console.log('IS_IN_STOCK:', is_in_stock);
+      const current = {
+        ...state.current,
+        [product_id]: {
+          ...state.current[product_id],
+          stocks:is_in_stock,
+          qty:qty
+        },
+      };
+      return{...state,current}
     }
     default:
       return state;

@@ -254,5 +254,7 @@ export default magento => ({
   getRatingOptions: () => magento.get(`/V1/mma/rating/ratings/${magento.storeId}`, undefined, undefined, ADMIN_TYPE),
 
   postGuestReview: review => magento.post('/V1/mma/review/guest/post', review, ADMIN_TYPE),
+  
+  getProductIsInStock: (sku) => magento.get(`/V1/stockItems/${sku}`,undefined,undefined,ADMIN_TYPE)
 
 });

@@ -12,6 +12,7 @@ import {
   getConfigurableProductOptions,
   getCustomOptions,
   updateProductQtyInput,
+  getproductIsInStock
 } from '../../actions';
 import { ProductMediaContainer } from './ProductMediaContainer';
 import { finalPrice } from '../../helper/price';
@@ -68,8 +69,8 @@ export const ProductScreen = props => {
     }
     dispatch(
       getCustomOptions(product.sku, product.id),
-    ); /*The custom options are available on all product types. */
-  }, []); // eslint-disable-line
+      dispatch(getproductIsInStock(product.sku))
+)}, []); // eslint-disable-line
 
   useEffect(() => {
     setCurProduct(current[product.id]);
@@ -102,7 +103,7 @@ export const ProductScreen = props => {
       return <Spinner />;
     }
     return (
-      <Button style={styles.buttonStyle(theme)} onPress={onPressAddToCart}>
+      <Button style={styles.buttonStyle(theme)} disabled={!currentProduct.stocks} onPress={onPressAddToCart}>
         {translate('product.addToCartButton')}
       </Button>
     );
@@ -124,25 +125,33 @@ export const ProductScreen = props => {
       </Text>
       
       <View style={styles.qtyAddCartContanier}>
-      <View style={styles.qtyContainer}>
-      <Text bold style={styles.textStyle(theme)}>
+      
+      
+      {
+        currentProduct.qty !=0 &&
+        <View style={styles.qtyContainer}>
+        <Text bold style={styles.textStyle(theme)}>
         {translate('common.quantity')}
       </Text>
-      
-      <Input
+        <Input
         containerStyle={styles.inputContainer(theme)}
         inputStyle={{ textAlign: 'center' }}
         autoCorrect={false}
         keyboardType="numeric"
-        value={`${currentProduct.qtyInput}`}
+        value={`${currentProduct.qty}`}
         onChangeText={qty => dispatch(updateProductQtyInput(qty, product.id))}
       />
       </View>
+      }
+     
       <View style={[CommonStyle.marginLR20]}>
          {renderPrice()}
       </View>
 
       
+      </View>
+      <View style={styles.stockcontainer}>
+      <Text>{currentProduct.stocks ? 'Product is available' : 'Out of stock !'}</Text>
       </View>
       {renderAddToCartButton()}
       <ProductOptions
@@ -243,6 +252,10 @@ const styles = StyleSheet.create({
   priceContainer: {
     alignSelf: 'center',
   },
+  stockcontainer:{
+    flexDirection:'row',
+    justifyContent:'center'
+  }
 });
 
 const mapStateToProps = state => {
