@@ -26,12 +26,13 @@ import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
 
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
 
 export const ProductScreen = props => {
   const { cart, currencyRate, currencySymbol, customer, current } = useSelector(
     state => mapStateToProps(state),
   );
+
 
  
   ProductScreen['navigationOptions'] = screenProps => ({
@@ -44,7 +45,7 @@ export const ProductScreen = props => {
     ),
     headerBackTitle: ' ',
     headerStyle: {
-      backgroundColor:'#F7F6F4',
+      backgroundColor:GlobalStyle.colorSet.white,
       height: 50,
       elevation: 0,
       borderBottomColor:'transparent',
@@ -57,6 +58,7 @@ export const ProductScreen = props => {
     : {};
   const theme = useContext(ThemeContext);
   const [product] = useState(params.product);
+  const [qty,setQty] = useState(1);
   const [currentProduct, setCurProduct] = useState(current[product.id]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { onPressAddToCart } = useAddToCart({
@@ -67,7 +69,6 @@ export const ProductScreen = props => {
   });
   const { description } = useProductDescription({ product });
   console.log("product:",product);
-
   useEffect(() => {
     if (product.type_id === 'configurable') {
       dispatch(getConfigurableProductOptions(product.sku, product.id));
@@ -114,6 +115,26 @@ export const ProductScreen = props => {
     );
   };
 
+  const onIncrement = () => {
+    let q = qty+1;
+    if(q>10){
+      alert("Maximum 10 Items can be purchased at a same time.");
+    }
+    else {
+      setQty(q);
+      dispatch(updateProductQtyInput(q, product.id));
+    }
+    
+  }
+  const onDecrement = () => {
+    let q = qty-1;
+    if(qty>1){
+      setQty(q);
+      dispatch(updateProductQtyInput(q, product.id));
+    }
+   
+  }
+
   return (
     <ScrollView style={styles.container(theme)}>
        <StatusBar
@@ -129,34 +150,55 @@ export const ProductScreen = props => {
         {product.name}
       </Text>
       
-      <View style={styles.qtyAddCartContanier}>
-      
-      
-      {
-        currentProduct.qty !=0 &&
-        <View style={styles.qtyContainer}>
-        <Text bold style={styles.textStyle(theme)}>
-        {translate('common.quantity')}
-      </Text>
-        <Input
-        containerStyle={styles.inputContainer(theme)}
-        inputStyle={{ textAlign: 'center' }}
-        autoCorrect={false}
-        keyboardType="numeric"
-        value={`${currentProduct.qty}`}
-        onChangeText={qty => dispatch(updateProductQtyInput(qty, product.id))}
-      />
-      </View>
-      }
      
-      <View style={[CommonStyle.marginLR20]}>
-         {renderPrice()}
-      </View>
+      <View style={styles.qtyAddCartContanier}>
+            
+              <View style={[styles.QuantitySubMainContainer]}>
+                <TouchableOpacity
+                  onPress={onIncrement}
+                  style={[styles.minusButtonContainer]}>
+                  <Image
+                    resizeMode={'contain'}
+                    style={styles.minusButtonImage}
+                    source={require('./../../../resources/icons/plus.png')}
+                  />
+                </TouchableOpacity>
 
+                <View style={styles.productQuantityContainer}>
+                  <Text style={styles.productQuantityText}>
+                  {`${currentProduct.qtyInput}`}
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  onPress={onDecrement}
+                  style={[styles.plusButtonContainer]}>
+                  <Image
+                    resizeMode={'contain'}
+                    style={styles.plusButtonImage}
+                    source={require('./../../../resources/icons/minus.png')}
+                  />
+                </TouchableOpacity>
+              </View>
+      
+    
+
+     
+     
+      <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
+       
+        {(!currentProduct.stocks)?
+          <View>
+               <Text>{'Out of stock !'}</Text>
+          </View>: renderPrice()
+        }
+        
+      </View>
+      
       
       </View>
       <View style={styles.stockcontainer}>
-      <Text>{currentProduct.stocks ? 'Product is available' : 'Out of stock !'}</Text>
+
+     
       </View>
       <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
       <ProductOptions
@@ -207,7 +249,7 @@ export const ProductScreen = props => {
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: GlobalStyle.colorSet.white,
   }),
   textStyle: theme => ({
     color:theme.colors.black,
@@ -266,7 +308,71 @@ const styles = StyleSheet.create({
   stockcontainer:{
     flexDirection:'row',
     justifyContent:'center'
-  }
+  },
+  PriceQuantityConatiner: {
+    marginLeft: W(20),
+    marginRight: W(20),
+    height: H(42),
+    borderTopWidth: 1,
+    borderTopColor: GlobalStyle.colorSet.BorderGrey,
+    borderBottomWidth: 1,
+    borderBottomColor: GlobalStyle.colorSet.BorderGrey,
+  },
+  QuantityConatiner: {
+    width: W(180),
+    height: H(42),
+    // borderWidth: 1,
+    // borderColor: GlobalStyle.colorSet.black,
+  },
+  QuantitySubMainContainer: {
+    borderWidth: 0,
+    height: H(42),
+    flexDirection:'row',
+    borderWidth:1,
+    borderColor:GlobalStyle.colorSet.BorderGrey,
+    borderRadius:H(7),
+    backgroundColor:GlobalStyle.colorSet.white
+  },
+  FavourateButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: W(10),
+    marginLeft: W(10),
+    marginRight: W(10)
+  },
+
+  plusButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: W(10),
+    paddingRight: W(10)
+  },
+  plusButtonImage: {
+    height: H(22),
+    width: H(22),
+  },
+  productQuantityContainer: {
+    width: W(30),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  productQuantityText: {
+    fontSize: W(16),
+    fontFamily: GlobalStyle.fontSet.SemiBold,
+    color: GlobalStyle.colorSet.bgBlack,
+  },
+  minusButtonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: W(10),
+    paddingRight: W(10)
+  },
+  minusButtonImage: {
+    height: H(22),
+    width: H(22),
+  },
+
+
 });
 
 const mapStateToProps = state => {
