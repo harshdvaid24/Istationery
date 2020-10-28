@@ -86,6 +86,7 @@ const AuthStack = createStackNavigator({
 
 const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
+  [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
   [routes.NAVIGATION_CONTACTUS_PATH]:ContactUsScreen,
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,

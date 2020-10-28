@@ -117,6 +117,14 @@ const Account = ({
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
+      
+        <TouchableOpacity onPress={openResetPassword}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.LBTitle]}>
+              Reset password
+            </Text>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={onLogoutPress}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <Text style={[CommonStyle.LBTitle]}>
@@ -124,14 +132,6 @@ const Account = ({
             </Text>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={openResetPassword}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-            {translate('login.forgetPassword')}
-            </Text>
-            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
-        </TouchableOpacity>
-   
     </View>
   );
 };
