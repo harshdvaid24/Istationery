@@ -19,6 +19,7 @@ import { signIn,ResetError } from '../../actions';
 import {
   NAVIGATION_SIGNIN_PATH,
   NAVIGATION_LOGIN_PATH,
+  NAVIGATION_HOME_SCREEN_PATH
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -108,6 +109,9 @@ const Signin = ({
 <Text style={styles.linkTitleButton(theme)}>{'Existing user?  '}</Text>
 <Text style={styles.linkTitleButton(theme)}>{'Login'}</Text>
 </TouchableOpacity>
+<TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
+        <Text style={styles.linkSkip}>Skip to continue shopping</Text>
+        </TouchableOpacity>
   </View>
     );
   };
@@ -240,8 +244,10 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color: theme.colors.secondary,
   }),
-  linkTitle: {
-    // textAlign: 'center',
+  linkSkip:{
+    textDecorationLine:'underline',
+    textAlign: 'center',
+    fontSize:12
   },
   Title: theme => ({
     color: theme.colors.secondary,
