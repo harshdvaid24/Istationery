@@ -2,7 +2,7 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext, useState, useEffect } from 'react';
-import { ScrollView,StatusBar,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
+import { ScrollView,Share,StatusBar,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { Button, Input, Price, Spinner, Text } from '../common';
@@ -135,6 +135,26 @@ export const ProductScreen = props => {
    
   }
 
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <ScrollView style={styles.container(theme)}>
        <StatusBar
@@ -181,8 +201,16 @@ export const ProductScreen = props => {
               </View>
       
     
+              <TouchableOpacity
+                 onPress={onShare}
+                  style={[styles.shareContainer]}>
+                  <Image
+                    resizeMode={'contain'}
+                    style={styles.minusButtonImage}
+                    source={require('./../../../resources/icons/sharing.png')}
+                  />
+                </TouchableOpacity>
 
-     
      
       <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
        
@@ -371,7 +399,13 @@ const styles = StyleSheet.create({
     height: H(22),
     width: H(22),
   },
-
+shareContainer:{
+    padding:H(6),
+    borderWidth:1,
+    borderColor:GlobalStyle.colorSet.BorderGrey,
+    borderRadius:H(7),
+    backgroundColor:GlobalStyle.colorSet.white
+}
 
 });
 

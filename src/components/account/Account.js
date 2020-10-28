@@ -36,6 +36,11 @@ const Account = ({
     _logout();
   };
 
+  const onContactUs = () => {
+  navigation.navigate('ContactUsScreen');
+  };
+
+  
   const renderCustomerData = () => {
     if (!customer) {
       return (
@@ -80,13 +85,7 @@ const Account = ({
   return (
     <View style={styles.container(theme)}>
       {renderCustomerData()}
-      <TouchableOpacity onPress={onLogoutPress}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-                Logout
-            </Text>
-            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
-        </TouchableOpacity>
+     
 
         <TouchableOpacity onPress={openOrders}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
@@ -96,6 +95,8 @@ const Account = ({
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
+        
+
         <TouchableOpacity onPress={openAddAddress}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <Text style={[CommonStyle.LBTitle]}>
@@ -104,7 +105,21 @@ const Account = ({
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
-   
+        <TouchableOpacity onPress={onContactUs}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.LBTitle]}>
+            Contact Us
+            </Text>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onLogoutPress}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.LBTitle]}>
+                Logout
+            </Text>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
     </View>
   );
 };

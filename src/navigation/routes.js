@@ -9,6 +9,8 @@ export const NAVIGATION_CART_PATH = 'Cart';
 export const NAVIGATION_CHECKOUT_PATH = 'Checkout';
 export const NAVIGATION_HOME_STACK_PATH = 'Home';
 export const NAVIGATION_ACCOUNT_PATH = 'Account';
+export const NAVIGATION_CONTACTUS_PATH = 'ContactUsScreen';
+
 export const NAVIGATION_LOGIN_PATH = 'Login';
 export const NAVIGATION_SIGNIN_PATH = 'Signin';
 export const NAVIGATION_RESET_PASSWORD_PATH = 'navigation_reset_password_path';

@@ -27,6 +27,7 @@ import OrderScreen from '../components/account/OrderScreen';
 import AddressScreen from '../components/account/AddressScreen';
 import DrawerScreen from '../components/catalog/DrawerScreen';
 
+import {ContactUsScreen} from '../components/catalog/ContactUsScreen';
 
 import CartBadge from '../components/cart/CartBadge';
 
@@ -85,6 +86,7 @@ const AuthStack = createStackNavigator({
 
 const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
+  [routes.NAVIGATION_CONTACTUS_PATH]:ContactUsScreen,
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
   [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
