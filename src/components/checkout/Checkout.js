@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View,TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import CheckoutSection from './CheckoutSection';
 import { Spinner, ModalSelect, Button, Text, Input, Price } from '../common';
@@ -9,7 +9,8 @@ import CheckoutPaymentMethod from './CheckoutPaymentMethod';
 import CheckoutTotals from './CheckoutTotals';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-
+import CommonStyle from '../../utils/CommonStyle'
+import GlobalStyle,{W,H} from '../../utils/GlobalStyles'
 
 const Title = ({title}) => {
   return(
@@ -59,20 +60,25 @@ const Checkout = ({
     </ScrollView>
   );
 };
-
-
-Checkout.navigationOptions = {
+Checkout['navigationOptions'] = screenProps => ({
   headerTitle: () => <Title title={translate('checkout.title')} />,
-  
   title: translate('checkout.title'),
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
   headerBackTitle: ' ',
   headerStyle: {
-    backgroundColor:'#F7F6F4',
-    paddingTop:30,
-    height: 80,
+    backgroundColor:GlobalStyle.colorSet.white,
+    height: 50,
     elevation: 0,
+    borderBottomColor:'transparent',
   }
-};
+});
+
 
 const styles = {
   container: theme => ({

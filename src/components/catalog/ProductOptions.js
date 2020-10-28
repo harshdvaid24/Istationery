@@ -9,9 +9,9 @@ import { ModalSelect } from '../common';
 import { ThemeContext } from '../../theme';
 import { getProductMedia, uiProductUpdate } from '../../actions';
 import _ from 'lodash';
-
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
+
 
 export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) => {
   const theme = useContext(ThemeContext);
@@ -127,7 +127,7 @@ export const ProductOptions = ({ currentProduct, product, setSelectedProduct }) 
                   data={data}
                   onChange={optionSelect}
                 />
-                  <Image style={[CommonStyle.Icon15,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down-arrow.png")} />
+                  <Image style={[CommonStyle.Icon15,{marginRight:W(20)}]} source={require("./.././../../resources/icons/down-arrow.png")} />
       </View>
      
     );
@@ -144,5 +144,10 @@ const styles = StyleSheet.create({
     // borderWidth:1,
      marginTop: theme.spacing.large,
     marginBottom: theme.spacing.large,
+    height: H(42),
+    borderWidth:1,
+    borderColor:GlobalStyle.colorSet.BorderGrey,
+    borderRadius:H(7),
+    backgroundColor:GlobalStyle.colorSet.white
   }),
 });

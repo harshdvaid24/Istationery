@@ -75,6 +75,19 @@ const HomeStack = createStackNavigator(
   },
 );
 
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
+
 const AuthStack = createStackNavigator({
   [routes.NAVIGATION_LOGIN_PATH]: Login,
   [routes.NAVIGATION_SIGNIN_PATH]: Signin,
@@ -83,7 +96,18 @@ const AuthStack = createStackNavigator({
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions
 });
-
+AuthStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
@@ -95,6 +119,19 @@ const AccountStack = createStackNavigator({
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions
 });
+
+AccountStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 const AccountSwitch = createSwitchNavigator({
   [routes.NAVIGATION_AUTH_LOADING_SWITCH]: AuthLoading,
@@ -110,12 +147,39 @@ const SearchStack = createStackNavigator({
   defaultNavigationOptions: defaultHeaderOptions
 });
 
+SearchStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
+
+
 const CartStack = createStackNavigator({
   [routes.NAVIGATION_CART_PATH]: Cart,
 }, {
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions
 });
+
+CartStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 const MainAppNavigator = createBottomTabNavigator(
   {
@@ -200,5 +264,18 @@ const Nav = createStackNavigator({
 {
   headerBackTitleVisible: false,
 });
+
+Nav.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 export const Navigator = createAppContainer(Nav);

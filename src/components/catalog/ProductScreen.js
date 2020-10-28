@@ -24,7 +24,7 @@ import { RelatedProducts } from './RelatedProducts';
 import { ProductReviews } from './reviews/ProductReviews';
 import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
-
+import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
 
@@ -42,6 +42,15 @@ export const ProductScreen = props => {
         >
         <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
         </TouchableOpacity>
+    ),
+    headerRight: () => (
+      <TouchableOpacity
+        style={[CommonStyle.paddingLR20]}
+        onPress={() => {props.navigation.navigate('Cart') }}
+        >
+
+        <CartBadge color={GlobalStyle.colorSet.btnPrimary} />
+      </TouchableOpacity>
     ),
     headerBackTitle: ' ',
     headerStyle: {
@@ -200,7 +209,16 @@ export const ProductScreen = props => {
                 </TouchableOpacity>
               </View>
       
-    
+              <TouchableOpacity
+                 onPress={onShare}
+                  style={[styles.shareContainer]}>
+                  <Image
+                    resizeMode={'contain'}
+                    style={styles.minusButtonImage}
+                    source={require('./../../../resources/icons/wishlistAdded.png')}
+                  />
+            </TouchableOpacity>
+
               <TouchableOpacity
                  onPress={onShare}
                   style={[styles.shareContainer]}>
@@ -209,7 +227,7 @@ export const ProductScreen = props => {
                     style={styles.minusButtonImage}
                     source={require('./../../../resources/icons/sharing.png')}
                   />
-                </TouchableOpacity>
+            </TouchableOpacity>
 
      
       <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
