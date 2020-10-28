@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import { Button } from '../common';
 import { logout, currentCustomer } from '../../actions';
-import { NAVIGATION_ORDERS_PATH, NAVIGATION_ADDRESS_SCREEN_PATH } from '../../navigation/routes';
+import { NAVIGATION_ORDERS_PATH, NAVIGATION_ADDRESS_SCREEN_PATH,NAVIGATION_RESET_PASSWORD_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
@@ -82,6 +82,10 @@ const Account = ({
     navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
   };
 
+  const openResetPassword = () =>{
+    navigation.navigate(NAVIGATION_RESET_PASSWORD_PATH);
+  }
+
   return (
     <View style={styles.container(theme)}>
       {renderCustomerData()}
@@ -120,6 +124,14 @@ const Account = ({
             </Text>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
+        <TouchableOpacity onPress={openResetPassword}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.LBTitle]}>
+            {translate('login.forgetPassword')}
+            </Text>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+   
     </View>
   );
 };

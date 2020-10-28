@@ -18,6 +18,7 @@ import { auth,ResetError } from '../../actions/CustomerAuthActions';
 import {
   NAVIGATION_SIGNIN_PATH,
   NAVIGATION_RESET_PASSWORD_PATH,
+  NAVIGATION_HOME_SCREEN_PATH
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -94,6 +95,9 @@ function Login ({
         <TouchableOpacity   onPress={onSigninPress} style={styles.linkButton(theme)}>
            <Text style={styles.linkTitleButton(theme)}>{'New user?  '}</Text>
           <Text style={styles.linkTitleButton(theme)}>{translate('login.signupButton')}</Text>
+        </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
+        <Text style={styles.linkSkip}>Skip to continue shopping</Text>
         </TouchableOpacity>
       </View>
     );
@@ -207,6 +211,11 @@ const styles = StyleSheet.create({
   linkTitle: {
     textDecorationLine:'underline',
      textAlign: 'center',
+  },
+  linkSkip:{
+    textDecorationLine:'underline',
+    textAlign: 'center',
+    fontSize:12
   },
   Title: theme => ({
     color: theme.colors.secondary,
