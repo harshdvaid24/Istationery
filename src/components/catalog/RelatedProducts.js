@@ -3,7 +3,7 @@
  */
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
-import FeaturedProducts from '../home/FeaturedProducts';
+ import AllRelatedProducts from '../home/RelatedProducts';
 import { translate } from '../../i18n';
 import { ThemeContext } from '../../theme';
 import { NAVIGATION_HOME_PRODUCT_PATH } from '../../navigation/routes';
@@ -34,7 +34,7 @@ export const RelatedProducts = ({ product, currencySymbol, currencyRate, navigat
   };
 
   return (
-    <FeaturedProducts
+    <AllRelatedProducts
       style={{ marginBottom: theme.spacing.large }}
       products={{ items: relatedProducts }}
       title={translate('product.relatedProductsTitle')}

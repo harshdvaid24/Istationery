@@ -22,6 +22,7 @@ const _colorSet = {
  
   separatorGray: '#ECECEC',
   mainBgColor: '#F5F5F5',
+  almostWhite:'#F7F7F7',
   black: '#323232',
   white: '#FFFFFF',
   whiteLight: '#f5f5f5',
