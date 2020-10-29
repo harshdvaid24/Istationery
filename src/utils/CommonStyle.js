@@ -1230,7 +1230,12 @@ xlGreyBold:{
 },
 
 
-
+// white
+mWhitleSemiBold:{
+  fontSize: W(14),
+  fontFamily: GlobalStyle.fontSet.SemiBold,
+  color: GlobalStyle.colorSet.white,
+},
 
 
 
@@ -1265,7 +1270,18 @@ FixedLabel:{
   position:'absolute',
   top:0,
   left:W(10)
- }
+ },
+
+
+//  buttons
+rectBtn:{
+  height: H(25),
+  width: W(110),
+  borderRadius: H(2),
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: GlobalStyle.colorSet.btnPrimary,
+},
 
 
 });

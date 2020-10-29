@@ -40,7 +40,7 @@ const Category = ({
 }) => {
   const theme = useContext(ThemeContext);
   const listTypeGrid = useSelector(({ ui }) => ui.listTypeGrid );
-
+console.log("products:",products);
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
     _getProductsForCategoryOrChild(category);
@@ -97,7 +97,7 @@ const Category = ({
 
 Category.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.title.toUpperCase(),
-  headerBackTitle: ' ',
+  headerTitle: ' ',
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {navigation.goBack() }}

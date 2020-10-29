@@ -28,6 +28,9 @@ import AddressScreen from '../components/account/AddressScreen';
 import DrawerScreen from '../components/catalog/DrawerScreen';
 
 import {ContactUsScreen} from '../components/catalog/ContactUsScreen';
+import WishlistScreen from '../components/Wishlist/WishlistScreen';
+
+
 
 import CartBadge from '../components/cart/CartBadge';
 
@@ -63,6 +66,7 @@ const defaultHeaderOptions = {
 
 const HomeStack = createStackNavigator(
   {
+    // [routes.NAVIGATION_WISHLIST_PATH]:WishlistScreen,
     [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
     [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
@@ -112,6 +116,8 @@ const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
   [routes.NAVIGATION_CONTACTUS_PATH]:ContactUsScreen,
+  [routes.NAVIGATION_WISHLIST_PATH]:WishlistScreen,
+  
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
   [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
