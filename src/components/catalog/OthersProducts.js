@@ -9,15 +9,15 @@ import { ThemeContext } from '../../theme';
 import { NAVIGATION_HOME_PRODUCT_PATH } from '../../navigation/routes';
 import { useDispatch } from 'react-redux';
 import { setCurrentProduct } from '../../actions';
-import { useRelatedProducts } from '../../hooks/useRelatedProducts';
+import { useOtherProducts } from '../../hooks/useOtherProducts';
 import { Spinner } from '../common';
 
-export const RelatedProducts = ({ product, currencySymbol, currencyRate, navigation }) => {
+export const OthersProducts = ({ product, currencySymbol, currencyRate, navigation }) => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
-  const { relatedProducts, loading, error } = useRelatedProducts({ product });
-  console.log("Related product:",relatedProducts);
-  if (!relatedProducts?.length && !loading || error) {
+  const { othersProducts, loading, error } = useOtherProducts({ product });
+  console.log("Others product:",othersProducts);
+  if (!othersProducts?.length && !loading || error) {
     return <View />;
   }
 
@@ -36,8 +36,8 @@ export const RelatedProducts = ({ product, currencySymbol, currencyRate, navigat
   return (
     <AllRelatedProducts
       style={{ marginBottom: theme.spacing.large }}
-      products={{ items: relatedProducts }}
-      title={translate('product.relatedProductsTitle')}
+      products={{ items: othersProducts }}
+      title={translate('product.otherProductsTitle')}
       titleStyle={styles.relatedProductTitle}
       onPress={onProductPress}
       currencySymbol={currencySymbol}

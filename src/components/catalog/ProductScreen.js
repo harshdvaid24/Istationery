@@ -21,6 +21,7 @@ import { ProductCustomOptions } from './ProductCustomOptions';
 import { useAddToCart } from '../../hooks/useAddToCart';
 import { useProductDescription } from '../../hooks/useProductDescription';
 import { RelatedProducts } from './RelatedProducts';
+import { OthersProducts } from './OthersProducts';
 import { ProductReviews } from './reviews/ProductReviews';
 import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
@@ -288,6 +289,15 @@ export const ProductScreen = props => {
         currencySymbol={currencySymbol}
         navigation={props.navigation}
       />
+
+      <OthersProducts
+        product={product}
+        currencyRate={currencyRate}
+        currencySymbol={currencySymbol}
+        navigation={props.navigation}
+      />
+
+
     </ScrollView>
   );
 };
