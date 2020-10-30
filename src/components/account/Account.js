@@ -13,7 +13,7 @@ import { Button } from '../common';
 import { logout, currentCustomer } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
    NAVIGATION_ADDRESS_SCREEN_PATH,
-   NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH } from '../../navigation/routes';
+   NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
@@ -85,7 +85,7 @@ const Account = ({
   };
 
   const openResetPassword = () =>{
-    navigation.navigate(NAVIGATION_RESET_PASSWORD_PATH);
+    navigation.navigate(NAVIGATION_CHANGE_PASSWORD_PATH);
   }
 
   const openWishlist = () =>{
@@ -136,7 +136,7 @@ const Account = ({
         <TouchableOpacity onPress={openResetPassword}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <Text style={[CommonStyle.LBTitle]}>
-              Reset password
+              Change password
             </Text>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>

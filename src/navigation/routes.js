@@ -16,6 +16,7 @@ export const NAVIGATION_WISHLIST_PATH = 'WishlistScreen';
 export const NAVIGATION_LOGIN_PATH = 'Login';
 export const NAVIGATION_SIGNIN_PATH = 'Signin';
 export const NAVIGATION_RESET_PASSWORD_PATH = 'navigation_reset_password_path';
+export const NAVIGATION_CHANGE_PASSWORD_PATH = 'navigation_change_password_path';
 export const NAVIGATION_AUTH_STACK_PATH = 'Auth';
 export const NAVIGATION_AUTH_LOADING_SWITCH = 'navigation_auth_loading_switch';
 export const NAVIGATION_LOGIN_STACK_PATH = 'Login_Stack';

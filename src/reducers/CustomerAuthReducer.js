@@ -9,6 +9,9 @@ import {
   MAGENTO_AUTH,
   MAGENTO_AUTH_ERROR,
   MAGENTO_AUTH_ERROR_RESET,
+  MAGENTO_PASSWORD_CHANGE_ERROR,
+  MAGENTO_PASSWORD_CHANGE_LOADING,
+  MAGENTO_PASSWORD_CHANGE_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -69,6 +72,13 @@ export default (state = INITIAL_STATE, action) => {
       case MAGENTO_AUTH_ERROR_RESET:{
         console.log("MAGENTO_AUTH_ERROR_RESET");
         return { ...state, error: null };
+      }
+      case MAGENTO_PASSWORD_CHANGE_ERROR:
+      return { ...state, error: action.payload };
+      case MAGENTO_PASSWORD_CHANGE_SUCCESS:
+      return { ...state, success: action.payload };
+      case MAGENTO_PASSWORD_CHANGE_LOADING:{
+        return { ...state, loading:action.payload };
       }
         
     case MAGENTO_AUTH_LOADING: {

@@ -15,6 +15,9 @@ import {
   MAGENTO_AUTH_ERROR,
   MAGENTO_AUTH_ERROR_RESET,
   MAGENTO_LOGIN_SUCCESS,
+  MAGENTO_PASSWORD_CHANGE_LOADING,
+  MAGENTO_PASSWORD_CHANGE_SUCCESS,
+  MAGENTO_PASSWORD_CHANGE_ERROR
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -48,6 +51,25 @@ export const signIn = customer => async (dispatch) => {
     authFail(dispatch, e.message);
   }
 };
+
+export const changePassword = (customer) => async (dispatch) =>{
+  try {
+    const userdetails = {'currentPassword':customer.currentPassword,'newPassword':customer.newPassword};
+    dispatch({type: MAGENTO_PASSWORD_CHANGE_LOADING, payload: true});
+    const response = await magento.customer.changePassword(userdetails,customer.customer_id);
+    if(response.message)
+    {
+      changePasswordFail(dispatch,response.message);
+    }
+    else
+    {
+      changePasswordSuccess(dispatch)
+    }
+  } catch (error) {
+    logError(error);
+    changePasswordFail(dispatch,error.message);
+  }
+}
 
 export const auth = (username, password) => async (dispatch) => {
   try {
@@ -141,3 +163,13 @@ export const setCurrentCustomer = customer => ({
   type: MAGENTO_CURRENT_CUSTOMER,
   payload: customer,
 });
+
+const changePasswordSuccess = (dispatch) => {
+  dispatch({ type: MAGENTO_PASSWORD_CHANGE_SUCCESS, payload: true });
+  dispatch({type:MAGENTO_PASSWORD_CHANGE_LOADING,payload:false});
+};
+
+const changePasswordFail = (dispatch, message) => {
+  dispatch({type:MAGENTO_PASSWORD_CHANGE_ERROR, payload:message});
+  dispatch({ type: MAGENTO_PASSWORD_CHANGE_LOADING, payload: false });
+};

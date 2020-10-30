@@ -26,6 +26,7 @@ import OrdersScreen from '../components/account/OrdersScreen';
 import OrderScreen from '../components/account/OrderScreen';
 import AddressScreen from '../components/account/AddressScreen';
 import DrawerScreen from '../components/catalog/DrawerScreen';
+import ChangePasswordScreen from '../components/account/ChangePassword';
 
 import {ContactUsScreen} from '../components/catalog/ContactUsScreen';
 import WishlistScreen from '../components/Wishlist/WishlistScreen';
@@ -96,6 +97,7 @@ const AuthStack = createStackNavigator({
   [routes.NAVIGATION_LOGIN_PATH]: Login,
   [routes.NAVIGATION_SIGNIN_PATH]: Signin,
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
+  [routes.NAVIGATION_CHANGE_PASSWORD_PATH]: ChangePasswordScreen 
 }, {
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions

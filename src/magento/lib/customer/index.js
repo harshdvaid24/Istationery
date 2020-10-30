@@ -22,4 +22,6 @@ export default magento => ({
   placeCartOrder: payment => magento.put('/V1/carts/mine/order', payment, CUSTOMER_TYPE),
 
   postReview: review => magento.post('/V1/mma/review/mine/post', review, CUSTOMER_TYPE),
+
+  changePassword: (userDetail,id) => magento.put(`/V1/customers/me/password?customerId=${id}`,userDetail,CUSTOMER_TYPE)
 });

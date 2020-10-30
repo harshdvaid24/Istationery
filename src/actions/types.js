@@ -53,6 +53,9 @@ export const MAGENTO_AUTH_LOADING = 'magento_auth_loading';
 export const MAGENTO_PASSWORD_RESET_LOADING = 'magento_password_reset_loading';
 export const MAGENTO_PASSWORD_RESET_SUCCESS = 'magento_password_reset_success';
 export const MAGENTO_PASSWORD_RESET_ERROR = 'magento_password_reset_error';
+export const MAGENTO_PASSWORD_CHANGE_LOADING = 'magento_password_change_loading';
+export const MAGENTO_PASSWORD_CHANGE_SUCCESS = 'magento_password_change_success';
+export const MAGENTO_PASSWORD_CHANGE_ERROR = 'magento_password_change_error';
 
 export const UI_PRODUCT_QTY_INPUT = 'ui_product_qty_input';
 export const UI_PRODUCT_UPDATE_OPTIONS = 'ui_product_update';
