@@ -26,6 +26,8 @@ export const useProductReviewsForm = (props: Props): Result => {
   const [error, setError] = useState(false)
 
   const ratingOptions = useSelector(({ product }) => product.ratingOptions);
+  
+  console.log("useProductReviewsForm:ratingOptions:",ratingOptions);
   const dispatch = useDispatch();
 
   const getAvailableRatings = async () => {

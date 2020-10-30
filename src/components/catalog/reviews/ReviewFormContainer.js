@@ -19,6 +19,7 @@ export const ReviewFormContainer = ({ product }) => {
   const [iconName, setIconName] = useState('angle-down');
   const [reviewFormRefs, setReviewFormRefs] = useState([]);
   const reviewFormRef = useRef();
+  console.log("Product:",product);
   const {
     postReviewLoading,
     postReview,

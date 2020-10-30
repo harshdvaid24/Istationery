@@ -2,7 +2,7 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext, useState, useEffect } from 'react';
-import { ScrollView,Share,StatusBar,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
+import { ScrollView,Share,StatusBar,Platform,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { Button, Input, Price, Spinner, Text } from '../common';
@@ -27,7 +27,7 @@ import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
 import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
 
 export const ProductScreen = props => {
   const { cart, currencyRate, currencySymbol, customer, current } = useSelector(
@@ -41,7 +41,7 @@ export const ProductScreen = props => {
       <TouchableOpacity
         onPress={() => {props.navigation.goBack() }}
         >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+        <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
         </TouchableOpacity>
     ),
     headerRight: () => (
@@ -56,8 +56,11 @@ export const ProductScreen = props => {
     headerBackTitle: ' ',
     headerStyle: {
       backgroundColor:GlobalStyle.colorSet.white,
-      height: 50,
+      marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
+      height: H(60),
       elevation: 0,
+      justifyContent:'center',
+      // borderWidth:1,
       borderBottomColor:'transparent',
     }
 });

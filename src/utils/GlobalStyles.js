@@ -1,8 +1,9 @@
 import { Dimensions } from 'react-native';
-
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 export const WINDOW_WIDTH = Dimensions.get('window').width;
 export const WINDOW_HEIGHT = Dimensions.get('window').height;
 
+export const StatusbarHeight = getStatusBarHeight();
 // MOCKUP_DEVICE_WIDTH
 export const MOCKUP_DEVICE_WIDTH = 414;
 
