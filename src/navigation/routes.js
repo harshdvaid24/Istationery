@@ -11,6 +11,8 @@ export const NAVIGATION_HOME_STACK_PATH = 'Home';
 export const NAVIGATION_ACCOUNT_PATH = 'Account';
 export const NAVIGATION_CONTACTUS_PATH = 'ContactUsScreen';
 export const NAVIGATION_WISHLIST_PATH = 'WishlistScreen';
+export const NAVIGATION_ADDRESS_PATH = 'AddressListScreen';
+
 
 
 export const NAVIGATION_LOGIN_PATH = 'Login';
