@@ -30,7 +30,7 @@ const Input = ({
         placeholder={placeholder}
         placeholderTextColor={theme.colors.bodyText}
         autoCorrect={false}
-        style={[styles.inputStyle(theme), inputStyle,CommonStyle.border1]}
+        style={[styles.inputStyle(theme), inputStyle,]}
         value={value}
         onChangeText={onChangeText}
         ref={(component) => { assignRef && assignRef(component); }}

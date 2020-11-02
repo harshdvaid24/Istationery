@@ -60,7 +60,7 @@ const ReviewForm = forwardRef((props, ref) => {
       console.log("nickname:",nickname);
       console.log("summary:",summary);
       console.log("review:", review);
-      console.log("props.ratingOptions:", props.ratingOptions);
+      // console.log("props.ratingOptions:", props.ratingOptions);
       props.onSubmit({
         price,
         value,
@@ -68,7 +68,9 @@ const ReviewForm = forwardRef((props, ref) => {
         nickname,
         title: summary,
         detail: review,
-      }, props.ratingOptions);
+      },
+      //  props.ratingOptions
+       );
       Keyboard.dismiss();
     }
   };
@@ -116,7 +118,7 @@ const ReviewForm = forwardRef((props, ref) => {
       <Text style={styles.ratingsTitle}>Nickname <Required/></Text>
       <Spacer size={10} />
       <TextInput
-        textContentType="username"
+        textContentType="none"
         secureTextEntry={false}
         // placeholder={placeholder}
         underlineColorAndroid="transparent"
@@ -143,7 +145,7 @@ const ReviewForm = forwardRef((props, ref) => {
         onSubmitEditing={() => reviewEl.current.focus()}
       /> */}
        <TextInput
-        textContentType="username"
+        textContentType="none"
         secureTextEntry={false}
         ref={summaryEl}
         underlineColorAndroid="transparent"
@@ -170,7 +172,7 @@ const ReviewForm = forwardRef((props, ref) => {
         onSubmitEditing={onSubmit}
       /> */}
        <TextInput
-        textContentType="username"
+        textContentType="none"
         secureTextEntry={false}
         ref={reviewEl}
         underlineColorAndroid="transparent"

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   View,
   StyleSheet,
+  Platform,
   Image,
   TouchableOpacity,
   ActivityIndicator,
@@ -17,7 +18,7 @@ import { NAVIGATION_ORDERS_PATH,
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyles,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
 
 const Account = ({
   customer,
@@ -57,18 +58,18 @@ const Account = ({
     const { email, firstname, lastname } = customer;
     return (
       <View style={[CommonStyle.width100p,styles.HeaderContainer]}>
-        <View style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.HorizontalCenter]}>
-           <Text style={[CommonStyle.LBTitle]}>Name : </Text>
-            <Text style={[CommonStyle.lGreySemiBold]}>
+        <View style={[CommonStyle.FlexRow,styles.HeaderNameContainer,CommonStyle.HorizontalCenter]}>
+           <Text style={[CommonStyle.lGreyRegular]}>Name : </Text>
+            <Text style={[CommonStyle.lGreyRegular]}>
               {firstname}
               {' '}
               {lastname}
             </Text>
         </View>
 
-        <View style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.HorizontalCenter]}>
-           <Text style={[CommonStyle.LBTitle]}>Email : </Text>
-            <Text style={[CommonStyle.lGreySemiBold]}>
+        <View style={[CommonStyle.FlexRow,styles.HeaderNameContainer,CommonStyle.HorizontalCenter]}>
+           <Text style={[CommonStyle.lGreyRegular]}>Email : </Text>
+            <Text style={[CommonStyle.lGreyRegular]}>
                {email}
             </Text>
         </View>
@@ -99,52 +100,68 @@ const Account = ({
       {renderCustomerData()}
      
       <TouchableOpacity onPress={openWishlist}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-             My Wishlist
-            </Text>
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
+                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                  My Wishlist
+                </Text>
+            </View>
+          
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={openOrders}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-            {translate('account.myOrdersButton')}
-            </Text>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/orders.png")} />
+                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 {translate('account.myOrdersButton')}
+                </Text>
+            </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
         
 
         <TouchableOpacity onPress={openAddAddress}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-            {translate('account.myAddressButton')}
-            </Text>
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
+                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 {translate('account.myAddressButton')}
+                </Text>
+            </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={onContactUs}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-            Contact Us
-            </Text>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
+                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 Contact Us
+                </Text>
+            </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
       
-        <TouchableOpacity onPress={openResetPassword}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.marginBottom2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
+        {/* <TouchableOpacity onPress={openResetPassword}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.lGreyRegular]}>
               Reset password
             </Text>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={onLogoutPress}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.LBTitle]}>
-                Logout
-            </Text>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/exit.png")} />
+                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 Logout
+                </Text>
+            </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
     </View>
@@ -153,6 +170,14 @@ const Account = ({
 
 Account.navigationOptions = {
   title: translate('account.title'),
+  headerStyle: {
+    backgroundColor:GlobalStyles.colorSet.white,
+    marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
+    height: H(40),
+    elevation: 0,
+     borderBottomWidth:0.8,
+     borderBottomColor:GlobalStyles.colorSet.BorderGrey,
+  }
 };
 
 const styles = StyleSheet.create({
@@ -160,9 +185,15 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colorSet.white,
     paddingVertical:W(10),
   },
-  HeaderSubContainer:  {
+  HeaderNameContainer:  {
     backgroundColor: GlobalStyles.colorSet.white,
     paddingVertical:W(10),
+    paddingLeft:W(20),
+    paddingRight:W(20),
+  },
+  HeaderSubContainer:  {
+    backgroundColor: GlobalStyles.colorSet.white,
+    paddingVertical:W(20),
     paddingLeft:W(20),
     paddingRight:W(20),
   },
@@ -170,7 +201,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: theme.colors.background,
     // alignItems: 'center',
-    paddingTop: theme.spacing.large,
+    // paddingTop: theme.spacing.large,
   }),
   activity: theme => ({
     padding: theme.spacing.large,

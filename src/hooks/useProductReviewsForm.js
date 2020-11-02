@@ -24,7 +24,7 @@ export const useProductReviewsForm = (props: Props): Result => {
   const [loading, setLoading] = useState(false)
   const [postReviewLoading, setPostReviewLoading] = useState(false)
   const [error, setError] = useState(false)
-
+  console.log("useProductReviewsForm:props:",props);
   const ratingOptions = useSelector(({ product }) => product.ratingOptions);
   
   console.log("useProductReviewsForm:ratingOptions:",ratingOptions);

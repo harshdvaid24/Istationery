@@ -14,16 +14,16 @@ import Colors from '../../../theme/colors';
 import Typography from '../../../theme/typography';
 
 export const ReviewFormContainer = ({ product }) => {
+  console.log("ReviewFormContainer:product",product);
   const [expanded, setExpanded] = useState(false);
   const [success, setSuccess] = useState(false);
   const [iconName, setIconName] = useState('angle-down');
   const [reviewFormRefs, setReviewFormRefs] = useState([]);
   const reviewFormRef = useRef();
-  console.log("Product:",product);
   const {
     postReviewLoading,
     postReview,
-    ratingOptions,
+    // ratingOptions,
     loading
   } = useProductReviewsForm({
     product,
@@ -92,7 +92,7 @@ export const ReviewFormContainer = ({ product }) => {
               productName={product.name}
               onMountRefs={refs => setReviewFormRefs(refs)}
               onSubmit={submitReview}
-              ratingOptions={ratingOptions}
+              // ratingOptions={ratingOptions}
             />
           </View>
         )
