@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     // marginLeft: Sizes.WINDOW_WIDTH * 0.05,
     marginTop: Sizes.WINDOW_WIDTH * 0.05,
     fontSize: 20,
-    margin: 10
+    // margin: 10
   },
   expandHeaderRow: {
     // borderBottomWidth: 1,

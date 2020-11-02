@@ -11,6 +11,8 @@ import { useProductReviews } from '../../../hooks/useProductReviews';
 import CustomerReviews from './CustomerReviews';
 import { Spinner, Text } from '../../common';
 import Typography from '../../../theme/typography';
+import CommonStyle from '../../../utils/CommonStyle'
+import GlobalStyle,{W,H,StatusbarHeight} from '../../../utils/GlobalStyles'
 
 export const ProductReviews = ({ product }) => {
   const [expanded, setExpanded] = useState(false);
@@ -36,12 +38,12 @@ console.log("review:",product);
   }
 
   return (
-    <View style={styles.customerReviewsWrap}>
+    <View style={[styles.customerReviewsWrap,]}>
       <TouchableOpacity
-        style={styles.expandHeaderRow}
+        style={[styles.expandHeaderRow,]}
         onPress={() => { setExpanded(!expanded) }}
       >
-        <Row style={styles.expandHeaderWrap}>
+        <Row style={[styles.expandHeaderWrap,]}>
           <Text style={styles.customerReviewsTitle}>Customer Reviews</Text>
           <Icon name={iconName} type="font-awesome" color={'#737373'}/>
         </Row>
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
   customerReviewsWrap: {
     // marginLeft: Sizes.WINDOW_WIDTH * 0.05,
     marginTop: Sizes.WINDOW_WIDTH * 0.05,
-    margin: 10
+    // margin: 10
   },
   expandHeaderRow: {
     // borderBottomWidth: 1,

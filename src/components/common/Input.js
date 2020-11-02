@@ -3,6 +3,7 @@ import { TextInput, View, ViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from './Text';
 import { ThemeContext } from '../../theme';
+import CommonStyle from '../../utils/CommonStyle';
 
 const Input = ({
   label,
@@ -29,7 +30,7 @@ const Input = ({
         placeholder={placeholder}
         placeholderTextColor={theme.colors.bodyText}
         autoCorrect={false}
-        style={[styles.inputStyle(theme), inputStyle]}
+        style={[styles.inputStyle(theme), inputStyle,CommonStyle.border1]}
         value={value}
         onChangeText={onChangeText}
         ref={(component) => { assignRef && assignRef(component); }}
