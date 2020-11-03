@@ -1,3 +1,4 @@
+import React from 'react'
 import { combineReducers } from 'redux';
 import CategoryTreeReducer from './CategoryTreeReducer';
 import CustomerAuthReducer from './CustomerAuthReducer';
@@ -11,6 +12,7 @@ import HomeReducer from './HomeReducer';
 import SearchReducer from './SearchReducer';
 import FilterReducer from './FilterReducer';
 import UIReducer from './UIReducer';
+import WishlistReducer from './WishlistReducer'
 
 export default combineReducers({
   categoryTree: CategoryTreeReducer,
@@ -25,4 +27,5 @@ export default combineReducers({
   search: SearchReducer,
   filters: FilterReducer,
   ui: UIReducer,
+  wishlist:WishlistReducer,
 });

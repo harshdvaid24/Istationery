@@ -3,3 +3,4 @@ export * from './UIActions';
 export * from './CustomerAuthActions';
 export * from './CartActions';
 export * from './ProductActions';
+export * from './WishListAction';

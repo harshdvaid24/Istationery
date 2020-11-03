@@ -13,7 +13,8 @@ import {
   MAGENTO_RELATED_PRODUCTS_SUCCESS,
   MAGENTO_RELATED_PRODUCTS_ERROR,
   MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT,
-  MAGENTO_PRODUCT_STOCK_CHECK
+  MAGENTO_PRODUCT_STOCK_CHECK,
+  MAGENTO_ADD_WISHLIST
 } from '../actions/types';
 import { getPriceFromChildren } from '../helper/product';
 
@@ -27,7 +28,8 @@ const INITIAL_STATE = {
       selectedCustomOptions: {},
       medias: {},
       stocks:{},
-      qty:{}
+      qty:{},
+      item_added_in_wishlist:false
     },
   },
   relatedProducts: {
@@ -174,7 +176,6 @@ export default (state = INITIAL_STATE, action) => {
     }
     case MAGENTO_PRODUCT_STOCK_CHECK:{
       const{sku, product_id, is_in_stock, qty} = action.payload;
-      console.log('IS_IN_STOCK:', is_in_stock);
       const current = {
         ...state.current,
         [product_id]: {
@@ -182,6 +183,17 @@ export default (state = INITIAL_STATE, action) => {
           stocks:is_in_stock,
           qty:qty
         },
+      };
+      return{...state,current}
+    }
+    case MAGENTO_ADD_WISHLIST:{
+      const {product_id,item_added_in_wishlist} = action.payload
+      const current ={
+        ...state,
+        [product_id]:{
+          ...state.current[product_id],
+          item_added_in_wishlist
+        }
       };
       return{...state,current}
     }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   View,
   Text,
@@ -14,11 +15,10 @@ import {
   ImageBackground,
   TouchableHighlight,
   SafeAreaView,
-  Alert,
   PermissionsAndroid,
   NativeModules,
 } from 'react-native';
-
+import {getWishListProducts, removeWishlistItem,AddToCart, addToCart } from '../../actions'
 
 import { W, H } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
@@ -27,7 +27,10 @@ import GlobalStyle from '../../utils/GlobalStyles';
 import { WishlistItem } from './WishlistItem';
 
 const WishlistScreen = props => {
-
+  // const { currencyRate, currencySymbol, products } = useSelector(
+  //   state => mapStateToProps(state),
+  // );
+ 
   WishlistScreen['navigationOptions'] = screenProps => ({
     headerLeft: () => (
       <TouchableOpacity
@@ -46,44 +49,50 @@ const WishlistScreen = props => {
     }
 });
 
+const dispatch = useDispatch();
+const WishlistItems = useSelector(state=>state.wishlist.products.products);
+const error = useSelector(state=>state.wishlist.error);
+const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
 
+  useEffect(()=>{
+    dispatch(getWishListProducts());
+  },[]);
 
-  const [WishlistItems, setWishlistItems] = useState([
-    {id:1,productName:"New machine HP 15 series",price:20},
-    {id:1,productName:"machine",price:20},
-     {id:1,productName:"New machine HP 15 series and not play",price:20},
-  ])
   
-
-  const [isOpen, setIsOpen] = useState(false);
- 
- 
- 
   const onOptionPressed =(optionId) => {
-    console.log('onOptionPressed',optionId);
-    setSelectedCustomer(optionId);
-    
-     setIsOpen(true);
-   
-   
+    dispatch(removeWishlistItem(optionId));
+    if(error)
+    {
+      alert('Something went wrong!')
+    }
+ }
+
+ const onAddToCartClick = (id,sku) =>{
+   dispatch(AddToCart(sku));
+   if(!is_in_stock)
+   {
+    alert('Item is out of stock');
+   }
+  //  const is_in_stock =  await AddToCart(sku);
+  //  console.log('IS_IN_STOCK',is_in_stock);
+  //  if(is_in_stock)
+  //  {
+    // alert('it is available')
+  //  }
+  //  else{
+    //  alert('item is not available');
+  //  }
  }
 
 
 
-
-
-  //useEffect
-  // useEffect(() => {
-  //   setPackageListData(props.Data);
-    
-  // });
   return (
      <View style={[CommonStyle.marginBottom20,{backgroundColor:GlobalStyle.colorSet.mainBgColor}]}>
 
              
       <FlatList
           data={WishlistItems}
-          onRefresh={() => dispatch(get_Employees(Token))}
+          onRefresh={() => dispatch(getWishListProducts())}
           refreshing={false}
           // ListFooterComponent={renderFooter}
           removeClippedSubviews={false}
@@ -92,7 +101,7 @@ const WishlistScreen = props => {
           numColumns={1}
           showsHorizontalScrollIndicator={false}
           renderItem={item => {
-            return <WishlistItem item={item} onOptionPressed={onOptionPressed} navigation={props.navigation} />;
+            return <WishlistItem item={item}  onAddToCartOption={onAddToCartClick} onOptionPressed={onOptionPressed} navigation={props.navigation} />;
           }}
           // keyExtractor={item => item.id.toString()}
           keyExtractor={(item, index) => index.toString()}
@@ -103,4 +112,20 @@ const WishlistScreen = props => {
        
   );
 };
+// const mapStateToProps = state => {
+//   const {
+//     currency: {
+//       displayCurrencySymbol: currencySymbol,
+//       displayCurrencyExchangeRate: currencyRate,
+//     },
+//   } = state.magento;
+
+//   const { products } = state.wishlist;
+
+//   return {
+//     currencyRate,
+//     currencySymbol,
+//     products 
+//   };
+// }
 export default WishlistScreen;

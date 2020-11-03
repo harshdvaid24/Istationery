@@ -23,5 +23,11 @@ export default magento => ({
 
   postReview: review => magento.post('/V1/mma/review/mine/post', review, CUSTOMER_TYPE),
 
-  changePassword: (userDetail,id) => magento.put(`/V1/customers/me/password?customerId=${id}`,userDetail,CUSTOMER_TYPE)
+  changePassword: (userDetail,id) => magento.put(`/V1/customers/me/password?customerId=${id}`,userDetail,CUSTOMER_TYPE),
+
+  AddWishlistItem: (id)=> magento.post(`/V1/ipwishlist/add/${id}`,undefined,CUSTOMER_TYPE),
+
+  RemoveWishListItem: (wishListItemId) => magento.delete(`/V1/ipwishlist/delete/${wishListItemId}`,undefined,CUSTOMER_TYPE),
+
+  getWishlistItems: () => magento.get(`/V1/ipwishlist/items`,undefined,undefined,CUSTOMER_TYPE),
 });

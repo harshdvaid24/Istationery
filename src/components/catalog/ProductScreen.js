@@ -12,7 +12,8 @@ import {
   getConfigurableProductOptions,
   getCustomOptions,
   updateProductQtyInput,
-  getproductIsInStock
+  getproductIsInStock,
+  toggleWishList
 } from '../../actions';
 import { ProductMediaContainer } from './ProductMediaContainer';
 import { finalPrice } from '../../helper/price';
@@ -124,6 +125,41 @@ export const ProductScreen = props => {
     );
   };
 
+  const onToggleWishlist = () =>{
+    dispatch(toggleWishList(product.id));
+  }
+
+  const renderAddWishlistButton = () => {
+ //   const source = require('./../../../resources/icons/wishlistAdded.png');
+  if(currentProduct.item_added_in_wishlist){
+    return(
+    <TouchableOpacity
+      // onPress={current.item_added_in_wishlist?' ': onToggleWishlist}
+       style={[styles.shareContainer]}>
+       <Image
+         resizeMode={'contain'}
+         style={styles.minusButtonImage}
+         source={require('./../../../resources/icons/wishlist.png')}
+       />
+    </TouchableOpacity>
+
+    )}
+    else{
+      return(
+        <TouchableOpacity
+        onPress={onToggleWishlist}
+         style={[styles.shareContainer]}>
+         <Image
+           resizeMode={'contain'}
+           style={styles.minusButtonImage}
+           source={require('./../../../resources/icons/wishlistAdded.png')}
+         />
+      </TouchableOpacity>
+      )
+    }
+  }
+  
+
   const onIncrement = () => {
     let q = qty+1;
     if(q>10){
@@ -209,15 +245,7 @@ export const ProductScreen = props => {
                 </TouchableOpacity>
               </View>
       
-              <TouchableOpacity
-                 onPress={onShare}
-                  style={[styles.shareContainer]}>
-                  <Image
-                    resizeMode={'contain'}
-                    style={styles.minusButtonImage}
-                    source={require('./../../../resources/icons/wishlistAdded.png')}
-                  />
-            </TouchableOpacity>
+              {renderAddWishlistButton()}
 
               <TouchableOpacity
                  onPress={onShare}

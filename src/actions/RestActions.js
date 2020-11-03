@@ -56,7 +56,11 @@ import {
   RESET_FILTERS_DATA,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
   MAGENTO_GET_CUSTOM_OPTIONS,
-  MAGENTO_PRODUCT_STOCK_CHECK
+  MAGENTO_PRODUCT_STOCK_CHECK,
+  MAGENTO_ADD_WISHLIST,
+  MAGENTO_WISHLIST_DELETE_ITEMS,
+  MAGENTO_WISHLIST_GET_LOADING,
+  MAGENTO_WISHLIST_ITEMS
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -721,3 +725,29 @@ export const getproductIsInStock = (sku) => async (dispatch) =>{
   }))
   .catch((error)=>{logError(error)});
 }
+
+export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
+  // if(add)
+  // {
+  //   const data = {product_id:id,item_added_in_wishlist : false}
+  //  dispatch({type:MAGENTO_ADD_WISHLIST, payload:data})
+  //  const respose = magento.customer.RemoveWishListItem(wishListItemId);
+  //  if(respose.message)
+  //  {
+  //   console.log('Failed_TO_REMOVE',response.message);
+  //   //  failedToRemoveWishListItem();
+  //  } 
+  // }
+  // else
+  // {
+  const data = {product_id:id,item_added_in_wishlist : true}
+  dispatch({type:MAGENTO_ADD_WISHLIST, payload:data});
+  const response = magento.customer.AddWishlistItem(id);
+  console.log(response);
+    if(response.message)
+    {
+      console.log('Failed',response.message);
+      // wishlistFail()
+    }
+  }
+// }

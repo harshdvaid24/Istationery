@@ -103,3 +103,15 @@ export const MAGENTO_RELATED_PRODUCTS_SUCCESS = 'magento_related_products_succes
 export const MAGENTO_RELATED_PRODUCTS_ERROR = 'magento_related_products_error';
 export const MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT = 'magento_related_products_conf_product_update';
 export const MAGENTO_PRODUCT_STOCK_CHECK = 'magento_product_stock_check';
+export const MAGENTO_ADD_WISHLIST = 'magento_add_wishlist';
+
+
+/**
+ * Action Names fot "Wishlist Product" in Account Screen
+ */
+export const MAGENTO_WISHLIST_GET_LOADING = 'magento_wishlist_get_loading';
+export const MAGENTO_WISHLIST_ITEMS = 'magento_wishlist_items';
+export const MAGENTO_WISHLIST_DELETE_ITEMS = 'magento_wishlist_delete_items';
+export const MAGENTO_WISHLIST_DELETE_ITEMS_SUCCESS ='magento_wishlist_delete_items_success';
+export const MAGENTO_WISHLIST_DELETE_ITEMS_ERROR = 'magento_wishlist_delete_items_error';
+export const MAGENTO_WISHLIST_PRODUCT_STOCK_CHECK = 'magento_wishlist_product_stock_check';

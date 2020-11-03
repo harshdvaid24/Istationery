@@ -25,14 +25,17 @@ import CommonStyle from '../../utils/CommonStyle';
 
 import styles from './styles';
 
-export const WishlistItem = ({ item, onOptionPressed, navigation }) => {
+export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigation }) => {
   // console.log('ThumbnailItemV:', item);
-  // console.log('PackageItem:',item.item);
+  // console.log('PackageItem:',item.item.productItem);
  
   const OnOptionPressed = () => {
-  onOptionPressed(item.item.id);
+  onOptionPressed(item.item.wishlistId);
   };
 
+  const onAddToCart = () =>{
+    onAddToCartOption(item.item.wishlistId,item.item.productItem.sku)
+  }
 
 
   return (
@@ -41,14 +44,14 @@ export const WishlistItem = ({ item, onOptionPressed, navigation }) => {
             <Image
                   resizeMode="contain"
                   style={[CommonStyle.Icon100]}
-                  source={{uri:'https://staging.istationery.com/pub/media/catalog/product/cache/8d91c3bb3302d1da0f0fa0ff37fb4476/d/g/dg1738.jpg'}}
+                  source={{uri:`https://staging.istationery.com/pub/media/catalog/product/cache/8d91c3bb3302d1da0f0fa0ff37fb4476${item.item.productItem.small_image}`}}
                 />
               <View  style={[styles.ItemTextContainer]}>
-                    <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.productName}</Text> 
+                    <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.productItem.name}</Text> 
                     <View style={[CommonStyle.marginTop5]}>
-                      <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {item.item.price} </Text>
+                      <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {parseFloat(item.item.productItem.price).toFixed(2)} </Text>
                     </View>
-                    <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
+                    <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]} onPress={onAddToCart}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>
                         Add to Cart
                       </Text>
