@@ -35,6 +35,7 @@ export const ProductScreen = props => {
     state => mapStateToProps(state),
   );
 
+  console.log("ProductScreen:customer:",customer);
 
  
   ProductScreen['navigationOptions'] = screenProps => ({
@@ -130,7 +131,13 @@ export const ProductScreen = props => {
   };
 
   const onToggleWishlist = () =>{
-    dispatch(toggleWishList(product.id));
+    if(customer!=null){
+      dispatch(toggleWishList(product.id));
+    }
+    else {
+      alert("Login is required to add item in wishlist");
+    }
+   
   }
 
   const renderAddWishlistButton = () => {
@@ -143,7 +150,7 @@ export const ProductScreen = props => {
        <Image
          resizeMode={'contain'}
          style={styles.minusButtonImage}
-         source={require('./../../../resources/icons/wishlist.png')}
+         source={require('./../../../resources/icons/wishlistAdded.png')}
        />
     </TouchableOpacity>
 
@@ -156,7 +163,8 @@ export const ProductScreen = props => {
          <Image
            resizeMode={'contain'}
            style={styles.minusButtonImage}
-           source={require('./../../../resources/icons/wishlistAdded.png')}
+          
+           source={require('./../../../resources/icons/wishlist.png')}
          />
       </TouchableOpacity>
       )
@@ -309,7 +317,12 @@ export const ProductScreen = props => {
       {magentoOptions.reviewEnabled && (
         <>
           <ProductReviews product={product} />
-          <ReviewFormContainer product={product} />
+          {
+            (customer!=null)?
+              <ReviewFormContainer product={product} />
+            : null
+          }
+         
         </>
       )}
       </View>

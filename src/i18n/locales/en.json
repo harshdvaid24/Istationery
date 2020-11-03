@@ -72,6 +72,10 @@
     "title": "Orders",
     "noOrderMessage": "Oops, there is no orders yet!"
   },
+  "WishlistScreen": {
+    "title": "Wishlist",
+    "noWishlistMessage": "Sorry, there is no Wishlist items yet!"
+  },
   "passwordReset": {
     "title": "Reset Password",
     "resetButton": "RESET MY PASSWORD",

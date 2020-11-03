@@ -19,11 +19,11 @@ import {
   NativeModules,
 } from 'react-native';
 import {getWishListProducts, removeWishlistItem,AddToCart, addToCart } from '../../actions'
-
+import { translate } from '../../i18n';
 import { W, H } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
-// import styles from './styles';
+ import styles from './styles';
 import { WishlistItem } from './WishlistItem';
 
 const WishlistScreen = props => {
@@ -84,10 +84,26 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
   //  }
  }
 
-
-
+ const renderEmptyOrderList = () => {
   return (
-     <View style={[CommonStyle.marginBottom20,{backgroundColor:GlobalStyle.colorSet.mainBgColor}]}>
+    <View style={[styles.emptyListContainerStyle]}>
+      <Text style={[CommonStyle.lGreyRegular]}>
+        {translate('WishlistScreen.noWishlistMessage')}
+      </Text>
+      {/* <TouchableOpacity
+        onPress={() => navigate(NAVIGATION_HOME_SCREEN_PATH)}
+      >
+        <Text type="heading"  style={styles.buttonTextStyle(theme)}>
+          {translate('common.continueShopping')}
+        </Text>
+      </TouchableOpacity> */}
+    </View>
+  );
+};
+
+ if (WishlistItems && WishlistItems.length) {
+  return (
+     <View style={[CommonStyle.marginBottom20,styles.emptyListContainerStyle]}>
 
              
       <FlatList
@@ -111,6 +127,8 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
      </View>
        
   );
+  }
+  return renderEmptyOrderList();
 };
 // const mapStateToProps = state => {
 //   const {

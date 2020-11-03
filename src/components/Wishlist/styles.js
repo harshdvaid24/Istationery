@@ -13,7 +13,13 @@ const styles = StyleSheet.create({
 ItemTextContainer:{
   width:W(220),
   marginLeft:W(20)
-}
+},
+emptyListContainerStyle:{
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: GlobalStyle.colorSet.darkWhite,
+},
 });
 
 export default styles;
