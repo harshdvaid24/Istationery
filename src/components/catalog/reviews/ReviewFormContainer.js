@@ -14,6 +14,7 @@ import Colors from '../../../theme/colors';
 import Typography from '../../../theme/typography';
 
 export const ReviewFormContainer = ({ product }) => {
+  console.log("ReviewFormContainer:product",product);
   const [expanded, setExpanded] = useState(false);
   const [success, setSuccess] = useState(false);
   const [iconName, setIconName] = useState('angle-down');
@@ -22,7 +23,7 @@ export const ReviewFormContainer = ({ product }) => {
   const {
     postReviewLoading,
     postReview,
-    ratingOptions,
+    // ratingOptions,
     loading
   } = useProductReviewsForm({
     product,
@@ -91,7 +92,7 @@ export const ReviewFormContainer = ({ product }) => {
               productName={product.name}
               onMountRefs={refs => setReviewFormRefs(refs)}
               onSubmit={submitReview}
-              ratingOptions={ratingOptions}
+              // ratingOptions={ratingOptions}
             />
           </View>
         )
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     // marginLeft: Sizes.WINDOW_WIDTH * 0.05,
     marginTop: Sizes.WINDOW_WIDTH * 0.05,
     fontSize: 20,
-    margin: 10
+    // margin: 10
   },
   expandHeaderRow: {
     // borderBottomWidth: 1,

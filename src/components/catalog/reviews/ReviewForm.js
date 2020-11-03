@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Keyboard } from 'react-native';
+import { View, StyleSheet, Keyboard,TextInput } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
 import Colors from '../../../theme/colors';
 import { Input, Spinner, Text } from '../../common';
 import Sizes from '../../../theme/dimens';
 import { Button } from '../../common';
 import { Row, Spacer } from 'react-native-markup-kit';
+import CommonStyle from '../../../utils/CommonStyle'
+import GlobalStyle,{W,H,StatusbarHeight} from '../../../utils/GlobalStyles'
 
 const Required = () => <Text style={styles.required}>*</Text>;
 
@@ -52,6 +54,13 @@ const ReviewForm = forwardRef((props, ref) => {
     if (!nickname.length || !summary.length || !review.length) {
       alert('Please fill all required fields');
     } else {
+      console.log("price:", price);
+      console.log("value:",value);
+      console.log("quality:",quality);
+      console.log("nickname:",nickname);
+      console.log("summary:",summary);
+      console.log("review:", review);
+      // console.log("props.ratingOptions:", props.ratingOptions);
       props.onSubmit({
         price,
         value,
@@ -59,7 +68,9 @@ const ReviewForm = forwardRef((props, ref) => {
         nickname,
         title: summary,
         detail: review,
-      }, props.ratingOptions);
+      },
+      //  props.ratingOptions
+       );
       Keyboard.dismiss();
     }
   };
@@ -106,21 +117,36 @@ const ReviewForm = forwardRef((props, ref) => {
       <Spacer size={15} />
       <Text style={styles.ratingsTitle}>Nickname <Required/></Text>
       <Spacer size={10} />
-      <Input
-        textContentType="username"
+      <TextInput
+        textContentType="none"
+        secureTextEntry={false}
+        // placeholder={placeholder}
+        underlineColorAndroid="transparent"
+        returnKeyType="next"
+        autoCorrect={false}
+        style={[styles.input]}
+        value={nickname}
+        onChangeText={val => setNickname(val)}
         ref={nicknameEl}
+        onSubmitEditing={() => summaryEl.current.focus()}
+      />
+     
+      <Spacer size={25} />
+      <Text style={styles.ratingsTitle}>Summary <Required/></Text>
+      <Spacer size={10} />
+      {/* <Input
+        ref={summaryEl}
         underlineColorAndroid="transparent"
         returnKeyType="next"
         autoCorrect={false}
         style={styles.input}
-        value={nickname}
-        onChangeText={val => setNickname(val)}
-        onSubmitEditing={() => summaryEl.current.focus()}
-      />
-      <Spacer size={25} />
-      <Text style={styles.ratingsTitle}>Summary <Required/></Text>
-      <Spacer size={10} />
-      <Input
+        value={summary}
+        onChangeText={val => setSummary(val)}
+        onSubmitEditing={() => reviewEl.current.focus()}
+      /> */}
+       <TextInput
+        textContentType="none"
+        secureTextEntry={false}
         ref={summaryEl}
         underlineColorAndroid="transparent"
         returnKeyType="next"
@@ -133,7 +159,21 @@ const ReviewForm = forwardRef((props, ref) => {
       <Spacer size={25} />
       <Text style={styles.ratingsTitle}>Review <Required/></Text>
       <Spacer size={10} />
-      <Input
+      {/* <Input
+        ref={reviewEl}
+        underlineColorAndroid="transparent"
+        returnKeyType="send"
+        autoCorrect={false}
+        style={[styles.input, styles.reviewInput]}
+        multiline={true}
+        value={review}
+        onChangeText={val => setReview(val)}
+        numberOfLines={3}
+        onSubmitEditing={onSubmit}
+      /> */}
+       <TextInput
+        textContentType="none"
+        secureTextEntry={false}
         ref={reviewEl}
         underlineColorAndroid="transparent"
         returnKeyType="send"
@@ -188,8 +228,11 @@ const styles = StyleSheet.create({
   },
   input: {
     width: Sizes.WINDOW_WIDTH * 0.9,
-    backgroundColor: Colors.reviewInputBackground,
+    backgroundColor:GlobalStyle.colorSet.WhiteGrey,
     padding: 10,
+    borderWidth:0.3,
+    borderColor:GlobalStyle.colorSet.LightGrey,
+    borderRadius:H(3)
   },
   reviewInput: {
     height: 100,

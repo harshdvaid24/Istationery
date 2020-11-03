@@ -95,7 +95,8 @@
     "addToCartButton": "Add to Cart",
     "productDetailLabel": "Product Details",
     "noProductDetail": "No description available!",
-    "relatedProductsTitle":"You may also like"
+    "relatedProductsTitle":"Related Products",
+    "otherProductsTitle":"Other products you might like!"
   },
   "checkout": {
     "title": "Checkout",

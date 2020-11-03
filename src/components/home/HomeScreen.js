@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
+import {Platform,
   ScrollView, View, StyleSheet,StatusBar, RefreshControl,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import  CommonStyle from './../../utils/CommonStyle';
-import  GlobalStyles,{H,W} from './../../utils/GlobalStyles';
+import  GlobalStyles,{H,W,StatusbarHeight} from './../../utils/GlobalStyles';
 
 import FastImage from 'react-native-fast-image';
 const LogoTitle = ( ) => {
@@ -48,8 +48,10 @@ class HomeScreen extends Component {
     // headerRight: <CurrencyPicker />,
     headerStyle: {
       backgroundColor:'white',
-      height: 50,
+      marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
+      height: H(60),
       elevation: 0,
+      // borderWidth:1,
       borderBottomColor:'transparent',
     },
    
