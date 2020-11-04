@@ -26,7 +26,7 @@ import CommonStyle from '../../utils/CommonStyle';
 import styles from './styles';
 
 export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigation }) => {
-  // console.log('ThumbnailItemV:', item);
+   console.log('ThumbnailItemV:', item);
   // console.log('PackageItem:',item.item.productItem);
  
   const OnOptionPressed = () => {
@@ -51,11 +51,11 @@ export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigati
                     <View style={[CommonStyle.marginTop5]}>
                       <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {parseFloat(item.item.productItem.price).toFixed(2)} </Text>
                     </View>
-                    <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]} onPress={onAddToCart}>
+                    {/* <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]} onPress={onAddToCart}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>
                         Add to Cart
                       </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
               </View>  
        
       </View>

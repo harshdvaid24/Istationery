@@ -56,7 +56,7 @@ RelatedProducts.defaultProps = {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    height: theme.dimens.WINDOW_HEIGHT * 0.35,
+    // height: theme.dimens.WINDOW_HEIGHT * 0.35,
     paddingTop: 10,
     
   }),

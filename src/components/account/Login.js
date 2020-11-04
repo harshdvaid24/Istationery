@@ -36,8 +36,8 @@ function Login ({
 }) {
   const theme = useContext(ThemeContext);
   // Internal State
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('dummy.bhupendra@gmail.com');
+  const [password, setPassword] = useState('Abcd@1234');
   // Reference
   const passwordInput = useRef();
 

@@ -6,7 +6,8 @@
 				"start": "node node_modules/react-native/local-cli/cli.js start",
 				"test": "jest",
 				"prestorybook": "rnstl",
-				"storybook": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook"
+				"storybook": "(adb reverse tcp:7007 tcp:7007 || true) && start-storybook",
+				"postinstall": "patch-package"
 		},
 		"dependencies": {
 				"@react-native-community/async-storage": "^1.6.2",
@@ -16,12 +17,14 @@
 				"i18n-js": "^3.3.0",
 				"lodash": "^4.17.15",
 				"metro-react-native-babel-preset": "0.58.0",
+				"patch-package": "^6.2.2",
+				"postinstall-postinstall": "^2.1.0",
 				"moment": "^2.24.0",
 				"prop-types": "^15.6.0",
 				"react": "16.11.0",
-				"react-native": "0.62.1",
+				"react-native": "0.62.2",
 				"react-native-elements": "^1.2.6",
-				"react-native-fast-image": "^7.0.2",
+				"react-native-fast-image": "^8.3.3",
 				"react-native-flash-message": "^0.1.16",
 				"react-native-gesture-handler": "^1.6.1",
 				"react-native-icon-badge": "^1.1.3",

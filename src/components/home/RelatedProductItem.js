@@ -70,7 +70,7 @@ const RelatedProductItem = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    padding: theme.spacing.tiny,
+    paddingHorizontal:W(2),
     borderRadius:10,
     width: theme.dimens.WINDOW_WIDTH * 0.47,
   }),
