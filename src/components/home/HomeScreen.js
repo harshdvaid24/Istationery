@@ -17,14 +17,14 @@ import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import  CommonStyle from './../../utils/CommonStyle';
-import  GlobalStyles,{H,W,StatusbarHeight} from './../../utils/GlobalStyles';
+import  GlobalStyles,{H,W,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles';
 
 import FastImage from 'react-native-fast-image';
 const LogoTitle = ( ) => {
   return(
-  <View style={{flex:1}}>
+  <View style={[{flex:1}]}>
     <FastImage
-          style={{height:45,width:"100%"}}
+          style={{height:H(45),width:"100%"}}
           resizeMode="contain"
           source={require('./../../../resources/icons/logo.png')}
         />
@@ -41,14 +41,18 @@ class HomeScreen extends Component {
     headerTitle: () => <LogoTitle />,
     headerBackTitle: ' ',
     headerLeft: (
-      <MaterialHeaderButtons>
-        <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={navigation.getParam('toggleDrawer')} />
-      </MaterialHeaderButtons>
+      <View style={[CommonStyle.marginLR10]}>     
+          <MaterialHeaderButtons>
+            <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={navigation.getParam('toggleDrawer')} />
+          </MaterialHeaderButtons>
+      </View>
     ),
-    // headerRight: <CurrencyPicker />,
+    //  headerRight: <CurrencyPicker />,
+     headerRight: <View />,
     headerStyle: {
       backgroundColor:'white',
-      marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
+      marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+      // height: H(40),
       height: H(60),
       elevation: 0,
       // borderWidth:1,
@@ -61,6 +65,7 @@ class HomeScreen extends Component {
   
 
   componentDidMount() {
+    console.log("WINDOW_HEIGHT:WINDOW_HEIGHT:",WINDOW_HEIGHT);
     const { navigation } = this.props;
     if (this.props.slider.length === 0) {
       this.props.getHomeData();
@@ -73,7 +78,7 @@ class HomeScreen extends Component {
     navigation.toggleDrawer();
   };
 
-  onProductPress = (product) => {
+  WINDOW_HEIGHT = (product) => {
     console.log("onProductPress:product:",product);
     this.props.setCurrentProduct({ product });
     NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {

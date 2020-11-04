@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import {
   View,TouchableOpacity,Image,
-  RefreshControl,
+  RefreshControl,Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -19,7 +19,7 @@ import {
 import { ThemeContext } from '../../theme';
 
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 const Category = ({
   canLoadMoreContent,
@@ -41,6 +41,8 @@ const Category = ({
   const theme = useContext(ThemeContext);
   const listTypeGrid = useSelector(({ ui }) => ui.listTypeGrid );
 console.log("products:",products);
+console.log("height:",WINDOW_HEIGHT);
+
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
     _getProductsForCategoryOrChild(category);
@@ -72,6 +74,8 @@ console.log("products:",products);
   };
 
   return (
+   
+   
     <View style={styles.containerStyle(theme)}>
       <ProductList
         refreshControl={(
@@ -92,6 +96,7 @@ console.log("products:",products);
         currencyRate={currencyRate}
       />
     </View>
+  
   );
 };
 
@@ -106,6 +111,14 @@ Category.navigationOptions = ({ navigation }) => ({
       </TouchableOpacity>
   ),
   headerRight: (<HeaderGridToggleIcon />),
+  headerStyle: {
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : H(StatusbarHeight),
+    height: H(40),
+    elevation: 0,
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  },
 });
 
 const styles = {

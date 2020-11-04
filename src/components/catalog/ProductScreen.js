@@ -28,7 +28,7 @@ import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
 import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyle,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 export const ProductScreen = props => {
   const { cart, currencyRate, currencySymbol, customer, current } = useSelector(
@@ -38,35 +38,7 @@ export const ProductScreen = props => {
   console.log("ProductScreen:customer:",customer);
 
  
-  ProductScreen['navigationOptions'] = screenProps => ({
-    headerLeft: () => (
-      <TouchableOpacity
-        onPress={() => {props.navigation.goBack() }}
-        >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-        </TouchableOpacity>
-    ),
-    headerRight: () => (
-      <TouchableOpacity
-        style={[CommonStyle.paddingLR20]}
-        onPress={() => {props.navigation.navigate('Cart') }}
-        >
-
-        <CartBadge color={GlobalStyle.colorSet.btnPrimary} />
-      </TouchableOpacity>
-    ),
-    headerBackTitle: ' ',
-    headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.white,
-      marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
-      height: H(60),
-      elevation: 0,
-      justifyContent:'center',
-      // borderWidth:1,
-      borderBottomColor:'transparent',
-    }
-});
-  console.log("current:",current);
+ console.log("current:",current);
   const dispatch = useDispatch();
   const params = props.navigation?.state?.params
     ? props.navigation?.state?.params
@@ -344,7 +316,37 @@ export const ProductScreen = props => {
 
     </ScrollView>
   );
+
+  
 };
+
+ProductScreen['navigationOptions'] = screenProps => ({
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  headerRight: () => (
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR20]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyle.colorSet.btnPrimary} />
+    </TouchableOpacity>
+  ),
+  headerBackTitle: ' ',
+  headerStyle: {
+    backgroundColor:GlobalStyle.colorSet.white,
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : H(StatusbarHeight),
+    height: H(40),
+    elevation: 0,
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  }
+});
 
 const styles = StyleSheet.create({
   container: theme => ({
