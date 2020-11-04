@@ -27,7 +27,7 @@ import styles from './styles';
 
 export const AddressItem = ({ item, onOptionPressed, navigation }) => {
   // console.log('ThumbnailItemV:', item);
-  // console.log('PackageItem:',item.item);
+  console.log('AddressList:',item.item);
  
   const OnOptionPressed = () => {
   onOptionPressed(item.item.id);
@@ -40,15 +40,17 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
       <View style={[CommonStyle.FlexRow]}>
            
               <View  style={[styles.ItemTextContainer]}>
-                    <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.productName}</Text> 
+                    <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.firstname} {item.item.lastname}</Text> 
                     <View style={[CommonStyle.marginTop5]}>
-                      <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {item.item.price} </Text>
+                      <Text>{item.item.street},{item.item.city},{item.item.region}, </Text>
+                      <Text>{item.item.country},{item.item.pincode} </Text>
                     </View>
                     <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>
                        Edit
                       </Text>
                     </TouchableOpacity>
+                    {/* {item.item.default_billing && <Text>Default</Text>} */}
               </View>  
        
       </View>

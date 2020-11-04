@@ -30,4 +30,6 @@ export default magento => ({
   RemoveWishListItem: (wishListItemId) => magento.delete(`/V1/ipwishlist/delete/${wishListItemId}`,undefined,CUSTOMER_TYPE),
 
   getWishlistItems: () => magento.get(`/V1/ipwishlist/items`,undefined,undefined,CUSTOMER_TYPE),
+
+  getCustomerAddress: (customerId) => magento.post(`/V1/mobileapi/customer/address`,customerId,undefined,CUSTOMER_TYPE)
 });

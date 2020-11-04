@@ -58,6 +58,8 @@ import {
   MAGENTO_GET_CUSTOM_OPTIONS,
   MAGENTO_PRODUCT_STOCK_CHECK,
   MAGENTO_ADD_WISHLIST,
+  MAGENTO_GET_ADDRESS_LIST,
+  MAGENTO_GET_ADDRESS_LIST_LOADING,
   MAGENTO_WISHLIST_DELETE_ITEMS,
   MAGENTO_WISHLIST_GET_LOADING,
   MAGENTO_WISHLIST_ITEMS
@@ -751,3 +753,16 @@ export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
     }
   }
 // }
+
+export const getAddress = (id) => async(dispatch) =>{
+  // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:true});
+  const parameters = {parameters:{customer_id:id}}
+  magento.customer.getCustomerAddress(parameters).then((data)=>{
+    // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:false});
+    if(data[0].data.status=="success");
+    {
+    dispatch({type:MAGENTO_GET_ADDRESS_LIST, payload:data[0].data.address});
+    }
+    //console.log(data[0].data.address);
+  })
+}

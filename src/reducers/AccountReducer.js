@@ -9,6 +9,8 @@ import {
   MAGENTO_ORDER_PRODUCT_DETAIL,
   MAGENTO_LOGOUT,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
+  MAGENTO_GET_ADDRESS_LIST,
+  MAGENTO_GET_ADDRESS_LIST_LOADING
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -28,6 +30,8 @@ const INITIAL_STATE = {
     loading: false,
     error: false,
   },
+  addresses:{},
+  loading:{}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -74,6 +78,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         products,
       };
+    }
+
+    case MAGENTO_GET_ADDRESS_LIST:{
+      console.log('From Account Reducer',action.payload)
+      return {...state,address:action.payload}
+    }
+    case MAGENTO_GET_ADDRESS_LIST_LOADING:{
+      return {...state.loading,loading:action.payload}
     }
     default:
       return state;

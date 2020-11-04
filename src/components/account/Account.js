@@ -29,6 +29,7 @@ const Account = ({
   const theme = useContext(ThemeContext);
 
   useEffect(() => {
+    console
     // ComponentDidMount
     if (!customer) {
       _currentCustomer();

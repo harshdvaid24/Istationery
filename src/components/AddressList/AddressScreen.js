@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {useDispatch,useSelector} from 'react-redux';
 import {
   View,
   Text,
@@ -18,7 +19,7 @@ import {
   PermissionsAndroid,
   NativeModules,
 } from 'react-native';
-
+import {getAddress} from '../../actions'
 
 import { W, H } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
@@ -55,12 +56,15 @@ const AddressListScreen = props => {
 });
 
 
-
-  const [WishlistItems, setWishlistItems] = useState([
-    {id:1,productName:"New machine HP 15 series",price:20},
-    {id:1,productName:"machine",price:20},
-     {id:1,productName:"New machine HP 15 series and not play",price:20},
-  ])
+const dispatch = useDispatch();
+const customer = useSelector(state=>state.account.customer)
+const AddressList = useSelector(state=>state.account.address)
+const Loading = useSelector(state=>state.account.loading);
+console.log(Loading);
+useEffect(() => {
+  dispatch(getAddress(customer.id))
+},[])
+  // const [AddressListItems, setAddressListItems] = useState(AddressList)
   
 
   const [isOpen, setIsOpen] = useState(false);
@@ -85,13 +89,14 @@ const AddressListScreen = props => {
   //   setPackageListData(props.Data);
     
   // });
+
   return (
      <View style={[CommonStyle.marginBottom20,{backgroundColor:GlobalStyle.colorSet.mainBgColor}]}>
 
              
       <FlatList
-          data={WishlistItems}
-          onRefresh={() => dispatch(get_Employees(Token))}
+          data={AddressList}
+          onRefresh={() => dispatch(getAddress(customer.id))}
           refreshing={false}
           // ListFooterComponent={renderFooter}
           removeClippedSubviews={false}
@@ -110,5 +115,5 @@ const AddressListScreen = props => {
      </View>
        
   );
-};
+        }
 export default AddressListScreen;
