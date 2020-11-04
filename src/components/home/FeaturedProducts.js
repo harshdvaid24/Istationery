@@ -4,6 +4,8 @@ import { View, StyleSheet, FlatList } from 'react-native';
 import { Text } from '../common';
 import FeaturedProductItem from './FeaturedProductItem';
 import { ThemeContext } from '../../theme';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles,{H,W} from './../../utils/GlobalStyles';
 
 const FeaturedProducts = ({
   style,
@@ -56,7 +58,7 @@ FeaturedProducts.defaultProps = {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    height: theme.dimens.WINDOW_HEIGHT * 0.35,
+    // height:H(300),
     paddingTop: 10,
     
   }),

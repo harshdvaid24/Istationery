@@ -36,7 +36,7 @@ const FeaturedProductItem = ({
   );
 
   return (
-    <View style={styles.container(theme)}>
+    <View style={[styles.container(theme)]}>
       <TouchableOpacity
         style={styles.containerStyle(theme)}
         onPress={() => { onPress(product); }}
@@ -69,7 +69,9 @@ const FeaturedProductItem = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    padding: theme.spacing.tiny,
+    // padding: theme.spacing.tiny,
+    // paddingVertical:20,
+    paddingHorizontal:W(2),
     borderRadius:10,
     width: theme.dimens.WINDOW_WIDTH * 0.47,
   }),
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderRadius:10,
     flex: 1,
-    borderWidth: 0,
+    // borderWidth: 1,
     borderColor: theme.colors.border,
     backgroundColor: theme.colors.surface,
     borderRadius: theme.dimens.borderRadius,
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   }),
   productPriceContainer:{
+    // borderWidth: 1,
     height:H(35),
     width:'100%',
     // flexDirection:'row',

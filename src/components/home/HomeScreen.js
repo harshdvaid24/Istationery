@@ -74,6 +74,7 @@ class HomeScreen extends Component {
   };
 
   onProductPress = (product) => {
+    console.log("onProductPress:product:",product);
     this.props.setCurrentProduct({ product });
     NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
       product,title: product.name,
