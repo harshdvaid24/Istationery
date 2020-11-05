@@ -19,12 +19,13 @@ import {
   PermissionsAndroid,
   NativeModules,
 } from 'react-native';
-import {getAddress} from '../../actions'
+import {getAddress, deleteAddress} from '../../actions';
+import { translate } from '../../i18n';
 
 import { W, H } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
-// import styles from './styles';
+import styles from './styles';
 import { AddressItem } from './AddressItem';
 
 const AddressListScreen = props => {
@@ -60,6 +61,7 @@ const dispatch = useDispatch();
 const customer = useSelector(state=>state.account.customer)
 const AddressList = useSelector(state=>state.account.address)
 const Loading = useSelector(state=>state.account.loading);
+const error = useSelector(state=>state.account.error)
 console.log(Loading);
 useEffect(() => {
   dispatch(getAddress(customer.id))
@@ -72,14 +74,34 @@ useEffect(() => {
  
  
   const onOptionPressed =(optionId) => {
-    console.log('onOptionPressed',optionId);
-    setSelectedCustomer(optionId);
+    dispatch(deleteAddress(customer.id,optionId));
+    if(error)
+    {
+      alert('Something went wrong!')
+    }
+    // console.log('onOptionPressed',optionId);
+    // setSelectedCustomer(optionId);
     
-     setIsOpen(true);
+    //  setIsOpen(true);
    
    
  }
-
+ const renderEmptyAddressList = () => {
+  return (
+    <View style={[styles.emptyListContainerStyle]}>
+      <Text style={[CommonStyle.lGreyRegular]}>
+        {translate('AddressListScreen.noAddresslistMessage')}
+      </Text>
+      {/* <TouchableOpacity
+        onPress={() => navigate(NAVIGATION_HOME_SCREEN_PATH)}
+      >
+        <Text type="heading"  style={styles.buttonTextStyle(theme)}>
+          {translate('common.continueShopping')}
+        </Text>
+      </TouchableOpacity> */}
+    </View>
+  );
+};
 
 
 
@@ -89,7 +111,7 @@ useEffect(() => {
   //   setPackageListData(props.Data);
     
   // });
-
+  if (AddressList && AddressList.length) {
   return (
      <View style={[CommonStyle.marginBottom20,{backgroundColor:GlobalStyle.colorSet.mainBgColor}]}>
 
@@ -115,5 +137,8 @@ useEffect(() => {
      </View>
        
   );
+        }
+  return renderEmptyAddressList();
+
         }
 export default AddressListScreen;

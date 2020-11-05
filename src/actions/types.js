@@ -122,3 +122,5 @@ export const MAGENTO_WISHLIST_PRODUCT_STOCK_CHECK = 'magento_wishlist_product_st
  */
 export const MAGENTO_GET_ADDRESS_LIST = 'magento_get_address_list';
 export const MAGENTO_GET_ADDRESS_LIST_LOADING = 'magento_get_address_list_loading';
+export const MAGENTO_DELETE_ADDRESS_ERROR = 'magento_delete-address_error';
+export const MAGENTO_GET_ADDRESS_LIST_ERROR = 'magento_get_address_list_error';

@@ -30,7 +30,7 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
   console.log('AddressList:',item.item);
  
   const OnOptionPressed = () => {
-  onOptionPressed(item.item.id);
+  onOptionPressed(item.item.address_id);
   };
 
 

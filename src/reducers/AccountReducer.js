@@ -10,7 +10,9 @@ import {
   MAGENTO_LOGOUT,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
   MAGENTO_GET_ADDRESS_LIST,
-  MAGENTO_GET_ADDRESS_LIST_LOADING
+  MAGENTO_GET_ADDRESS_LIST_LOADING,
+  MAGENTO_GET_ADDRESS_LIST_ERROR,
+  MAGENTO_DELETE_ADDRESS_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -31,7 +33,8 @@ const INITIAL_STATE = {
     error: false,
   },
   addresses:{},
-  loading:{}
+  loading:{},
+  error:false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -81,11 +84,17 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case MAGENTO_GET_ADDRESS_LIST:{
-      console.log('From Account Reducer',action.payload)
       return {...state,address:action.payload}
     }
+    case MAGENTO_GET_ADDRESS_LIST_ERROR:{
+    return {...state,address:{},error:action.payload}
+    }
+    
     case MAGENTO_GET_ADDRESS_LIST_LOADING:{
       return {...state.loading,loading:action.payload}
+    }
+    case MAGENTO_DELETE_ADDRESS_ERROR:{
+      return {...state,error:action.payload}
     }
     default:
       return state;
