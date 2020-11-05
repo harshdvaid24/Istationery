@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Platform,
   ScrollView, View, StyleSheet,StatusBar, RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { MaterialHeaderButtons, Text, Item } from '../common';
@@ -51,11 +52,12 @@ class HomeScreen extends Component {
      headerRight: <View />,
     headerStyle: {
       backgroundColor:'white',
-      marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+      // marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+      marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
       // height: H(40),
       height: H(60),
       elevation: 0,
-      // borderWidth:1,
+      //  borderWidth:1,
       borderBottomColor:'transparent',
     },
    
@@ -115,6 +117,7 @@ class HomeScreen extends Component {
     }
 
     return (
+     
       <ScrollView
         style={styles.container(theme)}
         contentContainerStyle={styles.Contentcontainer(theme)}
@@ -125,6 +128,7 @@ class HomeScreen extends Component {
           />
           )}
       >
+      
          <StatusBar
                   translucent
                   backgroundColor="transparent"
@@ -132,6 +136,7 @@ class HomeScreen extends Component {
                 />
         <HomeSlider slider={this.props.slider} />
         {this.renderFeatured()}
+          
       </ScrollView>
     );
   }

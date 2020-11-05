@@ -42,6 +42,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case MAGENTO_CURRENT_PRODUCT: {
+      console.log("MAGENTO_CURRENT_PRODUCT:current:",action.payload);
       let current = action.payload;
       const relatedProducts = {
         loading: false,
