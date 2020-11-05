@@ -19,13 +19,13 @@ import {
   NativeModules,
 } from 'react-native';
 import { W, H } from '../../utils/GlobalStyles';
-
+import { magento } from '../../magento';
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
-
+import FastImage from 'react-native-fast-image';
 import styles from './styles';
 
-export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigation }) => {
+export const WishlistItem = ({ item, onOptionPressed,onProduct, navigation }) => {
    console.log('ThumbnailItemV:', item);
   // console.log('PackageItem:',item.item.productItem);
  
@@ -33,18 +33,19 @@ export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigati
   onOptionPressed(item.item.wishlistId);
   };
 
-  const onAddToCart = () =>{
-    onAddToCartOption(item.item.wishlistId,item.item.productItem.sku)
+  const onProductSelect = () =>{
+    onProduct(item.item.productItem);
   }
-
+ 
 
   return (
     <View style={[styles.cardRow,CommonStyle.alignContentLR]}>
-      <View style={[CommonStyle.FlexRow]}>
-            <Image
+      <TouchableOpacity onPress={onProductSelect}
+      style={[CommonStyle.FlexRow]}>
+            <FastImage
                   resizeMode="contain"
                   style={[CommonStyle.Icon100]}
-                  source={{uri:`https://staging.istationery.com/pub/media/catalog/product/cache/8d91c3bb3302d1da0f0fa0ff37fb4476${item.item.productItem.small_image}`}}
+                  source={{uri:magento.getProductMediaUrl() + item.item.productItem.media_gallery_entries[0].file }}
                 />
               <View  style={[styles.ItemTextContainer]}>
                     <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.productItem.name}</Text> 
@@ -58,7 +59,7 @@ export const WishlistItem = ({ item, onOptionPressed,onAddToCartOption, navigati
                     </TouchableOpacity> */}
               </View>  
        
-      </View>
+      </TouchableOpacity>
      
         <TouchableOpacity onPress={OnOptionPressed}
           style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}>

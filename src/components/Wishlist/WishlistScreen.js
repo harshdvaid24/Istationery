@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch,connect } from 'react-redux';
 import {
   View,
   Text,
@@ -25,29 +25,25 @@ import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
  import styles from './styles';
 import { WishlistItem } from './WishlistItem';
+import PropTypes from 'prop-types';
+import {
+  NAVIGATION_HOME_PRODUCT_PATH,
+} from '../../navigation/routes';
+import {
+  setCurrentProduct,
+} from '../../actions';
 
-const WishlistScreen = props => {
+const WishlistScreen = ({
+  navigation,
+  currencySymbol,
+  currencyRate,
+  setCurrentProduct: _setCurrentProduct,
+}) => {
   // const { currencyRate, currencySymbol, products } = useSelector(
   //   state => mapStateToProps(state),
   // );
  
-  WishlistScreen['navigationOptions'] = screenProps => ({
-    headerLeft: () => (
-      <TouchableOpacity
-        onPress={() => {screenProps.navigation.goBack() }}
-        >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-        </TouchableOpacity>
-    ),
-    headerBackTitle: ' ',
-    headerTitle:'My Wishlist',
-    headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.white,
-      height: H(50),
-      elevation: 0,
-      borderBottomColor:'transparent',
-    }
-});
+ 
 
 const dispatch = useDispatch();
 const WishlistItems = useSelector(state=>state.wishlist.products.products);
@@ -66,6 +62,16 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
       alert('Something went wrong!')
     }
  }
+
+ const onProductSelect = (productItem) =>{
+   console.log("onProductSelect:",productItem);
+   _setCurrentProduct({product:productItem});
+    navigation.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
+    title: productItem.name,
+    product:productItem,
+  });
+}
+
 
  const onAddToCartClick = (id,sku) =>{
    dispatch(AddToCart(sku));
@@ -112,12 +118,12 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
           refreshing={false}
           // ListFooterComponent={renderFooter}
           removeClippedSubviews={false}
-          extraData={props.state}
+          // extraData={props.state}
           // contentContainerStyle={{paddingHorizontal: W(10)}}
           numColumns={1}
           showsHorizontalScrollIndicator={false}
           renderItem={item => {
-            return <WishlistItem item={item}  onAddToCartOption={onAddToCartClick} onOptionPressed={onOptionPressed} navigation={props.navigation} />;
+            return <WishlistItem item={item}  onProduct={onProductSelect} onOptionPressed={onOptionPressed} navigation={navigation} />;
           }}
           // keyExtractor={item => item.id.toString()}
           keyExtractor={(item, index) => index.toString()}
@@ -130,20 +136,47 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
   }
   return renderEmptyOrderList();
 };
-// const mapStateToProps = state => {
-//   const {
-//     currency: {
-//       displayCurrencySymbol: currencySymbol,
-//       displayCurrencyExchangeRate: currencyRate,
-//     },
-//   } = state.magento;
+WishlistScreen['navigationOptions'] = screenProps => ({
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  headerBackTitle: ' ',
+  headerTitle:'My Wishlist',
+  headerStyle: {
+    backgroundColor:GlobalStyle.colorSet.white,
+    height: H(50),
+    elevation: 0,
+    borderBottomColor:'transparent',
+  }
+});
+WishlistScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+  currencySymbol: PropTypes.string.isRequired,
+  currencyRate: PropTypes.number.isRequired,
+  setCurrentProduct: PropTypes.func.isRequired,
 
-//   const { products } = state.wishlist;
+};
 
-//   return {
-//     currencyRate,
-//     currencySymbol,
-//     products 
-//   };
-// }
-export default WishlistScreen;
+WishlistScreen.defaultProps = {};
+const mapStateToProps = state => {
+  const {
+    currency: {
+      displayCurrencySymbol: currencySymbol,
+      displayCurrencyExchangeRate: currencyRate,
+    },
+  } = state.magento;
+
+  return {
+    currencyRate,
+    currencySymbol,
+  };
+}
+
+export default connect(mapStateToProps, {
+  setCurrentProduct,
+})(WishlistScreen);
+
