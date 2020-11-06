@@ -775,7 +775,7 @@ export const getAddress = (id) => async(dispatch) =>{
 
 export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
   const parameters = {parameters:{customer_id,address_id}};
-  magento.customer.deleteCustomerAddress(parameters).then((data)=>{
+  await magento.customer.deleteCustomerAddress(parameters).then((data)=>{
    // console.log(data[0].data.customer[0].status);
     if(data[0].data.customer[0].status=="success")
     {
