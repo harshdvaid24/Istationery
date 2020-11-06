@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { RefreshControl, View } from 'react-native';
+import { RefreshControl, View,Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Spinner } from '../common/index';
 import { initMagento, getCategoryTree } from '../../actions/index';
 import CategoryTreeList from './CategoryTreeList';
 import { ThemeContext } from '../../theme';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles,{H,W,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles';
 
 const CategoryTree = ({
   categoryTree,
@@ -48,11 +50,18 @@ const CategoryTree = ({
 CategoryTree.navigationOptions = {
   title: 'Categories'.toUpperCase(),
   headerBackTitle: ' ',
+  marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+  // height: H(40),
+  height: H(60),
+  elevation: 0,
+  //  borderWidth:1,
+  borderBottomColor:'transparent',
 };
 
 const styles = {
   container: theme => ({
     flex: 1,
+    marginTop:Platform.OS === 'ios' ?0:H(40),
     backgroundColor: theme.colors.primary,
   }),
 };

@@ -98,14 +98,14 @@ const CategoryTreeListItem = (props) => {
 const styles = {
   subItemsContainer:theme => ({
     paddingLeft:20,
-    paddingBottom:10,
+    // paddingBottom:10,
     backgroundColor: theme.colors.white,
     borderBottomWidth: 1,
     borderColor: theme.colors.lightBorder,
   }),
   rowStyles: theme => ({
     flex: 1,
-    height:60,
+    height:H(50),
     flexDirection: 'row',
     alignItems:'center',
     justifyContent: 'space-between',
