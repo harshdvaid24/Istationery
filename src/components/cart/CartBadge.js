@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { View, Image,TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Icon } from 'react-native-elements';
 import IconBadge from 'react-native-icon-badge';
 import { Text } from '../common';
 import { ThemeContext, theme } from '../../theme';
-
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
 const CartBadge = ({
   color,
   itemsCount,
@@ -17,7 +18,7 @@ const CartBadge = ({
     <IconBadge
       MainElement={(
         <View style={styles.iconWrapper}>
-          <Icon name="md-cart" type="ionicon" color={color} />
+          <Image style={[CommonStyle.Icon25]} source={require("./.././../../resources/icons/cart.png")} />
         </View>
       )}
       BadgeElement={

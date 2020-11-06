@@ -7,6 +7,8 @@ import { getProductThumbnailFromAttribute } from '../../helper/product';
 import { ThemeContext } from '../../theme';
 import { finalPrice } from '../../helper/price';
 import { useSelector } from 'react-redux';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles,{H,W} from './../../utils/GlobalStyles';
 
 const FeaturedProductItem = ({
   onPress,
@@ -34,7 +36,7 @@ const FeaturedProductItem = ({
   );
 
   return (
-    <View style={styles.container(theme)}>
+    <View style={[styles.container(theme)]}>
       <TouchableOpacity
         style={styles.containerStyle(theme)}
         onPress={() => { onPress(product); }}
@@ -45,20 +47,20 @@ const FeaturedProductItem = ({
           source={{ uri: imageURI }}
         />
         <View style={styles.infoStyle}>
-          <Text
-            type="subheading"
-            style={themeStyles.text}
-            // ellipsizeMode="tail"
-            numberOfLines={2}
-          >
-            {product.name}
-          </Text>
-          <Price
-            basePrice={product.price}
-            discountPrice={price}
-            currencySymbol={currencySymbol}
-            currencyRate={currencyRate}
-          />
+          <View style={[CommonStyle.marginTB10,CommonStyle.marginLR10]}>
+              <Text numberOfLines={2} style={[styles.textStyle]}>{product.name}</Text>
+        
+          </View>
+
+          <View style={[styles.productPriceContainer,CommonStyle.paddingLR15]}>
+            <Price
+              style={styles.textStyle}
+              basePrice={product.price}
+              discountPrice={finalPrice(product.custom_attributes, product.price)}
+              currencyRate={currencyRate}
+              currencySymbol={currencySymbol}
+            />
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -67,7 +69,9 @@ const FeaturedProductItem = ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    padding: theme.spacing.tiny,
+    // padding: theme.spacing.tiny,
+    // paddingVertical:20,
+    paddingHorizontal:W(2),
     borderRadius:10,
     width: theme.dimens.WINDOW_WIDTH * 0.47,
   }),
@@ -75,19 +79,31 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     borderRadius:10,
     flex: 1,
-    borderWidth: 0,
+    // borderWidth: 1,
     borderColor: theme.colors.border,
     backgroundColor: theme.colors.surface,
     borderRadius: theme.dimens.borderRadius,
     alignItems: 'center',
     justifyContent: 'center',
   }),
+  productPriceContainer:{
+    // borderWidth: 1,
+    height:H(35),
+    width:'100%',
+    // flexDirection:'row',
+    paddingHorizontal:W(15),
+    // justifyContent:'center'
+  },
   infoStyle: {
     paddingLeft:10,
     paddingRight:10,
     // flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  textStyle:{
+    // fontSize:W(14),
+    color:GlobalStyles.colorSet.appBlack,
   },
   textStyle: theme => ({
     justifyContent: 'center',

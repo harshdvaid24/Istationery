@@ -1,7 +1,7 @@
 import { StyleSheet, Platform, StatusBar } from 'react-native';
 import GlobalStyle from './GlobalStyles';
 import { W, H } from './GlobalStyles';
-
+ 
 const CommonStyle = StyleSheet.create({
   topPadding: {
     paddingTop: Platform.OS == 'ios' ? 0 : H(47),
@@ -867,6 +867,7 @@ width50p:{width:'50%'},
 width60p:{width:'60%'},
 width70p:{width:'70%'},
 width80p:{width:'80%'},
+width85p:{width:'85%'},
 width90p:{width:'90%'},
 width100p:{width:'100%'},
 
@@ -941,6 +942,7 @@ width100p:{width:'100%'},
   paddingTB50: { paddingTop: W(50), paddingBottom: W(50) },
 
   paddingLR10: { paddingLeft: W(10), paddingRight: W(10) },
+  paddingLR15: { paddingLeft: W(15), paddingRight: W(15) },
   paddingLR20: { paddingLeft: W(20), paddingRight: W(20) },
   paddingLR30: { paddingLeft: W(30), paddingRight: W(30) },
   paddingLR40: { paddingLeft: W(40), paddingRight: W(40) },
@@ -1228,7 +1230,12 @@ xlGreyBold:{
 },
 
 
-
+// white
+mWhitleSemiBold:{
+  fontSize: W(14),
+  fontFamily: GlobalStyle.fontSet.SemiBold,
+  color: GlobalStyle.colorSet.white,
+},
 
 
 
@@ -1263,7 +1270,18 @@ FixedLabel:{
   position:'absolute',
   top:0,
   left:W(10)
- }
+ },
+
+
+//  buttons
+rectBtn:{
+  height: H(25),
+  width: W(110),
+  borderRadius: H(2),
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: GlobalStyle.colorSet.btnPrimary,
+},
 
 
 });

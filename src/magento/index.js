@@ -38,8 +38,8 @@ class Magento {
     throw new Error('Need Integration Token!');
   }
 
-  post(path, params, type = ADMIN_TYPE) {
-    return this.send(path, 'POST', null, params, type);
+  post(path,data = null ,params, type = ADMIN_TYPE) {
+    return this.send(path, 'POST', params, data, type);
   }
 
   put(path, params, type = ADMIN_TYPE) {
@@ -47,6 +47,10 @@ class Magento {
   }
 
   get(path, params, data, type = ADMIN_TYPE) {
+    console.log("parsms:path:",path);
+    console.log("parsms:params:",params);
+    console.log("data:",data);
+    console.log("type:",type);
     return this.send(path, 'GET', params, data, type);
   }
 
@@ -59,7 +63,7 @@ class Magento {
 
     if (params) {
       let separator = '?';
-      Object.keys(params).forEach((key) => {
+      Object.keys(params).forEach(key => {
         uri += `${separator}${key}=${params[key]}`;
         separator = '&';
       });
@@ -85,23 +89,34 @@ class Magento {
 
     return new Promise((resolve, reject) => {
       console.log({
-        uri, method, headers, data, ...params,
+        uri,
+        method,
+        headers,
+        data,
+        ...params,
       });
+      console.log("data:",data);
       fetch(uri, { method, headers, body: JSON.stringify(data) })
-        .then((response) => {
+        .then(response => {
           console.log(response);
           if (response.ok) {
             return response.json();
           }
           // Possible 401 or other network error
-          return response.json().then(errorResponse => Promise.reject(errorResponse));
+          return response.json().then(errorResponse => {
+            console.log("errorResponse:",errorResponse);
+            logError(errorResponse);
+            resolve(errorResponse);
+            Promise.reject(errorResponse);
+          });
         })
-        .then((responseData) => {
+        .then(responseData => {
           // debugger;
-          console.log(responseData);
           resolve(responseData);
+          console.log(" .then(responseData:",responseData);
+         
         })
-        .catch((error) => {
+        .catch(error => {
           logError(error);
           const customError = this.getErrorMessageForResponce(error);
           reject(new Error(customError));
@@ -181,9 +196,7 @@ class Magento {
     }
   };
 
-  makeParams = ({
-    sort, page, pageSize, filter,
-  }) => {
+  makeParams = ({ sort, page, pageSize, filter }) => {
     let index = 0;
     let query = '';
     if (typeof sort !== 'undefined') {
@@ -199,42 +212,49 @@ class Magento {
     }
 
     if (typeof filter !== 'undefined') {
-      Object.keys(filter)
-        .forEach((key) => {
-          let value = filter[key];
-          let condition = null;
-          let subQuery = '';
-          if (typeof value === 'object') {
-            condition = value.condition;
-            value = value.value;
-            if (condition.includes('from')) {
-              const conditions = condition.split(',');
-              const values = value.split(',');
-              index++;
-              subQuery = `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
-              subQuery += `searchCriteria[filter_groups][${index}][filters][0][value]=${values[0]}&`;
-              subQuery += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${conditions[0]}&`;
-              index++;
-              subQuery += `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
-              subQuery += `searchCriteria[filter_groups][${index}][filters][0][value]=${values[1]}&`;
-              subQuery += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${conditions[1]}&`;
-            }
-          } else {
-            condition = 'eq';
-          }
+      Object.keys(filter).forEach(key => {
+        let value = filter[key];
+        let condition = null;
+        let subQuery = '';
+        if (typeof value === 'object') {
+          condition = value.condition;
+          value = value.value;
           if (condition.includes('from')) {
-            query += subQuery;
-          } else {
+            const conditions = condition.split(',');
+            const values = value.split(',');
             index++;
-            query += `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
-            query += `searchCriteria[filter_groups][${index}][filters][0][value]=${value}&`;
-            query += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${condition}&`;
+            subQuery = `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
+            subQuery += `searchCriteria[filter_groups][${index}][filters][0][value]=${
+              values[0]
+            }&`;
+            subQuery += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${
+              conditions[0]
+            }&`;
+            index++;
+            subQuery += `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
+            subQuery += `searchCriteria[filter_groups][${index}][filters][0][value]=${
+              values[1]
+            }&`;
+            subQuery += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${
+              conditions[1]
+            }&`;
           }
-        });
+        } else {
+          condition = 'eq';
+        }
+        if (condition.includes('from')) {
+          query += subQuery;
+        } else {
+          index++;
+          query += `searchCriteria[filter_groups][${index}][filters][0][field]=${key}&`;
+          query += `searchCriteria[filter_groups][${index}][filters][0][value]=${value}&`;
+          query += `searchCriteria[filter_groups][${index}][filters][0][condition_type]=${condition}&`;
+        }
+      });
     }
 
     return query;
-  }
+  };
 }
 
 export const magento = new Magento();

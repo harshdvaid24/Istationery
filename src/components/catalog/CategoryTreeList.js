@@ -17,7 +17,7 @@ const CategoryTreeList = ({
 
 
   return (
-    <SafeAreaView style={{ flex: 1,paddingHorizontal:10,backgroundColor:theme.colors.primary }}>
+    <SafeAreaView style={{ flex: 1,paddingHorizontal:10,backgroundColor:theme.colors.white }}>
       {/* <View style={{height:120,backgroundColor:theme.colors.white}}/> */}
 
     

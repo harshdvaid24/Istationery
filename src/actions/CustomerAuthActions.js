@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento } from '../magento';
+import { getCart } from './RestActions';
 import {
   MAGENTO_PASSWORD_RESET_LOADING,
   MAGENTO_PASSWORD_RESET_SUCCESS,
@@ -14,6 +15,9 @@ import {
   MAGENTO_AUTH_ERROR,
   MAGENTO_AUTH_ERROR_RESET,
   MAGENTO_LOGIN_SUCCESS,
+  MAGENTO_PASSWORD_CHANGE_LOADING,
+  MAGENTO_PASSWORD_CHANGE_SUCCESS,
+  MAGENTO_PASSWORD_CHANGE_ERROR
 } from './types';
 import NavigationService from '../navigation/NavigationService';
 import {
@@ -48,11 +52,31 @@ export const signIn = customer => async (dispatch) => {
   }
 };
 
+export const changePassword = (customer) => async (dispatch) =>{
+  try {
+    const userdetails = {'currentPassword':customer.currentPassword,'newPassword':customer.newPassword};
+    dispatch({type: MAGENTO_PASSWORD_CHANGE_LOADING, payload: true});
+    const response = await magento.customer.changePassword(userdetails,customer.customer_id);
+    if(response.message)
+    {
+      changePasswordFail(dispatch,response.message);
+    }
+    else
+    {
+      changePasswordSuccess(dispatch)
+    }
+  } catch (error) {
+    logError(error);
+    changePasswordFail(dispatch,error.message);
+  }
+}
+
 export const auth = (username, password) => async (dispatch) => {
   try {
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: true });
     const response = await magento.guest.auth(username, password);
     console.log('token');
+    console.log('auth:response:',response);
     magento.setCustomerToken(response);
     if (response.message) {
       authFail(dispatch, response.message);
@@ -72,6 +96,7 @@ const authSuccess = async (dispatch, token) => {
   try {
     await AsyncStorage.setItem('customerToken', token);
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
+    dispatch(getCart());
     NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
   } catch (e) {
     logError(e);
@@ -95,8 +120,10 @@ export const ReseterrorMessage = error => ({ type: MAGENTO_AUTH_ERROR_RESET, pay
 export const logout = () => (dispatch) => {
   dispatch({ type: MAGENTO_AUTH, payload: '' });
   dispatch({ type: MAGENTO_LOGOUT });
+  dispatch(getCart());
   NavigationService.navigate(NAVIGATION_LOGIN_STACK_PATH);
   AsyncStorage.setItem('customerToken', '');
+  magento.setCustomerToken(false);
 };
 
 export const initiatePasswordReset = email => async (dispatch) => {
@@ -136,3 +163,13 @@ export const setCurrentCustomer = customer => ({
   type: MAGENTO_CURRENT_CUSTOMER,
   payload: customer,
 });
+
+const changePasswordSuccess = (dispatch) => {
+  dispatch({ type: MAGENTO_PASSWORD_CHANGE_SUCCESS, payload: true });
+  dispatch({type:MAGENTO_PASSWORD_CHANGE_LOADING,payload:false});
+};
+
+const changePasswordFail = (dispatch, message) => {
+  dispatch({type:MAGENTO_PASSWORD_CHANGE_ERROR, payload:message});
+  dispatch({ type: MAGENTO_PASSWORD_CHANGE_LOADING, payload: false });
+};

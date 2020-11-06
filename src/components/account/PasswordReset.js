@@ -45,7 +45,6 @@ const PasswordReset = ({
   };
 
   const onSigninPress = () => {
-    console.log("onSigninPress");
     _ResetError("");
     navigation.goBack();
   };

@@ -53,6 +53,9 @@ export const MAGENTO_AUTH_LOADING = 'magento_auth_loading';
 export const MAGENTO_PASSWORD_RESET_LOADING = 'magento_password_reset_loading';
 export const MAGENTO_PASSWORD_RESET_SUCCESS = 'magento_password_reset_success';
 export const MAGENTO_PASSWORD_RESET_ERROR = 'magento_password_reset_error';
+export const MAGENTO_PASSWORD_CHANGE_LOADING = 'magento_password_change_loading';
+export const MAGENTO_PASSWORD_CHANGE_SUCCESS = 'magento_password_change_success';
+export const MAGENTO_PASSWORD_CHANGE_ERROR = 'magento_password_change_error';
 
 export const UI_PRODUCT_QTY_INPUT = 'ui_product_qty_input';
 export const UI_PRODUCT_UPDATE_OPTIONS = 'ui_product_update';
@@ -91,3 +94,33 @@ export const UI_PRODUCT_LIST_TYPE_GRID = 'ui_product_list_type_grid';
 export const MAGENTO_COUPON_LOADING = 'MAGENTO_COUPON_LOADING';
 export const MAGENTO_COUPON_ERROR = 'MAGENTO_COUPON_ERROR';
 export const MAGENTO_CHECKOUT_TOTALS = 'MAGENTO_CHECKOUT_TOTALS';
+
+/**
+ * Action Names for "Related Product" in Product Screen
+ */
+export const MAGENTO_RELATED_PRODUCTS_LOADING = 'magento_related_products_loading';
+export const MAGENTO_RELATED_PRODUCTS_SUCCESS = 'magento_related_products_success';
+export const MAGENTO_RELATED_PRODUCTS_ERROR = 'magento_related_products_error';
+export const MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT = 'magento_related_products_conf_product_update';
+export const MAGENTO_PRODUCT_STOCK_CHECK = 'magento_product_stock_check';
+export const MAGENTO_ADD_WISHLIST = 'magento_add_wishlist';
+
+
+/**
+ * Action Names fot "Wishlist Product" in Account Screen
+ */
+export const MAGENTO_WISHLIST_GET_LOADING = 'magento_wishlist_get_loading';
+export const MAGENTO_WISHLIST_ITEMS = 'magento_wishlist_items';
+export const MAGENTO_WISHLIST_DELETE_ITEMS = 'magento_wishlist_delete_items';
+export const MAGENTO_WISHLIST_DELETE_ITEMS_SUCCESS ='magento_wishlist_delete_items_success';
+export const MAGENTO_WISHLIST_DELETE_ITEMS_ERROR = 'magento_wishlist_delete_items_error';
+export const MAGENTO_WISHLIST_PRODUCT_STOCK_CHECK = 'magento_wishlist_product_stock_check';
+
+
+/**
+ * Action names for Address in account screen
+ */
+export const MAGENTO_GET_ADDRESS_LIST = 'magento_get_address_list';
+export const MAGENTO_GET_ADDRESS_LIST_LOADING = 'magento_get_address_list_loading';
+export const MAGENTO_DELETE_ADDRESS_ERROR = 'magento_delete-address_error';
+export const MAGENTO_GET_ADDRESS_LIST_ERROR = 'magento_get_address_list_error';

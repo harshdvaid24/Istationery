@@ -45,10 +45,10 @@ HomeSlider.defaultProps = {
 
 const styles = StyleSheet.create({
   imageContainer: theme => ({
-    height: theme.dimens.WINDOW_HEIGHT * 0.3,
+    height: theme.dimens.WINDOW_HEIGHT * 0.25,
   }),
   imageStyle: theme => ({
-    height: theme.dimens.WINDOW_HEIGHT * 0.3,
+    height: theme.dimens.WINDOW_HEIGHT * 0.25,
     width: theme.dimens.WINDOW_WIDTH,
     top: 0,
   }),

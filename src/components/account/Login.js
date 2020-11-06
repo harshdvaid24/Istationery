@@ -18,6 +18,7 @@ import { auth,ResetError } from '../../actions/CustomerAuthActions';
 import {
   NAVIGATION_SIGNIN_PATH,
   NAVIGATION_RESET_PASSWORD_PATH,
+  NAVIGATION_HOME_SCREEN_PATH
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -35,8 +36,8 @@ function Login ({
 }) {
   const theme = useContext(ThemeContext);
   // Internal State
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('dummy.bhupendra@gmail.com');
+  const [password, setPassword] = useState('Abcd@1234');
   // Reference
   const passwordInput = useRef();
 
@@ -95,11 +96,15 @@ function Login ({
            <Text style={styles.linkTitleButton(theme)}>{'New user?  '}</Text>
           <Text style={styles.linkTitleButton(theme)}>{translate('login.signupButton')}</Text>
         </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
+        <Text style={styles.linkSkip}>Skip to continue shopping</Text>
+        </TouchableOpacity>
       </View>
     );
   };
 
   const renderMessages = () => {
+    console.log("renderMessages:",error);
     if (error) {
       return <Text style={styles.error(theme)}>{error}</Text>;
     }
@@ -206,6 +211,11 @@ const styles = StyleSheet.create({
   linkTitle: {
     textDecorationLine:'underline',
      textAlign: 'center',
+  },
+  linkSkip:{
+    textDecorationLine:'underline',
+    textAlign: 'center',
+    fontSize:12
   },
   Title: theme => ({
     color: theme.colors.secondary,

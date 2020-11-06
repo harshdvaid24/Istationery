@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View, TouchableOpacity } from 'react-native';
+import { View, Text,TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Text } from './Text';
+// import { Text } from './Text';
 import { Price } from './Price';
 import { getProductThumbnailFromAttribute } from '../../helper/product';
 import { ThemeContext } from '../../theme';
 import { finalPrice } from '../../helper/price';
+import  CommonStyle from './../../utils/CommonStyle';
+import  GlobalStyles,{H,W} from './../../utils/GlobalStyles';
 
 const ProductListItem = ({
   product,
@@ -36,14 +38,20 @@ const ProductListItem = ({
           source={{ uri: image() }}
         />
         <View style={[styles.infoStyle, infoStyle]}>
-          <Text type="subheading" style={[styles.textStyle(theme), textStyle]}>{product.name}</Text>
-          <Price
-            style={styles.textStyle(theme)}
-            basePrice={product.price}
-            discountPrice={finalPrice(product.custom_attributes, product.price)}
-            currencyRate={currencyRate}
-            currencySymbol={currencySymbol}
-          />
+          <View style={[styles.productNameContainer]}>
+              
+             <Text style={[styles.textStyle]}>{product.name}</Text>
+          </View>
+          <View style={[styles.productPriceContainer,CommonStyle.paddingLR15]}>
+            <Price
+              style={styles.textStyle}
+              basePrice={product.price}
+              discountPrice={finalPrice(product.custom_attributes, product.price)}
+              currencyRate={currencyRate}
+              currencySymbol={currencySymbol}
+            />
+          </View>
+        
         </View>
       </TouchableOpacity>
     </View>
@@ -93,10 +101,10 @@ const styles = {
     justifyContent: 'center',
     flex: 2,
   },
-  textStyle: theme => ({
-    padding: theme.spacing.small,
-    marginBottom: theme.spacing.medium,
-  }),
+  textStyle:{
+    // fontSize:W(14),
+    color:GlobalStyles.colorSet.appBlack
+  },
   imageStyle: theme => ({
     height: theme.dimens.productListItemImageHeight,
     margin: theme.spacing.small,
@@ -104,6 +112,20 @@ const styles = {
     borderColor: theme.colors.border,
     width: null,
   }),
+  productNameContainer:{
+    height:H(40),
+    width:'100%',
+    // flexDirection:'row',
+    paddingHorizontal:W(15),
+    // justifyContent:'center'
+  },
+  productPriceContainer:{
+    height:H(35),
+    width:'100%',
+    // flexDirection:'row',
+    paddingHorizontal:W(15),
+    // justifyContent:'center'
+  }
 };
 
 export { ProductListItem };

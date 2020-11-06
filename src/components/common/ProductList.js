@@ -4,14 +4,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   View,
   FlatList,
-  TouchableOpacity,
+  TouchableOpacity,Image,
   StyleSheet,
+  Text
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
-import { ProductListItem, Spinner, Text } from '.';
+import { ProductListItem, Spinner } from '.';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-
+import { W ,H} from '../../utils/GlobalStyles';
+import  CommonStyle from './../../utils/CommonStyle';
 const COLUMN_COUNT = 2;
 
 const sortData = [
@@ -48,7 +50,6 @@ const ProductList = ({
 }) => {
   const theme = useContext(ThemeContext);
   const selector = useRef(null);
-
   const renderItemRow = ({ item, index }) => (
     <ProductListItem
       imageStyle={styles.imageStyle}
@@ -64,7 +65,7 @@ const ProductList = ({
     <ProductListItem
       viewContainerStyle={{
         width: theme.dimens.WINDOW_WIDTH / COLUMN_COUNT,
-        borderRightColor: theme.colors.border,
+        borderRightColor: theme.colors.lightBorder,
         borderRightWidth: index % COLUMN_COUNT !== (COLUMN_COUNT - 1) ? theme.dimens.productListItemInBetweenSpace : 0,
       }}
       columnContainerStyle={styles.columnContainerStyle}
@@ -86,22 +87,26 @@ const ProductList = ({
         customSelector={(
           <TouchableOpacity
             style={styles.iconWrapper(theme)}
-            onPress={() => selector.current.open()}
-          >
-            <Icon name="sort" size={24} color="#104E8B" />
-            <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
+            onPress={() => selector.current.open()}>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/sort.png")} />
+         
+           <View style={[styles.textContainer]}>
+              <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
+           </View>
+          
           </TouchableOpacity>
         )}
         onChange={option => performSort(option.key)}
       />
-      <View style={styles.separator(theme)} />
-      {/* <TouchableOpacity
+      {/* <View style={styles.separator(theme)} /> */}
+      <TouchableOpacity
         style={styles.iconWrapper(theme)}
-        onPress={() => navigation.toggleFilterDrawer()}
-      >
-        <Icon name="filter" size={24} color="#104E8B" />
-        <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
-      </TouchableOpacity> */}
+        onPress={() => navigation.toggleFilterDrawer()}>
+        <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/filter.png")} />
+        <View style={[styles.textContainer]}>
+              <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
+           </View>
+      </TouchableOpacity>
     </View>
   );
 
@@ -156,7 +161,7 @@ const ProductList = ({
 const styles = StyleSheet.create({
   itemSeparator: theme => ({
     height: theme.dimens.productListItemInBetweenSpace,
-    backgroundColor: theme.colors.border,
+    // backgroundColor: theme.colors.border,
     flex: 1,
   }),
   container: {
@@ -189,33 +194,41 @@ const styles = StyleSheet.create({
   },
   headerContainerStyle: theme => ({
     flex: 1,
+    backgroundColor:theme.colors.white,
     flexDirection: 'row',
     //  alignItems: 'stretch',
-     justifyContent: 'flex-end',
+     justifyContent: 'space-between',
     // borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
+    borderBottomColor: theme.colors.bodyText,
   }),
   
   iconWrapper: theme => ({
     // flex: 1,
-    height: 32,
-    width:120,
-    // borderWidth:1,
-    margin: theme.spacing.small,
+    height: H(32),
+    // backgroundColor:'green',
+    width:'50%',
+    //  borderWidth:1,
+     paddingVertical:W(25),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   }),
   headerTextStyle: theme => ({
     textTransform: 'uppercase',
-    color:theme.colors.primary,
+    color:theme.colors.black,
     marginLeft: theme.spacing.small,
   }),
   separator: theme => ({
-    width: 1,
+    width: 0.1,
     backgroundColor: theme.colors.border,
     marginVertical: theme.spacing.small,
   }),
+  textContainer:  {
+    height: H(32),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 ProductList.propTypes = {

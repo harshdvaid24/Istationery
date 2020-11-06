@@ -12,7 +12,7 @@ import { Icon } from 'react-native-elements';
 
 import Category from '../components/catalog/Category';
 import CategoryTree from '../components/catalog/CategoryTree';
-import Product from '../components/catalog/Product';
+
 import Cart from '../components/cart/Cart';
 import Checkout from '../components/checkout/Checkout';
 import Login from '../components/account/Login';
@@ -24,8 +24,15 @@ import HomeScreen from '../components/home/HomeScreen';
 import SearchScreen from '../components/search/SearchScreen';
 import OrdersScreen from '../components/account/OrdersScreen';
 import OrderScreen from '../components/account/OrderScreen';
-import AddressScreen from '../components/account/AddressScreen';
+
 import DrawerScreen from '../components/catalog/DrawerScreen';
+import ChangePasswordScreen from '../components/account/ChangePassword';
+
+import {ContactUsScreen} from '../components/catalog/ContactUsScreen';
+import WishlistScreen from '../components/Wishlist/WishlistScreen';
+import AddressScreen from '../components/AddressList/AddressScreen';
+
+// import AddAddress from '../components/Account/AddressScreen';
 
 
 import CartBadge from '../components/cart/CartBadge';
@@ -33,14 +40,21 @@ import CartBadge from '../components/cart/CartBadge';
 import * as routes from './routes';
 
 import { theme } from '../theme';
+import { ProductScreen } from '../components/catalog/ProductScreen';
+
 
 const defaultHeader = {
   
   headerStyle: {
     elevation: 0,
     backgroundColor: theme.colors.white,
-    height: 40,
+    height: 0,
+    shadowColor: 'transparent',
+    borderBottomColor:'transparent',
   },
+   style: { shadowColor: 'transparent' },
+  
+ 
   headerTitleStyle: {
     ...theme.typography.titleTextSemiBold,
     alignSelf: 'center',
@@ -49,34 +63,85 @@ const defaultHeader = {
   headerTintColor: theme.colors.appbarTint,
 };
 
+const defaultHeaderOptions = {
+  headerForceInset: { top: "never", bottom: "never" }
+};
+
 const HomeStack = createStackNavigator(
   {
+    [routes.NAVIGATION_ADDRESS_PATH]:AddressScreen,
     [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
-    [routes.NAVIGATION_HOME_PRODUCT_PATH]: Product,
+    [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
     navigationOptions: defaultHeader,
+    
+    defaultNavigationOptions: defaultHeaderOptions
   },
 );
+
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 const AuthStack = createStackNavigator({
   [routes.NAVIGATION_LOGIN_PATH]: Login,
   [routes.NAVIGATION_SIGNIN_PATH]: Signin,
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
+  [routes.NAVIGATION_CHANGE_PASSWORD_PATH]: ChangePasswordScreen 
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
-
+AuthStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
+  [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
+  [routes.NAVIGATION_CONTACTUS_PATH]:ContactUsScreen,
+  [routes.NAVIGATION_WISHLIST_PATH]:WishlistScreen,
+  [routes.NAVIGATION_ADDRESS_PATH]:AddressScreen,
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
   [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
+
+AccountStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 const AccountSwitch = createSwitchNavigator({
   [routes.NAVIGATION_AUTH_LOADING_SWITCH]: AuthLoading,
@@ -86,16 +151,45 @@ const AccountSwitch = createSwitchNavigator({
 
 const SearchStack = createStackNavigator({
   [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
-  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: Product,
+  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
+
+SearchStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
+
 
 const CartStack = createStackNavigator({
   [routes.NAVIGATION_CART_PATH]: Cart,
 }, {
   navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
 });
+
+CartStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 const MainAppNavigator = createBottomTabNavigator(
   {
@@ -111,6 +205,8 @@ const MainAppNavigator = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon name="md-search" type="ionicon" color={tintColor} />,
       }),
     },
+   
+    
     [routes.NAVIGATION_CART_PATH]: {
       screen: CartStack,
       navigationOptions: () => ({
@@ -122,8 +218,7 @@ const MainAppNavigator = createBottomTabNavigator(
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) => <Icon name="md-person" type="ionicon" color={tintColor} />,
       }),
-    },
-  
+    }
   },
   {
     // initialRouteName: NAVIGATION_AUTH_STACK_PATH,
@@ -135,7 +230,9 @@ const MainAppNavigator = createBottomTabNavigator(
       inactiveBackgroundColor: theme.colors.tabBarBackground,
     },
   },
- { navigationOptions: defaultHeader}
+ { navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+}
 );
 
 const Drawer = createDrawerNavigator({
@@ -156,6 +253,7 @@ const DrawerNavigator = createDrawerNavigator(
   },
   {
     navigationOptions: defaultHeader,
+    defaultNavigationOptions: defaultHeaderOptions
   },
   {
     contentComponent: DrawerScreen,
@@ -169,11 +267,25 @@ const Nav = createStackNavigator({
   [routes.NAVIGATION_DRAWER_NAVIGATOR]: {
     screen: DrawerNavigator,
     navigationOptions: defaultHeader,
+    defaultNavigationOptions: defaultHeaderOptions
   },
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
 },
 {
   headerBackTitleVisible: false,
 });
+
+Nav.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+    drawerLockMode = 'locked-closed';
+  }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 
 export const Navigator = createAppContainer(Nav);

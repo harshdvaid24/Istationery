@@ -9,7 +9,7 @@
  *                           app won't work
  */
 export const magentoOptions = {
-  url: 'http://mage2.local/',
+  url: 'http://mage2.local/', // make sure you have trail slash in the end
   home_cms_block_id: '19',
   store: 'default', // store code // Stores > All Stores > Store View > Code
   authentication: {
@@ -17,6 +17,7 @@ export const magentoOptions = {
       access_token: 'cdlodltsj3wfwd1jrx08q9nfprb5idq4',
     },
   },
+  reviewEnabled: false, // set true ONLY if you install https://github.com/troublediehard/mma-customapi on the magento backend
 };
 
 /**

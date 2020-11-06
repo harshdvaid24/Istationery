@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import {
-  View,
-  RefreshControl,
+  View,TouchableOpacity,Image,
+  RefreshControl,Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -17,6 +17,9 @@ import {
   NAVIGATION_HOME_PRODUCT_PATH,
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
+
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 const Category = ({
   canLoadMoreContent,
@@ -37,9 +40,9 @@ const Category = ({
 }) => {
   const theme = useContext(ThemeContext);
   const listTypeGrid = useSelector(({ ui }) => ui.listTypeGrid );
+console.log("products:",products);
+console.log("height:",WINDOW_HEIGHT);
 
-  console.log("Navigation:",navigation);
-  console.log("NavigationService:",NavigationService);
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
     _getProductsForCategoryOrChild(category);
@@ -49,6 +52,7 @@ const Category = ({
     _setCurrentProduct({ product });
     NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
       title: product.name,
+      product: product,
     });
   };
 
@@ -70,6 +74,8 @@ const Category = ({
   };
 
   return (
+   
+   
     <View style={styles.containerStyle(theme)}>
       <ProductList
         refreshControl={(
@@ -90,13 +96,29 @@ const Category = ({
         currencyRate={currencyRate}
       />
     </View>
+  
   );
 };
 
 Category.navigationOptions = ({ navigation }) => ({
   title: navigation.state.params.title.toUpperCase(),
-  headerBackTitle: ' ',
+  headerTitle: ' ',
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
   headerRight: (<HeaderGridToggleIcon />),
+  headerStyle: {
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : H(StatusbarHeight),
+    height: H(40),
+    elevation: 0,
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  },
 });
 
 const styles = {

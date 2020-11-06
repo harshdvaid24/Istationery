@@ -20,4 +20,18 @@ export default magento => ({
   getCartPaymentMethods: () => magento.get('/V1/carts/mine/payment-methods', undefined, undefined, CUSTOMER_TYPE),
 
   placeCartOrder: payment => magento.put('/V1/carts/mine/order', payment, CUSTOMER_TYPE),
+
+  postReview: review => magento.post('/V1/mma/review/mine/post', review, CUSTOMER_TYPE),
+
+  changePassword: (userDetail,id) => magento.put(`/V1/customers/me/password?customerId=${id}`,userDetail,CUSTOMER_TYPE),
+
+  AddWishlistItem: (id)=> magento.post(`/V1/ipwishlist/add/${id}`,undefined,CUSTOMER_TYPE),
+
+  RemoveWishListItem: (wishListItemId) => magento.delete(`/V1/ipwishlist/delete/${wishListItemId}`,undefined,CUSTOMER_TYPE),
+
+  getWishlistItems: () => magento.get(`/V1/ipwishlist/items`,undefined,undefined,CUSTOMER_TYPE),
+
+  getCustomerAddress: (customerId) => magento.post(`/V1/mobileapi/customer/address`,customerId,undefined,CUSTOMER_TYPE),
+
+  deleteCustomerAddress:(userDetail) => magento.post(`/V1/mobileapi/customer/deleteaddress`,userDetail,undefined,CUSTOMER_TYPE)
 });

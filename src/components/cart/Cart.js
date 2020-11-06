@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   StatusBar,
+  Image,
   TouchableOpacity,
   FlatList,
   RefreshControl,
@@ -12,6 +13,8 @@ import { connect } from 'react-redux';
 import { cartItemProduct, refreshCart } from '../../actions';
 import CartListItem from './CartListItem';
 import NavigationService from '../../navigation/NavigationService';
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
 import {
   NAVIGATION_CHECKOUT_PATH,
   NAVIGATION_HOME_SCREEN_PATH,
@@ -20,31 +23,31 @@ import { Button, Text, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 
-const LogoTitle = ( ) => {
-  return(
-  <View style={{flex:1,justifyContent:'center',paddingHorizontal:30,alignItems:'flex-start'}}>
-    <Text style={{fontSize:20,fontWeight:'bold',color:'#0e0a1f'}}>
-      Cart
-    </Text>
-  </View>
-  )
-  
-} 
+
 
 class Cart extends Component {
   static contextType = ThemeContext;
   static navigationOptions = ({ navigation }) => ({
     // title: translate('home.title'),
-    headerTitle: () => <LogoTitle />,
+    headerTitle:'Cart',
+    // headerLeft: () => (
+    //   <TouchableOpacity
+    //     onPress={() => {navigation.goBack() }}
+    //     >
+    //     <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+    //     </TouchableOpacity>
+    // ),
+    
     headerBackTitle: ' ',
-    headerLeft:null,
-    headerRight:null,
     headerStyle: {
-      backgroundColor:'#fff',
-      height: 60,
+      backgroundColor:GlobalStyle.colorSet.white,
+      height: 50,
       elevation: 0,
+      borderBottomColor:'transparent',
     }
   });
+
+  
 
 
   static propTypes = {

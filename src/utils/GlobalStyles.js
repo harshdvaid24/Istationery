@@ -1,8 +1,9 @@
 import { Dimensions } from 'react-native';
-
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 export const WINDOW_WIDTH = Dimensions.get('window').width;
 export const WINDOW_HEIGHT = Dimensions.get('window').height;
 
+export const StatusbarHeight = getStatusBarHeight();
 // MOCKUP_DEVICE_WIDTH
 export const MOCKUP_DEVICE_WIDTH = 414;
 
@@ -22,13 +23,14 @@ const _colorSet = {
  
   separatorGray: '#ECECEC',
   mainBgColor: '#F5F5F5',
+  almostWhite:'#F7F7F7',
   black: '#323232',
   white: '#FFFFFF',
   whiteLight: '#f5f5f5',
   darkWhite:'#f9f8fb',
   WhiteGrey: '#fafafa',
 
-  btnPrimary:'#1569C7',
+  btnPrimary:'#ff9016',
   btnSecondary:'#850ef6',
   
   appBlack: '#686868',
@@ -50,25 +52,27 @@ const _fontSet = {
   // Bold: 'OpenSans-Bold',
   // SemiBold: 'OpenSans-SemiBold',
 
-  Regular :'Popppins-Regular',
-  SemiBold : 'Popppins-SemiBold',
-  Bold : 'Popppins-Bold',
-  Black :'Popppins-Black',
-  ExtraBold : 'Popppins-ExtraBold',
-  Italic : 'Popppins-Italic',
-  Light: 'Popppins-Light',
-  Medium: 'Popppins-Medium',
-  Thin: 'Popppins-Thin',
-  ExtraLight: 'Popppins-ExtraLight',
+  Regular :'Poppins-Regular',
+  SemiBold : 'Poppins-SemiBold',
+  Bold : 'Poppins-Bold',
+  Black :'Poppins-Black',
+  ExtraBold : 'Poppins-ExtraBold',
+  Italic : 'Poppins-Italic',
+  Light: 'Poppins-Light',
+  Medium: 'Poppins-Medium',
+  Thin: 'Poppins-Thin',
+  ExtraLight: 'Poppins-ExtraLight',
 
-  BlackItalic: 'Popppins-BlackItalic',
-  SemiBoldItalic: 'Popppins-SemiBoldItalic',
-  BoldItalic: 'Popppins-BoldItalic',
-  ExtraBoldItalic: 'Popppins-ExtraBoldItalic',
-  ExtraLightItalic: 'Popppins-ExtraLightItalic',
-  LightItalic: 'Popppins-LightItalic',
-  MediumItalic: 'Popppins-MediumItalic',
-  ThinItalic: 'Popppins-ThinItalic',
+  BlackItalic: 'Poppins-BlackItalic',
+  SemiBoldItalic: 'Poppins-SemiBoldItalic',
+  BoldItalic: 'Poppins-BoldItalic',
+  ExtraBoldItalic: 'Poppins-ExtraBoldItalic',
+  ExtraLightItalic: 'Poppins-ExtraLightItalic',
+  LightItalic: 'Poppins-LightItalic',
+  MediumItalic: 'Poppins-MediumItalic',
+  ThinItalic: 'Poppins-ThinItalic',
+
+  
 
 
 };

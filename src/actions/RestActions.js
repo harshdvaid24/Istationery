@@ -56,6 +56,14 @@ import {
   RESET_FILTERS_DATA,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
   MAGENTO_GET_CUSTOM_OPTIONS,
+  MAGENTO_PRODUCT_STOCK_CHECK,
+  MAGENTO_ADD_WISHLIST,
+  MAGENTO_GET_ADDRESS_LIST,
+  MAGENTO_GET_ADDRESS_LIST_LOADING,
+  MAGENTO_WISHLIST_DELETE_ITEMS,
+  MAGENTO_WISHLIST_GET_LOADING,
+  MAGENTO_WISHLIST_ITEMS,
+  MAGENTO_GET_ADDRESS_LIST_ERROR
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -268,20 +276,20 @@ export const getSearchProducts = (searchInput, offset, sortOrder, filter) => asy
   }
 };
 
-export const getCustomOptions = sku => async (dispatch) => {
+export const getCustomOptions = (sku, id) => async (dispatch) => {
   try {
     const data = await magento.admin.getProductOptions(sku);
-    dispatch({ type: MAGENTO_GET_CUSTOM_OPTIONS, payload: data });
+    dispatch({ type: MAGENTO_GET_CUSTOM_OPTIONS, payload: { data, id } });
   } catch (e) {
     logError(e);
   }
 };
 
-export const getConfigurableProductOptions = sku => (dispatch) => {
+export const getConfigurableProductOptions = (sku, id) => (dispatch) => {
   magento.admin
     .getConfigurableProductOptions(sku)
     .then((data) => {
-      dispatch({ type: MAGENTO_GET_CONF_OPTIONS, payload: data });
+      dispatch({ type: MAGENTO_GET_CONF_OPTIONS, payload: { data, id } });
       data.forEach((option) => {
         magento.admin
           .getAttributeByCode(option.attribute_id)
@@ -289,6 +297,7 @@ export const getConfigurableProductOptions = sku => (dispatch) => {
             dispatch({
               type: MAGENTO_PRODUCT_ATTRIBUTE_OPTIONS,
               payload: {
+                productId: id,
                 attributeId: option.attribute_id,
                 options: attributeOptions.options,
                 attributeCode: attributeOptions.attribute_code,
@@ -305,7 +314,7 @@ export const getConfigurableProductOptions = sku => (dispatch) => {
     });
 };
 
-const updateConfigurableProductsPrices = (products, dispatch, type) => {
+export const updateConfigurableProductsPrices = (products, dispatch, type) => {
   products.forEach((product) => {
     if (product.type_id === 'configurable') {
       updateConfigurableProductPrice(product, dispatch, type);
@@ -318,20 +327,20 @@ const updateConfigurableProductPrice = async (
   dispatch,
   type = MAGENTO_UPDATE_CONF_PRODUCT,
 ) => {
-  const { sku } = product;
+  const { sku, id } = product;
   try {
     const data = await magento.admin.getConfigurableChildren(sku);
-    dispatch({ type, payload: { sku, children: data } });
+    dispatch({ type, payload: { sku, children: data, id } });
   } catch (e) {
     logError(e);
   }
 };
 
-export const getProductMedia = ({ sku }) => (dispatch) => {
+export const getProductMedia = ({ sku, id }) => (dispatch) => {
   magento.admin
     .getProductMedia(sku)
     .then((media) => {
-      dispatch({ type: MAGENTO_GET_PRODUCT_MEDIA, payload: { sku, media } });
+      dispatch({ type: MAGENTO_GET_PRODUCT_MEDIA, payload: { sku, media, id } });
     })
     .catch((error) => {
       logError(error);
@@ -361,19 +370,48 @@ export const createCustomerCart = customerId => async (dispatch) => {
 };
 
 export const getCart = (refreshing = false) => async (dispatch, getState) => {
+  console.log("getCart:");
   if (refreshing) {
+    console.log("getCart:refreshing:");
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: true });
   }
 
   try {
     let cart;
+    let cartId = await AsyncStorage.getItem('cartId');
     if (magento.isCustomerLogin()) {
+      console.log("getCart:isCustomerLogin:");
+      if(cartId){
+        console.log("getCart:isCustomerLogin:cartId:",cartId);
+        /*Merge Cart*/
+        /*the code to merge cart will be here*/
+
+        AsyncStorage.removeItem('cartId');
+      }
       cart = await magento.customer.getCustomerCart();
+      console.log("getCart: CustomerLogin:cart:",cart);
     } else {
-      const cartId = await magento.guest.createGuestCart();
+      console.log("getCart:not CustomerLogin:");
+      if(cartId){
+        try{
+          console.log("getCart:not CustomerLogin:cartId:",cartId);
+          cart = await magento.guest.getGuestCart(cartId);
+          console.log("getCart: not CustomerLogin:cart:",cart);
+        }catch(err){
+          logError('Cart id '+cartId+' is no longer exist');
+        }
+      }
+
+      if(!cartId || !cart){
+        console.log("getCart: not CustomerLogin:not cartid:");
+        cartId = await magento.guest.createGuestCart();
+        console.log("getCart: not CustomerLogin:not cartid:",cartId);
+        AsyncStorage.setItem('cartId', cartId);
+        cart = await magento.guest.getGuestCart(cartId);
+      }
       dispatch({ type: MAGENTO_CREATE_CART, payload: cartId });
-      cart = await magento.guest.getGuestCart(cartId);
     }
+
     dispatch({ type: MAGENTO_GET_CART, payload: cart });
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: false });
   } catch (error) {
@@ -682,3 +720,69 @@ const dispatchGetCart = async (dispatch, cartId) => {
     logError(e);
   }
 };
+
+export const getproductIsInStock = (sku) => async (dispatch) =>{
+  console.log('SKU:',sku);
+  magento.admin.getProductIsInStock(sku).then((data=>{
+    dispatch({type: MAGENTO_PRODUCT_STOCK_CHECK,payload: data});
+  }))
+  .catch((error)=>{logError(error)});
+}
+
+export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
+  // if(add)
+  // {
+  //   const data = {product_id:id,item_added_in_wishlist : false}
+  //  dispatch({type:MAGENTO_ADD_WISHLIST, payload:data})
+  //  const respose = magento.customer.RemoveWishListItem(wishListItemId);
+  //  if(respose.message)
+  //  {
+  //   console.log('Failed_TO_REMOVE',response.message);
+  //   //  failedToRemoveWishListItem();
+  //  } 
+  // }
+  // else
+  // {
+  const data = {product_id:id,item_added_in_wishlist : true}
+  dispatch({type:MAGENTO_ADD_WISHLIST, payload:data});
+  const response = magento.customer.AddWishlistItem(id);
+  console.log(response);
+    if(response.message)
+    {
+      console.log('Failed',response.message);
+      // wishlistFail()
+    }
+  }
+// }
+
+export const getAddress = (id) => async(dispatch) =>{
+  // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:true});
+  const parameters = {parameters:{customer_id:id}}
+  magento.customer.getCustomerAddress(parameters).then((data)=>{
+    // console.log('GET ADDRESS:',)
+    // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:false});
+    if(data[0].data.status=="success")
+    {
+    dispatch({type:MAGENTO_GET_ADDRESS_LIST, payload:data[0].data.address});
+    }
+    else
+    {
+    dispatch({type:MAGENTO_GET_ADDRESS_LIST_ERROR,payload:data[0].data.status});
+    }
+    //console.log(data[0].data.address);
+  })
+}
+
+export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
+  const parameters = {parameters:{customer_id,address_id}};
+  magento.customer.deleteCustomerAddress(parameters).then((data)=>{
+   // console.log(data[0].data.customer[0].status);
+    if(data[0].data.customer[0].status=="success")
+    {
+      dispatch(getAddress(customer_id));
+    }
+    else{
+      dispatch({type:MAGENTO_DELETE_ADDRESS_ERROR , payload:true}) 
+    }
+  })
+}
