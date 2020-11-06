@@ -1237,6 +1237,13 @@ mWhitleSemiBold:{
   color: GlobalStyle.colorSet.white,
 },
 
+// white
+sWhiteSemiBold:{
+  fontSize: W(12),
+  fontFamily: GlobalStyle.fontSet.SemiBold,
+  color: GlobalStyle.colorSet.white,
+},
+
 
 
 textareaContainer: {
@@ -1283,6 +1290,14 @@ rectBtn:{
   backgroundColor: GlobalStyle.colorSet.btnPrimary,
 },
 
+countCircle:{
+  borderRadius:H(24)/2,
+  height:H(24),
+  width:H(24),
+  backgroundColor:GlobalStyle.colorSet.btnPrimary,
+  justifyContent:'center',
+  alignItems:'center'
+}
 
 });
 
