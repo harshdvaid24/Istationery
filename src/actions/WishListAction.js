@@ -18,6 +18,7 @@ export const getWishListProducts = () => async(dispatch) =>{
     try {
       let arr = [];
       await magento.customer.getWishlistItems().then((data)=>{
+        console.log(data);
          data.forEach((products) => {
             arr.push({
              productItem: products.product,

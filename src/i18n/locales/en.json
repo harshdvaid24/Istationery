@@ -76,6 +76,9 @@
     "title": "Wishlist",
     "noWishlistMessage": "Sorry, there is no Wishlist items yet!"
   },
+  "AddressListScreen":{
+    "noAddresslistMessage": "Sorry, there is no Address yet!"
+  },
   "passwordReset": {
     "title": "Reset Password",
     "resetButton": "RESET MY PASSWORD",

@@ -58,9 +58,12 @@ import {
   MAGENTO_GET_CUSTOM_OPTIONS,
   MAGENTO_PRODUCT_STOCK_CHECK,
   MAGENTO_ADD_WISHLIST,
+  MAGENTO_GET_ADDRESS_LIST,
+  MAGENTO_GET_ADDRESS_LIST_LOADING,
   MAGENTO_WISHLIST_DELETE_ITEMS,
   MAGENTO_WISHLIST_GET_LOADING,
-  MAGENTO_WISHLIST_ITEMS
+  MAGENTO_WISHLIST_ITEMS,
+  MAGENTO_GET_ADDRESS_LIST_ERROR
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -751,3 +754,35 @@ export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
     }
   }
 // }
+
+export const getAddress = (id) => async(dispatch) =>{
+  // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:true});
+  const parameters = {parameters:{customer_id:id}}
+  magento.customer.getCustomerAddress(parameters).then((data)=>{
+    // console.log('GET ADDRESS:',)
+    // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:false});
+    if(data[0].data.status=="success")
+    {
+    dispatch({type:MAGENTO_GET_ADDRESS_LIST, payload:data[0].data.address});
+    }
+    else
+    {
+    dispatch({type:MAGENTO_GET_ADDRESS_LIST_ERROR,payload:data[0].data.status});
+    }
+    //console.log(data[0].data.address);
+  })
+}
+
+export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
+  const parameters = {parameters:{customer_id,address_id}};
+  magento.customer.deleteCustomerAddress(parameters).then((data)=>{
+   // console.log(data[0].data.customer[0].status);
+    if(data[0].data.customer[0].status=="success")
+    {
+      dispatch(getAddress(customer_id));
+    }
+    else{
+      dispatch({type:MAGENTO_DELETE_ADDRESS_ERROR , payload:true}) 
+    }
+  })
+}
