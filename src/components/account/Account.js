@@ -109,7 +109,8 @@ const Account = ({
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
-                  My Wishlist {` (Items: ${total}) `}
+                  My Wishlist
+                   {/* {` (Items: ${total}) `} */}
                 </Text>
             </View>
           
