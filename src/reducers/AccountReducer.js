@@ -12,7 +12,9 @@ import {
   MAGENTO_GET_ADDRESS_LIST,
   MAGENTO_GET_ADDRESS_LIST_LOADING,
   MAGENTO_GET_ADDRESS_LIST_ERROR,
-  MAGENTO_DELETE_ADDRESS_ERROR
+  MAGENTO_DELETE_ADDRESS_ERROR,
+  MAGENTO_ADD_ADDRESS_ERROR,
+  MAGENTO_ADD_ADDRESS_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -34,7 +36,8 @@ const INITIAL_STATE = {
   },
   addresses:{},
   loading:{},
-  error:false
+  error:false,
+  success:false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -95,6 +98,13 @@ export default (state = INITIAL_STATE, action) => {
     }
     case MAGENTO_DELETE_ADDRESS_ERROR:{
       return {...state,error:action.payload}
+    }
+    case MAGENTO_ADD_ADDRESS_ERROR:{
+      return {...state,error:action.payload}
+    }
+    case MAGENTO_ADD_ADDRESS_SUCCESS:{
+      console.log("ADD_ADDRESS", action.payload)
+      return {...state,success:action.payload}
     }
     default:
       return state;

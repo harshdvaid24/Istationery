@@ -33,5 +33,9 @@ export default magento => ({
 
   getCustomerAddress: (customerId) => magento.post(`/V1/mobileapi/customer/address`,customerId,undefined,CUSTOMER_TYPE),
 
-  deleteCustomerAddress:(userDetail) => magento.post(`/V1/mobileapi/customer/deleteaddress`,userDetail,undefined,CUSTOMER_TYPE)
+  deleteCustomerAddress:(userDetail) => magento.post(`/V1/mobileapi/customer/deleteaddress`,userDetail,undefined,CUSTOMER_TYPE),
+
+  wishlistItem:() => magento.get(`/V1/ipwishlist/info`,undefined,undefined,CUSTOMER_TYPE),
+
+  addAddressCustomer:(userDetail) => magento.post(`/V1/mobileapi/customer/saveaddress`,userDetail,undefined,CUSTOMER_TYPE),
 });

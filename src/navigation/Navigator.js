@@ -31,6 +31,7 @@ import ChangePasswordScreen from '../components/account/ChangePassword';
 import {ContactUsScreen} from '../components/catalog/ContactUsScreen';
 import WishlistScreen from '../components/Wishlist/WishlistScreen';
 import AddressScreen from '../components/AddressList/AddressScreen';
+import AddAddressScreen from '../components/AddressList/AddAddressScreen';
 
 // import AddAddress from '../components/Account/AddressScreen';
 
@@ -70,6 +71,7 @@ const defaultHeaderOptions = {
 const HomeStack = createStackNavigator(
   {
     [routes.NAVIGATION_ADDRESS_PATH]:AddressScreen,
+    [routes.ADD_ADDRESS_PATH]:AddAddressScreen,
     [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
     [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
