@@ -27,6 +27,7 @@ import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
 import styles from './styles';
 import { AddressItem } from './AddressItem';
+import {ADD_ADDRESS_PATH} from '../../navigation/routes'
 
 const AddressListScreen = props => {
 
@@ -41,7 +42,7 @@ const AddressListScreen = props => {
     headerRight: () => (
       <TouchableOpacity
         style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}
-        onPress={() => {screenProps.navigation.goBack() }}
+        onPress={() => {screenProps.navigation.navigate(ADD_ADDRESS_PATH) }}
         >
             <Text style={[CommonStyle.lPrimarySemiBold]}>Add</Text>
         </TouchableOpacity>

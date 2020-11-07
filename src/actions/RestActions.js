@@ -63,7 +63,10 @@ import {
   MAGENTO_WISHLIST_DELETE_ITEMS,
   MAGENTO_WISHLIST_GET_LOADING,
   MAGENTO_WISHLIST_ITEMS,
-  MAGENTO_GET_ADDRESS_LIST_ERROR
+  MAGENTO_GET_ADDRESS_LIST_ERROR,
+  MAGENTO_WISHLIST_TOTAL_ITEMS,
+  MAGENTO_ADD_ADDRESS_ERROR,
+  MAGENTO_ADD_ADDRESS_SUCCESS
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -785,4 +788,32 @@ export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
       dispatch({type:MAGENTO_DELETE_ADDRESS_ERROR , payload:true}) 
     }
   })
+}
+
+//to get the total item in wishlist 
+export const wishListItem = () => async (dispatch) =>{
+  await magento.customer.wishlistItem().then((data)=>{
+    // console.log(data[0]);  
+    dispatch({type:MAGENTO_WISHLIST_TOTAL_ITEMS, payload:data[0].total_items});
+  })
+}
+
+export const addAddress = (userDetail) => async (dispatch) => {
+  // console.log(userDetail);  
+  try {
+    dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
+    await magento.customer.addAddressCustomer(userDetail).then((data)=>{
+      if(data[0].data.customer[0].status=="success")
+      {
+        dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:true})
+      }
+      else{
+        dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+      }
+    })
+  } catch (error) {
+    logError(error);
+    dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+  }
+  
 }

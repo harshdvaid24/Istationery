@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../common';
-import { logout, currentCustomer } from '../../actions';
+import { logout, currentCustomer,wishListItem } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
    NAVIGATION_ADDRESS_SCREEN_PATH,
    NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
@@ -24,15 +24,19 @@ const Account = ({
   customer,
   navigation,
   currentCustomer: _currentCustomer,
+  wishlistItem:_wishlistItem,
   logout: _logout,
+  total:total
 }) => {
   const theme = useContext(ThemeContext);
+  //console.log(total);
 
   useEffect(() => {
-    console
+    //console
     // ComponentDidMount
     if (!customer) {
       _currentCustomer();
+      _wishlistItem();
     }
   }, []);
 
@@ -105,7 +109,7 @@ const Account = ({
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
-                  My Wishlist
+                  My Wishlist {` (Items: ${total}) `}
                 </Text>
             </View>
           
@@ -229,9 +233,10 @@ Account.defaultProps = {
   customer: null,
 };
 
-const mapStateToProps = ({ account }) => {
+const mapStateToProps = ({ account,wishlist }) => {
   const { customer } = account;
-  return { customer };
+  const {total} = wishlist;
+  return { customer,total };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer, wishlistItem:wishListItem })(Account);
