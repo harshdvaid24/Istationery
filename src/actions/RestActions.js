@@ -631,6 +631,7 @@ export const getGuestCartPaymentMethods = cartId => async (dispatch) => {
 };
 
 export const getCountries = () => (dispatch) => {
+  console.log("getCountries");
   magento.guest
     .getCountries()
     .then((data) => {

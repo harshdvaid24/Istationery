@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
-import { View , StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
+import { View , StyleSheet,Image,Platform, TouchableOpacity, ScrollView,KeyboardAvoidingView} from 'react-native';
 import moduleName from 'react'
 import {
     Spinner,
@@ -8,39 +8,32 @@ import {
     Text,
     Input,
   } from '../common';
-
-import { addAddress } from '../../actions';
+import { addAddress,getAddress } from '../../actions';
 import { translate } from '../../i18n';
 import { W, H } from '../../utils/GlobalStyles';
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import { ThemeContext } from '../../theme';
 import {NAVIGATION_ADDRESS_SCREEN_PATH} from '../../navigation/routes'
-  
-
+import country from '../../utils/Country.json';
+import ModalSelector from 'react-native-modal-selector';
 const AddAddress = ({navigation}) => {
-  AddAddress['navigationOptions'] = screenProps => ({
-    headerLeft: () => (
-      <TouchableOpacity
-        onPress={() => {screenProps.navigation.goBack() }}
-        >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-        </TouchableOpacity>
-    ),
-    headerBackTitle: ' ',
-    headerTitle:'Add Address',
-    headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.White,
-      height: H(50),
-      elevation: 0,
-      borderBottomColor:'transparent',
-    }
-});
+ 
+  const dispatch = useDispatch();
+useEffect(() => {
+  console.log("use effect");
+  if(success)
+  {
+   
+    dispatch(getAddress(customer.id));
+    navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
+  }
+}, [success]);
+
 const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
 const success = useSelector(state=>state.account.success)
-console.log(success);
-const dispatch = useDispatch();
+ console.log(success);
     const [firstName, setfirstName] = useState('');
     const [lastName, setlastName] = useState('')
     const [city, setcity] = useState('');
@@ -51,7 +44,10 @@ const dispatch = useDispatch();
     const [postcode, setpostcode] = useState('');
     const [region, setregion] = useState('');
     const [state, setstate] = useState('')
-    console.log(customer);
+
+    const [countryName, setcountryName] = useState('Bahrain');
+    const [countryCode, setcountryCode] = useState('BH');
+    // console.log(customer);
 
 
     //References
@@ -107,18 +103,17 @@ const dispatch = useDispatch();
       else {
         const customerSendData = {
           parameters: {
-            customer_id: customer.id,
+             customer_id: customer.id,
             email:customer.email,
             company,
-            country_Id:countryId,
+            country_Id:countryCode,
             city,
             street,
             telephone,
             postcode,
             firstname: firstName,
             lastname: lastName,
-            region,
-            email:customer.email,
+            region
           },
         };
         dispatch(addAddress(customerSendData));
@@ -142,6 +137,8 @@ const dispatch = useDispatch();
       )
     }
   
+  
+  
 
     // if(success)
     // {
@@ -149,9 +146,15 @@ const dispatch = useDispatch();
     // }
 
     return (
+      <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : 'height'}
+         keyboardVerticalOffset={Platform.select({ios: 150, android: 500})}
+         style = {{ flex: 1 }}
+        >
       <ScrollView keyboardShouldPersistTaps='always'>
-        <View style={styles.container(theme)}>
-        <Text style={[styles.Title(theme)]}> Add Address </Text>
+        
+        <View style={[styles.container]}>
+
      <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"
@@ -187,7 +190,20 @@ const dispatch = useDispatch();
       // editable={!loading}
        onChangeText={setcompany}
        assignRef={(input) => { companyInput.current = input; }}
-       onSubmitEditing={() => { streetInput.current.focus(); }}
+       onSubmitEditing={() => {telephoneInput .current.focus(); }}
+       containerStyle={styles.inputContainer(theme)}
+     />
+
+    <Input
+       autoCapitalize="none"
+       underlineColorAndroid="transparent"
+       placeholder={translate('common.telephone')}
+       autoCorrect={false}
+       value={telephone}
+       //editable={!loading}
+       onChangeText={settelephone}
+       assignRef={(input) => { telephoneInput.current = input; }}
+       onSubmitEditing={() => {streetInput.current.focus();}}
        containerStyle={styles.inputContainer(theme)}
      />
     
@@ -253,46 +269,101 @@ const dispatch = useDispatch();
        //editable={!loading}
        onChangeText={setstate}
        assignRef={(input) => { stateInput.current = input; }}
-       onSubmitEditing={() => { telephoneInput.current.focus(); }}
+      //  onSubmitEditing={() => { telephoneInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
      />
-     <Input
-       autoCapitalize="none"
-       underlineColorAndroid="transparent"
-       placeholder={translate('common.telephone')}
-       autoCorrect={false}
-       value={telephone}
-       //editable={!loading}
-       onChangeText={settelephone}
-       assignRef={(input) => { telephoneInput.current = input; }}
-       //onSubmitEditing={onCreateAccountPress}
-       containerStyle={styles.inputContainer(theme)}
-     />
+      <ModalSelector
+                data={country}
+                style={[styles.dropdownContainer(theme),]}
+                initValue="Select country!"
+                keyExtractor={item => item.name}
+                labelExtractor={item => item.name}
+                accessible={true}
+                scrollViewAccessibilityLabel={'Scrollable options'}
+                cancelButtonAccessibilityLabel={'Cancel Button'}
+                onChange={option => {
+                  setcountryCode(option.code);
+                  setcountryName(option.name);
+
+                }}>
+                <View style={[CommonStyle.CountryCodeView,]}>
+                <Input
+                    autoCapitalize="none"
+                    underlineColorAndroid="transparent"
+                    placeholder={''}
+                    returnKeyType="next"
+                    autoCorrect={false}
+                    value={countryName}
+                    editable={false}
+                    containerStyle={styles.dropdown(theme)}
+                  />
+                   <Image style={[CommonStyle.Icon15,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down.png")} />
+                </View>
+              </ModalSelector>
+
+    
      {renderButtons()}
      {/* {renderMessages()} */}
      <View />
    </View>
    </ScrollView>
+   </KeyboardAvoidingView>
     )
 }
+AddAddress['navigationOptions'] = screenProps => ({
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  headerBackTitle: ' ',
+  headerTitle:'Add Address',
+  headerStyle: {
+    backgroundColor:GlobalStyle.colorSet.White,
+    height: H(50),
+    elevation: 0,
+    borderBottomColor:'transparent',
+  }
+});
 const styles = StyleSheet.create({
-    container: theme => ({
+    container: {
       flex: 1,
-      backgroundColor: theme.colors.tabBarBackground,
+      // backgroundColor: theme.colors.tabBarBackground,
       alignItems: 'center',
-      paddingTop: theme.dimens.WINDOW_HEIGHT * 0.1,
-    }),
+      paddingHorizontal:W(20),
+       paddingTop: H(10),
+       paddingBottom:H(30)
+    },
     loginContainer :theme => ({
       flex: 1,
       backgroundColor: theme.colors.white,
       alignItems: 'center',
       justifyContent:'center',
     }),
+    dropdownContainer: theme => ({
+      backgroundColor:theme.colors.background,
+      width: "100%",
+      justifyContent:'center',
+      marginVertical:H(10),
+      height:H(45),
+      borderWidth:0,
+      borderRadius:5,
+      paddingLeft:10,
+      color:GlobalStyle.colorSet.grey
+    }),
+    dropdown: theme => ({
+      backgroundColor:theme.colors.background,
+      color:GlobalStyle.colorSet.grey,
+      width:"85%",
+      height:H(45),
+    }),
     inputContainer: theme => ({
       backgroundColor:theme.colors.background,
-      width: theme.dimens.WINDOW_WIDTH * 0.7,
+      width: "100%",
       marginVertical:10,
-      height:45,
+      height:H(45),
       borderWidth:0,
       borderRadius:5,
       paddingLeft:10
