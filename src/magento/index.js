@@ -38,8 +38,8 @@ class Magento {
     throw new Error('Need Integration Token!');
   }
 
-  post(path,data = null ,params, type = ADMIN_TYPE) {
-    return this.send(path, 'POST', params, data, type);
+  post(path ,params, type = ADMIN_TYPE) {
+    return this.send(path, 'POST', null ,params, type);
   }
 
   put(path, params, type = ADMIN_TYPE) {
