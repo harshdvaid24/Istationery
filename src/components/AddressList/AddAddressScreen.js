@@ -1,7 +1,15 @@
 import React,{useState,useEffect,useRef,useContext} from 'react';
 import {useSelector,useDispatch} from 'react-redux'
-import { View , StyleSheet,Image,Platform, TouchableOpacity, ScrollView,KeyboardAvoidingView} from 'react-native';
-import moduleName from 'react'
+import { View ,
+  StyleSheet,
+  Image,Platform,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+  KeyboardAvoidingView} from 'react-native';
+import moduleName from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
     Spinner,
     Button,
@@ -19,6 +27,7 @@ import country from '../../utils/Country.json';
 import ModalSelector from 'react-native-modal-selector';
 const AddAddress = ({navigation}) => {
  
+  console.log("navigation:",navigation);
   const dispatch = useDispatch();
 useEffect(() => {
   console.log("use effect");
@@ -32,23 +41,29 @@ useEffect(() => {
 
 const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
-const success = useSelector(state=>state.account.success)
+const success = useSelector(state=>state.account.success);
+const addressDetails = navigation.state.params?navigation.state.params.address:null;
  console.log(success);
-    const [firstName, setfirstName] = useState('');
-    const [lastName, setlastName] = useState('')
-    const [city, setcity] = useState('');
-    const [countryId, setcountryId] = useState("BH");
-    const [company, setcompany] = useState('');
-    const [street, setstreet] = useState('')
-    const [telephone, settelephone] = useState('');
-    const [postcode, setpostcode] = useState('');
-    const [region, setregion] = useState('');
-    const [state, setstate] = useState('')
+    const [firstName, setfirstName] = useState(addressDetails?addressDetails.firstname:'');
+    const [lastName, setlastName] = useState(addressDetails?addressDetails.lastname:'')
+    const [city, setcity] = useState(addressDetails?addressDetails.city:'');
+    // const [company, setcompany] = useState(addressDetails?addressDetails.firstname:'');
+    const [street, setstreet] = useState(addressDetails?addressDetails.street:'')
+    const [telephone, settelephone] = useState(addressDetails?addressDetails.phone:'');
+    const [postcode, setpostcode] = useState(addressDetails?addressDetails.pincode:'');
+    const [region, setregion] = useState(addressDetails?addressDetails.region:'');
+    // const [state, setstate] = useState(addressDetails?addressDetails.firstname:'')
 
-    const [countryName, setcountryName] = useState('Bahrain');
-    const [countryCode, setcountryCode] = useState('BH');
-    // console.log(customer);
-
+    const [countryName, setcountryName] = useState(addressDetails?addressDetails.country:'Bahrain');
+    let selectedCoountryCode; 
+    if(addressDetails){
+      selectedCoountryCode = country.reduce((code, item) => {
+        if (item.name === addressDetails.country){code = item.code}
+        return code
+      }, null);
+      console.log("selectedCoountryCode:",selectedCoountryCode);
+    }
+    const [countryCode, setcountryCode] = useState(addressDetails?selectedCoountryCode:'BH');
 
     //References
     const lastnameInput = useRef(null);
@@ -87,10 +102,10 @@ const success = useSelector(state=>state.account.success)
       {
         alert('Region should not be empty.');
       }
-      else if(state=='')
-      {
-        alert('State should not be empty.');
-      }  
+      // else if(state=='')
+      // {
+      //   alert('State should not be empty.');
+      // }  
       // else if(company=='')
       // {
       //   alert('Password should not be empty.');
@@ -105,7 +120,7 @@ const success = useSelector(state=>state.account.success)
           parameters: {
              customer_id: customer.id,
             email:customer.email,
-            company,
+            // company,
             country_Id:countryCode,
             city,
             street,
@@ -128,10 +143,10 @@ const success = useSelector(state=>state.account.success)
       // }
   
       return (
-        <View style={[{marginTop:10}]}>
+        <View style={[CommonStyle.marginTop15,CommonStyle.HorizontalCenter,]}>
         <Button
           onPress={onAddAddressPress}>
-          {'Add Address'}
+          {'Add'}
         </Button>
         </View>
       )
@@ -146,14 +161,20 @@ const success = useSelector(state=>state.account.success)
     // }
 
     return (
-      <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : 'height'}
-         keyboardVerticalOffset={Platform.select({ios: 150, android: 500})}
-         style = {{ flex: 1 }}
-        >
-      <ScrollView keyboardShouldPersistTaps='always'>
-        
-        <View style={[styles.container]}>
+      <View
+      style={[
+        styles.container,
+      ]}>
+      <KeyboardAwareScrollView
+       extraHeight={H(120)}
+       extraScrollHeight={0}
+       >
+       
+              <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+              />
 
      <Input
        autoCapitalize="none"
@@ -177,10 +198,10 @@ const success = useSelector(state=>state.account.success)
        //editable={!loading}
        onChangeText={setlastName}
        assignRef={(input) => { lastnameInput.current = input; }}
-       onSubmitEditing={() => { companyInput.current.focus(); }}
+       onSubmitEditing={() => { telephoneInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
      />
-      <Input
+      {/* <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"
        placeholder={translate('common.company')}
@@ -192,7 +213,7 @@ const success = useSelector(state=>state.account.success)
        assignRef={(input) => { companyInput.current = input; }}
        onSubmitEditing={() => {telephoneInput .current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
-     />
+     /> */}
 
     <Input
        autoCapitalize="none"
@@ -256,10 +277,10 @@ const success = useSelector(state=>state.account.success)
       // editable={!loading}
        onChangeText={setregion}
        assignRef={(input) => { regionInput.current = input; }}
-       onSubmitEditing={() => { stateInput.current.focus(); }}
+      //  onSubmitEditing={() => { stateInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
      />
-       <Input
+       {/* <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"
        placeholder={translate('common.state')}
@@ -271,7 +292,7 @@ const success = useSelector(state=>state.account.success)
        assignRef={(input) => { stateInput.current = input; }}
       //  onSubmitEditing={() => { telephoneInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
-     />
+     /> */}
       <ModalSelector
                 data={country}
                 style={[styles.dropdownContainer(theme),]}
@@ -304,10 +325,9 @@ const success = useSelector(state=>state.account.success)
     
      {renderButtons()}
      {/* {renderMessages()} */}
-     <View />
-   </View>
-   </ScrollView>
-   </KeyboardAvoidingView>
+     
+     </KeyboardAwareScrollView>
+      </View>
     )
 }
 AddAddress['navigationOptions'] = screenProps => ({
@@ -332,6 +352,7 @@ const styles = StyleSheet.create({
       flex: 1,
       // backgroundColor: theme.colors.tabBarBackground,
       alignItems: 'center',
+      justifyContent:'center',
       paddingHorizontal:W(20),
        paddingTop: H(10),
        paddingBottom:H(30)
@@ -351,11 +372,10 @@ const styles = StyleSheet.create({
       borderWidth:0,
       borderRadius:5,
       paddingLeft:10,
-      color:GlobalStyle.colorSet.grey
+    
     }),
     dropdown: theme => ({
       backgroundColor:theme.colors.background,
-      color:GlobalStyle.colorSet.grey,
       width:"85%",
       height:H(45),
     }),
