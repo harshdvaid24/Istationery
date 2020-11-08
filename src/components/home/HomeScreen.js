@@ -79,7 +79,13 @@ class HomeScreen extends Component {
     const { navigation } = this.props;
     navigation.toggleDrawer();
   };
-
+  onProductPress = (product) => {
+    this.props.setCurrentProduct({ product });
+    NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
+      product,
+      title: product.name,
+    });
+  };
   WINDOW_HEIGHT = (product) => {
     console.log("onProductPress:product:",product);
     this.props.setCurrentProduct({ product });

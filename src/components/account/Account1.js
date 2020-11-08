@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../common';
-import { logout, currentCustomer,wishListItem } from '../../actions';
+import { logout, currentCustomer } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
    NAVIGATION_ADDRESS_SCREEN_PATH,
    NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
@@ -20,23 +20,27 @@ import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyles,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
 
+import {
+  getOrdersForCustomer,
+} from '../../actions';
+
 const Account = ({
   customer,
+  orders,
+  customerId,
+  getOrdersForCustomer: _getOrdersForCustomer,
   navigation,
   currentCustomer: _currentCustomer,
-  wishlistItem:_wishlistItem,
   logout: _logout,
-  total:total
 }) => {
   const theme = useContext(ThemeContext);
-  //console.log(total);
-
+  
   useEffect(() => {
-    //console
     // ComponentDidMount
+    console.log("useEffect(() => {");
+    _getOrdersForCustomer(customerId);
     if (!customer) {
       _currentCustomer();
-      _wishlistItem();
     }
   }, []);
 
@@ -107,11 +111,15 @@ const Account = ({
       <TouchableOpacity onPress={openWishlist}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
+               <Image style={[CommonStyle.Icon22]} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
-                  My Wishlist
-                   {/* {` (Items: ${total}) `} */}
+                  My Wishlist 
                 </Text>
+                <View style={[CommonStyle.countCircle]}>
+                    <Text style={[CommonStyle.sWhiteSemiBold]}>
+                      10
+                     </Text>
+                </View>
             </View>
           
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
@@ -120,10 +128,15 @@ const Account = ({
         <TouchableOpacity onPress={openOrders}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/orders.png")} />
+               <Image style={[CommonStyle.Icon22]} source={require("./.././../../resources/icons/account/orders.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myOrdersButton')}
                 </Text>
+                <View style={[CommonStyle.countCircle]}>
+                    <Text style={[CommonStyle.sWhiteSemiBold]}>
+                      99
+                     </Text>
+                </View>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
@@ -133,7 +146,7 @@ const Account = ({
         <TouchableOpacity onPress={openAddAddress}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
+               <Image style={[CommonStyle.Icon22]} source={require("./.././../../resources/icons/account/addresses.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myAddressButton')}
                 </Text>
@@ -144,7 +157,7 @@ const Account = ({
         <TouchableOpacity onPress={onContactUs}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
+               <Image style={[CommonStyle.Icon22]} source={require("./.././../../resources/icons/account/contactUs.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                  Contact Us
                 </Text>
@@ -163,7 +176,7 @@ const Account = ({
         <TouchableOpacity onPress={onLogoutPress}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/exit.png")} />
+               <Image style={[CommonStyle.Icon22]} source={require("./.././../../resources/icons/account/exit.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                  Logout
                 </Text>
@@ -228,16 +241,23 @@ Account.propTypes = {
   navigation: PropTypes.object.isRequired,
   currentCustomer: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  orders: PropTypes.arrayOf(PropTypes.object),
+  customerId: PropTypes.number,
+  getOrdersForCustomer: PropTypes.func.isRequired,
 };
 
 Account.defaultProps = {
   customer: null,
+  orders: null,
+  customerId: null,
 };
 
-const mapStateToProps = ({ account,wishlist }) => {
+const mapStateToProps = ({ account }) => {
   const { customer } = account;
-  const {total} = wishlist;
-  return { customer,total };
+  const customerId = account.customer ? account.customer.id : null;
+  const orders = account.orderData ? account.orderData.items : [];
+  return { customer, customerId,
+    orders };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer, wishlistItem:wishListItem })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer,getOrdersForCustomer })(Account);
