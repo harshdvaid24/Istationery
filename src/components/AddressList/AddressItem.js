@@ -22,10 +22,11 @@ import { W, H } from '../../utils/GlobalStyles';
 
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
+import {ADD_ADDRESS_PATH} from '../../navigation/routes'
 
 import styles from './styles';
 
-export const AddressItem = ({ item, onOptionPressed, navigation }) => {
+export const AddressItem = ({ item, onOptionPressed,onEditAddressPress, navigation }) => {
   // console.log('ThumbnailItemV:', item);
   console.log('AddressList:',item.item);
  
@@ -33,6 +34,13 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
   onOptionPressed(item.item.address_id);
   };
 
+  const OnEditAddressPress = () => {
+    console.log('From Address Item screen',item.item);
+   navigation.navigate(ADD_ADDRESS_PATH,{
+     item:item.item
+   })
+    //onEditAddressPress(item.item);
+  }
 
 
   return (
@@ -45,7 +53,7 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
                       <Text>{item.item.street},{item.item.city},{item.item.region}, </Text>
                       <Text>{item.item.country},{item.item.pincode} </Text>
                     </View>
-                    <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
+                    <TouchableOpacity onPress={OnEditAddressPress} style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>
                        Edit
                       </Text>

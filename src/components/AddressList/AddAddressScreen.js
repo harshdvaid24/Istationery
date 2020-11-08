@@ -18,7 +18,7 @@ import { ThemeContext } from '../../theme';
 import {NAVIGATION_ADDRESS_SCREEN_PATH} from '../../navigation/routes'
   
 
-const AddAddress = ({navigation}) => {
+const AddAddress = props => {
   AddAddress['navigationOptions'] = screenProps => ({
     headerLeft: () => (
       <TouchableOpacity
@@ -39,7 +39,7 @@ const AddAddress = ({navigation}) => {
 const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
 const success = useSelector(state=>state.account.success)
-console.log(success);
+console.log(props.navigation.getParam('item'));
 const dispatch = useDispatch();
     const [firstName, setfirstName] = useState('');
     const [lastName, setlastName] = useState('')
@@ -51,7 +51,6 @@ const dispatch = useDispatch();
     const [postcode, setpostcode] = useState('');
     const [region, setregion] = useState('');
     const [state, setstate] = useState('')
-    console.log(customer);
 
 
     //References
@@ -219,6 +218,7 @@ const dispatch = useDispatch();
      />
       <Input
        autoCapitalize="none"
+       keyboardType="number-pad"
        underlineColorAndroid="transparent"
        placeholder={translate('common.postcode')}
        returnKeyType="next"
@@ -260,12 +260,13 @@ const dispatch = useDispatch();
        autoCapitalize="none"
        underlineColorAndroid="transparent"
        placeholder={translate('common.telephone')}
+       keyboardType="numeric"
        autoCorrect={false}
        value={telephone}
        //editable={!loading}
        onChangeText={settelephone}
        assignRef={(input) => { telephoneInput.current = input; }}
-       //onSubmitEditing={onCreateAccountPress}
+       onSubmitEditing={onAddAddressPress}
        containerStyle={styles.inputContainer(theme)}
      />
      {renderButtons()}
