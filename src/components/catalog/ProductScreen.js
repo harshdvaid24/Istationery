@@ -3,6 +3,7 @@
  */
 import React, { useContext, useState, useEffect } from 'react';
 import { ScrollView,Share,StatusBar,Platform,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { Button, Input, Price, Spinner, Text } from '../common';
@@ -29,6 +30,7 @@ import { magentoOptions } from '../../config/magento';
 import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
 
 export const ProductScreen = props => {
   const { cart, currencyRate, currencySymbol, customer, current } = useSelector(
@@ -329,6 +331,13 @@ ProductScreen['navigationOptions'] = screenProps => ({
       </TouchableOpacity>
   ),
   headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR20]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <Icon name="md-search" type="ionicon" color={GlobalStyle.colorSet.grey} />
+    </TouchableOpacity>
     <TouchableOpacity
       style={[CommonStyle.paddingLR20]}
       onPress={() => {screenProps.navigation.navigate('Cart') }}
@@ -336,6 +345,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
 
       <CartBadge color={GlobalStyle.colorSet.btnPrimary} />
     </TouchableOpacity>
+    </View>
   ),
   headerBackTitle: ' ',
   headerStyle: {
@@ -479,6 +489,10 @@ shareContainer:{
     borderColor:GlobalStyle.colorSet.BorderGrey,
     borderRadius:H(7),
     backgroundColor:GlobalStyle.colorSet.white
+},
+headerRight:{
+  flexDirection:'row',
+  alignItems:'center'
 }
 
 });
