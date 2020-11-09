@@ -336,7 +336,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
       style={[CommonStyle.paddingLR20]}
       onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
       >
-      <Icon name="md-search" type="ionicon" color={GlobalStyle.colorSet.grey} />
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/search_inactive.png')} resizeMode='contain'/></View>
     </TouchableOpacity>
     <TouchableOpacity
       style={[CommonStyle.paddingLR20]}

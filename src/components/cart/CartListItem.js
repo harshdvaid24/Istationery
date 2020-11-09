@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import { View, TouchableOpacity, Alert, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import { Spinner, Text, Price } from '../common';
 import { removeFromCartLoading, removeFromCart } from '../../actions';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import CommonStyle from '../../utils/CommonStyle'
 
 const CartListItem = ({
   item,
@@ -80,11 +81,10 @@ const CartListItem = ({
               onPress={onPressRemoveItem}
             >
               <View style={styles.iconWrapper(theme)}>
-                <Icon
-                  name="md-trash"
-                  type="ionicon"
-                  color="#104E8B"
-                />
+              <Image
+                style={CommonStyle.Icon40} 
+                source={require('../../../resources/icons/bin.png')}
+              />
               </View>
 
             </TouchableOpacity>
