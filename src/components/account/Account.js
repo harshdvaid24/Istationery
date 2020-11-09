@@ -30,16 +30,21 @@ const Account = ({
 }) => {
   const theme = useContext(ThemeContext);
   //console.log(total);
-
+  console.log("useEffect:Account:total",total);
   useEffect(() => {
     //console
     // ComponentDidMount
-   
+   console.log("useEffect:Account:");
+   console.log("useEffect:customer:",customer);
     if (!customer) {
+      console.log("useEffect:!customer:",customer);
       _currentCustomer();
+      // _wishlistItem();
+    }
+    else {
       _wishlistItem();
     }
-  }, [total]);
+  });
 
   const onLogoutPress = () => {
     _logout();
@@ -111,7 +116,7 @@ const Account = ({
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                   My Wishlist
-                   {` ( ${total}) `}
+                   {` (${total}) `}
                 </Text>
             </View>
           
@@ -229,10 +234,12 @@ Account.propTypes = {
   navigation: PropTypes.object.isRequired,
   currentCustomer: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
+  wishListItem: PropTypes.func.isRequired,
 };
 
 Account.defaultProps = {
   customer: null,
+  total:null
 };
 
 const mapStateToProps = ({ account,wishlist }) => {
@@ -241,4 +248,4 @@ const mapStateToProps = ({ account,wishlist }) => {
   return { customer,total };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer, wishListItem })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem })(Account);
