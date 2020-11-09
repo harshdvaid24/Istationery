@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../common';
-import { logout, currentCustomer,wishListItem } from '../../actions';
+import { logout, currentCustomer,wishListItem,getOrdersForCustomer } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
    NAVIGATION_ADDRESS_SCREEN_PATH,
    NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
@@ -22,9 +22,12 @@ import GlobalStyles,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
 
 const Account = ({
   customer,
+  orders,
   navigation,
+  customerId,
   currentCustomer: _currentCustomer,
   wishlistItem:_wishlistItem,
+  getOrdersForCustomer:_getOrdersForCustomer,
   logout: _logout,
   total:total
 }) => {
@@ -39,10 +42,10 @@ const Account = ({
     if (!customer) {
       console.log("useEffect:!customer:",customer);
       _currentCustomer();
-      // _wishlistItem();
     }
     else {
       _wishlistItem();
+      _getOrdersForCustomer(customerId);
     }
   });
 
@@ -128,7 +131,7 @@ const Account = ({
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/orders.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
-                 {translate('account.myOrdersButton')}
+                 {translate('account.myOrdersButton')} {`(${orders?orders.length:0})`} 
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
@@ -231,21 +234,28 @@ const styles = StyleSheet.create({
 
 Account.propTypes = {
   customer: PropTypes.object,
+  customerId: PropTypes.number,
+  orders: PropTypes.arrayOf(PropTypes.object),
   navigation: PropTypes.object.isRequired,
   currentCustomer: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   wishListItem: PropTypes.func.isRequired,
+  getOrdersForCustomer: PropTypes.func.isRequired,
 };
 
 Account.defaultProps = {
   customer: null,
-  total:null
+  orders: null,
+  total:null,
+  customerId: null,
 };
 
 const mapStateToProps = ({ account,wishlist }) => {
   const { customer } = account;
+  const customerId = account.customer ? account.customer.id : null;
   const {total} = wishlist;
+  const orders = account.orderData ? account.orderData.items : [];
   return { customer,total };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem, getOrdersForCustomer:getOrdersForCustomer, })(Account);
