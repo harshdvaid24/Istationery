@@ -34,11 +34,12 @@ const Account = ({
   useEffect(() => {
     //console
     // ComponentDidMount
+   
     if (!customer) {
       _currentCustomer();
       _wishlistItem();
     }
-  }, []);
+  }, [total]);
 
   const onLogoutPress = () => {
     _logout();
@@ -110,7 +111,7 @@ const Account = ({
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                   My Wishlist
-                   {/* {` (Items: ${total}) `} */}
+                   {` ( ${total}) `}
                 </Text>
             </View>
           
@@ -240,4 +241,4 @@ const mapStateToProps = ({ account,wishlist }) => {
   return { customer,total };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer, wishlistItem:wishListItem })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer, wishListItem })(Account);

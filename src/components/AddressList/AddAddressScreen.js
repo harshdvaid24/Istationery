@@ -29,21 +29,37 @@ const AddAddress = ({navigation}) => {
  
   console.log("navigation:",navigation);
   const dispatch = useDispatch();
-useEffect(() => {
-  console.log("use effect");
-  if(success)
-  {
-   
-    dispatch(getAddress(customer.id));
-    navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
-  }
-}, [success]);
+
 
 const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
 const success = useSelector(state=>state.account.success);
 const addressDetails = navigation.state.params?navigation.state.params.address:null;
- console.log(success);
+ 
+
+ useEffect(() => {
+  console.log("use effect:sucess:",success);
+  if(success)
+  {
+    clearInput();
+    dispatch(getAddress(customer.id));
+    navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
+  }
+}, [success]);
+
+const clearInput = () => {
+  setAddressId('');
+  setfirstName('');
+  setlastName('');
+  setcity('');
+  setstreet('');
+  settelephone('');
+  setpostcode('');
+  setregion('');
+  setcountryName('Bahrain');
+  setcountryCode('BH');
+}
+ const [address_id, setAddressId] = useState(addressDetails?addressDetails.address_id:'');
     const [firstName, setfirstName] = useState(addressDetails?addressDetails.firstname:'');
     const [lastName, setlastName] = useState(addressDetails?addressDetails.lastname:'')
     const [city, setcity] = useState(addressDetails?addressDetails.city:'');
@@ -116,22 +132,47 @@ const addressDetails = navigation.state.params?navigation.state.params.address:n
       }
      
       else {
-        const customerSendData = {
-          parameters: {
-             customer_id: customer.id,
-            email:customer.email,
-            // company,
-            country_Id:countryCode,
-            city,
-            street,
-            telephone,
-            postcode,
-            firstname: firstName,
-            lastname: lastName,
-            region
-          },
-        };
-        dispatch(addAddress(customerSendData));
+
+        if(addressDetails){
+          const customerSendData = {
+            parameters: {
+               customer_id: customer.id,
+               address_id:address_id,
+               email:customer.email,
+              country_Id:countryCode,
+              city,
+              street,
+              telephone,
+              postcode,
+              firstname: firstName,
+              lastname: lastName,
+              region
+            },
+          };
+          dispatch(addAddress(customerSendData));
+          // dispatch(addAddress(customerSendData)).then((data) => {
+          //   console.log('addAddress:data:',data);
+          // });
+        }
+        else {
+          const customerSendData = {
+            parameters: {
+               customer_id: customer.id,
+              email:customer.email,
+              // company,
+              country_Id:countryCode,
+              city,
+              street,
+              telephone,
+              postcode,
+              firstname: firstName,
+              lastname: lastName,
+              region
+            },
+          };
+          dispatch(addAddress(customerSendData));
+        }
+
       }
 
      
