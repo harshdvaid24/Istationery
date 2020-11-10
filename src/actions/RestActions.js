@@ -631,6 +631,7 @@ export const getGuestCartPaymentMethods = cartId => async (dispatch) => {
 };
 
 export const getCountries = () => (dispatch) => {
+  console.log("getCountries");
   magento.guest
     .getCountries()
     .then((data) => {
@@ -793,27 +794,52 @@ export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
 //to get the total item in wishlist 
 export const wishListItem = () => async (dispatch) =>{
   await magento.customer.wishlistItem().then((data)=>{
-    // console.log(data[0]);  
+     console.log(" magento.customer.wishlistItem():",data);  
     dispatch({type:MAGENTO_WISHLIST_TOTAL_ITEMS, payload:data[0].total_items});
   })
 }
 
-export const addAddress = (userDetail) => async (dispatch) => {
-  // console.log(userDetail);  
-  try {
-    dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
-    await magento.customer.addAddressCustomer(userDetail).then((data)=>{
-      if(data[0].data.customer[0].status=="success")
-      {
-        dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:true})
-      }
-      else{
-        dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
-      }
-    })
-  } catch (error) {
-    logError(error);
-    dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+export const addAddress = (userDetail) => {
+  return async dispatch => {
+       dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
+      try {
+       magento.customer.addAddressCustomer(userDetail).then((data)=>{
+        if(data[0].data.customer[0].status=="success")
+        {
+         dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:true})
+        }
+        else{
+          dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+        }
+      })
+
+    } catch (error) {
+      logError(error);
+       dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+    }
   }
-  
+
 }
+
+// export const addAddress = (userDetail) => async (dispatch) => {
+//   // console.log(userDetail);  
+//   try {
+//     dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
+//     await magento.customer.addAddressCustomer(userDetail).then((data)=>{
+//       if(data[0].data.customer[0].status=="success")
+//       {
+//         return true;
+//         dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:true})
+//       }
+//       else{
+//         return false;
+//         dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+//       }
+//     })
+//   } catch (error) {
+//     logError(error);
+//     return false;
+//     dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+//   }
+  
+// }

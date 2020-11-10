@@ -515,7 +515,11 @@ const CommonStyle = StyleSheet.create({
     fontFamily: GlobalStyle.fontSet.Regular,
     marginTop: Platform.OS === 'ios' ? W(27) : W(17),
   },
-  CountryCodeView: { width: W(60), alignItems: 'center' },
+  CountryCodeView: {
+    height:H(35),
+     alignItems: 'center',
+    flexDirection:'row'
+    },
 
   TextAlineLeft: {
     textAlign: 'left',

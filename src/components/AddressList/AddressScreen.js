@@ -30,7 +30,6 @@ import { AddressItem } from './AddressItem';
 import {ADD_ADDRESS_PATH} from '../../navigation/routes'
 
 const AddressListScreen = props => {
-
   AddressListScreen['navigationOptions'] = screenProps => ({
     headerLeft: () => (
       <TouchableOpacity
@@ -74,19 +73,23 @@ useEffect(() => {
  
  
  
-  const onOptionPressed =(optionId) => {
+  const onRemove =(optionId) => {
     dispatch(deleteAddress(customer.id,optionId));
     if(error)
     {
       alert('Something went wrong!')
     }
-    // console.log('onOptionPressed',optionId);
+    // console.log('onRemove',optionId);
     // setSelectedCustomer(optionId);
     
     //  setIsOpen(true);
    
    
  }
+
+ const onEdit =(address) => {
+  props.navigation.navigate(ADD_ADDRESS_PATH,{address:address})
+}
  const renderEmptyAddressList = () => {
   return (
     <View style={[styles.emptyListContainerStyle]}>
@@ -128,7 +131,7 @@ useEffect(() => {
           numColumns={1}
           showsHorizontalScrollIndicator={false}
           renderItem={item => {
-            return <AddressItem item={item} onOptionPressed={onOptionPressed} navigation={props.navigation} />;
+            return <AddressItem item={item} onRemove={onRemove} OnEdit={onEdit} navigation={props.navigation} />;
           }}
           // keyExtractor={item => item.id.toString()}
           keyExtractor={(item, index) => index.toString()}

@@ -25,14 +25,18 @@ import CommonStyle from '../../utils/CommonStyle';
 
 import styles from './styles';
 
-export const AddressItem = ({ item, onOptionPressed, navigation }) => {
+export const AddressItem = ({ item, onRemove,OnEdit, navigation }) => {
   // console.log('ThumbnailItemV:', item);
   console.log('AddressList:',item.item);
  
-  const OnOptionPressed = () => {
-  onOptionPressed(item.item.address_id);
+  const OnRemovePressed = () => {
+  onRemove(item.item.address_id);
   };
 
+  const OnEditPressed = () => {
+    OnEdit(item.item);
+    };
+  
 
 
   return (
@@ -45,7 +49,7 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
                       <Text>{item.item.street},{item.item.city},{item.item.region}, </Text>
                       <Text>{item.item.country},{item.item.pincode} </Text>
                     </View>
-                    <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
+                    <TouchableOpacity onPress={OnEditPressed} style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>
                        Edit
                       </Text>
@@ -55,7 +59,7 @@ export const AddressItem = ({ item, onOptionPressed, navigation }) => {
        
       </View>
      
-        <TouchableOpacity onPress={OnOptionPressed}
+        <TouchableOpacity onPress={OnRemovePressed}
           style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}>
             <Image
                   resizeMode="contain"
