@@ -8,6 +8,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { DrawerActions } from 'react-navigation-drawer';
 
+import {View ,Image,StyleSheet} from 'react-native'
+import CommonStyle from '../utils/CommonStyle'
+
 import { Icon } from 'react-native-elements';
 
 import Category from '../components/catalog/Category';
@@ -198,13 +201,35 @@ const MainAppNavigator = createBottomTabNavigator(
     [routes.NAVIGATION_HOME_STACK_PATH]: {
       screen: HomeStack,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => <Icon name="md-home" type="ionicon" color={tintColor} />,
+        tabBarIcon: ({ tintColor,focused }) => {
+          let imagePath = null;
+          if(focused)
+          {
+            imagePath=require('../../resources/icons/home_active.png')
+          }
+          else 
+          {
+            imagePath=require('../../resources/icons/home_inactive.png')
+          }
+          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+        },
       }),
     },
     [routes.NAVIGATION_SEARCH_SCREEN_PATH]: {
       screen: SearchStack,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => <Icon name="md-search" type="ionicon" color={tintColor} />,
+        tabBarIcon: ({ tintColor,focused }) => {
+          let imagePath = null;
+          if(focused)
+          {
+            imagePath=require('../../resources/icons/search_active.png')
+          }
+          else 
+          {
+            imagePath=require('../../resources/icons/search_inactive.png')
+          }
+          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+        },
       }),
     },
    
@@ -218,7 +243,18 @@ const MainAppNavigator = createBottomTabNavigator(
     [routes.NAVIGATION_AUTH_STACK_PATH]: {
       screen: AccountSwitch,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => <Icon name="md-person" type="ionicon" color={tintColor} />,
+        tabBarIcon: ({ tintColor,focused }) => {
+          let imagePath = null;
+          if(focused)
+          {
+            imagePath=require('../../resources/icons/account_active.png')
+          }
+          else 
+          {
+            imagePath=require('../../resources/icons/account_inactive.png')
+          }
+          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+        },
       }),
     }
   },
@@ -289,5 +325,12 @@ Nav.navigationOptions = ({ navigation }) => {
     drawerLockMode,
   };
 };
+
+const styles = StyleSheet.create({
+  IconWrapper:{
+    marginTop: 5,
+    marginRight: 12
+  }
+})
 
 export const Navigator = createAppContainer(Nav);

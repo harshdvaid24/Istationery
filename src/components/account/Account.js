@@ -46,6 +46,13 @@ const Account = ({
     else {
       _wishlistItem();
       _getOrdersForCustomer(customerId);
+      // const unsun
+      const unsubscribe = navigation.addListener('didFocus', () => {
+        _wishlistItem();
+        _getOrdersForCustomer(customerId);
+      });
+      // _wishlistItem();
+      // _getOrdersForCustomer(customerId);
     }
   });
 
