@@ -237,7 +237,17 @@ const MainAppNavigator = createBottomTabNavigator(
     [routes.NAVIGATION_CART_PATH]: {
       screen: CartStack,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor,focused }) => <CartBadge focused={focused} color={tintColor} />,
+        tabBarIcon: ({ tintColor,focused }) => {
+          let isFocused = null
+          if(focused)
+          {
+            isFocused = true;
+          }
+          else
+        {
+          isFocused = false
+        }
+          return(<CartBadge isActive={isFocused} color={tintColor} />)},
       }),
     },
     [routes.NAVIGATION_AUTH_STACK_PATH]: {

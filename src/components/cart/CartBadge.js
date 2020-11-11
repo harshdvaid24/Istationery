@@ -10,6 +10,7 @@ import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
 const CartBadge = ({
   color,
+  isActive,
   itemsCount,
 }) => {
   const theme = useContext(ThemeContext);
@@ -18,7 +19,11 @@ const CartBadge = ({
     <IconBadge
       MainElement={(
         <View style={styles.iconWrapper}>
-          <Image style={[CommonStyle.Icon25]} source={require("./.././../../resources/icons/Cart.png")} />
+        {isActive?
+          <Image style={[CommonStyle.Icon25]}  source={require('../../../resources/icons/Cart_c.png')} />
+        :
+        <Image style={[CommonStyle.Icon25]}  source={require('../../../resources/icons/cart.png')} />
+        }
         </View>
       )}
       BadgeElement={
@@ -55,6 +60,7 @@ CartBadge.propTypes = {
 
 CartBadge.defaultProps = {
   itemsCount: 0,
+  isActive:false
 };
 
 const mapStateToProps = ({ cart }) => {
