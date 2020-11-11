@@ -14,7 +14,8 @@ import NavigationService from '../../navigation/NavigationService';
 import { NAVIGATION_SEARCH_PRODUCT_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 const Title = ({title}) => {
   return(
   <View style={{flex:1,marginLeft:20  }}>
@@ -111,12 +112,12 @@ class SearchScreen extends Component {
           placeholder={'Search Products'}
           onChangeText={this.updateSearch}
           value={input}
-          containerStyle={styles.searchStyle(theme)}
-          inputStyle={styles.inputStyle(theme)}
-          inputContainerStyle={styles.inputContainerStyle(theme)}
+          containerStyle={[styles.searchStyle(theme)]}
+          inputStyle={[styles.inputStyle(theme)]}
+          inputContainerStyle={[styles.inputContainerStyle(theme)]}
           showLoading={this.props.loadingMore}
         />
-        <View style={[{marginTop:10,marginRight:20}]}>
+        <View style={[{marginRight:20}]}>
           <HeaderGridToggleIcon />
         </View>
        
@@ -134,26 +135,26 @@ const styles = {
   containerStyle: theme => ({
     flex: 1,
     backgroundColor: theme.colors.background,
-  
   }),
   searchStyle: theme => ({
-    backgroundColor: theme.colors.background,
+    backgroundColor: GlobalStyle.colorSet.white,
     alignSelf: 'center',
-   marginLeft:20,
+    marginLeft:W(20),
     borderBottomWidth: 0,
     borderTopWidth: 0,
     height: theme.dimens.searchBarHeight,
-    width: theme.dimens.WINDOW_WIDTH-50,
+    width: "90%",
   }),
   inputContainerStyle: theme => ({
-    marginTop:5,
-    marginHorizontal:10,
-    backgroundColor: theme.colors.surface,
+    // marginTop:5,
+    marginLeft:W(20),
+    backgroundColor: GlobalStyle.colorSet.white,
+    borderColor:GlobalStyle.colorSet.btnPrimary,
     borderRadius: theme.dimens.searchBarBorderRadius,
   }),
   inputStyle: theme => ({
     fontSize:14,
-    backgroundColor: theme.colors.surface,
+    backgroundColor: GlobalStyle.colorSet.white,
     color: theme.colors.titleText,
   }),
   notFoundTextWrap: {

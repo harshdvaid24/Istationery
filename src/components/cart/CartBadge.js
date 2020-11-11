@@ -18,7 +18,7 @@ const CartBadge = ({
     <IconBadge
       MainElement={(
         <View style={styles.iconWrapper}>
-          <Image style={[CommonStyle.Icon25]} source={require("./.././../../resources/icons/cart.png")} />
+          <Image style={[CommonStyle.Icon25]} source={require("./.././../../resources/icons/Cart.png")} />
         </View>
       )}
       BadgeElement={

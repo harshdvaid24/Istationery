@@ -336,7 +336,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
       style={[CommonStyle.paddingLR20]}
       onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
       >
-      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/search_inactive.png')} resizeMode='contain'/></View>
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
     </TouchableOpacity>
     <TouchableOpacity
       style={[CommonStyle.paddingLR20]}
@@ -355,7 +355,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
     height: H(60),
     elevation: 0,
      borderWidth:0,
-  //  borderBottomColor:'transparent',
+   borderBottomColor:'transparent',
   }
 });
 

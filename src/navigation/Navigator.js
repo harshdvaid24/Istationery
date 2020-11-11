@@ -205,11 +205,11 @@ const MainAppNavigator = createBottomTabNavigator(
           let imagePath = null;
           if(focused)
           {
-            imagePath=require('../../resources/icons/home_active.png')
+            imagePath=require('../../resources/icons/Home_c.png')
           }
           else 
           {
-            imagePath=require('../../resources/icons/home_inactive.png')
+            imagePath=require('../../resources/icons/Home.png')
           }
           return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
         },
@@ -222,11 +222,11 @@ const MainAppNavigator = createBottomTabNavigator(
           let imagePath = null;
           if(focused)
           {
-            imagePath=require('../../resources/icons/search_active.png')
+            imagePath=require('../../resources/icons/Search_c.png')
           }
           else 
           {
-            imagePath=require('../../resources/icons/search_inactive.png')
+            imagePath=require('../../resources/icons/Search.png')
           }
           return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
         },
@@ -237,7 +237,7 @@ const MainAppNavigator = createBottomTabNavigator(
     [routes.NAVIGATION_CART_PATH]: {
       screen: CartStack,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) => <CartBadge color={tintColor} />,
+        tabBarIcon: ({ tintColor,focused }) => <CartBadge focused={focused} color={tintColor} />,
       }),
     },
     [routes.NAVIGATION_AUTH_STACK_PATH]: {
@@ -247,11 +247,11 @@ const MainAppNavigator = createBottomTabNavigator(
           let imagePath = null;
           if(focused)
           {
-            imagePath=require('../../resources/icons/account_active.png')
+            imagePath=require('../../resources/icons/Profile_c.png')
           }
           else 
           {
-            imagePath=require('../../resources/icons/account_inactive.png')
+            imagePath=require('../../resources/icons/Profile.png')
           }
           return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
         },
