@@ -112,7 +112,7 @@ const Account = ({
   return (
     <View style={styles.container(theme)}>
       {renderCustomerData()}
-     
+     {console.log("total:",total)}
       <TouchableOpacity onPress={openWishlist}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>

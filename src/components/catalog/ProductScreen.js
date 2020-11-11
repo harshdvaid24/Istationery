@@ -340,8 +340,9 @@ ProductScreen['navigationOptions'] = screenProps => ({
   headerBackTitle: ' ',
   headerStyle: {
     backgroundColor:GlobalStyle.colorSet.white,
-    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : H(StatusbarHeight),
-    height: H(40),
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+    // height: H(40),
+    height: H(60),
     elevation: 0,
      borderWidth:0,
   //  borderBottomColor:'transparent',

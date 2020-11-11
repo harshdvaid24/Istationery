@@ -15,7 +15,7 @@ const initialState ={
   error:false,
   success:true,
   is_in_stock:{},
-  total:{}
+  total:0
 }
 
  export default (state = initialState, action) =>{
