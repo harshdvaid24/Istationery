@@ -18,7 +18,7 @@ import {
   } from '../common';
 import { addAddress,getAddress } from '../../actions';
 import { translate } from '../../i18n';
-import { W, H } from '../../utils/GlobalStyles';
+import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import { ThemeContext } from '../../theme';
@@ -34,6 +34,7 @@ const AddAddress = ({navigation}) => {
 const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
 const success = useSelector(state=>state.account.success);
+const loading = useSelector(state=>state.account.loading)
 const addressDetails = navigation.state.params?navigation.state.params.address:null;
  
 
@@ -179,10 +180,6 @@ const clearInput = () => {
     };
 
     const renderButtons = () => {
-      // if (loading) {
-      //   return <Spinner />;
-      // }
-  
       return (
         <View style={[CommonStyle.marginTop15,CommonStyle.HorizontalCenter,]}>
         <Button
@@ -200,6 +197,9 @@ const clearInput = () => {
     // {
     //   navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
     // }
+    if (loading) {
+      return <Spinner />;
+    }
 
     return (
       <View
@@ -382,10 +382,13 @@ AddAddress['navigationOptions'] = screenProps => ({
   headerBackTitle: ' ',
   headerTitle:'Add Address',
   headerStyle: {
-    backgroundColor:GlobalStyle.colorSet.White,
-    height: H(50),
+    backgroundColor:GlobalStyle.colorSet.white,
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+    // height: H(40),
+    height: H(60),
     elevation: 0,
-    borderBottomColor:'transparent',
+     borderWidth:0,
+   borderBottomColor:'transparent',
   }
 });
 const styles = StyleSheet.create({

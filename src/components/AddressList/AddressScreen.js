@@ -22,12 +22,13 @@ import {
 import {getAddress, deleteAddress} from '../../actions';
 import { translate } from '../../i18n';
 
-import { W, H } from '../../utils/GlobalStyles';
+import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
 import styles from './styles';
 import { AddressItem } from './AddressItem';
 import {ADD_ADDRESS_PATH} from '../../navigation/routes'
+import {Spinner} from '../common'
 
 const AddressListScreen = props => {
   AddressListScreen['navigationOptions'] = screenProps => ({
@@ -35,7 +36,7 @@ const AddressListScreen = props => {
       <TouchableOpacity
         onPress={() => {screenProps.navigation.goBack() }}
         >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+        <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
         </TouchableOpacity>
     ),
     headerRight: () => (
@@ -49,10 +50,13 @@ const AddressListScreen = props => {
     headerBackTitle: ' ',
     headerTitle:'My Addresses',
     headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.White,
-      height: H(50),
+      backgroundColor:GlobalStyle.colorSet.white,
+      marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+      // height: H(40),
+      height: H(60),
       elevation: 0,
-      borderBottomColor:'transparent',
+       borderWidth:0,
+     borderBottomColor:'transparent',
     }
 });
 
@@ -61,8 +65,7 @@ const dispatch = useDispatch();
 const customer = useSelector(state=>state.account.customer)
 const AddressList = useSelector(state=>state.account.address)
 const Loading = useSelector(state=>state.account.loading);
-const error = useSelector(state=>state.account.error)
-console.log(Loading);
+const error = useSelector(state=>state.account.deleteError)
 useEffect(() => {
   dispatch(getAddress(customer.id))
 },[])
@@ -91,6 +94,11 @@ useEffect(() => {
   props.navigation.navigate(ADD_ADDRESS_PATH,{address:address})
 }
  const renderEmptyAddressList = () => {
+  if(Loading)
+  {
+    return <Spinner/>
+  }
+  
   return (
     <View style={[styles.emptyListContainerStyle]}>
       <Text style={[CommonStyle.lGreyRegular]}>
@@ -116,6 +124,10 @@ useEffect(() => {
     
   // });
   if (AddressList && AddressList.length) {
+    if(Loading)
+    {
+      return <Spinner/>
+    }
   return (
      <View style={[CommonStyle.marginBottom20,{backgroundColor:GlobalStyle.colorSet.mainBgColor}]}>
 

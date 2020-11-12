@@ -759,8 +759,16 @@ export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
   }
 // }
 
+const addressListLoading = (dispatch)=>{
+  dispatch({type:MAGENTO_GET_ADDRESS_LIST_LOADING,payload:true})
+}
+
+const addressListLoadingEnd = (dispatch)=>{
+  dispatch({type:MAGENTO_GET_ADDRESS_LIST_LOADING,payload:false})
+}
+
 export const getAddress = (id) => async(dispatch) =>{
-  // dispatch ({type:MAGENTO_GET_ADDRESS_LIST_LOADING, payload:true});
+  addressListLoading(dispatch)
   const parameters = {parameters:{customer_id:id}}
   magento.customer.getCustomerAddress(parameters).then((data)=>{
     // console.log('GET ADDRESS:',)
@@ -773,11 +781,13 @@ export const getAddress = (id) => async(dispatch) =>{
     {
     dispatch({type:MAGENTO_GET_ADDRESS_LIST_ERROR,payload:data[0].data.status});
     }
+    addressListLoadingEnd(dispatch)
     //console.log(data[0].data.address);
   })
 }
 
 export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
+  addressListLoading(dispatch);
   const parameters = {parameters:{customer_id,address_id}};
   await magento.customer.deleteCustomerAddress(parameters).then((data)=>{
    // console.log(data[0].data.customer[0].status);
@@ -788,6 +798,7 @@ export const deleteAddress = (customer_id,address_id) => async (dispatch) =>{
     else{
       dispatch({type:MAGENTO_DELETE_ADDRESS_ERROR , payload:true}) 
     }
+    addressListLoadingEnd(dispatch);
   })
 }
 
@@ -801,6 +812,7 @@ export const wishListItem = () => async (dispatch) =>{
 
 export const addAddress = (userDetail) => {
   return async dispatch => {
+  addressListLoading(dispatch);
        dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
       try {
        magento.customer.addAddressCustomer(userDetail).then((data)=>{
@@ -811,11 +823,13 @@ export const addAddress = (userDetail) => {
         else{
           dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
         }
+        addressListLoadingEnd(dispatch);
       })
 
     } catch (error) {
       logError(error);
-       dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true})
+      dispatch({type:MAGENTO_ADD_ADDRESS_ERROR , payload:true});
+      addressListLoadingEnd(dispatch);
     }
   }
 

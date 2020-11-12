@@ -35,7 +35,8 @@ const INITIAL_STATE = {
     error: false,
   },
   addresses:{},
-  loading:{},
+  loading:false,
+  deleteError:false,
   error:false,
   success:false,
 };
@@ -94,10 +95,10 @@ export default (state = INITIAL_STATE, action) => {
     }
     
     case MAGENTO_GET_ADDRESS_LIST_LOADING:{
-      return {...state.loading,loading:action.payload}
+      return {...state,loading:action.payload}
     }
     case MAGENTO_DELETE_ADDRESS_ERROR:{
-      return {...state,error:action.payload}
+      return {...state,deleteError:action.payload}
     }
     case MAGENTO_ADD_ADDRESS_ERROR:{
       return {...state,error:action.payload}

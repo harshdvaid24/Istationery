@@ -12,8 +12,18 @@ import {
 } from './types';
 import { logError } from '../helper/logger';
 
+const loadingStart=(dispatch) => {
+  dispatch({type:MAGENTO_WISHLIST_GET_LOADING, payload:true})
+}
+
+const loadingEnd=(dispatch) => {
+  dispatch({type:MAGENTO_WISHLIST_GET_LOADING, payload:false})
+}
+
+
 export const getWishListProducts = () => async(dispatch) =>{
   console.log('method is called');
+  loadingStart(dispatch);
     // dispatch({type:MAGENTO_WISHLIST_GET_LOADING,payload:true});
     try {
       let arr = [];
@@ -26,14 +36,17 @@ export const getWishListProducts = () => async(dispatch) =>{
             })
         });
         dispatch({type:MAGENTO_WISHLIST_ITEMS, payload:arr})
+        loadingEnd(dispatch);
       }).catch((error)=>{logError(error)})
     } catch (error) {
       logError(error);
+      loadingEnd(dispatch);
     }
     
   }
 
 export const removeWishlistItem = (id) =>  async (dispatch) =>{
+  loadingStart(dispatch);
   try {
     magento.customer.RemoveWishListItem(id).then((data)=>{
       if(data.message)
@@ -42,10 +55,19 @@ export const removeWishlistItem = (id) =>  async (dispatch) =>{
       }
       else{
         return dispatch(getWishListProducts(dispatch))
-    }}).catch((error)=>{return dispatch({type:MAGENTO_WISHLIST_DELETE_ITEMS_SUCCESS, payload:error.message}), logError(error)})}
+    }
+    loadingEnd(dispatch);
+  }).
+  catch((error)=>{
+        loadingEnd(dispatch);
+        dispatch({type:MAGENTO_WISHLIST_DELETE_ITEMS_SUCCESS, payload:error.message}), 
+        logError(error)
+      })
+  }
 
   catch(error)
   {
+    loadingEnd(dispatch)
     dispatch({type:MAGENTO_WISHLIST_DELETE_ITEMS_ERROR, payload:error.message})
     logError(error);
   }

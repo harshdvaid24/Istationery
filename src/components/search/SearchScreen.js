@@ -107,7 +107,7 @@ class SearchScreen extends Component {
 
     return (
       <View style={styles.containerStyle(theme)}>
-        <View style={[{flexDirection:'row',justifyContent:'center',alignItems:'center'}]}>
+        <View style={[{marginTop:StatusbarHeight,marginHorizontal:W(5),marginBottom:H(5),flexDirection:'row',justifyContent:'center',alignItems:'center'}]}>
         <SearchBar
           placeholder={'Search Products'}
           onChangeText={this.updateSearch}
@@ -117,7 +117,7 @@ class SearchScreen extends Component {
           inputContainerStyle={[styles.inputContainerStyle(theme)]}
           showLoading={this.props.loadingMore}
         />
-        <View style={[{marginRight:20}]}>
+        <View>
           <HeaderGridToggleIcon />
         </View>
        
@@ -137,9 +137,8 @@ const styles = {
     backgroundColor: theme.colors.background,
   }),
   searchStyle: theme => ({
-    backgroundColor: GlobalStyle.colorSet.white,
+    backgroundColor: GlobalStyle.colorSet.mainBgColor,
     alignSelf: 'center',
-    marginLeft:W(20),
     borderBottomWidth: 0,
     borderTopWidth: 0,
     height: theme.dimens.searchBarHeight,

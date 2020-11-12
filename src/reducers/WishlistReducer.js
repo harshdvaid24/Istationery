@@ -15,6 +15,7 @@ const initialState ={
   error:false,
   success:true,
   is_in_stock:{},
+  loading:false,
   total:0
 }
 
@@ -32,6 +33,9 @@ const initialState ={
             return {...state,is_in_stock:action.payload }
         case MAGENTO_WISHLIST_TOTAL_ITEMS:{
             return {...state,total:action.payload}
+        }
+        case MAGENTO_WISHLIST_GET_LOADING:{
+            return {...state,loading:action.payload}
         }
          default:
              return state;

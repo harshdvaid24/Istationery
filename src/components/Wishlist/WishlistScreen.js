@@ -19,8 +19,9 @@ import {
   NativeModules,
 } from 'react-native';
 import {getWishListProducts, removeWishlistItem,AddToCart, addToCart } from '../../actions'
+import {Spinner} from '../common'
 import { translate } from '../../i18n';
-import { W, H } from '../../utils/GlobalStyles';
+import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
  import styles from './styles';
@@ -49,6 +50,7 @@ const dispatch = useDispatch();
 const WishlistItems = useSelector(state=>state.wishlist.products.products);
 const error = useSelector(state=>state.wishlist.error);
 const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
+const loading = useSelector(state => state.wishlist.loading);
 
   useEffect(()=>{
     dispatch(getWishListProducts());
@@ -91,6 +93,12 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
  }
 
  const renderEmptyOrderList = () => {
+  if(loading)
+  {
+    return <Spinner/>
+  }
+  else 
+{
   return (
     <View style={[styles.emptyListContainerStyle]}>
       <Text style={[CommonStyle.lGreyRegular]}>
@@ -105,9 +113,14 @@ const is_in_stock = useSelector(state=>state.wishlist.is_in_stock)
       </TouchableOpacity> */}
     </View>
   );
+    }
 };
 
  if (WishlistItems && WishlistItems.length) {
+  if(loading)
+  {
+    return <Spinner/>
+  }
   return (
      <View style={[CommonStyle.marginBottom20,styles.emptyListContainerStyle]}>
 
@@ -148,9 +161,12 @@ WishlistScreen['navigationOptions'] = screenProps => ({
   headerTitle:'My Wishlist',
   headerStyle: {
     backgroundColor:GlobalStyle.colorSet.white,
-    height: H(50),
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+    // height: H(40),
+    height: H(60),
     elevation: 0,
-    borderBottomColor:'transparent',
+     borderWidth:0,
+   borderBottomColor:'transparent',
   }
 });
 WishlistScreen.propTypes = {
