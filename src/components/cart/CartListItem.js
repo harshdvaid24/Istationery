@@ -82,8 +82,8 @@ const CartListItem = ({
             >
               <View style={styles.iconWrapper(theme)}>
               <Image
-                style={CommonStyle.Icon40} 
-                source={require('../../../resources/icons/bin.png')}
+                style={CommonStyle.Icon30} 
+                source={require('../../../resources/icons/remove.png')}
               />
               </View>
 
