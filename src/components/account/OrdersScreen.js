@@ -17,7 +17,8 @@ import OrderListItem from './OrderListItem';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import { Spinner } from '../common';
 
 import { NAVIGATION_HOME_SCREEN_PATH } from '../../navigation/routes';
 
@@ -25,6 +26,7 @@ const OrdersScreen = ({
   orders,
   customerId,
   refreshing,
+  loading,
   getOrdersForCustomer: _getOrdersForCustomer,
   navigation,
 }) => {
@@ -64,6 +66,10 @@ const OrdersScreen = ({
 
   const renderEmptyOrderList = () => {
     const { navigate } = navigation;
+    if(loading)
+    {
+      return <Spinner/>
+    }
     return (
       <View style={styles.emptyListContainerStyle(theme)}>
         <Text type="heading" style={styles.textStyle(theme)}>
@@ -81,6 +87,10 @@ const OrdersScreen = ({
   };
 
   if (orders && orders.length) {
+    if(loading)
+    {
+      return <Spinner/>
+    }
     return (
       <View style={styles.container(theme)}>
         {renderOrderList()}
@@ -99,6 +109,15 @@ OrdersScreen.navigationOptions = (props) => ({
       <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
+  headerStyle: {
+    backgroundColor:GlobalStyles.colorSet.white,
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+    // height: H(40),
+    height: H(60),
+    elevation: 0,
+     borderWidth:0,
+   borderBottomColor:'transparent',
+  }
 });
 
 const styles = {
@@ -137,11 +156,13 @@ OrdersScreen.defaultProps = {
 };
 
 const mapStateToProps = ({ account, magento }) => {
+  const loading = account.loading;
   const customerId = account.customer ? account.customer.id : null;
   const orders = account.orderData ? account.orderData.items : [];
   return {
     customerId,
     orders,
+    loading,
     refreshing: account.refreshing,
   };
 };

@@ -31,34 +31,7 @@ import {ADD_ADDRESS_PATH} from '../../navigation/routes'
 import {Spinner} from '../common'
 
 const AddressListScreen = props => {
-  AddressListScreen['navigationOptions'] = screenProps => ({
-    headerLeft: () => (
-      <TouchableOpacity
-        onPress={() => {screenProps.navigation.goBack() }}
-        >
-        <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-        </TouchableOpacity>
-    ),
-    headerRight: () => (
-      <TouchableOpacity
-        style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}
-        onPress={() => {screenProps.navigation.navigate(ADD_ADDRESS_PATH) }}
-        >
-            <Text style={[CommonStyle.lPrimarySemiBold]}>Add</Text>
-        </TouchableOpacity>
-    ),
-    headerBackTitle: ' ',
-    headerTitle:'My Addresses',
-    headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.white,
-      marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
-      // height: H(40),
-      height: H(60),
-      elevation: 0,
-       borderWidth:0,
-     borderBottomColor:'transparent',
-    }
-});
+ 
 
 
 const dispatch = useDispatch();
@@ -157,4 +130,32 @@ useEffect(() => {
   return renderEmptyAddressList();
 
         }
+AddressListScreen.navigationOptions = screenProps => ({
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {screenProps.navigation.goBack() }}
+              >
+              <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+              </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}
+              onPress={() => {screenProps.navigation.navigate(ADD_ADDRESS_PATH) }}
+              >
+                  <Text style={[CommonStyle.lPrimarySemiBold]}>Add</Text>
+              </TouchableOpacity>
+          ),
+          headerBackTitle: ' ',
+          headerTitle:'My Addresses',
+          headerStyle: {
+            backgroundColor:GlobalStyle.colorSet.white,
+            marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+            // height: H(40),
+            height: H(60),
+            elevation: 0,
+             borderWidth:0,
+           borderBottomColor:'transparent',
+          }
+      });
 export default AddressListScreen;

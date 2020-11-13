@@ -127,3 +127,8 @@ export const MAGENTO_DELETE_ADDRESS_ERROR = 'magento_delete-address_error';
 export const MAGENTO_GET_ADDRESS_LIST_ERROR = 'magento_get_address_list_error';
 export const MAGENTO_ADD_ADDRESS_ERROR = 'magento_add_address_error'; 
 export const MAGENTO_ADD_ADDRESS_SUCCESS = 'magento_add_address_success'; 
+
+/**
+ * GET ORDERS LOADING
+ */
+export const MAGENTO_ORDERS_LOADING = 'magento_order_loading';

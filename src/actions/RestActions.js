@@ -66,7 +66,8 @@ import {
   MAGENTO_GET_ADDRESS_LIST_ERROR,
   MAGENTO_WISHLIST_TOTAL_ITEMS,
   MAGENTO_ADD_ADDRESS_ERROR,
-  MAGENTO_ADD_ADDRESS_SUCCESS
+  MAGENTO_ADD_ADDRESS_SUCCESS,
+  MAGENTO_ORDERS_LOADING
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -496,7 +497,15 @@ export const cartItemProduct = sku => async (dispatch) => {
   }
 };
 
+const ordersLoading = (dispatch) =>{
+  dispatch({type:MAGENTO_ORDERS_LOADING,payload:true})
+}
+const ordersLoadingEnd = (dispatch) =>{
+  dispatch({type:MAGENTO_ORDERS_LOADING,payload:false})
+}
+
 export const getOrdersForCustomer = (customerId, refreshing) => async (dispatch) => {
+  ordersLoading(dispatch);
   if (refreshing) {
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_ORDERS_DATA, payload: true });
   }
@@ -521,7 +530,9 @@ export const getOrdersForCustomer = (customerId, refreshing) => async (dispatch)
     data.items = orders;
     dispatch({ type: MAGENTO_GET_ORDERS, payload: data });
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_ORDERS_DATA, payload: false });
+    ordersLoadingEnd(dispatch);
   } catch (error) {
+    ordersLoadingEnd(dispatch);
     logError(error);
   }
 };

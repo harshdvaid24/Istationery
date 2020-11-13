@@ -126,7 +126,7 @@ class Cart extends Component {
           </Text>
 
           <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
-            { this.props.currencySymbol} {sum}
+            { this.props.currencySymbol} {parseFloat(sum).toFixed(2)}
           </Text>
           {/* <Price
             currencyRate={this.props.currencyRate}
