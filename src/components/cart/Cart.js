@@ -14,7 +14,7 @@ import { cartItemProduct, refreshCart } from '../../actions';
 import CartListItem from './CartListItem';
 import NavigationService from '../../navigation/NavigationService';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyle,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 import {
   NAVIGATION_CHECKOUT_PATH,
   NAVIGATION_HOME_SCREEN_PATH,
@@ -41,9 +41,12 @@ class Cart extends Component {
     headerBackTitle: ' ',
     headerStyle: {
       backgroundColor:GlobalStyle.colorSet.white,
-      height: 50,
+      marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+      // height: H(40),
+      height: H(60),
       elevation: 0,
-      borderBottomColor:'transparent',
+       borderWidth:0,
+     borderBottomColor:'transparent',
     }
   });
 

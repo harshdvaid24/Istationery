@@ -54,7 +54,7 @@ const Account = ({
       // _wishlistItem();
       // _getOrdersForCustomer(customerId);
     }
-  });
+  },[]);
 
   const onLogoutPress = () => {
     _logout();
@@ -262,7 +262,7 @@ const mapStateToProps = ({ account,wishlist }) => {
   const customerId = account.customer ? account.customer.id : null;
   const {total} = wishlist;
   const orders = account.orderData ? account.orderData.items : [];
-  return { customer,total };
+  return { customer,customerId,total,orders };
 };
 
 export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem, getOrdersForCustomer:getOrdersForCustomer, })(Account);
