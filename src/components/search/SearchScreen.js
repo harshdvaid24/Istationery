@@ -117,7 +117,7 @@ class SearchScreen extends Component {
           inputContainerStyle={[styles.inputContainerStyle(theme)]}
           showLoading={this.props.loadingMore}
         />
-        <View style={[{marginRight:20}]}>
+        <View style={[{marginRight:20,padding:10,backgroundColor:'#ffffff'}]}>
           <HeaderGridToggleIcon />
         </View>
        
