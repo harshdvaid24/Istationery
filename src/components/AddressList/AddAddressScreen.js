@@ -399,7 +399,7 @@ const clearInput = () => {
 AddAddress['navigationOptions'] = screenProps => ({
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {screenProps.navigation.goBack() }}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_ADDRESS_PATH)}}
       >
       <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
