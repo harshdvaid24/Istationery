@@ -21,13 +21,14 @@ import {
 } from 'react-native';
 import {getAddress, deleteAddress} from '../../actions';
 import { translate } from '../../i18n';
+import {MAGENTO_ADD_ADDRESS_SUCCESS} from '../../actions/types'
 
 import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle from '../../utils/GlobalStyles';
 import styles from './styles';
 import { AddressItem } from './AddressItem';
-import {ADD_ADDRESS_PATH} from '../../navigation/routes'
+import {ADD_ADDRESS_PATH,NAVIGATION_ACCOUNT_PATH} from '../../navigation/routes'
 import {Spinner} from '../common'
 
 const AddressListScreen = props => {
@@ -40,7 +41,8 @@ const AddressList = useSelector(state=>state.account.address)
 const Loading = useSelector(state=>state.account.loading);
 const error = useSelector(state=>state.account.deleteError)
 useEffect(() => {
-  dispatch(getAddress(customer.id))
+  dispatch(getAddress(customer.id));
+  dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
 },[])
   // const [AddressListItems, setAddressListItems] = useState(AddressList)
   
@@ -133,7 +135,7 @@ useEffect(() => {
 AddressListScreen.navigationOptions = screenProps => ({
           headerLeft: () => (
             <TouchableOpacity
-              onPress={() => {screenProps.navigation.goBack() }}
+              onPress={() => {screenProps.navigation.navigate(NAVIGATION_ACCOUNT_PATH) }}
               >
               <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
               </TouchableOpacity>

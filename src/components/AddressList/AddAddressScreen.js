@@ -22,7 +22,7 @@ import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import { ThemeContext } from '../../theme';
-import {NAVIGATION_ADDRESS_SCREEN_PATH} from '../../navigation/routes'
+import {NAVIGATION_ADDRESS_SCREEN_PATH,NAVIGATION_ADDRESS_PATH} from '../../navigation/routes'
 import country from '../../utils/Country.json';
 import ModalSelector from 'react-native-modal-selector';
 const AddAddress = ({navigation}) => {
@@ -374,7 +374,7 @@ const clearInput = () => {
 AddAddress['navigationOptions'] = screenProps => ({
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {screenProps.navigation.goBack() }}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_ADDRESS_PATH)}}
       >
       <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
