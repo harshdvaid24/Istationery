@@ -127,6 +127,7 @@ export const MAGENTO_DELETE_ADDRESS_ERROR = 'magento_delete-address_error';
 export const MAGENTO_GET_ADDRESS_LIST_ERROR = 'magento_get_address_list_error';
 export const MAGENTO_ADD_ADDRESS_ERROR = 'magento_add_address_error'; 
 export const MAGENTO_ADD_ADDRESS_SUCCESS = 'magento_add_address_success'; 
+export const MAGENTO_ADD_ADDRESS_SUCCESS_CLEAR = 'magento_add_address_success_clear'; 
 
 /**
  * GET ORDERS LOADING

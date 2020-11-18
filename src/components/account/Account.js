@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../common';
 import { logout, currentCustomer,wishListItem,getOrdersForCustomer } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
-   NAVIGATION_ADDRESS_SCREEN_PATH,
+  NAVIGATION_ADDRESS_PATH,
    NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -103,7 +103,7 @@ const Account = ({
   };
 
   const openAddAddress = () => {
-    navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
+    navigation.navigate(NAVIGATION_ADDRESS_PATH);
   };
 
   const openResetPassword = () =>{

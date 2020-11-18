@@ -22,7 +22,7 @@ import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
 import GlobalStyle from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import { ThemeContext } from '../../theme';
-import {NAVIGATION_ADDRESS_SCREEN_PATH} from '../../navigation/routes'
+import {NAVIGATION_ADDRESS_PATH} from '../../navigation/routes'
 import country from '../../utils/Country.json';
 import ModalSelector from 'react-native-modal-selector';
 const AddAddress = ({navigation}) => {
@@ -35,18 +35,41 @@ const theme = useContext(ThemeContext);
 const customer = useSelector(state=>state.account.customer)
 const success = useSelector(state=>state.account.success);
 const loading = useSelector(state=>state.account.loading)
-const addressDetails = navigation.state.params?navigation.state.params.address:null;
+const addressDetails = (navigation.state.params&&navigation.state.params.isAdd!=true)?navigation.state.params.address:null;
+
+const isAdd = (navigation.state.params)?navigation.state.params.isAdd:false;
  
+
+console.log("addressDetails:",addressDetails);
+console.log("isAdd:",isAdd);
 
  useEffect(() => {
   console.log("use effect:sucess:",success);
+  console.log("use effect:addressDetails:",addressDetails);
+  if(isAdd)
+  {
+    clearInput();
+  }
   if(success)
   {
     clearInput();
+    console.log("customer.id:",customer.id);
     dispatch(getAddress(customer.id));
-    navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
+    navigation.navigate(NAVIGATION_ADDRESS_PATH);
   }
-}, [success]);
+  else{
+    setAddressId(addressDetails?addressDetails.address_id:'');
+    setfirstName(addressDetails?addressDetails.firstname:'');
+    setlastName(addressDetails?addressDetails.lastname:'');
+    setcity(addressDetails?addressDetails.city:'');
+    setstreet(addressDetails?addressDetails.street:'');
+    settelephone(addressDetails?addressDetails.phone:'');
+    setpostcode(addressDetails?addressDetails.pincode:'');
+    setregion(addressDetails?addressDetails.region:'');
+    setcountryName(addressDetails?addressDetails.country:'Bahrain');
+    setcountryCode(addressDetails?selectedCoountryCode:'BH');
+  }
+}, [success,addressDetails,isAdd]);
 
 const clearInput = () => {
   setAddressId('');
@@ -59,6 +82,8 @@ const clearInput = () => {
   setregion('');
   setcountryName('Bahrain');
   setcountryCode('BH');
+
+  
 }
  const [address_id, setAddressId] = useState(addressDetails?addressDetails.address_id:'');
     const [firstName, setfirstName] = useState(addressDetails?addressDetails.firstname:'');
@@ -195,7 +220,7 @@ const clearInput = () => {
 
     // if(success)
     // {
-    //   navigation.navigate(NAVIGATION_ADDRESS_SCREEN_PATH);
+    //   navigation.navigate(NAVIGATION_ADDRESS_PATH);
     // }
     if (loading) {
       return <Spinner />;
@@ -399,7 +424,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       paddingHorizontal:W(20),
        paddingTop: H(10),
-       paddingBottom:H(30)
+       paddingBottom:H(10)
     },
     loginContainer :theme => ({
       flex: 1,

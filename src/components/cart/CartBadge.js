@@ -22,7 +22,7 @@ const CartBadge = ({
         {isActive?
           <Image style={[CommonStyle.Icon25]}  source={require('../../../resources/icons/Cart_c.png')} />
         :
-        <Image style={[CommonStyle.Icon25]}  source={require('../../../resources/icons/cart.png')} />
+        <Image style={[CommonStyle.Icon25]}  source={require('../../../resources/icons/Cart.png')} />
         }
         </View>
       )}

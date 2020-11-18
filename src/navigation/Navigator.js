@@ -129,7 +129,7 @@ const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ADDRESS_PATH]:AddressScreen,
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
-  [routes.NAVIGATION_ADDRESS_SCREEN_PATH]: AddressScreen,
+  [routes.ADD_ADDRESS_PATH]: AddAddressScreen,
 }, {
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions

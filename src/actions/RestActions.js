@@ -779,6 +779,7 @@ const addressListLoadingEnd = (dispatch)=>{
 }
 
 export const getAddress = (id) => async(dispatch) =>{
+  dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
   addressListLoading(dispatch)
   const parameters = {parameters:{customer_id:id}}
   magento.customer.getCustomerAddress(parameters).then((data)=>{
@@ -846,6 +847,12 @@ export const addAddress = (userDetail) => {
 
 }
 
+export const clearEditAddress = () => {
+  console.log("clearEditAddress");
+  return async dispatch => {
+    dispatch({type:MAGENTO_ADD_ADDRESS_SUCCESS , payload:false})
+  }
+}
 // export const addAddress = (userDetail) => async (dispatch) => {
 //   // console.log(userDetail);  
 //   try {

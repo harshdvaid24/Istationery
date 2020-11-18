@@ -19,7 +19,7 @@ import {
   PermissionsAndroid,
   NativeModules,
 } from 'react-native';
-import {getAddress, deleteAddress} from '../../actions';
+import {getAddress, deleteAddress,clearEditAddress} from '../../actions';
 import { translate } from '../../i18n';
 
 import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
@@ -40,7 +40,8 @@ const AddressList = useSelector(state=>state.account.address)
 const Loading = useSelector(state=>state.account.loading);
 const error = useSelector(state=>state.account.deleteError)
 useEffect(() => {
-  dispatch(getAddress(customer.id))
+  dispatch(getAddress(customer.id));
+  dispatch(clearEditAddress());
 },[])
   // const [AddressListItems, setAddressListItems] = useState(AddressList)
   
@@ -49,7 +50,7 @@ useEffect(() => {
  
  
  
-  const onRemove =(optionId) => {
+  const onRemove = (optionId) => {
     dispatch(deleteAddress(customer.id,optionId));
     if(error)
     {
@@ -128,9 +129,10 @@ useEffect(() => {
   );
         }
   return renderEmptyAddressList();
-
+  
         }
 AddressListScreen.navigationOptions = screenProps => ({
+  
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {screenProps.navigation.goBack() }}
@@ -141,7 +143,10 @@ AddressListScreen.navigationOptions = screenProps => ({
           headerRight: () => (
             <TouchableOpacity
               style={[CommonStyle.paddingLR20,CommonStyle.paddingTB20]}
-              onPress={() => {screenProps.navigation.navigate(ADD_ADDRESS_PATH) }}
+              onPress={() => {
+                screenProps.navigation.setParams({address: null}),
+                screenProps.navigation.navigate(ADD_ADDRESS_PATH,{isAdd:true}) 
+                }}
               >
                   <Text style={[CommonStyle.lPrimarySemiBold]}>Add</Text>
               </TouchableOpacity>
