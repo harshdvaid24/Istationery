@@ -170,7 +170,7 @@ export const ProductScreen = props => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'istationery | https://www.istationery.com',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

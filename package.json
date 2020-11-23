@@ -39,6 +39,7 @@
 				"react-native-safe-area-context": "^0.7.3",
 				"react-native-safe-area-view": "^2.0.0",
 				"react-native-screens": "^2.13.0",
+				"react-native-share": "^4.1.0",
 				"react-native-simple-radio-button": "^2.7.4",
 				"react-native-splash-screen": "^3.2.0",
 				"react-native-status-bar-height": "^2.5.0",

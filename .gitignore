@@ -64,3 +64,5 @@ src/config/magento.js
 coverage
 
 package-lock.json
+android/app/release/Istationery_beta_0_1.apk
+android/app/release/Istationery_beta_0_2.apk

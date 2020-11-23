@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text } from 'react-native';
+import { View,Text,Platform } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -135,6 +135,7 @@ const styles = {
   containerStyle: theme => ({
     flex: 1,
     backgroundColor: theme.colors.background,
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
   }),
   searchStyle: theme => ({
     backgroundColor: GlobalStyle.colorSet.white,

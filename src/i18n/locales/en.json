@@ -94,7 +94,7 @@
   "cart": {
     "title": "Cart",
     "emptyMessage": "Your cart is empty",
-    "checkoutButton": "Go to Checkout"
+    "checkoutButton": "Checkout"
   },
   "cartListItem": {
     "removeItemDialogTitle": "You sure?",

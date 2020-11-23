@@ -177,14 +177,14 @@ const Account = ({
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity> */}
         <TouchableOpacity onPress={onLogoutPress}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+      style={[CommonStyle.FlexRow,styles.logoutBtn,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/exit.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
                  Logout
                 </Text>
             </View>
-            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+            {/* <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} /> */}
         </TouchableOpacity>
     </View>
   );
@@ -218,10 +218,12 @@ const styles = StyleSheet.create({
     paddingVertical:W(20),
     paddingLeft:W(20),
     paddingRight:W(20),
+    borderColor:GlobalStyles.colorSet.BorderGrey,
+    borderWidth:W(0.5)
   },
   container: theme => ({
-    // flex: 1,
-    backgroundColor: theme.colors.background,
+     flex: 1,
+    backgroundColor: 'white',
     // alignItems: 'center',
     // paddingTop: theme.spacing.large,
   }),
@@ -237,6 +239,11 @@ const styles = StyleSheet.create({
   buttonMargin: theme => ({
     marginTop: theme.spacing.large,
   }),
+  logoutBtn:{
+    position:'absolute',
+    bottom:H(0),
+    width:"100%"
+  }
 });
 
 Account.propTypes = {

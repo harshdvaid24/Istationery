@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { View, Text,StyleSheet, FlatList } from 'react-native';
+import { View, Text,StyleSheet, FlatList,Platform,TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { priceSignByCode } from '../../helper/price';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H} from './../../utils/GlobalStyles'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 const OrderScreen = ({
   products,
@@ -131,7 +131,43 @@ const OrderScreen = ({
 
 OrderScreen.navigationOptions = ({ navigation }) => ({
   title: `${translate('common.order')} # ${navigation.state.params.item.increment_id}`,
+    headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {navigation.goBack() }}
+      >
+      <FastImage style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  headerStyle: {
+    backgroundColor:GlobalStyles.colorSet.white,
+    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+    // height: H(40),
+    height: H(60),
+    elevation: 0,
+     borderWidth:0,
+   borderBottomColor:'transparent',
+  }
 });
+
+// OrderScreen.navigationOptions = (navigation) => ({
+//   title: `${translate('common.order')} # ${navigation.state.params.item.increment_id}`,
+//   headerLeft: () => (
+//     <TouchableOpacity
+//       onPress={() => {props.navigation.goBack() }}
+//       >
+//       <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+//       </TouchableOpacity>
+//   ),
+//   headerStyle: {
+//     backgroundColor:GlobalStyles.colorSet.white,
+//     marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
+//     // height: H(40),
+//     height: H(60),
+//     elevation: 0,
+//      borderWidth:0,
+//    borderBottomColor:'transparent',
+//   }
+// });
 
 const styles = StyleSheet.create({
   container: theme => ({

@@ -82,7 +82,7 @@ const CartListItem = ({
             >
               <View style={styles.iconWrapper(theme)}>
               <Image
-                style={CommonStyle.Icon30} 
+                style={CommonStyle.Icon20} 
                 source={require('../../../resources/icons/remove.png')}
               />
               </View>
