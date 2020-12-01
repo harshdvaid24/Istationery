@@ -14,12 +14,12 @@ import {
 import { ProductList, HeaderGridToggleIcon } from '../common';
 import NavigationService from '../../navigation/NavigationService';
 import {
-  NAVIGATION_HOME_PRODUCT_PATH,
+  NAVIGATION_HOME_PRODUCT_PATH,NAVIGATION_SEARCH_SCREEN_PATH
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
-
+import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 const Category = ({
   canLoadMoreContent,
@@ -100,17 +100,33 @@ console.log("height:",WINDOW_HEIGHT);
   );
 };
 
-Category.navigationOptions = ({ navigation }) => ({
-  title: navigation.state.params.title.toUpperCase(),
-  headerTitle: ' ',
+Category['navigationOptions'] = screenProps => ({
+  title:screenProps.navigation?.state?.params.title,
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {navigation.goBack() }}
+      onPress={() => {screenProps.navigation.goBack() }}
       >
-      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-  headerRight: (<HeaderGridToggleIcon />),
+  title:screenProps.navigation?.state?.params.title ,
+  headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyle.colorSet.btnPrimary} />
+    </TouchableOpacity>
+    </View>
+  ),
   headerStyle: {
     backgroundColor:'white',
     marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
@@ -126,6 +142,11 @@ const styles = {
     flex: 1,
     backgroundColor: theme.colors.background,
   }),
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
+  },
+  
 };
 
 Category.propTypes = {

@@ -40,6 +40,7 @@ const _colorSet = {
   bgBlack: '#202023',
   grey: '#9392a7',
   LightGrey: '#757575',
+  iconGrey:'#858585',
   BorderGrey: '#e5e5e5',
 };
 

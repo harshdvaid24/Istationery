@@ -882,6 +882,7 @@ width100p:{width:'100%'},
   marginTop30: { marginTop: W(30) },
   marginTop40: { marginTop: W(40) },
   marginTop50: { marginTop: W(50) },
+  marginTop55: { marginTop: W(55) },
   marginTop60: { marginTop: H(60) },
 
   marginTop15: { marginTop: W(15) },

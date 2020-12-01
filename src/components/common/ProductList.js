@@ -14,6 +14,8 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { W ,H} from '../../utils/GlobalStyles';
 import  CommonStyle from './../../utils/CommonStyle';
+import GlobalStyle,{StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import { HeaderGridToggleIcon } from '../common';
 const COLUMN_COUNT = 2;
 
 const sortData = [
@@ -79,16 +81,16 @@ const ProductList = ({
   );
 
   const renderHeader = () => (
-    <View style={styles.headerContainerStyle(theme)}>
+    <View style={styles.headerContainerStyle}>
       <ModalSelector
-        style={styles.iconWrapper(theme)}
+        style={[styles.iconWrapper(theme)]}
         data={sortData}
         ref={(component) => { selector.current = component; }}
         customSelector={(
           <TouchableOpacity
-            style={styles.iconWrapper(theme)}
+            style={[styles.shortButton]}
             onPress={() => selector.current.open()}>
-            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/sort.png")} />
+            <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/sort.png")} />
          
            <View style={[styles.textContainer]}>
               <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
@@ -100,13 +102,19 @@ const ProductList = ({
       />
       {/* <View style={styles.separator(theme)} /> */}
       <TouchableOpacity
-        style={styles.iconWrapper(theme)}
+        style={[styles.iconWrapper(theme)]}
         onPress={() => navigation.toggleFilterDrawer()}>
-        <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/filter.png")} />
+        <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/filter.png")} />
         <View style={[styles.textContainer]}>
               <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
            </View>
       </TouchableOpacity>
+          <View style={[styles.ViewChange]}>
+            <HeaderGridToggleIcon />
+            <Text style={[CommonStyle.mGreySemiBold]}>
+              View
+            </Text>
+          </View>
     </View>
   );
 
@@ -127,19 +135,26 @@ const ProductList = ({
 
     if (products.length) {
       return (
-        <FlatList
-          refreshControl={refreshControl}
-          data={products}
-          renderItem={gridColumnsValue ? renderItemRow : renderItemColumn}
-          keyExtractor={(item, index) => index.toString()}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.1}
-          ListHeaderComponent={renderHeader}
-          ListFooterComponent={renderFooter}
-          numColumns={gridColumnsValue ? 1 : 2}
-          key={(gridColumnsValue) ? 'ONE COLUMN' : 'TWO COLUMNS'}
-          ItemSeparatorComponent={renderItemSeparator}
-        />
+        <View>
+          {renderHeader()}
+          <View style={[CommonStyle.marginTop55]}>
+              <FlatList
+              refreshControl={refreshControl}
+              data={products}
+              renderItem={gridColumnsValue ? renderItemRow : renderItemColumn}
+              keyExtractor={(item, index) => index.toString()}
+              onEndReached={onEndReached}
+              onEndReachedThreshold={0.1}
+              // ListHeaderComponent={renderHeader}
+              ListFooterComponent={renderFooter}
+              numColumns={gridColumnsValue ? 1 : 2}
+              key={(gridColumnsValue) ? 'ONE COLUMN' : 'TWO COLUMNS'}
+              ItemSeparatorComponent={renderItemSeparator}
+            />
+          </View>
+          
+        </View>
+       
       );
     }
     if (!searchIndicator) {
@@ -192,27 +207,44 @@ const styles = StyleSheet.create({
   columnContainerStyle: {
     flexDirection: 'column',
   },
-  headerContainerStyle: theme => ({
+  headerContainerStyle:{
+    position:'absolute',
     flex: 1,
-    backgroundColor:theme.colors.white,
+    backgroundColor:GlobalStyle.colorSet.white,
     flexDirection: 'row',
     //  alignItems: 'stretch',
      justifyContent: 'space-between',
-    // borderBottomWidth: 1,
-    borderBottomColor: theme.colors.bodyText,
-  }),
-  
+    //  borderBottomWidth: 0.3,
+    //  borderBottomColor:GlobalStyle.colorSet.LightGrey,
+  },
+  shortButton: {
+    // flex: 1,
+    height: H(32),
+    // backgroundColor:'green',
+    width:'1000%',
+    //  borderWidth:1,
+     paddingVertical:W(25),
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   iconWrapper: theme => ({
     // flex: 1,
     height: H(32),
     // backgroundColor:'green',
-    width:'50%',
+    width:'33%',
     //  borderWidth:1,
      paddingVertical:W(25),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   }),
+    ViewChange:{
+    width:'33%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerTextStyle: theme => ({
     textTransform: 'uppercase',
     color:theme.colors.black,

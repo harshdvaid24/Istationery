@@ -98,9 +98,11 @@ export const ProductScreen = props => {
       return <Spinner />;
     }
     return (
-      <Button style={styles.buttonStyle(theme)} disabled={!currentProduct.stocks} onPress={onPressAddToCart}>
+      <View style={[styles.addTocartSection]}>
+       <Button style={[styles.buttonStyle]} disabled={!currentProduct.stocks} onPress={onPressAddToCart}>
         {translate('product.addToCartButton')}
       </Button>
+      </View>
     );
   };
 
@@ -187,7 +189,8 @@ export const ProductScreen = props => {
   };
 
   return (
-    <ScrollView style={styles.container(theme)}>
+    <View style={styles.container(theme)}>
+    <ScrollView >
        <StatusBar
                   translucent
                   backgroundColor="transparent"
@@ -197,9 +200,9 @@ export const ProductScreen = props => {
         product={product}
         selectedProductSku={selectedProduct?.sku}
       />
-      <Text type="heading" bold style={styles.textStyle(theme)}>
+      {/* <Text type="heading" bold style={styles.textStyle(theme)}>
         {product.name}
-      </Text>
+      </Text> */}
       
      
       <View style={styles.qtyAddCartContanier}>
@@ -256,10 +259,8 @@ export const ProductScreen = props => {
       
       
       </View>
-      <View style={styles.stockcontainer}>
-
-     
-      </View>
+      {/* <View style={styles.stockcontainer}>
+      </View> */}
       <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
       <ProductOptions
         product={product}
@@ -267,7 +268,7 @@ export const ProductScreen = props => {
         setSelectedProduct={setSelectedProduct}
       />
       </View>
-      {renderAddToCartButton()}
+     
 
      
 
@@ -315,8 +316,11 @@ export const ProductScreen = props => {
         navigation={props.navigation}
       />
 
-
+    
+   
     </ScrollView>
+    {renderAddToCartButton()}
+    </View>
   );
 
   
@@ -330,16 +334,17 @@ ProductScreen['navigationOptions'] = screenProps => ({
       <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
+  title:screenProps.navigation?.state?.params.title ,
   headerRight: () => (
     <View style={[styles.headerRight]}>
     <TouchableOpacity
-      style={[CommonStyle.paddingLR20]}
+      style={[CommonStyle.paddingLR10]}
       onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
       >
       <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
     </TouchableOpacity>
     <TouchableOpacity
-      style={[CommonStyle.paddingLR20]}
+      style={[CommonStyle.paddingLR10]}
       onPress={() => {screenProps.navigation.navigate('Cart') }}
       >
 
@@ -347,7 +352,6 @@ ProductScreen['navigationOptions'] = screenProps => ({
     </TouchableOpacity>
     </View>
   ),
-  headerBackTitle: ' ',
   headerStyle: {
     backgroundColor:GlobalStyle.colorSet.white,
     marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
@@ -361,7 +365,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
 
 const styles = StyleSheet.create({
   container: theme => ({
-    flex: 1,
+    // flex: 1,
     backgroundColor: GlobalStyle.colorSet.white,
   }),
   textStyle: theme => ({
@@ -386,11 +390,20 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // marginBottom: theme.spacing.extraLarge,
   }),
-  buttonStyle: theme => ({
+  buttonStyle: {
+    width:"90%",
     alignSelf: 'center',
-    marginTop: 20,
-    width: theme.dimens.WINDOW_WIDTH * 0.9,
-  }),
+  },
+  addTocartSection:{
+    height:H(60),
+    paddingBottom:H(10),
+    justifyContent:'center',
+    alignItems:'center',
+    position:'absolute',
+    backgroundColor:GlobalStyle.colorSet.white,
+    bottom:H(0),
+    width:"100%"
+  },
   modalStyle: theme => ({
     alignSelf: 'center',
     width: theme.dimens.WINDOW_WIDTH * 0.9,
@@ -494,7 +507,9 @@ shareContainer:{
 headerRight:{
   flexDirection:'row',
   alignItems:'center'
-}
+},
+
+
 
 });
 
