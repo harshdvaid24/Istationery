@@ -8,7 +8,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { DrawerActions } from 'react-navigation-drawer';
 
-import {View ,Image,StyleSheet} from 'react-native'
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import { Transition } from 'react-native-reanimated';
+import {View ,Image,StyleSheet,Text, TouchableOpacity} from 'react-native'
 import CommonStyle from '../utils/CommonStyle'
 
 import { Icon } from 'react-native-elements';
@@ -45,6 +47,7 @@ import * as routes from './routes';
 
 import { theme } from '../theme';
 import { ProductScreen } from '../components/catalog/ProductScreen';
+import { H,W } from '../utils/GlobalStyles';
 
 
 const defaultHeader = {
@@ -90,10 +93,10 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -112,10 +115,10 @@ const AuthStack = createStackNavigator({
 AuthStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -138,10 +141,10 @@ const AccountStack = createStackNavigator({
 AccountStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -165,10 +168,10 @@ const SearchStack = createStackNavigator({
 SearchStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -186,10 +189,30 @@ const CartStack = createStackNavigator({
 CartStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
+
+const WishlistStack = createStackNavigator({
+  [routes.NAVIGATION_WISHLIST_PATH]: WishlistScreen,
+}, {
+  navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+});
+
+CartStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -211,43 +234,77 @@ const MainAppNavigator = createBottomTabNavigator(
           {
             imagePath=require('../../resources/icons/Home.png')
           }
-          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+          return(<View style={[styles.IconWrapper,CommonStyle.marginLR10]}>
+                <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+                    <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+                      Home
+                    </Text>
+          </View>)
         },
       }),
     },
-    [routes.NAVIGATION_SEARCH_SCREEN_PATH]: {
-      screen: SearchStack,
+    // [routes.NAVIGATION_SEARCH_SCREEN_PATH]: {
+    //   screen: SearchStack,
+    //   navigationOptions: () => ({
+    //     tabBarIcon: ({ tintColor,focused }) => {
+    //       let imagePath = null;
+    //       if(focused)
+    //       {
+    //         imagePath=require('../../resources/icons/Search_c.png')
+    //       }
+    //       else 
+    //       {
+    //         imagePath=require('../../resources/icons/Search.png')
+    //       }
+    //       return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/></View>)
+    //     },
+    //   }),
+    // },
+   
+    
+    [routes.NAVIGATION_CART_PATH]: {
+      screen: CartStack,
+      navigationOptions: (props) => ({
+       
+        tabBarIcon: ({ tintColor,focused }) => {
+          let imagePath = null;
+          if(focused)
+          {
+            imagePath=require('../../resources/icons/Bottom/wishlist_selected.png')
+          }
+          else 
+          {
+            imagePath=require('../../resources/icons/Bottom/category2.png')
+          }
+          return(<TouchableOpacity onPress={()=> props.navigation.openDrawer()} style={[styles.IconWrapper,CommonStyle.paddingLR10]}>
+              <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+              <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+                      Categories
+                    </Text>
+            </TouchableOpacity>)},
+      }),
+     
+    },
+    [routes.NAVIGATION_WISHLIST_PATH]: {
+      screen: WishlistStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor,focused }) => {
           let imagePath = null;
           if(focused)
           {
-            imagePath=require('../../resources/icons/Search_c.png')
+            imagePath=require('../../resources/icons/Bottom/wishlist_selected.png')
           }
           else 
           {
-            imagePath=require('../../resources/icons/Search.png')
+            imagePath=require('../../resources/icons/Bottom/wishlist.png')
           }
-          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+          return(<View style={styles.IconWrapper}>
+              <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+              <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+                      Wishlist
+              </Text>
+            </View>)
         },
-      }),
-    },
-   
-    
-    [routes.NAVIGATION_CART_PATH]: {
-      screen: CartStack,
-      navigationOptions: () => ({
-        tabBarIcon: ({ tintColor,focused }) => {
-          let isFocused = null
-          if(focused)
-          {
-            isFocused = true;
-          }
-          else
-        {
-          isFocused = false
-        }
-          return(<CartBadge isActive={isFocused} color={tintColor} />)},
       }),
     },
     [routes.NAVIGATION_AUTH_STACK_PATH]: {
@@ -263,7 +320,12 @@ const MainAppNavigator = createBottomTabNavigator(
           {
             imagePath=require('../../resources/icons/Profile.png')
           }
-          return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon25} source={imagePath} resizeMode='contain'/></View>)
+          return(<View style={[styles.IconWrapper]}>
+                  <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+                  <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+                      My Account
+                    </Text>
+              </View>)
         },
       }),
     }
@@ -271,6 +333,13 @@ const MainAppNavigator = createBottomTabNavigator(
   {
     // initialRouteName: NAVIGATION_AUTH_STACK_PATH,
     tabBarOptions: {
+        tabStyle: {
+            // height:H(100),
+          // width:W(10),
+          // paddingTop: 10,
+          paddingHorizontal: 0,
+        },
+        
       showLabel: false,
       activeTintColor: theme.colors.secondary,
       inactiveTintColor: theme.colors.tabBarIconInactive,
@@ -326,10 +395,10 @@ const Nav = createStackNavigator({
 Nav.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-    drawerLockMode = 'locked-closed';
-  }
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
   return {
     tabBarVisible,
     drawerLockMode,
@@ -338,8 +407,11 @@ Nav.navigationOptions = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   IconWrapper:{
-    marginTop: 5,
-    marginRight: 12
+     paddingTop: H(10),
+    // marginHorizontal:W(10),
+    justifyContent:'center',
+    alignItems:'center'
+
   }
 })
 

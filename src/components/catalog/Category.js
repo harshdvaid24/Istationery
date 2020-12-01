@@ -113,7 +113,7 @@ Category.navigationOptions = ({ navigation }) => ({
   headerRight: (<HeaderGridToggleIcon />),
   headerStyle: {
     backgroundColor:'white',
-    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : H(StatusbarHeight),
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
     height: H(40),
     elevation: 0,
      borderWidth:0,

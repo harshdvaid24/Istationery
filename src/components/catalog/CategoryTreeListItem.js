@@ -32,7 +32,9 @@ const CategoryTreeListItem = (props) => {
   const onExpandPress = () => setExpanded(!expanded);
 
   const onRowPress = () => {
+   
     const { category } = props;
+    console.log("category:",category);
     dispatch(resetFilters());
     dispatch(setCurrentCategory({ category }));
     NavigationService.navigate(NAVIGATION_CATEGORY_PATH, {

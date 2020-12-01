@@ -1011,6 +1011,11 @@ xlPrimaryRegular:{
 
 
 // grey
+xsGreyRegular:{
+  fontSize: W(10),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.LightGrey,
+},
 sGreyRegular:{
   fontSize: W(12),
   fontFamily: GlobalStyle.fontSet.Regular,
@@ -1068,6 +1073,11 @@ xlBlackSemiBold:{
 
 
 // primary
+xsPrimarySemiBold:{
+  fontSize: W(10),
+  fontFamily: GlobalStyle.fontSet.SemiBold,
+  color: GlobalStyle.colorSet.btnPrimary,
+},
 sPrimarySemiBold:{
   fontSize: W(12),
   fontFamily: GlobalStyle.fontSet.SemiBold,

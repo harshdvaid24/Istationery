@@ -205,7 +205,7 @@ Account.navigationOptions = {
 const styles = StyleSheet.create({
   HeaderContainer:  {
     backgroundColor: GlobalStyles.colorSet.white,
-    paddingVertical:W(10),
+    paddingVertical:W(10),  
   },
   HeaderNameContainer:  {
     backgroundColor: GlobalStyles.colorSet.white,

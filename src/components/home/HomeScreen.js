@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Platform,
   ScrollView, View, StyleSheet,StatusBar, RefreshControl,
+  TouchableOpacity,Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
@@ -19,16 +20,20 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import  CommonStyle from './../../utils/CommonStyle';
 import  GlobalStyles,{H,W,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles';
-
+import CartBadge from '../../components/cart/CartBadge';
+import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
 import FastImage from 'react-native-fast-image';
 const LogoTitle = ( ) => {
   return(
-  <View style={[{flex:1}]}>
+  <View style={[CommonStyle.width100p]}>
+    <View style={[CommonStyle.width45p]}>
     <FastImage
           style={{height:H(45),width:"100%"}}
           resizeMode="contain"
           source={require('./../../../resources/icons/logo.png')}
         />
+    </View>
+    
   </View>
   )
   
@@ -48,8 +53,22 @@ class HomeScreen extends Component {
           </MaterialHeaderButtons>
       </View>
     ),
-    //  headerRight: <CurrencyPicker />,
-     headerRight: <View />,
+     headerRight:(  
+      <View style={[styles.headerRight]}>
+      <TouchableOpacity
+        style={[CommonStyle.paddingLR10]}
+        onPress={() => {navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+        >
+        <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[CommonStyle.paddingLR10]}
+        onPress={() => {navigation.navigate('Cart') }}
+        >
+  
+        <CartBadge color={GlobalStyles.colorSet.btnPrimary} />
+      </TouchableOpacity>
+      </View>),
     headerStyle: {
       backgroundColor:'white',
       // marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(StatusbarHeight):0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
@@ -162,6 +181,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
+  }
 });
 
 HomeScreen.propTypes = {
