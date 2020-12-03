@@ -9,6 +9,11 @@ import {
 
 const INITIAL_STATE = {
   slider: [],
+  category_block_1:[],
+  extra_info_block1:[],
+  promotional_block1:[],
+  category_block_2:[],
+  brand_block:[],
   featuredProducts: {},
   refreshing: false,
 };

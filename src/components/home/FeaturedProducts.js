@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { Text } from '../common';
+import { View, StyleSheet, FlatList,Text } from 'react-native';
 import FeaturedProductItem from './FeaturedProductItem';
 import { ThemeContext } from '../../theme';
 import  CommonStyle from './../../utils/CommonStyle';
@@ -21,7 +20,7 @@ const FeaturedProducts = ({
 
   return (
     <View style={[styles.container(theme), style]}>
-      <Text type="heading" style={styles.title(theme)}>
+        <Text style={[CommonStyle.xlBlackSemiBold,CommonStyle.marginLR20,CommonStyle.marginTB10]}>
         {title}
       </Text>
       <FlatList

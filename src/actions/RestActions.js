@@ -150,7 +150,7 @@ export const getHomeData = refreshing => async (dispatch) => {
       return;
     }
     logError(value);
-    console.log("getHomeData value:",value);
+
     const payload = JSON.parse(value.content.replace(/<\/?[^>]+(>|$)/g, ''));
     console.log("getHomeData payload:",payload);
     dispatch({ type: HOME_SCREEN_DATA, payload });

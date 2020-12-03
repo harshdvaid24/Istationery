@@ -190,7 +190,7 @@ class Cart extends Component {
       <View style={container(theme)}>
           <StatusBar
                   translucent
-                  backgroundColor="transparent"
+                  backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
 

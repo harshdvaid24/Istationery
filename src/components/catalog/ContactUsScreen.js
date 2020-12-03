@@ -58,7 +58,7 @@ export const ContactUsScreen = props => {
         }}>
        <StatusBar
                   translucent
-                  backgroundColor="transparent"
+                  backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
     

@@ -193,7 +193,7 @@ export const ProductScreen = props => {
     <ScrollView >
        <StatusBar
                   translucent
-                  backgroundColor="transparent"
+                  backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
       <ProductMediaContainer
@@ -367,6 +367,7 @@ const styles = StyleSheet.create({
   container: theme => ({
     // flex: 1,
     backgroundColor: GlobalStyle.colorSet.white,
+    paddingBottom:H(50)
   }),
   textStyle: theme => ({
     color:theme.colors.black,

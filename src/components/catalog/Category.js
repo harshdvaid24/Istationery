@@ -45,6 +45,7 @@ console.log("height:",WINDOW_HEIGHT);
 
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
+    console.log(" _getProductsForCategoryOrChild:category:",category);
     _getProductsForCategoryOrChild(category);
   }, []);
 
@@ -101,7 +102,6 @@ console.log("height:",WINDOW_HEIGHT);
 };
 
 Category['navigationOptions'] = screenProps => ({
-  title:screenProps.navigation?.state?.params.title,
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {screenProps.navigation.goBack() }}

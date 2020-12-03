@@ -12,7 +12,15 @@ import {
   NAVIGATION_HOME_PRODUCT_PATH,
 } from '../../navigation/routes';
 import { getHomeData, setCurrentProduct } from '../../actions';
+
+
 import HomeSlider from './HomeSlider';
+import Banners from './Banners';
+import SmallOffers from './SmallOffers';
+import Discounts from './Discounts';
+import Categories from './Categories';
+import BrandsSlider from './BrandsSlider';
+
 import CurrencyPicker from './CurrencyPicker';
 import FeaturedProducts from './FeaturedProducts';
 import NavigationService from '../../navigation/NavigationService';
@@ -132,7 +140,7 @@ class HomeScreen extends Component {
 
   render() {
     const theme = this.context;
-
+    console.log("this.props.brand_block:",this.props.brand_block);
     if (this.props.errorMessage) {
       return (
         <View style={styles.errorContainer}>
@@ -156,12 +164,30 @@ class HomeScreen extends Component {
       
          <StatusBar
                   translucent
-                  backgroundColor="transparent"
+                  backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
         <HomeSlider slider={this.props.slider} />
+        <Banners slider={this.props.category_block_1} />
+        
+
+        <View  style={[CommonStyle.marginTop20]} />
+        <View  style={[CommonStyle.marginTop20]} />
+        <Categories slider={this.props.category_block_2} />
+
+       
+        <Discounts slider={this.props.promotional_block1} />
+
+      
+       
+
+
         {this.renderFeatured()}
-          
+        <View  style={[CommonStyle.marginTop20]} />
+        <SmallOffers slider={this.props.extra_info_block1} />
+     
+        <View  style={[CommonStyle.marginTop10]} />
+        <BrandsSlider slider={this.props.brand_block} />
       </ScrollView>
     );
   }
@@ -170,11 +196,11 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: theme => ({
     flex: 1,
-    paddingBottom:20,
+    paddingBottom:H(10),
     backgroundColor: theme.colors.background,
   }),
   Contentcontainer: theme => ({
-    paddingBottom:20,
+    paddingBottom:H(10),
   }),
   errorContainer: {
     flex: 1,
@@ -189,6 +215,11 @@ const styles = StyleSheet.create({
 
 HomeScreen.propTypes = {
   slider: PropTypes.array,
+  category_block_1:PropTypes.array,
+  extra_info_block1:PropTypes.array,
+  promotional_block1:PropTypes.array,
+  category_block_2:PropTypes.array,
+  brand_block: PropTypes.array,
   getHomeData: PropTypes.func,
   navigation: PropTypes.object,
   featuredProducts: PropTypes.object,
@@ -201,6 +232,11 @@ HomeScreen.propTypes = {
 
 HomeScreen.defaultProps = {
   slider: [],
+  category_block_1:[],
+  extra_info_block1:[],
+  promotional_block1:[],
+  category_block_2:[],
+  brand_block:[]
 };
 
 

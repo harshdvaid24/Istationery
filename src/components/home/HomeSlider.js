@@ -12,7 +12,6 @@ const HomeSlider = ({
   style,
 }) => {
   const theme = useContext(ThemeContext);
-
   const renderMediaItems = () => slider.map((slide, index) => (
     <View key={index} style={styles.slide}>
       <FastImage
