@@ -2,15 +2,22 @@ import React, { Component, useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   View,
+  FlatList,
+  TouchableOpacity,Image,
   StyleSheet,
+  Text
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
   getProductsForCategoryOrChild, addFilterData, getSearchProducts,
 } from '../../actions';
-import { Button, Text, Input } from '../common';
+import { Button, Input } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+
+
 
 const DrawerScreen = (props) => {
   const [maxValue, setMaxValue] = useState('');
@@ -32,7 +39,7 @@ const DrawerScreen = (props) => {
     } else {
       props.getSearchProducts(props.searchInput, null, props.filters.sortOrder, priceFilter);
     }
-    props.navigation.closeDrawer();
+    props.navigation.goBack();
   };
 
   const {
@@ -49,29 +56,59 @@ const DrawerScreen = (props) => {
       <View style={InputContainer(theme)}>
         <Text type="heading" style={textStyle(theme)}>Price:</Text>
         <Input
-          containerStyle={minInputStyle}
+          containerStyle={[minInputStyle,CommonStyle.borderBottomGrey]}
           placeholder={translate('common.min')}
           value={minValue}
-          keyboardType="numeric"
+          keyboardType="number-pad"
           onChangeText={minValue => setMinValue(minValue)}
         />
         <Text style={dashTextStyle(theme)}>-</Text>
         <Input
-          containerStyle={maxInputStyle}
+          containerStyle={[minInputStyle,CommonStyle.borderBottomGrey]}
           value={maxValue}
           placeholder={translate('common.max')}
-          keyboardType="numeric"
+          keyboardType="number-pad"
           onChangeText={maxValue => setMaxValue(maxValue)}
         />
       </View>
       <View style={styles.buttonStyleWrap}>
-        <Button onPress={onApplyPressed} style={styles.buttonStyle}>
-          {translate('common.apply')}
-        </Button>
+        <TouchableOpacity onPress={onApplyPressed} style={CommonStyle.BottomPrimaryColorSaveBtnSection}>
+         <Text style={[CommonStyle.mWhitleSemiBold]}>{translate('common.apply')}</Text> 
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
+
+
+DrawerScreen['navigationOptions'] = screenProps => ({
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.goBack() }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  title:"Filter" ,
+  // headerRight: () => (
+  //   <View style={[styles.headerRight]}>
+  //   <TouchableOpacity
+  //     style={[CommonStyle.paddingLR10]}
+  //     // onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+  //     >
+  //     <Text style={[CommonStyle.mPrimarySemiBold]}>Clear</Text>
+  //   </TouchableOpacity>
+  //   </View>
+  // ),
+  headerStyle: {
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+    height: H(40),
+    elevation: 0,
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  },
+});
 
 const styles = StyleSheet.create({
   container: theme => ({
@@ -87,10 +124,10 @@ const styles = StyleSheet.create({
     paddingVertical: theme.spacing.large,
   }),
   minInputStyle: {
-    width: 50,
+    width: W(100),
   },
   maxInputStyle: {
-    width: 50,
+    width: W(100),
   },
   textStyle: theme => ({
     paddingLeft: 50,
@@ -100,11 +137,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.spacing.large,
   }),
   buttonStyle: {
-    width: '100%',
+    width: '90%',
+
+    backgroundColor:GlobalStyle.colorSet.btnPrimary
   },
   buttonStyleWrap: {
     flex: 1,
+    alignItems:'center',
     justifyContent: 'flex-end',
+  },
+  headerRight:{
+    marginRight:W(20),
+    flexDirection:'row',
+    alignItems:'center'
   },
 });
 

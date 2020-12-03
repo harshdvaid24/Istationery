@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MaterialHeaderButtons, Item } from './Header';
 import { uiProductListTypeGrid } from '../../actions';
+import { TouchableOpacity,Image,Text } from 'react-native';
+import CommonStyle from '../../utils/CommonStyle';
 
 const HeaderGridToggleIcon = () => {
   const dispatch = useDispatch();
@@ -13,9 +15,15 @@ const HeaderGridToggleIcon = () => {
   };
 
   return (
-    <MaterialHeaderButtons>
-      <Item title="Change layout" iconName={isGrid ? 'list' : 'grid-on'} onPress={onPress} />
-    </MaterialHeaderButtons>
+    <TouchableOpacity style={[{height:"100%"},CommonStyle.width100p,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter,CommonStyle.FlexRow]} onPress={onPress}>{
+        (isGrid)?
+       <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/list.png")} />
+     : <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/grid.png")} />
+    }
+        <Text style={[CommonStyle.mGreySemiBold,CommonStyle.marginLR10]}>
+              View
+        </Text>
+    </TouchableOpacity>
   );
 };
 

@@ -81,7 +81,7 @@ const ProductList = ({
   );
 
   const renderHeader = () => (
-    <View style={styles.headerContainerStyle}>
+    <View style={[styles.headerContainerStyle]}>
       <ModalSelector
         style={[styles.iconWrapper(theme)]}
         data={sortData}
@@ -90,10 +90,10 @@ const ProductList = ({
           <TouchableOpacity
             style={[styles.shortButton]}
             onPress={() => selector.current.open()}>
-            <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/sort.png")} />
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/sort.png")} />
          
            <View style={[styles.textContainer]}>
-              <Text style={styles.headerTextStyle(theme)}>{translate('common.sort')}</Text>
+              <Text style={[CommonStyle.mGreySemiBold,CommonStyle.marginLR10]}>{translate('common.sort')}</Text>
            </View>
           
           </TouchableOpacity>
@@ -103,17 +103,14 @@ const ProductList = ({
       {/* <View style={styles.separator(theme)} /> */}
       <TouchableOpacity
         style={[styles.iconWrapper(theme)]}
-        onPress={() => navigation.toggleFilterDrawer()}>
-        <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/filter.png")} />
+        onPress={() => navigation.navigate('Drawer_Screen')}>
+        <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/filter.png")} />
         <View style={[styles.textContainer]}>
-              <Text style={styles.headerTextStyle(theme)}>{translate('common.filter')}</Text>
+              <Text style={[CommonStyle.mGreySemiBold,CommonStyle.marginLR10]}>{translate('common.filter')}</Text>
            </View>
       </TouchableOpacity>
           <View style={[styles.ViewChange]}>
             <HeaderGridToggleIcon />
-            <Text style={[CommonStyle.mGreySemiBold]}>
-              View
-            </Text>
           </View>
     </View>
   );
@@ -227,23 +224,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRightWidth:0.1,
+    borderRightColor:'black'
   },
   iconWrapper: theme => ({
     // flex: 1,
     height: H(32),
     // backgroundColor:'green',
-    width:'33%',
+    width:'33.3%',
     //  borderWidth:1,
      paddingVertical:W(25),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    borderRightWidth:1,
+    borderRightColor:GlobalStyle.colorSet.BorderGrey
   }),
     ViewChange:{
-    width:'33%',
+    width:'33.34%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+   
+
   },
   headerTextStyle: theme => ({
     textTransform: 'uppercase',

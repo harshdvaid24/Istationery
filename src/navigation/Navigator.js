@@ -2,6 +2,7 @@ import React from 'react';
 import {
   createSwitchNavigator,
   createAppContainer,
+  NavigationActions
 } from 'react-navigation';
 import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -81,6 +82,8 @@ const HomeStack = createStackNavigator(
     [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
     [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
+    [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
+    
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
@@ -386,7 +389,20 @@ const Nav = createStackNavigator({
     navigationOptions: defaultHeader,
     defaultNavigationOptions: defaultHeaderOptions
   },
+  
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
+},
+{
+  // getCustomActionCreators: (route, navStateKey) => {
+  //   console.log("route, navStateKe",route, navStateKey);
+  //   console.log("DrawerActions:",DrawerActions);
+  //   console.log("NavigationActions:",NavigationActions);
+  //   return {
+  //     toggleFilterDrawer: () => {
+  //       return DrawerActions.toggleDrawer({key: navStateKey});
+  //     },
+  //   };
+  // },
 },
 {
   headerBackTitleVisible: false,
