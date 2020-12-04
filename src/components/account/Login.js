@@ -22,6 +22,8 @@ import {
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import FastImage from 'react-native-fast-image';
+import {H} from '../../utils/GlobalStyles'
 
 
 
@@ -116,6 +118,14 @@ function Login ({
 
   return (
     <View style={styles.container(theme)}>
+    <View style={{height:'30%',width:'60%',marginTop:H(50),justifyContent:'center',alignItems:'center'}}>
+    <FastImage
+          style={{height:'100%',width:"100%"}}
+          resizeMode="center"
+          source={require('../../../resources/icons/logo.png')}
+        />
+    </View>
+    <View style={styles.container(theme)}>
       <Text style={[styles.Title(theme)]}> Login </Text>
       <Input
         autoCapitalize="none"
@@ -148,6 +158,7 @@ function Login ({
       {renderButtons()}
       {renderMessages()}
     </View>
+    </View>
   );
 };
 
@@ -157,7 +168,7 @@ Login.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    flex: 1,
+    //flex: 1,
     backgroundColor: theme.colors.tabBarBackground,
     alignItems: 'center',
     justifyContent:'center',
