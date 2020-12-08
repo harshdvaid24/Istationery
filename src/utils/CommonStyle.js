@@ -237,6 +237,10 @@ const CommonStyle = StyleSheet.create({
     height: W(40),
     width: W(40),
   },
+  Icon60: {
+    height: W(60),
+    width: W(60),
+  },
   Icon100: {
     height: W(100),
     width: W(100),
@@ -873,6 +877,7 @@ const CommonStyle = StyleSheet.create({
 
 width10p:{width:'10%'},
 width20p:{width:'20%'},
+width25p:{width:'25%'},
 width30p:{width:'30%'},
 width35p:{width:'35%'},
 width40p:{width:'40%'},
@@ -880,6 +885,7 @@ width45p:{width:'45%'},
 width50p:{width:'50%'},
 width60p:{width:'60%'},
 width70p:{width:'70%'},
+width75p:{width:'75%'},
 width80p:{width:'80%'},
 width85p:{width:'85%'},
 width90p:{width:'90%'},
@@ -957,6 +963,8 @@ width100p:{width:'100%'},
   paddingTB40: { paddingTop: W(40), paddingBottom: W(40) },
   paddingTB50: { paddingTop: W(50), paddingBottom: W(50) },
 
+
+  paddingLR5: { paddingLeft: W(5), paddingRight: W(5) },
   paddingLR10: { paddingLeft: W(10), paddingRight: W(10) },
   paddingLR15: { paddingLeft: W(15), paddingRight: W(15) },
   paddingLR20: { paddingLeft: W(20), paddingRight: W(20) },
