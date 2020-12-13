@@ -1,5 +1,6 @@
 export const NAVIGATION_HOME_SCREEN_PATH = 'HomeScreen';
 export const NAVIGATION_CATEGORY_TREE_PATH = 'CategoryTree';
+export const NAVIGATION_CATEGORY_SCREEN_PATH = 'CategoryTreeScreen';
 export const NAVIGATION_CATEGORY_PATH = 'Category';
 export const NAVIGATION_HOME_PRODUCT_PATH = 'Home_Product';
 export const NAVIGATION_SEARCH_PRODUCT_PATH = 'Search_Product';

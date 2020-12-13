@@ -14,11 +14,12 @@ import { Button } from '../common';
 import { logout, currentCustomer,wishListItem,getOrdersForCustomer } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
   NAVIGATION_ADDRESS_PATH,
-   NAVIGATION_RESET_PASSWORD_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
+  NAVIGATION_SEARCH_SCREEN_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyles,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
 const Account = ({
   customer,
@@ -95,7 +96,7 @@ const Account = ({
 
                   <View style={[CommonStyle.marginLR20]}>
                     {/* <Text style={[CommonStyle.lGreyRegular]}>Email : </Text> */}
-                      <Text numberOfLines={1} style={[CommonStyle.lGreyRegular]}>
+                      <Text numberOfLines={1} style={[CommonStyle.sGreyRegular]}>
                         {email}
                       </Text>
                   </View>
@@ -132,7 +133,7 @@ const Account = ({
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
-               <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+               <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                  {translate('account.myOrdersButton')} {`(${orders?orders.length:0})`} 
                 </Text>
             </View>
@@ -142,7 +143,7 @@ const Account = ({
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/coupon.png")} />
-               <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+               <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                   Vouchers
                 </Text>
             </View>
@@ -152,7 +153,7 @@ const Account = ({
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/wishlist.png")} />
-                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+                 <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                   Wishlist
                    {` (${total}) `}
                 </Text>
@@ -185,7 +186,7 @@ const Account = ({
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/orders.png")} />
-                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myOrdersButton')} {`(${orders?orders.length:0})`} 
                 </Text>
             </View>
@@ -198,7 +199,7 @@ const Account = ({
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
-                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myAddressButton')}
                 </Text>
             </View>
@@ -209,7 +210,7 @@ const Account = ({
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
-                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  Contact Us
                 </Text>
             </View>
@@ -221,7 +222,7 @@ const Account = ({
              style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop20,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/exit.png")} />
-                 <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  Logout
                 </Text>
             </View>
@@ -240,22 +241,53 @@ const Account = ({
   );
 };
 
-Account.navigationOptions = {
-  title: translate('account.title'),
+
+Account['navigationOptions'] = screenProps => ({
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => {screenProps.navigation.navigate('Home') }}
+      >
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      </TouchableOpacity>
+  ),
+  title:  translate('account.title').toUpperCase(),
+  headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyles.colorSet.btnPrimary} />
+    </TouchableOpacity>
+    </View>
+  ),
   headerStyle: {
-    backgroundColor:GlobalStyles.colorSet.white,
-    marginTop:Platform.OS === 'ios' ? 0 : H(StatusbarHeight),
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
     height: H(40),
     elevation: 0,
-     borderBottomWidth:0.8,
-     borderBottomColor:GlobalStyles.colorSet.BorderGrey,
-  }
-};
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  },
+
+});
+
 
 const styles = StyleSheet.create({
   HeaderContainer:  {
     backgroundColor: GlobalStyles.colorSet.white,
     paddingVertical:W(10),  
+  },
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
   },
   imageContainer:  {
    justifyContent:"center",
@@ -281,7 +313,7 @@ const styles = StyleSheet.create({
     borderWidth:W(0.5)
   },
   squareContainer:  {
-    height:H(70),
+    height:H(80),
     width:W(120),
     justifyContent:"center",
     alignItems:'center',

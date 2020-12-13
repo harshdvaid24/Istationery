@@ -1027,6 +1027,11 @@ xlPrimaryRegular:{
   fontFamily: GlobalStyle.fontSet.Regular,
   color: GlobalStyle.colorSet.btnPrimary,
 },
+xxlPrimaryRegular:{
+  fontSize: W(26),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.btnPrimary,
+},
 
 
 
@@ -1118,6 +1123,12 @@ lPrimarySemiBold:{
 
 xlPrimarySemiBold:{
   fontSize: W(18),
+  fontFamily: GlobalStyle.fontSet.SemiBold,
+  color: GlobalStyle.colorSet.btnPrimary,
+},
+
+xxlPrimarySemiBold:{
+  fontSize: W(26),
   fontFamily: GlobalStyle.fontSet.SemiBold,
   color: GlobalStyle.colorSet.btnPrimary,
 },

@@ -21,9 +21,14 @@ import {
 import {getWishListProducts, removeWishlistItem,AddToCart, addToCart } from '../../actions'
 import {Spinner} from '../common'
 import { translate } from '../../i18n';
-import { W, H,StatusbarHeight,WINDOW_HEIGHT } from '../../utils/GlobalStyles';
-import CommonStyle from '../../utils/CommonStyle';
-import GlobalStyle from '../../utils/GlobalStyles';
+import CartBadge from '../../components/cart/CartBadge';
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+
+import {
+  NAVIGATION_SEARCH_SCREEN_PATH
+} from '../../navigation/routes';
+
  import styles from './styles';
 import { WishlistItem } from './WishlistItem';
 import PropTypes from 'prop-types';
@@ -152,23 +157,42 @@ const loading = useSelector(state => state.wishlist.loading);
 WishlistScreen['navigationOptions'] = screenProps => ({
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {screenProps.navigation.goBack() }}
+      onPress={() => {screenProps.navigation.navigate('Home') }}
       >
-      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-  headerBackTitle: ' ',
-  headerTitle:'My Wishlist',
+  title: 'My Wishlist'.toUpperCase(),
+  headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyles.colorSet.btnPrimary} />
+    </TouchableOpacity>
+    </View>
+  ),
   headerStyle: {
-    backgroundColor:GlobalStyle.colorSet.white,
-    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
-    // height: H(40),
-    height: H(60),
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+    height: H(40),
     elevation: 0,
      borderWidth:0,
-   borderBottomColor:'transparent',
-  }
+  //  borderBottomColor:'transparent',
+  },
+
 });
+
+
+
 WishlistScreen.propTypes = {
   navigation: PropTypes.object.isRequired,
   currencySymbol: PropTypes.string.isRequired,

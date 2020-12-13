@@ -20,6 +20,10 @@ emptyListContainerStyle:{
   alignItems: 'center',
   backgroundColor: GlobalStyle.colorSet.darkWhite,
 },
+headerRight:{
+  flexDirection:'row',
+  alignItems:'center'
+},
 });
 
 export default styles;

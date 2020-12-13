@@ -18,6 +18,8 @@ import { Icon } from 'react-native-elements';
 
 import Category from '../components/catalog/Category';
 import CategoryTree from '../components/catalog/CategoryTree';
+import CategoryTreeScreen from '../components/catalog/CategoryTreeScreen';
+
 
 import Cart from '../components/cart/Cart';
 import Checkout from '../components/checkout/Checkout';
@@ -49,6 +51,7 @@ import * as routes from './routes';
 import { theme } from '../theme';
 import { ProductScreen } from '../components/catalog/ProductScreen';
 import { H,W } from '../utils/GlobalStyles';
+import Categories from '../components/home/Categories';
 
 
 const defaultHeader = {
@@ -168,6 +171,16 @@ const SearchStack = createStackNavigator({
   defaultNavigationOptions: defaultHeaderOptions
 });
 
+const CategoryStack = createStackNavigator({
+  [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: CategoryTreeScreen,
+  [routes.NAVIGATION_CATEGORY_PATH]: Categories,
+  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
+  [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
+}, {
+  // navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+});
+
 SearchStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   let drawerLockMode = 'unlocked';
@@ -205,7 +218,7 @@ CartStack.navigationOptions = ({ navigation }) => {
 const WishlistStack = createStackNavigator({
   [routes.NAVIGATION_WISHLIST_PATH]: WishlistScreen,
 }, {
-  navigationOptions: defaultHeader,
+  // navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions
 });
 
@@ -265,9 +278,32 @@ const MainAppNavigator = createBottomTabNavigator(
     //   }),
     // },
    
+    // [routes.NAVIGATION_CART_PATH]: {
+    //   screen: CartStack,
+    //   navigationOptions: (props) => ({
+       
+    //     tabBarIcon: ({ tintColor,focused }) => {
+    //       let imagePath = null;
+    //       if(focused)
+    //       {
+    //         imagePath=require('../../resources/icons/Bottom/wishlist_selected.png')
+    //       }
+    //       else 
+    //       {
+    //         imagePath=require('../../resources/icons/Bottom/category2.png')
+    //       }
+    //       return(<TouchableOpacity onPress={()=> props.navigation.openDrawer()} style={[styles.IconWrapper,CommonStyle.paddingLR10]}>
+    //           <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+    //           <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+    //                   Categories
+    //                 </Text>
+    //         </TouchableOpacity>)},
+    //   }),
+     
+    // },
     
-    [routes.NAVIGATION_CATEGORY_TREE_PATH]: {
-      screen: CategoryTree,
+    [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: {
+      screen: CategoryStack,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor,focused }) => {
           let imagePath = null;

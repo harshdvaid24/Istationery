@@ -4,7 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Platform,
+  Platform, Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,7 +12,7 @@ import {
   Spinner,
   Button,
   Input,
-  Text,
+ 
 } from '../common';
 import { auth,ResetError } from '../../actions/CustomerAuthActions';
 import {
@@ -23,8 +23,9 @@ import {
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import FastImage from 'react-native-fast-image';
-import {H} from '../../utils/GlobalStyles'
-
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H,StatusbarHeight} from './../../utils/GlobalStyles'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
   
@@ -95,11 +96,11 @@ function Login ({
 
 
         <TouchableOpacity   onPress={onSigninPress} style={styles.linkButton(theme)}>
-           <Text style={styles.linkTitleButton(theme)}>{'New user?  '}</Text>
-          <Text style={styles.linkTitleButton(theme)}>{translate('login.signupButton')}</Text>
+           <Text style={[CommonStyle.xlPrimaryRegular,CommonStyle.marginBottom20]}>{'New user?  '}</Text>
+          <Text style={[CommonStyle.xlPrimaryRegular,CommonStyle.underline,CommonStyle.marginBottom20]}>{translate('login.signupButton')}</Text>
         </TouchableOpacity>
           <TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
-        <Text style={styles.linkSkip}>Skip to continue shopping</Text>
+        {/* <Text style={[CommonStyle.mPrimaryRegular]}>Skip</Text> */}
         </TouchableOpacity>
       </View>
     );
@@ -118,15 +119,20 @@ function Login ({
 
   return (
     <View style={styles.container(theme)}>
-    <View style={{height:'30%',width:'60%',marginTop:H(50),justifyContent:'center',alignItems:'center'}}>
+     <KeyboardAwareScrollView
+       extraHeight={H(120)}
+       extraScrollHeight={0}
+       >
+    <View style={[CommonStyle.marginTop50]}>
+    
+    </View>
+    <View style={[styles.container(theme)]}>
     <FastImage
-          style={{height:'100%',width:"100%"}}
-          resizeMode="center"
+          style={[{height:H(80),width:W(140)},CommonStyle.marginBottom20]}
+          resizeMode="contain"
           source={require('../../../resources/icons/logo.png')}
         />
-    </View>
-    <View style={styles.container(theme)}>
-      <Text style={[styles.Title(theme)]}> Login </Text>
+      <Text style={[CommonStyle.xxlPrimarySemiBold,CommonStyle.marginBottom20]}>Login</Text>
       <Input
         autoCapitalize="none"
         underlineColorAndroid="transparent"
@@ -158,6 +164,7 @@ function Login ({
       {renderButtons()}
       {renderMessages()}
     </View>
+    </KeyboardAwareScrollView>
     </View>
   );
 };
@@ -168,7 +175,7 @@ Login.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: theme => ({
-    //flex: 1,
+    flex: 1,
     backgroundColor: theme.colors.tabBarBackground,
     alignItems: 'center',
     justifyContent:'center',
