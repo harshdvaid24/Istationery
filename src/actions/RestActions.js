@@ -67,7 +67,8 @@ import {
   MAGENTO_WISHLIST_TOTAL_ITEMS,
   MAGENTO_ADD_ADDRESS_ERROR,
   MAGENTO_ADD_ADDRESS_SUCCESS,
-  MAGENTO_ORDERS_LOADING
+  MAGENTO_ORDERS_LOADING,
+  MAGENTO_CART_TOTAL
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -499,6 +500,11 @@ export const cartItemProduct = sku => async (dispatch) => {
   }
 };
 
+export const getCartTotal = (cartId) => async(dispatch) => {
+  const totals = await magento.admin.getCartTotals(cartId);
+  dispatch({type:MAGENTO_CART_TOTAL, payload:totals})
+} 
+
 const ordersLoading = (dispatch) =>{
   dispatch({type:MAGENTO_ORDERS_LOADING,payload:true})
 }
@@ -703,6 +709,7 @@ export const removeFromCart = ({ cart, item }) => async (dispatch) => {
     if (cart.quote) {
       dispatchRemoveFromCart(dispatch, cart, item);
       dispatch(checkoutSetActiveSection(1));
+      getCartTotal(cart.quote.id,dispatch)
     }
   } catch (error) {
     logError(error);

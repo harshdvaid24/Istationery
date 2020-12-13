@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  Dimensions,
+  TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
-import { cartItemProduct, refreshCart } from '../../actions';
+import { cartItemProduct, refreshCart, removeCouponFromCart,addCouponToCart,getCartTotal } from '../../actions';
 import CartListItem from './CartListItem';
 import NavigationService from '../../navigation/NavigationService';
 import CommonStyle from './../../utils/CommonStyle'
@@ -19,9 +21,11 @@ import {
   NAVIGATION_CHECKOUT_PATH,
   NAVIGATION_HOME_SCREEN_PATH,
 } from '../../navigation/routes';
-import { Button, Text, Price } from '../common';
+import { Button, Text, Price,Spinner } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import { Row, Spacer } from 'react-native-markup-kit';
+
 
 
 
@@ -50,6 +54,10 @@ class Cart extends Component {
     }
   });
 
+  state = {
+    couponCodeInput: '',
+  };
+
   
 
 
@@ -68,6 +76,7 @@ class Cart extends Component {
   };
 
   componentDidMount() {
+    this.props.removeCouponFromCart(this.props.cart.id)
     this.updateCartItemsProducts();
   }
 
@@ -93,6 +102,8 @@ class Cart extends Component {
 
   updateCartItemsProducts = () => {
     const { items } = this.props.cart;
+    // console.log('FROM_CART_MAIN_PAGE',this.props.cart.id)\
+    this.props.getCartTotal(this.props.cart.id);
 
     if (!items) {
       return;
@@ -113,16 +124,16 @@ class Cart extends Component {
     const theme = this.context;
     const { items } = this.props.cart;
     const { totals } = styles;
-
-    let sum = 0;
-    if (items) {
-      items.forEach((item) => {
-        sum += item.price * item.qty;
-      });
-    }
+    const sum = this.props.cartTotals.base_subtotal;
+    // if (items) {
+    //   items.forEach((item) => {
+    //     sum += item.price * item.qty;
+    //   });
+    // }
 
     if (sum > 0) {
       return (
+        <View>
         <View style={[styles.totalPriceContainer]}>
           <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
             {`${translate('common.total')} : `}
@@ -137,6 +148,18 @@ class Cart extends Component {
             basePrice={sum}
           /> */}
         </View>
+          {this.props.cartTotals&& this.props.cartTotals.coupon_code &&
+        <View style={[styles.totalPriceContainer]}>
+        <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
+            {`${translate('common.grandTotal')} : `}
+          </Text>
+          
+        <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
+            { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(2)}
+          </Text>
+          </View>
+          }
+          </View>
       );
     }
   }
@@ -165,6 +188,17 @@ class Cart extends Component {
         </TouchableOpacity>
       </View>
     );
+  };
+
+  couponAction = () => {
+    const {quote} = this.props;
+    console.log('Checkout_Total_Page',quote.id);
+    if (this.props.cartTotals.coupon_code) {
+      this.props.removeCouponFromCart(quote.id);
+      this.props.addCouponToCart(this.state.couponCodeInput,quote.id);
+    } else {
+      this.props.addCouponToCart(this.state.couponCodeInput,quote.id);
+    }
   };
 
   renderItem = items => (
@@ -207,14 +241,44 @@ class Cart extends Component {
             keyExtractor={(item, index) => index.toString()}
           />
         </View>
+        {this.props.cartTotals.coupon_code&&<Text>{this.props.cartTotals.coupon_code} Coupon is applied</Text>}
+        <Text></Text>
+        <View style={[styles.row, { justifyContent: 'space-between' } ]}>
+          <View style={styles.couponInputContainer(theme)}>
+            <TextInput
+              style={{ height: 50}}
+              editable={!this.props?.totals?.coupon_code}
+              value={this.state.couponCodeInput}
+              placeholder="Coupon Code"
+              onChangeText={value => this.setState({ couponCodeInput: value })}
+            />
+          </View>
+          {
+            this.props.couponLoading
+              ? (
+                <View style={{ width: 100 }}>
+                  <Spinner />
+                </View>
+              )
+              : (
+                <View style={{marginRight:25}}>
+                <Button onPress={this.couponAction} style={{ width: 100, alignSelf: 'auto' }}>
+                  {!!this.props?.totals?.coupon_code ? 'Cancel' : 'Apply'}
+                </Button>
+                </View>
+              )
+          }
+        </View>
         <View style={footer(theme)}>
           {this.renderTotals()}
+          <View style={{marginLeft:20}}>
           <Button
             onPress={this.onPressAddToCheckout}
             style={buttonStyle(theme)}
           >
             {translate('cart.checkoutButton')}
           </Button>
+          </View>
         </View>
       </View>
     );
@@ -268,10 +332,25 @@ const styles = StyleSheet.create({
     height:50,
     width: theme.dimens.WINDOW_WIDTH * 0.5,
   }),
+  couponInputContainer: theme => ({
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    // padding: ,
+    marginLeft:20,
+    marginBottom:5,
+    marginRight: 20,
+    width: Dimensions.get('window').width - 100 - 30 - 90,
+  }),
+  row: {
+    flexDirection: 'row',
+    justifyContent:'center',
+    marginTop:10
+    // borderWidth:1,
+  },
 });
 
-const mapStateToProps = ({ cart, magento }) => {
-  const { products } = cart;
+const mapStateToProps = ({ cart, magento,checkout }) => {
+  const { products,cartId, couponLoading, couponError,quote,cartTotals } = cart;
   const {
     currency: {
       displayCurrencySymbol: currencySymbol,
@@ -280,6 +359,11 @@ const mapStateToProps = ({ cart, magento }) => {
   } = magento;
   return {
     products,
+    cartTotals,
+    cartId,
+    couponLoading,
+    couponError,
+    quote,
     currencyRate,
     currencySymbol,
     cart: cart.quote,
@@ -287,4 +371,4 @@ const mapStateToProps = ({ cart, magento }) => {
   };
 };
 
-export default connect(mapStateToProps, { cartItemProduct, refreshCart })(Cart);
+export default connect(mapStateToProps, { cartItemProduct, refreshCart,addCouponToCart,getCartTotal,removeCouponFromCart })(Cart);
