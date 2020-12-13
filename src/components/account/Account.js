@@ -78,22 +78,28 @@ const Account = ({
 
     const { email, firstname, lastname } = customer;
     return (
-      <View style={[CommonStyle.width100p,styles.HeaderContainer]}>
-        <View style={[CommonStyle.FlexRow,styles.HeaderNameContainer,CommonStyle.HorizontalCenter]}>
-           <Text style={[CommonStyle.lGreyRegular]}>Name : </Text>
-            <Text style={[CommonStyle.lGreyRegular]}>
-              {firstname}
-              {' '}
-              {lastname}
-            </Text>
-        </View>
+      <View style={[,CommonStyle.FlexRow]}>
+          <View style={[CommonStyle.width25p,styles.imageContainer,]}>
+          <Image style={[CommonStyle.Icon60]} source={require("./.././../../resources/icons/account/profile.png")} />
+                      
+          </View>
+            <View style={[CommonStyle.width85p,styles.profileNameContainer,]}>
+                  <View style={[CommonStyle.FlexRow,styles.HeaderNameContainer,CommonStyle.HorizontalCenter]}>
+                    <Text style={[CommonStyle.lBlackSemiBold]}>Hi.... </Text>
+                      <Text style={[CommonStyle.lBlackSemiBold]}>
+                        {firstname}
+                        {' '}
+                        {lastname}
+                      </Text>
+                  </View>
 
-        <View style={[CommonStyle.FlexRow,styles.HeaderNameContainer,CommonStyle.HorizontalCenter]}>
-           <Text style={[CommonStyle.lGreyRegular]}>Email : </Text>
-            <Text style={[CommonStyle.lGreyRegular]}>
-               {email}
-            </Text>
-        </View>
+                  <View style={[CommonStyle.marginLR20]}>
+                    {/* <Text style={[CommonStyle.lGreyRegular]}>Email : </Text> */}
+                      <Text numberOfLines={1} style={[CommonStyle.lGreyRegular]}>
+                        {email}
+                      </Text>
+                  </View>
+            </View>
       </View>
     );
   };
@@ -120,6 +126,48 @@ const Account = ({
     <View style={styles.container(theme)}>
       {renderCustomerData()}
      {console.log("total:",total)}
+     <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR5,CommonStyle.HorizontalCenter,]}>
+        
+     <TouchableOpacity onPress={openWishlist}
+          style={[CommonStyle.FlexRow,styles.squareContainer]}>
+            <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
+               <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+                 {translate('account.myOrdersButton')} {`(${orders?orders.length:0})`} 
+                </Text>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={openWishlist}
+          style={[CommonStyle.FlexRow,styles.squareContainer]}>
+            <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/coupon.png")} />
+               <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+                  Vouchers
+                </Text>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={openWishlist}
+          style={[CommonStyle.FlexRow,styles.squareContainer]}>
+            <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/wishlist.png")} />
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginTop10]}>
+                  Wishlist
+                   {` (${total}) `}
+                </Text>
+            </View>
+        </TouchableOpacity>
+
+       
+
+
+      
+
+        
+
+
+     </View>
       <TouchableOpacity onPress={openWishlist}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
@@ -169,15 +217,8 @@ const Account = ({
         </TouchableOpacity>
 
       
-        {/* <TouchableOpacity onPress={openResetPassword}
-      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
-            <Text style={[CommonStyle.lGreyRegular]}>
-              Reset password
-            </Text>
-            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
-        </TouchableOpacity> */}
         <TouchableOpacity onPress={onLogoutPress}
-      style={[CommonStyle.FlexRow,styles.logoutBtn,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+             style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop20,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/exit.png")} />
                  <Text style={[CommonStyle.lGreyRegular,CommonStyle.marginLR10]}>
@@ -186,6 +227,15 @@ const Account = ({
             </View>
             {/* <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} /> */}
         </TouchableOpacity>
+
+        {/* <TouchableOpacity onPress={openResetPassword}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <Text style={[CommonStyle.lGreyRegular]}>
+              Reset password
+            </Text>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity> */}
+       
     </View>
   );
 };
@@ -207,23 +257,43 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colorSet.white,
     paddingVertical:W(10),  
   },
+  imageContainer:  {
+   justifyContent:"center",
+   alignItems:'center',
+  //  backgroundColor: GlobalStyles.colorSet.white,
+  },
+  profileNameContainer:{
+    justifyContent:"center",
+    marginVertical:H(20)
+  },
   HeaderNameContainer:  {
-    backgroundColor: GlobalStyles.colorSet.white,
     paddingVertical:W(10),
     paddingLeft:W(20),
     paddingRight:W(20),
   },
   HeaderSubContainer:  {
     backgroundColor: GlobalStyles.colorSet.white,
-    paddingVertical:W(20),
+    paddingVertical:W(10),
+    marginHorizontal:W(15),
     paddingLeft:W(20),
     paddingRight:W(20),
     borderColor:GlobalStyles.colorSet.BorderGrey,
     borderWidth:W(0.5)
   },
+  squareContainer:  {
+    height:H(70),
+    width:W(120),
+    justifyContent:"center",
+    alignItems:'center',
+    backgroundColor: GlobalStyles.colorSet.white,
+    paddingVertical:W(10),
+    paddingHorizontal:W(10),
+    marginHorizontal:W(7),
+    marginVertical:H(10)
+  },
   container: theme => ({
      flex: 1,
-    backgroundColor: 'white',
+    backgroundColor:GlobalStyles.colorSet.BorderGrey,
     // alignItems: 'center',
     // paddingTop: theme.spacing.large,
   }),

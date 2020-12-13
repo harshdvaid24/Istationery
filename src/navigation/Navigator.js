@@ -246,8 +246,9 @@ const MainAppNavigator = createBottomTabNavigator(
         },
       }),
     },
-    // [routes.NAVIGATION_SEARCH_SCREEN_PATH]: {
-    //   screen: SearchStack,
+    // [routes.NAVIGATION_CATEGORY_PATH]: Category,
+    // [routes.NAVIGATION_CATEGORY_TREE_PATH]: {
+    //   screen: CategoryTree,
     //   navigationOptions: () => ({
     //     tabBarIcon: ({ tintColor,focused }) => {
     //       let imagePath = null;
@@ -265,28 +266,27 @@ const MainAppNavigator = createBottomTabNavigator(
     // },
    
     
-    [routes.NAVIGATION_CART_PATH]: {
-      screen: CartStack,
-      navigationOptions: (props) => ({
-       
+    [routes.NAVIGATION_CATEGORY_TREE_PATH]: {
+      screen: CategoryTree,
+      navigationOptions: () => ({
         tabBarIcon: ({ tintColor,focused }) => {
           let imagePath = null;
           if(focused)
           {
-            imagePath=require('../../resources/icons/Bottom/wishlist_selected.png')
+            imagePath=require('../../resources/icons/Bottom/category.png')
           }
           else 
           {
             imagePath=require('../../resources/icons/Bottom/category2.png')
           }
-          return(<TouchableOpacity onPress={()=> props.navigation.openDrawer()} style={[styles.IconWrapper,CommonStyle.paddingLR10]}>
-              <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
-              <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
-                      Categories
+          return(<View style={[styles.IconWrapper,CommonStyle.marginLR10]}>
+                <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
+                    <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
+                    Categories
                     </Text>
-            </TouchableOpacity>)},
+          </View>)
+        },
       }),
-     
     },
     [routes.NAVIGATION_WISHLIST_PATH]: {
       screen: WishlistStack,
