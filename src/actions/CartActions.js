@@ -1,13 +1,13 @@
 import * as types from './types';
 import { magento } from '../magento';
 import { logError } from '../helper/logger';
-import { createCustomerCart } from './RestActions';
+import { createCustomerCart,getCartTotal } from './RestActions';
 
 
-export const addCouponToCart = (couponCode) => async (dispatch, getState) => {
+export const addCouponToCart = (couponCode,cartId) => async (dispatch, getState) => {
   dispatch({ type: types.MAGENTO_COUPON_LOADING, payload: true });
   try {
-    const cartId = getState().cart?.cartId;
+    // const cartId = getState().cart?.cartId;
     let totals;
     if (magento.isCustomerLogin()) {
       await magento.admin.addCouponToCart(cartId, couponCode);
@@ -17,6 +17,8 @@ export const addCouponToCart = (couponCode) => async (dispatch, getState) => {
       totals = await magento.guest.getCartTotals(cartId);
     }
     dispatch({ type: types.MAGENTO_CHECKOUT_TOTALS, payload: totals });
+    dispatch({type:types.MAGENTO_CART_TOTAL, payload:totals})
+
   } catch (error) {
     dispatch({ type: types.MAGENTO_COUPON_ERROR, payload: error?.message });
     logError(error);
@@ -24,9 +26,8 @@ export const addCouponToCart = (couponCode) => async (dispatch, getState) => {
   dispatch({ type: types.MAGENTO_COUPON_LOADING, payload: false });
 };
 
-export const removeCouponFromCart = () => async (dispatch, getState) => {
+export const removeCouponFromCart = (cartId) => async (dispatch, getState) => {
   dispatch({ type: types.MAGENTO_COUPON_LOADING, payload: true });
-  const cartId = getState().cart?.cartId;
   try {
     let totals;
     if (magento.isCustomerLogin()) {
@@ -37,6 +38,7 @@ export const removeCouponFromCart = () => async (dispatch, getState) => {
       totals = await magento.guest.getCartTotals(cartId);
     }
     dispatch({ type: types.MAGENTO_CHECKOUT_TOTALS, payload: totals });
+    dispatch({type:types.MAGENTO_CART_TOTAL, payload:totals})
   } catch (error) {
     logError(error);
   }

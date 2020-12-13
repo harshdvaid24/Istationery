@@ -201,10 +201,11 @@ class CheckoutTotals extends Component {
   }
 
   couponAction = () => {
+    const {quote} = this.props;
     if (!!this.props?.totals?.coupon_code) {
-      this.props.removeCouponFromCart();
+      this.props.removeCouponFromCart(quote.id);
     } else {
-      this.props.addCouponToCart(this.state.couponCodeInput);
+      this.props.addCouponToCart(this.state.couponCodeInput,quote.id);
     }
   };
 
@@ -213,7 +214,7 @@ class CheckoutTotals extends Component {
 
     return (
       <View>
-        <View style={[styles.row, { justifyContent: 'space-between' } ]}>
+        {/* <View style={[styles.row, { justifyContent: 'space-between' } ]}>
           <View style={styles.couponInputContainer(theme)}>
             <TextInput
               // style={{ width: '100%' }}
@@ -237,7 +238,7 @@ class CheckoutTotals extends Component {
                 </Button>
               )
           }
-        </View>
+        </View> */}
         {
           !!(this.props.couponError?.length) && (
             <Text style={{ color: 'red', marginBottom: 10, textAlign: 'center' }}>{this.props.couponError}</Text>
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = ({ cart, checkout, magento }) => {
-  const { cartId, couponLoading, couponError } = cart;
+  const { cartId, couponLoading, couponError,quote } = cart;
   const { loading } = checkout.ui;
   const {
     payments, selectedPayment, totals, orderId, errorMessage,
@@ -323,6 +324,7 @@ const mapStateToProps = ({ cart, checkout, magento }) => {
     currencyRate,
     couponError,
     couponLoading,
+    quote
   };
 };
 

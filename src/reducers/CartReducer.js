@@ -13,6 +13,7 @@ import {
   MAGENTO_LOGIN_SUCCESS,
   MAGENTO_COUPON_LOADING,
   MAGENTO_COUPON_ERROR,
+  MAGENTO_CART_TOTAL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,6 +27,7 @@ const INITIAL_STATE = {
   removingItemId: false,
   couponLoading: false,
   couponError: '',
+  cartTotals:{}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -65,6 +67,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, couponLoading: action.payload, couponError };
     case MAGENTO_COUPON_ERROR:
       return { ...state, couponError: action.payload };
+    case MAGENTO_CART_TOTAL:
+      return { ...state,cartTotals:action.payload}
     default:
       return state;
   }
