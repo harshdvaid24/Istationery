@@ -2,6 +2,7 @@ import * as types from './types';
 import { magento } from '../magento';
 import { logError } from '../helper/logger';
 import { createCustomerCart,getCartTotal } from './RestActions';
+import Toast from 'react-native-simple-toast'
 
 
 export const addCouponToCart = (couponCode,cartId) => async (dispatch, getState) => {
@@ -10,16 +11,23 @@ export const addCouponToCart = (couponCode,cartId) => async (dispatch, getState)
     // const cartId = getState().cart?.cartId;
     let totals;
     if (magento.isCustomerLogin()) {
-      await magento.admin.addCouponToCart(cartId, couponCode);
+      await magento.admin.addCouponToCart(cartId, couponCode).then((data)=>{if(data.message){Toast.show(data.message,3000,Toast.BOTTOM)}}).catch((error)=>{
+        dispatch({ type: types.MAGENTO_COUPON_ERROR, payload: error?.message });
+        logError(error);
+      });
       totals = await magento.admin.getCartTotals(cartId);
     } else {
-      await magento.guest.addCouponToCart(cartId, couponCode);
+      await magento.guest.addCouponToCart(cartId, couponCode).then((data)=>{if(data.message){Toast.show(data.message,3000,Toast.BOTTOM)}}).catch((error)=>{
+        dispatch({ type: types.MAGENTO_COUPON_ERROR, payload: error?.message });
+        logError(error);
+      });;
       totals = await magento.guest.getCartTotals(cartId);
     }
     dispatch({ type: types.MAGENTO_CHECKOUT_TOTALS, payload: totals });
     dispatch({type:types.MAGENTO_CART_TOTAL, payload:totals})
 
   } catch (error) {
+    Toast.show(error.message,3000,Toast.BOTTOM);
     dispatch({ type: types.MAGENTO_COUPON_ERROR, payload: error?.message });
     logError(error);
   }
