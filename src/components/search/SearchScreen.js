@@ -16,14 +16,7 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
-const Title = ({title}) => {
-  return(
-  <View style={{flex:1,marginLeft:20  }}>
-      <Text type="heading" bold >{title}</Text>
-  </View>
-  )
-  
-} 
+
 class SearchScreen extends Component {
   static contextType = ThemeContext;
   static navigationOptions = ({ navigation }) => ({
@@ -164,6 +157,10 @@ const styles = {
   },
   notFoundText: {
     textAlign: 'center',
+  },
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
   },
 };
 

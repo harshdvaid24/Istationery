@@ -86,7 +86,8 @@ const HomeStack = createStackNavigator(
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
     [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
     [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
-    
+    [routes.NAVIGATION_CART_PATH]: Cart,
+    [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,

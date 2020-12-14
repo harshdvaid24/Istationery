@@ -278,7 +278,7 @@ Account['navigationOptions'] = screenProps => ({
   },
 
 });
-
+    
 
 const styles = StyleSheet.create({
   HeaderContainer:  {
