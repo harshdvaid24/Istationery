@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  View, TouchableOpacity, LayoutAnimation,Image
+  View, TouchableOpacity, LayoutAnimation,Image,Text
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import CategoryTreeList from './CategoryTreeList';
-import { Text } from '../common';
 import { setCurrentCategory, resetFilters } from '../../actions/index';
 import { NAVIGATION_CATEGORY_PATH } from '../../navigation/routes';
 import NavigationService from '../../navigation/NavigationService';
@@ -45,10 +44,10 @@ const CategoryTreeListItem = (props) => {
   const renderExpandButton = () => {
     if (props.category?.children_data?.length) {
       return (
-        <TouchableOpacity onPress={onExpandPress} style={[{paddingLeft:5,paddingTop:5,paddingBottom:5},CommonStyle.width20p]} onPress={onExpandPress}>
+        <TouchableOpacity onPress={onExpandPress} style={[CommonStyle.paddingTB10,CommonStyle.paddingLR10,CommonStyle.width20p]} onPress={onExpandPress}>
           {(expanded)?
-            <Image style={[CommonStyle.Icon15,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackDown.png")} />:
-           <Image style={[CommonStyle.Icon15,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackRight.png")} />
+            <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackDown.png")} />:
+           <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackRight.png")} />
           }
         </TouchableOpacity>
       );
@@ -64,13 +63,13 @@ const CategoryTreeListItem = (props) => {
     };
 
     return (
-      <View>
+      <View style={[]}>
         <TouchableOpacity
           onPress={onRowPress}
           style={[styles.rowStyles(theme)]}
         >
-          <View style={[CommonStyle.width80p]}>
-             <Text numberOfLines={1} type="heading" style={titleStyle}>{category.name}</Text>
+          <View style={[CommonStyle.width80p,CommonStyle.paddingLR20]}>
+             <Text numberOfLines={1} style={[CommonStyle.lGreyRegular]} >{category.name}</Text>
           </View>
           
           {renderExpandButton()}
@@ -99,15 +98,15 @@ const CategoryTreeListItem = (props) => {
 
 const styles = {
   subItemsContainer:theme => ({
-    paddingLeft:20,
+    paddingLeft:W(20),
     // paddingBottom:10,
     backgroundColor: theme.colors.white,
     borderBottomWidth: 1,
-    borderColor: theme.colors.lightBorder,
+    borderBottomColor:GlobalStyles.colorSet.BorderGrey,
   }),
   rowStyles: theme => ({
     flex: 1,
-    height:H(50),
+    height:H(40),
     flexDirection: 'row',
     alignItems:'center',
     justifyContent: 'space-between',
@@ -117,7 +116,7 @@ const styles = {
     backgroundColor: theme.colors.white,
   }),
   dropIcon: theme => ({
-    height: 24,
+    height: H(34),
     // padding: 2,
     paddingRight: theme.spacing.large,
   }),

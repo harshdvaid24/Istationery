@@ -174,7 +174,7 @@ const SearchStack = createStackNavigator({
 
 const CategoryStack = createStackNavigator({
   [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: CategoryTreeScreen,
-  [routes.NAVIGATION_CATEGORY_PATH]: Categories,
+  [routes.NAVIGATION_CATEGORY_PATH]: Category,
   [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
   [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
 }, {
