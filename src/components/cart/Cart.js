@@ -83,7 +83,7 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    this.props.removeCouponFromCart(this.props.cart.id)
+    // this.props.removeCouponFromCart(this.props.cart.id)
     this.updateCartItemsProducts();
   }
 
@@ -205,6 +205,11 @@ class Cart extends Component {
   couponAction = () => {
     const {quote} = this.props;
     console.log('Checkout_Total_Page',quote.id);
+    if(this.state.couponCodeInput=='')
+    {
+      alert('Please Enter Coupon Code');
+      return
+    }
     if (this.props.cartTotals.coupon_code) {
       this.props.removeCouponFromCart(quote.id);
       this.props.addCouponToCart(this.state.couponCodeInput,quote.id);
@@ -212,6 +217,12 @@ class Cart extends Component {
       this.props.addCouponToCart(this.state.couponCodeInput,quote.id);
     }
   };
+
+  onCouponRemovePress = () =>{
+    const {quote} = this.props;
+    this.setState({couponCodeInput:''})
+    this.props.removeCouponFromCart(quote.id);
+  }
 
   renderItem = items => (
     <CartListItem
@@ -289,8 +300,8 @@ class Cart extends Component {
             </View> }
             <View style={[CommonStyle.marginLR20]}>
                      {
-                       (this.props?.totals?.coupon_code)?
-                       <TouchableOpacity onPress={this.couponAction} style={styles.RemoveButtonStyle}>
+                       (this.props.cartTotals.coupon_code)?
+                       <TouchableOpacity onPress={this.onCouponRemovePress} style={styles.RemoveButtonStyle}>
                           <Text style={[CommonStyle.mPrimarySemiBold]}>  {'Remove'} </Text>
                       </TouchableOpacity>:
                       <TouchableOpacity onPress={this.couponAction} style={styles.RemoveButtonStyle}>
