@@ -140,7 +140,7 @@ class Cart extends Component {
 
     if (sum > 0) {
       return (
-        <View style={[styles.PriceContainer]}>
+        <View style={[styles.PriceContainer,CommonStyle.paddingLR20]}>
         <View style={[styles.totalPriceContainer,]}>
           <Text style={[CommonStyle.lBlackRegular]}>
             {`${translate('common.total')} : `}
@@ -266,23 +266,22 @@ class Cart extends Component {
         {
               this.props.couponLoading
                 ? (
-                  <View style={[styles.footer,]}>
+                  <View style={[styles.footer]}>
                     <Spinner />
                   </View>
                 )
                 : (
-       <View style={[styles.footer,]}>
+       <View style={[styles.footer]}>
       
           <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR10,CommonStyle.HorizontalCenter ]}>
           {
             (this.props.cartTotals.coupon_code)?
           <Text style={[CommonStyle.mPrimaryRegular]}>Coupon code {this.props.cartTotals.coupon_code}  is applied</Text>:
-            <View style={styles.couponInputContainer(theme)}>
+            <View style={[styles.couponInputContainer(theme)]}>
               <TextInput
-                style={[CommonStyle.mBlackRegular]}
-                editable={!this.props?.totals?.coupon_code}
+                style={[CommonStyle.mBlackRegular,{height:H(40),width:W(150),fontSize:W(12)}]}
                 value={this.state.couponCodeInput}
-                placeholder="Coupon Code"
+                 placeholder="Coupon Code"
                 keyboardType="default"
                 placeholderTextColor={'#858585'}
                 onChangeText={value => this.setState({ couponCodeInput: value })}
@@ -343,7 +342,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }),
   content: {
-    height:WINDOW_HEIGHT-H(150),
+    height:WINDOW_HEIGHT-H(100),
     paddingBottom:H(100)
   },
   totals: theme => ({
@@ -393,7 +392,7 @@ const styles = StyleSheet.create({
     width: W(100),
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor:GlobalStyle.colorSet.white
+    // backgroundColor:GlobalStyle.colorSet.white
   },
   CouponButtonStyle:{
     borderRadius:3,
@@ -405,7 +404,7 @@ const styles = StyleSheet.create({
   },
   couponInputContainer: theme => ({
     borderWidth: 1,
-    height:H(30),
+    height:H(40),
     justifyContent:'center',
     alignItems:'center',
     borderRadius:3,
