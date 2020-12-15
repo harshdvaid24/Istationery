@@ -83,7 +83,7 @@ class Cart extends Component {
   };
 
   componentDidMount() {
-    // this.props.removeCouponFromCart(this.props.cart.id)
+    this.props.removeCouponFromCart(this.props.cart.id)
     this.updateCartItemsProducts();
   }
 
