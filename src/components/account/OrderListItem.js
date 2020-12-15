@@ -32,7 +32,7 @@ const OrderListItem = ({
 
       <View style={[styles.row,CommonStyle.marginTB5,CommonStyle.alignContentLR]}>
           <Text style={[CommonStyle.mGreySemiBold]}>{`${translate('common.order')} # ${item.increment_id}`}</Text>
-           <Text style={[CommonStyle.mPrimarySemiBold]}>{`${item.status}`}</Text>
+           <Text style={[CommonStyle.mPrimarySemiBold]}>{`${item.status.toUpperCase()}`}</Text>
         </View>
 
         

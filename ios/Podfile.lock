@@ -249,6 +249,9 @@ PODS:
   - React-jsinspector (0.62.2)
   - react-native-safe-area-context (0.7.3):
     - React
+  - react-native-simple-toast (1.1.3):
+    - React-Core
+    - Toast (~> 4.0.0)
   - react-native-splash-screen (3.2.0):
     - React
   - react-native-webview (10.10.0):
@@ -328,6 +331,8 @@ PODS:
     - React
   - RNScreens (2.13.0):
     - React-Core
+  - RNShare (4.1.0):
+    - React-Core
   - RNVectorIcons (6.7.0):
     - React
   - SDWebImage (5.9.4):
@@ -336,6 +341,7 @@ PODS:
   - SDWebImageWebPCoder (0.6.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.7)
+  - Toast (4.0.0)
   - toolbar-android (0.1.0-rc.2):
     - React
   - Yoga (1.14.0)
@@ -366,6 +372,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -386,6 +393,7 @@ DEPENDENCIES:
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNShare (from `../node_modules/react-native-share`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - "toolbar-android (from `../node_modules/@react-native-community/toolbar-android`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -406,6 +414,7 @@ SPEC REPOS:
     - OpenSSL-Universal
     - SDWebImage
     - SDWebImageWebPCoder
+    - Toast
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -441,6 +450,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-simple-toast:
+    :path: "../node_modules/react-native-simple-toast"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   react-native-webview:
@@ -479,6 +490,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNShare:
+    :path: "../node_modules/react-native-share"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   toolbar-android:
@@ -515,6 +528,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
+  react-native-simple-toast: b986e6c1befdc211af3df1bae293278a44e32990
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-webview: 2e330b109bfd610e9818bf7865d1979f898960a7
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
@@ -534,9 +548,11 @@ SPEC CHECKSUMS:
   RNLocalize: 4071198b59b461f3b74eebc5fee8c50f13e39e79
   RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
   RNScreens: 13f23e5498fb4aa749d19a5eda7f8792fbb9d01f
+  RNShare: 106a76243ac90f43ddb9028dcb78ade406b8adff
   RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
   SDWebImage: b69257f4ab14e9b6a2ef53e910fdf914d8f757c1
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   toolbar-android: 404f4450b203597e7b417f714ff417bed562a1be
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

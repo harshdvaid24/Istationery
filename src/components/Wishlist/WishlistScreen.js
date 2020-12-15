@@ -157,7 +157,7 @@ const loading = useSelector(state => state.wishlist.loading);
 WishlistScreen['navigationOptions'] = screenProps => ({
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {screenProps.navigation.navigate('Home') }}
+      onPress={() => {screenProps.navigation.goBack() }}
       >
       <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>

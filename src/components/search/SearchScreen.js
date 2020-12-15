@@ -110,10 +110,7 @@ class SearchScreen extends Component {
           inputContainerStyle={[styles.inputContainerStyle(theme)]}
           showLoading={this.props.loadingMore}
         />
-        <View style={[{marginRight:20,padding:10,backgroundColor:'#ffffff'}]}>
-          <HeaderGridToggleIcon />
-        </View>
-       
+      
         </View>
        
         <View style={{ flex: 1 }}>
@@ -133,11 +130,13 @@ const styles = {
   searchStyle: theme => ({
     backgroundColor: GlobalStyle.colorSet.white,
     alignSelf: 'center',
-    marginLeft:W(20),
+    // marginLeft:W(20),
     borderBottomWidth: 0,
     borderTopWidth: 0,
     height: theme.dimens.searchBarHeight,
-    width: "90%",
+    width: "100%",
+    borderBottomWidth:1,
+    borderBottomColor:GlobalStyle.colorSet.BorderGrey
   }),
   inputContainerStyle: theme => ({
     // marginTop:5,

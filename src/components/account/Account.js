@@ -129,7 +129,7 @@ const Account = ({
      {console.log("total:",total)}
      <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR5,CommonStyle.HorizontalCenter,]}>
         
-     <TouchableOpacity onPress={openWishlist}
+     <TouchableOpacity onPress={openOrders}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />

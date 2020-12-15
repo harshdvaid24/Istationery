@@ -9,6 +9,7 @@ import {
   Image
 } from 'react-native';
 import PropTypes from 'prop-types';
+import CartBadge from '../../components/cart/CartBadge';
 import {
   getOrdersForCustomer,
 } from '../../actions';
@@ -20,6 +21,9 @@ import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 import { Spinner } from '../common';
 
+import {
+  NAVIGATION_SEARCH_SCREEN_PATH
+} from '../../navigation/routes';
 import { NAVIGATION_HOME_SCREEN_PATH } from '../../navigation/routes';
 
 const OrdersScreen = ({
@@ -72,16 +76,18 @@ const OrdersScreen = ({
     }
     return (
       <View style={styles.emptyListContainerStyle(theme)}>
-        <Text type="heading" style={styles.textStyle(theme)}>
+        <Image style={[CommonStyle.Icon100]} source={require("./../../../resources/icons/empty.png")} />
+
+        <Text  style={[CommonStyle.xlGreyRegular,CommonStyle.marginTop20]}>
           {translate('ordersScreen.noOrderMessage')}
         </Text>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={() => navigate(NAVIGATION_HOME_SCREEN_PATH)}
         >
-          <Text type="heading"  style={styles.buttonTextStyle(theme)}>
+          <Text style={[CommonStyle.lPrimarySemiBold,CommonStyle.marginTop10,CommonStyle.underline]}>
             {translate('common.continueShopping')}
           </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
     );
   };
@@ -100,24 +106,43 @@ const OrdersScreen = ({
   return renderEmptyOrderList();
 };
 
-OrdersScreen.navigationOptions = (props) => ({
-  title: translate('ordersScreen.title'),
+
+
+OrdersScreen['navigationOptions'] = screenProps => ({
   headerLeft: () => (
     <TouchableOpacity
-      onPress={() => {props.navigation.goBack() }}
+      onPress={() => {screenProps.navigation.goBack() }}
       >
-      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
+  title: 'My Orders'.toUpperCase(),
+  headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyles.colorSet.btnPrimary} />
+    </TouchableOpacity>
+    </View>
+  ),
   headerStyle: {
-    backgroundColor:GlobalStyles.colorSet.white,
-    marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
-    // height: H(40),
-    height: H(60),
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+    height: H(40),
     elevation: 0,
      borderWidth:0,
-   borderBottomColor:'transparent',
-  }
+  //  borderBottomColor:'transparent',
+  },
+
 });
 
 const styles = {
@@ -126,6 +151,10 @@ const styles = {
     backgroundColor: theme.colors.background,
     paddingHorizontal:10
   }),
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
+  },
   emptyListContainerStyle: theme => ({
     flex: 1,
     justifyContent: 'center',

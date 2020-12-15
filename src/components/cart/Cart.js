@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   RefreshControl,
+  Text,
   Dimensions,
   TextInput
 } from 'react-native';
@@ -16,41 +17,47 @@ import { cartItemProduct, refreshCart, removeCouponFromCart,addCouponToCart,getC
 import CartListItem from './CartListItem';
 import NavigationService from '../../navigation/NavigationService';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT,WINDOW_WIDTH} from './../../utils/GlobalStyles'
 import {
   NAVIGATION_CHECKOUT_PATH,
   NAVIGATION_HOME_SCREEN_PATH,
 } from '../../navigation/routes';
-import { Button, Text, Price,Spinner } from '../common';
+import { Button, Price,Spinner } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import { Row, Spacer } from 'react-native-markup-kit';
-
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 class Cart extends Component {
   static contextType = ThemeContext;
   static navigationOptions = ({ navigation }) => ({
-    // title: translate('home.title'),
-    headerTitle:'Cart',
-    // headerLeft: () => (
-    //   <TouchableOpacity
-    //     onPress={() => {navigation.goBack() }}
-    //     >
-    //     <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-    //     </TouchableOpacity>
-    // ),
-    
-    headerBackTitle: ' ',
+    headerLeft: () => (
+      <TouchableOpacity
+        onPress={() => {navigation.goBack() }}
+        >
+        <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+        </TouchableOpacity>
+    ),
+    title: 'My Cart'.toUpperCase(),
+    headerRight: () => (
+      <View style={[styles.headerRight]}>
+      <TouchableOpacity
+        style={[CommonStyle.paddingLR20]}
+        onPress={() => {navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+        >
+        <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+      </TouchableOpacity>
+      </View>
+    ),
     headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.white,
-      marginTop:Platform.OS === 'ios' ? 0 : (WINDOW_HEIGHT>770)? H(27) : H(StatusbarHeight),
-      // height: H(40),
-      height: H(60),
+      backgroundColor:'white',
+      marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+      height: H(40),
       elevation: 0,
        borderWidth:0,
-     borderBottomColor:'transparent',
+    //  borderBottomColor:'transparent',
     }
   });
 
@@ -133,13 +140,13 @@ class Cart extends Component {
 
     if (sum > 0) {
       return (
-        <View>
-        <View style={[styles.totalPriceContainer]}>
-          <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
+        <View style={[styles.PriceContainer]}>
+        <View style={[styles.totalPriceContainer,]}>
+          <Text style={[CommonStyle.lBlackRegular]}>
             {`${translate('common.total')} : `}
           </Text>
 
-          <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
+          <Text style={[CommonStyle.lBlackRegular]}>
             { this.props.currencySymbol} {parseFloat(sum).toFixed(2)}
           </Text>
           {/* <Price
@@ -148,16 +155,18 @@ class Cart extends Component {
             basePrice={sum}
           /> */}
         </View>
+
+
           {this.props.cartTotals&& this.props.cartTotals.coupon_code &&
-        <View style={[styles.totalPriceContainer]}>
-        <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
-            {`${translate('common.grandTotal')} : `}
-          </Text>
+            <View style={[styles.totalPriceContainer,CommonStyle.paddingTop10]}>
+                <Text style={[CommonStyle.xlBlackSemiBold]}>
+                    {`${translate('common.grandTotal')} : `}
+                </Text>
           
-        <Text style={[{marginTop:10,fontSize:18,color:'#0e0a1f',fontWeight:'bold'}]} type="heading">
-            { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(2)}
-          </Text>
-          </View>
+                <Text style={[CommonStyle.xlBlackSemiBold]}>
+                  { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(2)}
+                </Text>
+            </View>
           }
           </View>
       );
@@ -176,13 +185,16 @@ class Cart extends Component {
 
     return (
       <View style={containerStyle(theme)}>
-        <Text type="heading" style={totals(theme)}>
+
+      <Image style={[CommonStyle.Icon100]} source={require("./../../../resources/icons/empty.png")} />
+
+        <Text  style={[CommonStyle.xlGreyRegular,CommonStyle.marginTop20]}>
           {translate('cart.emptyMessage')}
         </Text>
         <TouchableOpacity
           onPress={() => navigate(NAVIGATION_HOME_SCREEN_PATH)}
         >
-          <Text type="heading" bold style={buttonTextStyle(theme)}>
+          <Text style={[CommonStyle.lPrimarySemiBold,CommonStyle.marginTop10,CommonStyle.underline]}>
             {translate('common.continueShopping')}
           </Text>
         </TouchableOpacity>
@@ -221,14 +233,21 @@ class Cart extends Component {
     } = styles;
 
     return (
-      <View style={container(theme)}>
+      <View style={[styles.container(theme),]}>
+      <KeyboardAwareScrollView
+       extraHeight={H(150)}
+       extraScrollHeight={0}
+       >
           <StatusBar
                   translucent
                   backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
 
-        <View style={content}>
+        <View style={[styles.content,]}>
+          <ScrollView>
+
+         
           <FlatList
             refreshControl={(
               <RefreshControl
@@ -240,46 +259,60 @@ class Cart extends Component {
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
           />
+           </ScrollView>
         </View>
-        {this.props.cartTotals.coupon_code&&<Text>{this.props.cartTotals.coupon_code} Coupon is applied</Text>}
-        <Text></Text>
-        <View style={[styles.row, { justifyContent: 'space-between' } ]}>
-          <View style={styles.couponInputContainer(theme)}>
-            <TextInput
-              style={{ height: 50}}
-              editable={!this.props?.totals?.coupon_code}
-              value={this.state.couponCodeInput}
-              placeholder="Coupon Code"
-              onChangeText={value => this.setState({ couponCodeInput: value })}
-            />
-          </View>
+     
+     
+        {
+              this.props.couponLoading
+                ? (
+                  <View style={[styles.footer,]}>
+                    <Spinner />
+                  </View>
+                )
+                : (
+       <View style={[styles.footer,]}>
+      
+          <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR10,CommonStyle.HorizontalCenter ]}>
           {
-            this.props.couponLoading
-              ? (
-                <View style={{ width: 100 }}>
-                  <Spinner />
-                </View>
-              )
-              : (
-                <View style={{marginRight:25}}>
-                <Button onPress={this.couponAction} style={{ width: 100, alignSelf: 'auto' }}>
-                  {!!this.props?.totals?.coupon_code ? 'Cancel' : 'Apply'}
-                </Button>
-                </View>
-              )
-          }
-        </View>
-        <View style={footer(theme)}>
-          {this.renderTotals()}
-          <View style={{marginLeft:20}}>
-          <Button
-            onPress={this.onPressAddToCheckout}
-            style={buttonStyle(theme)}
-          >
-            {translate('cart.checkoutButton')}
-          </Button>
+            (this.props.cartTotals.coupon_code)?
+          <Text style={[CommonStyle.mPrimaryRegular]}>Coupon code {this.props.cartTotals.coupon_code}  is applied</Text>:
+            <View style={styles.couponInputContainer(theme)}>
+              <TextInput
+                style={[CommonStyle.mBlackRegular]}
+                editable={!this.props?.totals?.coupon_code}
+                value={this.state.couponCodeInput}
+                placeholder="Coupon Code"
+                keyboardType="default"
+                placeholderTextColor={'#858585'}
+                onChangeText={value => this.setState({ couponCodeInput: value })}
+              />
+            </View> }
+            <View style={[CommonStyle.marginLR20]}>
+                     {
+                       (this.props?.totals?.coupon_code)?
+                       <TouchableOpacity onPress={this.couponAction} style={styles.RemoveButtonStyle}>
+                          <Text style={[CommonStyle.mPrimarySemiBold]}>  {'Remove'} </Text>
+                      </TouchableOpacity>:
+                      <TouchableOpacity onPress={this.couponAction} style={styles.RemoveButtonStyle}>
+                          <Text style={[CommonStyle.mPrimarySemiBold]}>  {'Apply'} </Text>
+                      </TouchableOpacity>
+                    } 
+                  </View>
+               
           </View>
+          
+              <View style={[CommonStyle.FlexRow,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter,CommonStyle.paddingTB10,CommonStyle.paddingLR10]}>
+                    {this.renderTotals()}
+                    <TouchableOpacity onPress={this.onPressAddToCheckout} style={styles.buttonStyle}>
+                                    <Text style={[CommonStyle.mWhitleSemiBold]}> {translate('cart.checkoutButton')} </Text> 
+                          </TouchableOpacity>
+              </View>
+          
+             
         </View>
+        )}
+        </KeyboardAwareScrollView>
       </View>
     );
   };
@@ -299,6 +332,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   }),
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
+  },
   containerStyle: theme => ({
     backgroundColor: theme.colors.background,
     flex: 1,
@@ -306,40 +343,75 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }),
   content: {
-    flex: 1,
-    marginTop:5
+    height:WINDOW_HEIGHT-H(150),
+    paddingBottom:H(100)
   },
   totals: theme => ({
     paddingTop: theme.spacing.small,
   }),
+  PriceContainer:{
+    justifyContent: 'center',
+    //  alignItems: 'center',
+  },
   totalPriceContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   buttonTextStyle: theme => ({
     padding: theme.spacing.large,
     top: 0,
     color: theme.colors.secondary,
   }),
-  footer: theme => ({
-    padding: theme.spacing.large,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  }),
-  buttonStyle: theme => ({
+  footer: {
+   position:'absolute',
+   width:WINDOW_WIDTH,
+   height:H(100),
+   paddingVertical:H(10),
+   backgroundColor:GlobalStyle.colorSet.WhiteGrey,
+   bottom:0
+  },
+  buttonStyle:{
     borderRadius:3,
-    height:50,
-    width: theme.dimens.WINDOW_WIDTH * 0.5,
-  }),
+    height:H(35),
+    width: W(150),
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyle.colorSet.btnPrimary
+  },
+  CouponButtonStyle:{
+    borderRadius:3,
+    height:H(30),
+    width: W(100),
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyle.colorSet.btnPrimary
+  },
+  RemoveButtonStyle:{
+    borderRadius:3,
+    height:H(30),
+    width: W(100),
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyle.colorSet.white
+  },
+  CouponButtonStyle:{
+    borderRadius:3,
+    height:H(30),
+    width: W(100),
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyle.colorSet.btnPrimary
+  },
   couponInputContainer: theme => ({
     borderWidth: 1,
-    borderColor: theme.colors.border,
-    // padding: ,
-    marginLeft:20,
-    marginBottom:5,
-    marginRight: 20,
-    width: Dimensions.get('window').width - 100 - 30 - 90,
+    height:H(30),
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:3,
+    borderColor: GlobalStyle.colorSet.BorderGrey,
+    width: W(200),
+    marginHorizontal:W(20)
   }),
   row: {
     flexDirection: 'row',
