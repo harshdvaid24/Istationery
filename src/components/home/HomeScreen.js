@@ -31,6 +31,7 @@ import  GlobalStyles,{H,W,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/Glo
 import CartBadge from '../../components/cart/CartBadge';
 import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
 import FastImage from 'react-native-fast-image';
+import SplashScreen from 'react-native-splash-screen'
 const LogoTitle = ( ) => {
   return(
   <View style={[CommonStyle.width100p]}>
@@ -99,6 +100,7 @@ class HomeScreen extends Component {
     if (this.props.slider.length === 0) {
       this.props.getHomeData();
     }
+    SplashScreen.hide();
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
