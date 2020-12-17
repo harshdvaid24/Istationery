@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
   footer: {
    position:'absolute',
    width:WINDOW_WIDTH,
-   height:H(100),
+   height:H(150),
    paddingVertical:H(10),
    backgroundColor:GlobalStyle.colorSet.WhiteGrey,
    bottom:0
