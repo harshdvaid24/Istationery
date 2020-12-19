@@ -18,71 +18,78 @@ const Discounts = ({
   const dispatch = useDispatch();
   // let URL =  magento.getMediaUrl();
   //  let BaseURL = 'https://staging.istationery.com/pub/media/';
-  const images = [
-    {id:1,image:'wysiwyg/banner/UniCopier.jpg'},
-    {id:2,image:'wysiwyg/banner/UniBook_1.jpg'},
-]
 
 const onItemPressed = (Cid,title) => {
-  console.log("onItemPressed:",Cid);
-  let category = {
-          children_data: [],
-          id: Cid,
-          is_active: false,
-          level: 2,
-          name: title,
-          parent_id: 3,
-          position: 35,
-          product_count: 14
-        };
-        dispatch(resetFilters());
-        dispatch(setCurrentCategory({ category }));
-        NavigationService.navigate(NAVIGATION_CATEGORY_PATH, {
-          title: category.name,
-        });
-  
-  }
+console.log("onItemPressed:",Cid);
+let category = {
+        children_data: [],
+        id: Cid,
+        is_active: false,
+        level: 2,
+        name: title,
+        parent_id: 3,
+        position: 35,
+        product_count: 14
+      };
+      dispatch(resetFilters());
+      dispatch(setCurrentCategory({ category }));
+      NavigationService.navigate(NAVIGATION_CATEGORY_PATH, {
+        title: category.name,
+      });
+
+}
 
   const renderMediaItems = () => slider.map((item, index) => (
     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={styles.slide}>
       <FastImage
         style={styles.imageStyle}
         resizeMode="contain"
-        source={{ uri:magento.getMediaUrl()+item.image }}
+        source={{ uri:magento.getMediaUrl()+item.image}}
       />
     </TouchableOpacity>
   ));
 
   return (
     <View style={[styles.imageContainer, style]}>
-         {renderMediaItems()} 
+      {/* <Text style={[CommonStyle.lPrimarySemiBold,CommonStyle.marginLR10,CommonStyle.marginTB10]}> Brands </Text> */}
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+         {/* <Swiper showsPagination={false} pagingEnabled autoplay={false}> */}
+         {renderMediaItems()}
+      {/* </Swiper> */}
+      </ScrollView>
+     
     </View>
   );
 };
 
-Discounts.propTypes = {
+Categories.propTypes = {
   slider: PropTypes.array,
   style: PropTypes.object,
 };
 
-Discounts.defaultProps = {
+Categories.defaultProps = {
   slider: [],
   style: {},
 };
 
 const styles = StyleSheet.create({
   imageContainer: {
-    // height:H(170),
+    height:H(140),
     alignItems: 'center',
-    paddingHorizontal:W(10)
+    // paddingHorizontal:W(10)
+    // width: W(200),
   },
   imageStyle: {
-    height:H(120),
-    width: "100%",
+    height:H(100),
+    width: W(100),
   },
   slide: {
-    width: "100%",
+    height:H(140),
+    width: W(130),
     alignItems: 'center',
+    // paddingVertical:H(5),
+    // paddingHorizontal:W(20),
+    // marginHorizontal:W(10),
     backgroundColor:GlobalStyles.colorSet.white
   },
 });

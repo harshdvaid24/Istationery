@@ -4,6 +4,8 @@ import {
   HOME_SCREEN_DATA,
   MAGENTO_GET_FEATURED_PRODUCTS,
   MAGENTO_UPDATE_FEATURED_CONF_PRODUCT,
+  MAGENTO_GET_OFFICE_PRODUCTS,
+  MAGENTO_UPDATE_OFFICE_CONF_PRODUCT,
   MAGENTO_UPDATE_REFRESHING_HOME_DATA,
 } from '../actions/types';
 
@@ -15,6 +17,7 @@ const INITIAL_STATE = {
   category_block_2:[],
   brand_block:[],
   featuredProducts: {},
+  officeProducts: {},
   refreshing: false,
 };
 
@@ -41,10 +44,36 @@ export default (state = INITIAL_STATE, action) => {
 
       return { ...state, featuredProducts };
     }
+    case MAGENTO_UPDATE_OFFICE_CONF_PRODUCT: {
+      const { sku, children } = action.payload;
+
+      let officeProducts = {};
+      _.forEach(state.officeProducts, (products, categoryId) => {
+        const items = products.items.map((product) => {
+          if (product.sku === sku) {
+            return {
+              ...product,
+              children,
+              price: getPriceFromChildren(children),
+            };
+          }
+          return product;
+        });
+
+        officeProducts = { ...officeProducts, [categoryId]: { ...products, items } };
+      });
+
+      return { ...state, featuredProducts };
+    }
     case MAGENTO_GET_FEATURED_PRODUCTS: {
       const { categoryId, products } = action.payload;
       const featuredProducts = { ...state.featuredProducts, [categoryId]: products };
       return { ...state, featuredProducts };
+    }
+    case MAGENTO_GET_OFFICE_PRODUCTS: {
+      const { categoryId, products } = action.payload;
+      const officeProducts = { ...state.officeProducts, [categoryId]: products };
+      return { ...state, officeProducts };
     }
     case HOME_SCREEN_DATA:
       return { ...state, ...action.payload };

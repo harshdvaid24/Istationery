@@ -46,7 +46,7 @@ let category = {
         resizeMode="contain"
         source={{ uri:magento.getMediaUrl()+item.image}}
       />
-    <Text numberOfLines={3} style={[CommonStyle.mBlackRegular,CommonStyle.TextAlineCenter,CommonStyle.marginTB10]}>{item.title}</Text>
+    <Text numberOfLines={3} style={[CommonStyle.mBlackRegular,CommonStyle.TextAlineCenter,CommonStyle.marginTB10]}>{item.category_name}</Text>
     </TouchableOpacity>
   ));
 
@@ -75,22 +75,22 @@ Categories.defaultProps = {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    height:H(170),
+    height:H(140),
     alignItems: 'center',
     // paddingHorizontal:W(10)
     // width: W(200),
   },
   imageStyle: {
-    height:H(50),
-    width: W(50),
+    height:H(100),
+    width: W(100),
   },
   slide: {
     height:H(140),
     width: W(130),
     alignItems: 'center',
-    paddingVertical:H(10),
-    paddingHorizontal:W(20),
-    marginHorizontal:W(10),
+    // paddingVertical:H(5),
+    // paddingHorizontal:W(20),
+    // marginHorizontal:W(10),
     backgroundColor:GlobalStyles.colorSet.white
   },
 });

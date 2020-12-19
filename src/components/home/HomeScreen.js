@@ -17,7 +17,7 @@ import { getHomeData, setCurrentProduct } from '../../actions';
 import HomeSlider from './HomeSlider';
 import Banners from './Banners';
 import SmallOffers from './SmallOffers';
-import Discounts from './Discounts';
+// import Discounts from './Discounts';
 import Categories from './Categories';
 import BrandsSlider from './BrandsSlider';
 
@@ -128,11 +128,25 @@ class HomeScreen extends Component {
   };
 
   renderFeatured() {
+    console.log("featuredProducts:",this.props.featuredProducts);
     return _.map(this.props.featuredProducts, (value, key) => (
       <FeaturedProducts
         key={`featured${key}`}
         products={value}
         title={this.props.featuredCategories[key].title}
+        onPress={this.onProductPress}
+        currencySymbol={this.props.currencySymbol}
+        currencyRate={this.props.currencyRate}
+      />
+    ));
+  }
+  renderFeature() {
+    console.log("officeProducts:",this.props.officeProducts);
+    return _.map(this.props.officeProducts, (value, key) => (
+      <FeaturedProducts
+        key={`featured${key}`}
+        products={value}
+        title={this.props.officeEssentials[key].title}
         onPress={this.onProductPress}
         currencySymbol={this.props.currencySymbol}
         currencyRate={this.props.currencyRate}
@@ -170,24 +184,29 @@ class HomeScreen extends Component {
                   barStyle="dark-content"
                 />
         <HomeSlider slider={this.props.slider} />
-        <Banners slider={this.props.category_block_1} />
+
+
+        <SmallOffers slider={this.props.extra_info_block1} />
+
+       
+
+
+        {/* <View  style={[CommonStyle.marginTop20]} />
+        <View  style={[CommonStyle.marginTop20]} /> */}
+        <Categories slider={this.props.category_block_1.items} />
+
+        <SmallOffers slider={this.props.new_arrivals} />
+       
         
-
-        <View  style={[CommonStyle.marginTop20]} />
-        <View  style={[CommonStyle.marginTop20]} />
-        <Categories slider={this.props.category_block_2} />
-
-       
-        <Discounts slider={this.props.promotional_block1} />
-
-      
-       
-
+        <Banners slider={this.props.category_block_2} />
+        
+        {/* <Discounts slider={this.props.category_block_1.items} /> */}
 
         {this.renderFeatured()}
+        {this.renderFeature()}
         <View  style={[CommonStyle.marginTop20]} />
-        <SmallOffers slider={this.props.extra_info_block1} />
-     
+        {/* <SmallOffers slider={this.props.extra_info_block1} /> */}
+        <SmallOffers slider={this.props.toys} />
         <View  style={[CommonStyle.marginTop10]} />
         <BrandsSlider slider={this.props.brand_block} />
       </ScrollView>
@@ -220,12 +239,16 @@ HomeScreen.propTypes = {
   category_block_1:PropTypes.array,
   extra_info_block1:PropTypes.array,
   promotional_block1:PropTypes.array,
+  new_arrivals:PropTypes.array,
+  toys:PropTypes.array,
   category_block_2:PropTypes.array,
   brand_block: PropTypes.array,
   getHomeData: PropTypes.func,
   navigation: PropTypes.object,
   featuredProducts: PropTypes.object,
   featuredCategories: PropTypes.object,
+  officeProducts:PropTypes.object,
+  officeEssentials:PropTypes.object,
   setCurrentProduct: PropTypes.func,
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
@@ -236,6 +259,8 @@ HomeScreen.defaultProps = {
   slider: [],
   category_block_1:[],
   extra_info_block1:[],
+  new_arrivals:[],
+  toys:[],
   promotional_block1:[],
   category_block_2:[],
   brand_block:[]

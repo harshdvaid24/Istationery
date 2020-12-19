@@ -42,16 +42,16 @@ const onItemPressed = (Cid,title) => {
         });
   
   }
-  const renderMediaItems = () => slider.items.map((item, index) => (
-    (index==0||(slider.items.length-1)==index)?
-    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_id)} key={index} style={[styles.slideH]}>
+  const renderMediaItems = () => slider.map((item, index) => (
+    ((slider.length-1)==index)?
+    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_id)} key={index} style={[styles.slideH,CommonStyle.border1]}>
       <FastImage
         style={styles.imageStyle}
         resizeMode="cover"
         source={{ uri:magento.getMediaUrl() + item.image }}
       />
     </TouchableOpacity>:
-     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide]}>
+     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide,CommonStyle.border1]}>
      <FastImage
        style={styles.imageStyle}
        resizeMode="cover"
@@ -71,7 +71,7 @@ const onItemPressed = (Cid,title) => {
             </Text>
           </View>
           <View style={[CommonStyle.FlexRow,CommonStyle.FlexWrap]}>
-          {(slider.items)?renderMediaItems():null} 
+          {(slider)?renderMediaItems():null} 
           </View>
         
     </View>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor:GlobalStyles.colorSet.white
   },
   imageStyle: {
-    height:H(220),
+    height:H(200),
     width: "100%",
   },
   slide: {

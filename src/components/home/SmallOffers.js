@@ -10,6 +10,7 @@ import  GlobalStyles,{H,W,StatusbarHeight,WINDOW_HEIGHT} from '../../utils/Globa
 import { setCurrentCategory, resetFilters } from '../../actions/index';
 import { NAVIGATION_CATEGORY_PATH } from '../../navigation/routes';
 import NavigationService from '../../navigation/NavigationService';
+import { cos } from 'react-native-reanimated';
 const SmallOffers = ({
   slider,
   style,
@@ -45,19 +46,12 @@ const onItemPressed = (Cid,title) => {
   }
   const renderMediaItems = () => slider.map((item, index) => (
     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide]}>
+     {console.log("small offers:",magento.getMediaUrl()+item.image)}
       <FastImage
         style={[styles.imageStyle]}
         resizeMode="contain"
         source={{ uri:magento.getMediaUrl()+item.image }}
       />
-      <View style={[styles.textContainer]}>
-          <Text style={[CommonStyle.mBlackSemiBold]} >
-             {item.title}
-          </Text>
-          <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop5]} >
-            {item.description}
-          </Text>
-      </View>
     </TouchableOpacity>
   ));
 
@@ -85,26 +79,19 @@ const styles = StyleSheet.create({
     // paddingHorizontal:W(10)
   },
   imageStyle: {
-    height:H(40),
-    width: W(40),
+    height:H(140),
+    width: "100%",
   },
   slide: {
     width: "100%",
-    paddingVertical:H(15),
+    paddingVertical:H(5),
     alignItems: 'center',
     flexDirection:'row',
-    paddingLeft:W(40),
     // justifyContent:'center',
     backgroundColor:GlobalStyles.colorSet.white,
     borderBottomColor:GlobalStyles.colorSet.BorderGrey,
     borderBottomWidth:0.5
   },
-  textContainer: {
-  // alignItems: 'center',
-  justifyContent:'center',
-  marginLeft:W(20),
-  backgroundColor:GlobalStyles.colorSet.white
-},
 });
 
 export default SmallOffers;
