@@ -32,7 +32,9 @@ import {
   UI_CHECKOUT_CUSTOMER_NEXT_LOADING,
   HOME_SCREEN_DATA,
   MAGENTO_GET_FEATURED_PRODUCTS,
+  MAGENTO_GET_OFFICE_PRODUCTS,
   MAGENTO_UPDATE_FEATURED_CONF_PRODUCT,
+  MAGENTO_UPDATE_OFFICE_PRODUCT,
   MAGENTO_REMOVE_FROM_CART,
   MAGENTO_REMOVE_FROM_CART_LOADING,
   MAGENTO_GET_SEARCH_PRODUCTS,
@@ -158,12 +160,15 @@ export const getHomeData = refreshing => async (dispatch) => {
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_HOME_DATA, payload: false });
 
     _.forEach(payload.featuredCategories, (details, categoryId) => getFeaturedCategoryProducts(categoryId, dispatch));
+    _.forEach(payload.officeEssentials, (details, categoryId) => getofficeEssentialsCategoryProducts(categoryId, dispatch));
   } catch (e) {
     logError(e);
   }
+  
 };
 
 const getFeaturedCategoryProducts = async (categoryId, dispatch) => {
+  // console.log("getFeaturedCategoryProducts:categoryId",categoryId);
   try {
     const products = await magento.admin.getProducts(categoryId);
     dispatch({
@@ -176,6 +181,25 @@ const getFeaturedCategoryProducts = async (categoryId, dispatch) => {
       MAGENTO_UPDATE_FEATURED_CONF_PRODUCT,
     );
   } catch (e) {
+    logError(e);
+  }
+};
+
+const getofficeEssentialsCategoryProducts = async (categoryId, dispatch) => {
+  // console.log("getofficeEssentialsCategoryProducts:categoryId",categoryId);
+  try {
+    const products = await magento.admin.getProducts(categoryId);
+    dispatch({
+      type: MAGENTO_GET_OFFICE_PRODUCTS,
+      payload: { categoryId, products },
+    });
+    updateConfigurableProductsPrices(
+      products.items,
+      dispatch,
+      MAGENTO_UPDATE_OFFICE_PRODUCT,
+    );
+  } catch (e) {
+    console.log("getofficeEssentialsCategoryProducts:e",e);
     logError(e);
   }
 };
