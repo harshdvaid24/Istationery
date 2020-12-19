@@ -19,6 +19,7 @@ import {
   NativeModules,
 } from 'react-native';
 import {getWishListProducts, removeWishlistItem,AddToCart, addToCart } from '../../actions'
+import { currentCustomer} from '../../actions';
 import {Spinner} from '../common'
 import { translate } from '../../i18n';
 import CartBadge from '../../components/cart/CartBadge';
@@ -40,6 +41,7 @@ import {
 } from '../../actions';
 
 const WishlistScreen = ({
+  currentCustomer: _currentCustomer,
   navigation,
   currencySymbol,
   currencyRate,
@@ -59,6 +61,7 @@ const loading = useSelector(state => state.wishlist.loading);
 
   useEffect(()=>{
     dispatch(getWishListProducts());
+    _currentCustomer();
   },[]);
 
   
@@ -198,7 +201,7 @@ WishlistScreen.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   setCurrentProduct: PropTypes.func.isRequired,
-
+  currentCustomer: PropTypes.func.isRequired,
 };
 
 WishlistScreen.defaultProps = {};
@@ -217,6 +220,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
+  currentCustomer,
   setCurrentProduct,
 })(WishlistScreen);
 

@@ -27,6 +27,8 @@ import Login from '../components/account/Login';
 import Signin from '../components/account/Signin';
 import Account from '../components/account/Account';
 import AuthLoading from '../components/account/AuthLoading';
+import AuthWishlistLoading from '../components/account/AuthWishlistLoading';
+
 import PasswordReset from '../components/account/PasswordReset';
 import HomeScreen from '../components/home/HomeScreen';
 import SearchScreen from '../components/search/SearchScreen';
@@ -131,6 +133,13 @@ AuthStack.navigationOptions = ({ navigation }) => {
     drawerLockMode,
   };
 };
+const WishlistStack = createStackNavigator({
+  [routes.NAVIGATION_WISHLIST_PATH]: WishlistScreen,
+}, {
+  // navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+});
+
 const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ACCOUNT_PATH]: Account,
   [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
@@ -157,6 +166,14 @@ AccountStack.navigationOptions = ({ navigation }) => {
     drawerLockMode,
   };
 };
+
+
+
+const WishlistSwitch = createSwitchNavigator({
+  [routes.NAVIGATION_AUTH_LOADING_SWITCH2]: AuthWishlistLoading,
+  [routes.NAVIGATION_LOGIN_STACK_PATH]: AuthStack,
+  [routes.NAVIGATION_WISHLIST_STACK_PATH]: WishlistStack,
+});
 
 const AccountSwitch = createSwitchNavigator({
   [routes.NAVIGATION_AUTH_LOADING_SWITCH]: AuthLoading,
@@ -216,12 +233,7 @@ CartStack.navigationOptions = ({ navigation }) => {
   };
 };
 
-const WishlistStack = createStackNavigator({
-  [routes.NAVIGATION_WISHLIST_PATH]: WishlistScreen,
-}, {
-  // navigationOptions: defaultHeader,
-  defaultNavigationOptions: defaultHeaderOptions
-});
+
 
 CartStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
@@ -325,8 +337,8 @@ const MainAppNavigator = createBottomTabNavigator(
         },
       }),
     },
-    [routes.NAVIGATION_WISHLIST_PATH]: {
-      screen: WishlistStack,
+    [routes.NAVIGATION_AUTH_STACK2_PATH]: {
+      screen: WishlistSwitch,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor,focused }) => {
           let imagePath = null;

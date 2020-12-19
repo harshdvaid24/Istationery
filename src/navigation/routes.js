@@ -20,10 +20,15 @@ export const NAVIGATION_LOGIN_PATH = 'Login';
 export const NAVIGATION_SIGNIN_PATH = 'Signin';
 export const NAVIGATION_RESET_PASSWORD_PATH = 'navigation_reset_password_path';
 export const NAVIGATION_CHANGE_PASSWORD_PATH = 'navigation_change_password_path';
+
 export const NAVIGATION_AUTH_STACK_PATH = 'Auth';
+export const NAVIGATION_AUTH_STACK2_PATH = 'Auth2';
 export const NAVIGATION_AUTH_LOADING_SWITCH = 'navigation_auth_loading_switch';
+export const NAVIGATION_AUTH_LOADING_SWITCH2 = 'navigation_auth_loading_switch2';
+
 export const NAVIGATION_LOGIN_STACK_PATH = 'Login_Stack';
 export const NAVIGATION_ACCOUNT_STACK_PATH = 'Account_Stack';
+export const NAVIGATION_WISHLIST_STACK_PATH = 'Wishlist_Stack';
 export const NAVIGATION_SEARCH_SCREEN_PATH = 'Search';
 export const NAVIGATION_ADDRESS_SCREEN_PATH = 'Address';
 export const NAVIGATION_DRAWER_SCREEN = 'Drawer_Screen';
