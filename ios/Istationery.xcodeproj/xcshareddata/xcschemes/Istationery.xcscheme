@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "magento_mobile_app.app"
-               BlueprintName = "magento_mobile_app"
-               ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+               BuildableName = "Istationery.app"
+               BlueprintName = "Istationery"
+               ReferencedContainer = "container:Istationery.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "magento_mobile_appTests.xctest"
-               BlueprintName = "magento_mobile_appTests"
-               ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+               BuildableName = "IstationeryTests.xctest"
+               BlueprintName = "IstationeryTests"
+               ReferencedContainer = "container:Istationery.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "magento_mobile_app.app"
-            BlueprintName = "magento_mobile_app"
-            ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+            BuildableName = "Istationery.app"
+            BlueprintName = "Istationery"
+            ReferencedContainer = "container:Istationery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "magento_mobile_app.app"
-            BlueprintName = "magento_mobile_app"
-            ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+            BuildableName = "Istationery.app"
+            BlueprintName = "Istationery"
+            ReferencedContainer = "container:Istationery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
