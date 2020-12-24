@@ -21,8 +21,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'magento_mobile_app' do
-  # Pods for magento_mobile_app
+target 'Istationery' do
+  # Pods for Istationery
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"

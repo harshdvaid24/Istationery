@@ -9,6 +9,6 @@ import 'react-native-gesture-handler';
 // const SHOW_STORYBOOK = true;
 //
 // const RootComponent = SHOW_STORYBOOK && __DEV__ ? StorybookUIRoot : App;
-// AppRegistry.registerComponent('magento_mobile_app', () => RootComponent);
+// AppRegistry.registerComponent('Istationery', () => RootComponent);
 
-AppRegistry.registerComponent('magento_mobile_app', () => App);
+AppRegistry.registerComponent('Istationery', () => App);

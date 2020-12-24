@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "magento_mobile_app-tvOS.app"
-               BlueprintName = "magento_mobile_app-tvOS"
-               ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+               BuildableName = "Istationery-tvOS.app"
+               BlueprintName = "Istationery-tvOS"
+               ReferencedContainer = "container:Istationery.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "magento_mobile_app-tvOSTests.xctest"
-               BlueprintName = "magento_mobile_app-tvOSTests"
-               ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+               BuildableName = "Istationery-tvOSTests.xctest"
+               BlueprintName = "Istationery-tvOSTests"
+               ReferencedContainer = "container:Istationery.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "magento_mobile_app-tvOSTests.xctest"
-               BlueprintName = "magento_mobile_app-tvOSTests"
-               ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+               BuildableName = "Istationery-tvOSTests.xctest"
+               BlueprintName = "Istationery-tvOSTests"
+               ReferencedContainer = "container:Istationery.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "magento_mobile_app-tvOS.app"
-            BlueprintName = "magento_mobile_app-tvOS"
-            ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+            BuildableName = "Istationery-tvOS.app"
+            BlueprintName = "Istationery-tvOS"
+            ReferencedContainer = "container:Istationery.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "magento_mobile_app-tvOS.app"
-            BlueprintName = "magento_mobile_app-tvOS"
-            ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+            BuildableName = "Istationery-tvOS.app"
+            BlueprintName = "Istationery-tvOS"
+            ReferencedContainer = "container:Istationery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "magento_mobile_app-tvOS.app"
-            BlueprintName = "magento_mobile_app-tvOS"
-            ReferencedContainer = "container:magento_mobile_app.xcodeproj">
+            BuildableName = "Istationery-tvOS.app"
+            BlueprintName = "Istationery-tvOS"
+            ReferencedContainer = "container:Istationery.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

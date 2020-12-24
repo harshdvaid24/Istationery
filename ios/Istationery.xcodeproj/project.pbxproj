@@ -21,7 +21,7 @@
 		B349B7B1594848748F9D20D4 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17733453D4584DA18DFB113C /* Poppins-ExtraBold.ttf */; };
 		B4993FB2ADC94687A7FEF8D6 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10ECCD4273CB4CCFB56FAA12 /* Poppins-Black.ttf */; };
 		BE0BD8C773774266BEE604FB /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 486AC838D7D94CFC98007A9A /* Poppins-Thin.ttf */; };
-		C8228D43CCEC369EF7A4DB56 /* libPods-magento_mobile_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B07B91F959A7138FA2F268 /* libPods-magento_mobile_app.a */; };
+		C8228D43CCEC369EF7A4DB56 /* libPods-Istationery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B07B91F959A7138FA2F268 /* libPods-Istationery.a */; };
 		C89E8BDFE37F4795B9E8B686 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CC59A850F65414494F5E4A7 /* Poppins-LightItalic.ttf */; };
 		CC44883BA80E4D84975D009C /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34E2EA58B3F54C35BC27BF1D /* Poppins-MediumItalic.ttf */; };
 		D4C58F5B162C4271916F0CBF /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FF8F85301CB462EBD6403A5 /* Poppins-BlackItalic.ttf */; };
@@ -36,22 +36,22 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* magento_mobile_appTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = magento_mobile_appTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* IstationeryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IstationeryTests.m; sourceTree = "<group>"; };
 		10ECCD4273CB4CCFB56FAA12 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/assets/fonts/Poppins-Black.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* magento_mobile_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = magento_mobile_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = magento_mobile_app/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = magento_mobile_app/AppDelegate.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Istationery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Istationery.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Istationery/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Istationery/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = magento_mobile_app/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = magento_mobile_app/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = magento_mobile_app/main.m; sourceTree = "<group>"; };
-		13BBA3AF23A3DF64BAA6354C /* Pods-magento_mobile_app-magento_mobile_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-magento_mobile_appTests.release.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-magento_mobile_appTests/Pods-magento_mobile_app-magento_mobile_appTests.release.xcconfig"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Istationery/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Istationery/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Istationery/main.m; sourceTree = "<group>"; };
+		13BBA3AF23A3DF64BAA6354C /* Pods-Istationery-IstationeryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-IstationeryTests.release.xcconfig"; path = "Target Support Files/Pods-Istationery-IstationeryTests/Pods-Istationery-IstationeryTests.release.xcconfig"; sourceTree = "<group>"; };
 		15BF76B19EF44481BDA94347 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../src/assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		17733453D4584DA18DFB113C /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
 		1F8B11C88D1943F4B5F48BC2 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		222E1C60008043FAA02600E0 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../src/assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
 		224E9C23DFB84C2BAE667702 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		26544C156E57F415DA822D3E /* libPods-magento_mobile_app-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_mobile_app-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26544C156E57F415DA822D3E /* libPods-Istationery-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Istationery-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C82A3A7E31E43BB99F6F52C /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../src/assets/fonts/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		311CAF7C346D4306A922415B /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../src/assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
@@ -61,31 +61,31 @@
 		3586E242C159415D9CAC889A /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../src/assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
 		3808C9A22F494947AC2E183E /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../src/assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		3CF6CD17B4EC4B2F8CF89C15 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../src/assets/fonts/Poppins-Italic.ttf"; sourceTree = "<group>"; };
-		43B07B91F959A7138FA2F268 /* libPods-magento_mobile_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_mobile_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B07B91F959A7138FA2F268 /* libPods-Istationery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Istationery.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		44E13C2BF0824257B6098787 /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../src/assets/fonts/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
 		47E233FB9C6747728390F743 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../src/assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
 		486AC838D7D94CFC98007A9A /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../src/assets/fonts/Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		550ABD00B4D24B1F99AB7FD4 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5938CB21441841F1A72AFFFF /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		5F6697C4E8E59A683D5DA842 /* Pods-magento_mobile_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app.release.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app/Pods-magento_mobile_app.release.xcconfig"; sourceTree = "<group>"; };
-		62AFDAF81AD4DD6908C54ACB /* Pods-magento_mobile_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app.debug.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app/Pods-magento_mobile_app.debug.xcconfig"; sourceTree = "<group>"; };
+		5F6697C4E8E59A683D5DA842 /* Pods-Istationery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery.release.xcconfig"; path = "Target Support Files/Pods-Istationery/Pods-Istationery.release.xcconfig"; sourceTree = "<group>"; };
+		62AFDAF81AD4DD6908C54ACB /* Pods-Istationery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery.debug.xcconfig"; path = "Target Support Files/Pods-Istationery/Pods-Istationery.debug.xcconfig"; sourceTree = "<group>"; };
 		66A62102243BA6DE00B9FA2E /* BridgeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeTest.swift; sourceTree = "<group>"; };
-		66A62104243BA75600B9FA2E /* magento_mobile_app-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "magento_mobile_app-Bridging-Header.h"; sourceTree = "<group>"; };
+		66A62104243BA75600B9FA2E /* Istationery-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Istationery-Bridging-Header.h"; sourceTree = "<group>"; };
 		6978635561254170BD5EC522 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../src/assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
 		6DA5A45E1A6249EFB3FD8517 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		716D068136A740CE8ED0CE7D /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		7235348CCC154DDF842D3C18 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		78EA8429DC3F21DDEFBB3722 /* Pods-magento_mobile_appTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_appTests.release.xcconfig"; path = "Target Support Files/Pods-magento_mobile_appTests/Pods-magento_mobile_appTests.release.xcconfig"; sourceTree = "<group>"; };
-		7AFEB8A22620F871D84F21EC /* Pods-magento_mobile_app-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-tvOSTests/Pods-magento_mobile_app-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		78EA8429DC3F21DDEFBB3722 /* Pods-IstationeryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IstationeryTests.release.xcconfig"; path = "Target Support Files/Pods-IstationeryTests/Pods-IstationeryTests.release.xcconfig"; sourceTree = "<group>"; };
+		7AFEB8A22620F871D84F21EC /* Pods-Istationery-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Istationery-tvOSTests/Pods-Istationery-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		7AFFAFAD8F2B4DAC849F23EA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		7CC59A850F65414494F5E4A7 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../src/assets/fonts/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
 		7FF8F85301CB462EBD6403A5 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../src/assets/fonts/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		85AAB3DDB7744152A77E2168 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../src/assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
-		8BCDE074D7C429ACECD2D3C2 /* Pods-magento_mobile_app-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-tvOS.release.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-tvOS/Pods-magento_mobile_app-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8BCDE074D7C429ACECD2D3C2 /* Pods-Istationery-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-tvOS.release.xcconfig"; path = "Target Support Files/Pods-Istationery-tvOS/Pods-Istationery-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		904FF31811E74C939EA40205 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		94C3FE4A71B04BB0838E76A9 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		95AD4CA27DB34CCA859E4714 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../src/assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
-		9B5BC4AAC0B78A67487E459F /* Pods-magento_mobile_app-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-tvOSTests/Pods-magento_mobile_app-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B5BC4AAC0B78A67487E459F /* Pods-Istationery-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Istationery-tvOSTests/Pods-Istationery-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E57348D64CB4B65B291F801 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		A2BA45F22B2F42C1B18034B5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = ../src/assets/fonts/FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
 		A439DBF571D341379CA9005E /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../src/assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
@@ -93,21 +93,21 @@
 		ACC0466B224BACC4000CA78C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		B413892E842F4D67881A7EC4 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		B757921698F94F22B8308F68 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		BCFB8127DAFEC5A8A868600D /* Pods-magento_mobile_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_appTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_mobile_appTests/Pods-magento_mobile_appTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BCFB8127DAFEC5A8A868600D /* Pods-IstationeryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IstationeryTests.debug.xcconfig"; path = "Target Support Files/Pods-IstationeryTests/Pods-IstationeryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFE8A2A9EBD64597A0ADABA4 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		C04A1B2376AC4802A1B269BC /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		C103D3E902F74B9080451225 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C1E95BFF71FE4165953719EB /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		CA9546DC8C4848F727A49559 /* Pods-magento_mobile_app-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-tvOS/Pods-magento_mobile_app-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		CA9546DC8C4848F727A49559 /* Pods-Istationery-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Istationery-tvOS/Pods-Istationery-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		CD703ACAFE6D454E80EB561B /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../src/assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
 		CEA8582276934322ACC74181 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../src/assets/fonts/Feather.ttf; sourceTree = "<group>"; };
-		D43208E9DAF66143E62F07C4 /* libPods-magento_mobile_app-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_mobile_app-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D43208E9DAF66143E62F07C4 /* libPods-Istationery-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Istationery-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D732577F0D4741529F7EF919 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = ../src/assets/fonts/FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
 		DC23EB0B29884201AB486E3F /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
-		E2D40163666AA103FDCC183B /* libPods-magento_mobile_app-magento_mobile_appTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-magento_mobile_app-magento_mobile_appTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2D40163666AA103FDCC183B /* libPods-Istationery-IstationeryTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Istationery-IstationeryTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6C103C267894101BCC61BCB /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		EADBF1D465AC453A861A1935 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
-		ECF669AF3DCF63BB345E38F0 /* Pods-magento_mobile_app-magento_mobile_appTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-magento_mobile_app-magento_mobile_appTests.debug.xcconfig"; path = "Target Support Files/Pods-magento_mobile_app-magento_mobile_appTests/Pods-magento_mobile_app-magento_mobile_appTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ECF669AF3DCF63BB345E38F0 /* Pods-Istationery-IstationeryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Istationery-IstationeryTests.debug.xcconfig"; path = "Target Support Files/Pods-Istationery-IstationeryTests/Pods-Istationery-IstationeryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EF947B8AE1C34027A73D24C1 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		F293D786F98047018F0BD418 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		F4603614423045DB95FB7489 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../src/assets/fonts/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
@@ -119,20 +119,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C8228D43CCEC369EF7A4DB56 /* libPods-magento_mobile_app.a in Frameworks */,
+				C8228D43CCEC369EF7A4DB56 /* libPods-Istationery.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* magento_mobile_appTests */ = {
+		00E356EF1AD99517003FC87E /* IstationeryTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* magento_mobile_appTests.m */,
+				00E356F21AD99517003FC87E /* IstationeryTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = magento_mobile_appTests;
+			path = IstationeryTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -143,7 +143,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* magento_mobile_app */ = {
+		13B07FAE1A68108700A75B9A /* Istationery */ = {
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -153,25 +153,25 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				66A62104243BA75600B9FA2E /* magento_mobile_app-Bridging-Header.h */,
+				66A62104243BA75600B9FA2E /* Istationery-Bridging-Header.h */,
 				66A62102243BA6DE00B9FA2E /* BridgeTest.swift */,
 			);
-			name = magento_mobile_app;
+			name = Istationery;
 			sourceTree = "<group>";
 		};
 		156495F786610F0BEFEC1043 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				62AFDAF81AD4DD6908C54ACB /* Pods-magento_mobile_app.debug.xcconfig */,
-				5F6697C4E8E59A683D5DA842 /* Pods-magento_mobile_app.release.xcconfig */,
-				CA9546DC8C4848F727A49559 /* Pods-magento_mobile_app-tvOS.debug.xcconfig */,
-				8BCDE074D7C429ACECD2D3C2 /* Pods-magento_mobile_app-tvOS.release.xcconfig */,
-				9B5BC4AAC0B78A67487E459F /* Pods-magento_mobile_app-tvOSTests.debug.xcconfig */,
-				7AFEB8A22620F871D84F21EC /* Pods-magento_mobile_app-tvOSTests.release.xcconfig */,
-				BCFB8127DAFEC5A8A868600D /* Pods-magento_mobile_appTests.debug.xcconfig */,
-				78EA8429DC3F21DDEFBB3722 /* Pods-magento_mobile_appTests.release.xcconfig */,
-				ECF669AF3DCF63BB345E38F0 /* Pods-magento_mobile_app-magento_mobile_appTests.debug.xcconfig */,
-				13BBA3AF23A3DF64BAA6354C /* Pods-magento_mobile_app-magento_mobile_appTests.release.xcconfig */,
+				62AFDAF81AD4DD6908C54ACB /* Pods-Istationery.debug.xcconfig */,
+				5F6697C4E8E59A683D5DA842 /* Pods-Istationery.release.xcconfig */,
+				CA9546DC8C4848F727A49559 /* Pods-Istationery-tvOS.debug.xcconfig */,
+				8BCDE074D7C429ACECD2D3C2 /* Pods-Istationery-tvOS.release.xcconfig */,
+				9B5BC4AAC0B78A67487E459F /* Pods-Istationery-tvOSTests.debug.xcconfig */,
+				7AFEB8A22620F871D84F21EC /* Pods-Istationery-tvOSTests.release.xcconfig */,
+				BCFB8127DAFEC5A8A868600D /* Pods-IstationeryTests.debug.xcconfig */,
+				78EA8429DC3F21DDEFBB3722 /* Pods-IstationeryTests.release.xcconfig */,
+				ECF669AF3DCF63BB345E38F0 /* Pods-Istationery-IstationeryTests.debug.xcconfig */,
+				13BBA3AF23A3DF64BAA6354C /* Pods-Istationery-IstationeryTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -181,10 +181,10 @@
 			children = (
 				ACC0466B224BACC4000CA78C /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				43B07B91F959A7138FA2F268 /* libPods-magento_mobile_app.a */,
-				D43208E9DAF66143E62F07C4 /* libPods-magento_mobile_app-tvOS.a */,
-				26544C156E57F415DA822D3E /* libPods-magento_mobile_app-tvOSTests.a */,
-				E2D40163666AA103FDCC183B /* libPods-magento_mobile_app-magento_mobile_appTests.a */,
+				43B07B91F959A7138FA2F268 /* libPods-Istationery.a */,
+				D43208E9DAF66143E62F07C4 /* libPods-Istationery-tvOS.a */,
+				26544C156E57F415DA822D3E /* libPods-Istationery-tvOSTests.a */,
+				E2D40163666AA103FDCC183B /* libPods-Istationery-IstationeryTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,9 +199,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* magento_mobile_app */,
+				13B07FAE1A68108700A75B9A /* Istationery */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* magento_mobile_appTests */,
+				00E356EF1AD99517003FC87E /* IstationeryTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				B69DB0F53FA946D2B47C06C7 /* Resources */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
@@ -215,7 +215,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* magento_mobile_app.app */,
+				13B07F961A680F5B00A75B9A /* Istationery.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -280,9 +280,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* magento_mobile_app */ = {
+		13B07F861A680F5B00A75B9A /* Istationery */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "magento_mobile_app" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Istationery" */;
 			buildPhases = (
 				C7A88E147B0D371BA36B84FA /* [CP] Check Pods Manifest.lock */,
 				66528E092350CD8B0028EBC4 /* Start Packager */,
@@ -296,9 +296,9 @@
 			);
 			dependencies = (
 			);
-			name = magento_mobile_app;
+			name = Istationery;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* magento_mobile_app.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Istationery.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -317,7 +317,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "magento_mobile_app" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Istationery" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -331,7 +331,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* magento_mobile_app */,
+				13B07F861A680F5B00A75B9A /* Istationery */,
 			);
 		};
 /* End PBXProject section */
@@ -406,7 +406,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-magento_mobile_app/Pods-magento_mobile_app-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Istationery/Pods-Istationery-resources.sh",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -445,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-magento_mobile_app/Pods-magento_mobile_app-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Istationery/Pods-Istationery-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C7A88E147B0D371BA36B84FA /* [CP] Check Pods Manifest.lock */ = {
@@ -463,7 +463,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-magento_mobile_app-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Istationery-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -492,7 +492,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = magento_mobile_app;
+			path = Istationery;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -500,7 +500,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62AFDAF81AD4DD6908C54ACB /* Pods-magento_mobile_app.debug.xcconfig */;
+			baseConfigurationReference = 62AFDAF81AD4DD6908C54ACB /* Pods-Istationery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -514,7 +514,7 @@
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				INFOPLIST_FILE = magento_mobile_app/Info.plist;
+				INFOPLIST_FILE = Istationery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /usr/lib/swift @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -523,9 +523,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.isationery.isationeryApp;
-				PRODUCT_NAME = magento_mobile_app;
+				PRODUCT_NAME = Istationery;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "magento_mobile_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Istationery-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -534,7 +534,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F6697C4E8E59A683D5DA842 /* Pods-magento_mobile_app.release.xcconfig */;
+			baseConfigurationReference = 5F6697C4E8E59A683D5DA842 /* Pods-Istationery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -544,7 +544,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3G8AK4M6P5;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = magento_mobile_app/Info.plist;
+				INFOPLIST_FILE = Istationery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) /usr/lib/swift @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -553,9 +553,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.isationery.isationeryApp;
-				PRODUCT_NAME = magento_mobile_app;
+				PRODUCT_NAME = Istationery;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "magento_mobile_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Istationery-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -600,7 +600,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "magento_mobile_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Istationery-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -637,7 +637,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "magento_mobile_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Istationery-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -645,7 +645,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "magento_mobile_app" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Istationery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -654,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "magento_mobile_app" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Istationery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

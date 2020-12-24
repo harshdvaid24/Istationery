@@ -14,11 +14,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface magento_mobile_appTests : XCTestCase
+@interface IstationeryTests : XCTestCase
 
 @end
 
-@implementation magento_mobile_appTests
+@implementation IstationeryTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {
