@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { MaterialHeaderButtons, Text, Item } from '../common';
 import {
   NAVIGATION_HOME_PRODUCT_PATH,
+  NAVIGATION_CATEGORY_SCREEN_PATH
 } from '../../navigation/routes';
 import { getHomeData, setCurrentProduct } from '../../actions';
 
@@ -58,7 +59,7 @@ class HomeScreen extends Component {
     headerLeft: (
       <View style={[CommonStyle.marginLR10]}>     
           <MaterialHeaderButtons>
-            <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={navigation.getParam('toggleDrawer')} />
+            <Item title="menu" iconName="menu" color={GlobalStyles.colorSet.btnPrimary} onPress={()=>navigation.navigate(NAVIGATION_CATEGORY_SCREEN_PATH)} />
           </MaterialHeaderButtons>
       </View>
     ),

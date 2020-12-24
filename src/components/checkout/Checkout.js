@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,useState } from 'react';
 import { ScrollView, View,TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import CheckoutSection from './CheckoutSection';
@@ -25,7 +25,12 @@ const Checkout = ({
   activeSection: _activeSection,
 }) => {
   const theme = useContext(ThemeContext);
+  // const [activeSection, setactiveState] = useState(_activeSection)
   const activeSection = Number(_activeSection);
+  // console.log('FROM CHECKOUT PAGE',activeSection)
+  // const activateNewSection = (sectionNumber) =>{
+  //   setactiveState(sectionNumber)
+  // }
 
   return (
     <ScrollView style={styles.container(theme)}>
@@ -41,21 +46,27 @@ const Checkout = ({
         number="2"
         expanded={activeSection === 2}
       >
+      {/* {activeSection == 2 && */}
         <CheckoutShippingMethod />
+      {/* } */}
       </CheckoutSection>
       <CheckoutSection
         title={translate('checkout.paymentMethod')}
         number="3"
         expanded={activeSection === 3}
       >
+      {/* {activeSection == 3 &&   */}
         <CheckoutPaymentMethod />
+        {/* } */}
       </CheckoutSection>
       <CheckoutSection
         title={translate('checkout.summary')}
         number="4"
         expanded={activeSection === 4}
       >
+      {/* {activeSection == 4 &&  */}
         <CheckoutTotals navigation={navigation} />
+      {/* } */}
       </CheckoutSection>
     </ScrollView>
   );
