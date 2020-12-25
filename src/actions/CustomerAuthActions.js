@@ -22,6 +22,7 @@ import {
 import NavigationService from '../navigation/NavigationService';
 import {
   NAVIGATION_ACCOUNT_STACK_PATH,
+  NAVIGATION_WISHLIST_STACK_PATH,
   NAVIGATION_LOGIN_STACK_PATH,
 } from '../navigation/routes';
 import { logError } from '../helper/logger';
@@ -81,7 +82,25 @@ export const auth = (username, password) => async (dispatch) => {
     if (response.message) {
       authFail(dispatch, response.message);
     } else {
-      authSuccess(dispatch, response);
+      authSuccess(dispatch, response,NAVIGATION_ACCOUNT_STACK_PATH);
+      dispatch({ type: MAGENTO_LOGIN_SUCCESS });
+    }
+  } catch (e) {
+    logError(e);
+    authFail(dispatch, e.message);
+  }
+};
+export const wishlistAuth = (username, password) => async (dispatch) => {
+  try {
+    dispatch({ type: MAGENTO_AUTH_LOADING, payload: true });
+    const response = await magento.guest.auth(username, password);
+    console.log('token');
+    console.log('auth:response:',response);
+    magento.setCustomerToken(response);
+    if (response.message) {
+      authFail(dispatch, response.message);
+    } else {
+      authSuccess(dispatch, response,NAVIGATION_WISHLIST_STACK_PATH);
       dispatch({ type: MAGENTO_LOGIN_SUCCESS });
     }
   } catch (e) {
@@ -90,14 +109,20 @@ export const auth = (username, password) => async (dispatch) => {
   }
 };
 
-const authSuccess = async (dispatch, token) => {
+const authSuccess = async (dispatch, token,SuccessScreen) => {
   dispatch({ type: MAGENTO_AUTH, payload: token });
 
   try {
     await AsyncStorage.setItem('customerToken', token);
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
     dispatch(getCart());
-    NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
+    if(SuccessScreen==NAVIGATION_ACCOUNT_STACK_PATH){
+      NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
+    }
+    else if(SuccessScreen==NAVIGATION_WISHLIST_STACK_PATH){
+      NavigationService.navigate(NAVIGATION_WISHLIST_STACK_PATH);
+    }
+    
   } catch (e) {
     logError(e);
     authFail(dispatch, 'Something went wrong. Pleas try again later.');

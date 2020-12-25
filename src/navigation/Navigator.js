@@ -24,6 +24,7 @@ import CategoryTreeScreen from '../components/catalog/CategoryTreeScreen';
 import Cart from '../components/cart/Cart';
 import Checkout from '../components/checkout/Checkout';
 import Login from '../components/account/Login';
+import WishlistLogin from '../components/Wishlist/Login';
 import Signin from '../components/account/Signin';
 import Account from '../components/account/Account';
 import AuthLoading from '../components/account/AuthLoading';
@@ -134,6 +135,27 @@ AuthStack.navigationOptions = ({ navigation }) => {
     drawerLockMode,
   };
 };
+const WishlistAuthStack = createStackNavigator({
+  [routes.NAVIGATION_LOGIN_PATH]: WishlistLogin,
+  [routes.NAVIGATION_SIGNIN_PATH]: Signin,
+  [routes.NAVIGATION_RESET_PASSWORD_PATH]: PasswordReset,
+  [routes.NAVIGATION_CHANGE_PASSWORD_PATH]: ChangePasswordScreen 
+}, {
+  navigationOptions: defaultHeader,
+  defaultNavigationOptions: defaultHeaderOptions
+});
+AuthStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  let drawerLockMode = 'unlocked';
+  // if (navigation.state.index > 0) {
+  //   tabBarVisible = false;
+  //   drawerLockMode = 'locked-closed';
+  // }
+  return {
+    tabBarVisible,
+    drawerLockMode,
+  };
+};
 const WishlistStack = createStackNavigator({
   [routes.NAVIGATION_WISHLIST_PATH]: WishlistScreen,
 }, {
@@ -172,7 +194,7 @@ AccountStack.navigationOptions = ({ navigation }) => {
 
 const WishlistSwitch = createSwitchNavigator({
   [routes.NAVIGATION_AUTH_LOADING_SWITCH2]: AuthWishlistLoading,
-  [routes.NAVIGATION_LOGIN_STACK_PATH]: AuthStack,
+  [routes.NAVIGATION_LOGIN_STACK_PATH]: WishlistAuthStack,
   [routes.NAVIGATION_WISHLIST_STACK_PATH]: WishlistStack,
 });
 

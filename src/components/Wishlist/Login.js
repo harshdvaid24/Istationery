@@ -14,7 +14,7 @@ import {
   Input,
  
 } from '../common';
-import { auth,ResetError } from '../../actions/CustomerAuthActions';
+import { wishlistAuth,ResetError } from '../../actions/CustomerAuthActions';
 import {
   NAVIGATION_SIGNIN_PATH,
   NAVIGATION_RESET_PASSWORD_PATH,
@@ -34,7 +34,7 @@ function Login ({
   error,
   success,
   navigation,
-  auth: _auth,
+  wishlistAuth: _auth,
   ResetError:_ResetError
 }) {
   const theme = useContext(ThemeContext);
@@ -263,4 +263,4 @@ Login.defaultProps = {
   loading: false,
 };
 
-export default connect(mapStateToProps, { auth,ResetError })(Login);
+export default connect(mapStateToProps, { wishlistAuth,ResetError })(Login);
