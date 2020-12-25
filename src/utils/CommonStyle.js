@@ -876,6 +876,7 @@ const CommonStyle = StyleSheet.create({
   },
 
 width10p:{width:'10%'},
+width15p:{width:'15%'},
 width20p:{width:'20%'},
 width25p:{width:'25%'},
 width30p:{width:'30%'},

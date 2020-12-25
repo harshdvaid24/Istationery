@@ -3,7 +3,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  listTypeGrid: true,
+  listTypeGrid: false,
 };
 
 export default (state = INITIAL_STATE, action) => {

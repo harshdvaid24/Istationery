@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text,Platform } from 'react-native';
+import { View,Text,Platform,TouchableOpacity,Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -16,6 +16,7 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+
 
 class SearchScreen extends Component {
   static contextType = ThemeContext;
@@ -101,15 +102,23 @@ class SearchScreen extends Component {
     return (
       <View style={styles.containerStyle(theme)}>
         <View style={[{flexDirection:'row',justifyContent:'center',alignItems:'center'}]}>
-        <SearchBar
-          placeholder={'Search Products'}
-          onChangeText={this.updateSearch}
-          value={input}
-          containerStyle={[styles.searchStyle(theme)]}
-          inputStyle={[styles.inputStyle(theme)]}
-          inputContainerStyle={[styles.inputContainerStyle(theme)]}
-          showLoading={this.props.loadingMore}
-        />
+        <TouchableOpacity style={[CommonStyle.width15p,styles.backBtn]}
+          onPress={() => {this.props.navigation.goBack() }}
+          >
+            <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,]} source={require("./.././../../resources/icons/back.png")} />
+          </TouchableOpacity>
+          <View style={[CommonStyle.width85p]}>
+              <SearchBar
+              placeholder={'Search Products'}
+              onChangeText={this.updateSearch}
+              value={input}
+              containerStyle={[styles.searchStyle(theme)]}
+              inputStyle={[styles.inputStyle(theme)]}
+              inputContainerStyle={[styles.inputContainerStyle(theme)]}
+              showLoading={this.props.loadingMore}
+            />
+          </View>
+        
       
         </View>
        
@@ -133,14 +142,14 @@ const styles = {
     // marginLeft:W(20),
     borderBottomWidth: 0,
     borderTopWidth: 0,
-    height: theme.dimens.searchBarHeight,
+    height: H(45),
     width: "100%",
     borderBottomWidth:1,
     borderBottomColor:GlobalStyle.colorSet.BorderGrey
   }),
   inputContainerStyle: theme => ({
     // marginTop:5,
-    marginLeft:W(20),
+    // marginLeft:W(20),
     backgroundColor: GlobalStyle.colorSet.white,
     borderColor:GlobalStyle.colorSet.btnPrimary,
     borderRadius: theme.dimens.searchBarBorderRadius,
@@ -161,6 +170,14 @@ const styles = {
     flexDirection:'row',
     alignItems:'center'
   },
+  backBtn:{
+    height: H(45),
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:GlobalStyle.colorSet.white,
+    borderBottomWidth:1,
+    borderBottomColor:GlobalStyle.colorSet.BorderGrey
+  }
 };
 
 const mapStateToProps = ({ search, filters, magento, ui }) => {

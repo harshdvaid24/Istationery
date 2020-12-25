@@ -56,7 +56,7 @@ const Checkout = ({
         expanded={activeSection === 3}
       >
       {/* {activeSection == 3 &&   */}
-        <CheckoutPaymentMethod />
+        <CheckoutPaymentMethod navigation={navigation} />
         {/* } */}
       </CheckoutSection>
       <CheckoutSection

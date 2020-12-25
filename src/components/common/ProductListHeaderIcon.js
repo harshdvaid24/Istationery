@@ -17,8 +17,8 @@ const HeaderGridToggleIcon = () => {
   return (
     <TouchableOpacity style={[{height:"100%"},CommonStyle.width100p,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter,CommonStyle.FlexRow]} onPress={onPress}>{
         (isGrid)?
-       <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/list.png")} />
-     : <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/grid.png")} />
+        <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/grid.png")} />
+     : <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/list.png")} />
     }
         <Text style={[CommonStyle.mGreySemiBold,CommonStyle.marginLR10]}>
               View

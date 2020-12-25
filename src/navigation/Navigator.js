@@ -43,7 +43,7 @@ import WishlistScreen from '../components/Wishlist/WishlistScreen';
 import AddressScreen from '../components/AddressList/AddressScreen';
 import AddAddressScreen from '../components/AddressList/AddAddressScreen';
 
-// import AddAddress from '../components/Account/AddressScreen';
+ import {PaymentScreen} from '../components/checkout/PaymentScreen';
 
 
 import CartBadge from '../components/cart/CartBadge';
@@ -90,6 +90,7 @@ const HomeStack = createStackNavigator(
     [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
     [routes.NAVIGATION_CART_PATH]: Cart,
     [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
+    
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
@@ -440,6 +441,7 @@ const Nav = createStackNavigator({
   },
   
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
+  [routes.NAVIGATION_PAYMENT_PATH]: PaymentScreen,
 },
 {
   // getCustomActionCreators: (route, navStateKey) => {

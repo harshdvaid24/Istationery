@@ -36,9 +36,9 @@ import SplashScreen from 'react-native-splash-screen'
 const LogoTitle = ( ) => {
   return(
   <View style={[CommonStyle.width100p]}>
-    <View style={[CommonStyle.width45p]}>
+    <View style={[CommonStyle.width100p,CommonStyle.HorizontalCenter]}>
     <FastImage
-          style={{height:H(45),width:"100%"}}
+          style={[styles.Logo]}
           resizeMode="contain"
           source={require('./../../../resources/icons/logo.png')}
         />
@@ -232,7 +232,8 @@ const styles = StyleSheet.create({
   headerRight:{
     flexDirection:'row',
     alignItems:'center'
-  }
+  },
+  Logo:{height:H(45),width:W(200)}
 });
 
 HomeScreen.propTypes = {

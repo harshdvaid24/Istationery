@@ -19,7 +19,7 @@ const HomeSlider = ({
         resizeMode="cover"
         source={{ uri: magento.getMediaUrl() + slide.image }}
       />
-      <Text style={styles.slideTitle(theme)}>{slide.title}</Text>
+      {/* <Text style={styles.slideTitle(theme)}>{slide.title}</Text> */}
     </View>
   ));
 
