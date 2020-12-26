@@ -26,7 +26,7 @@ const ProductListItem = ({
   const image = () => getProductThumbnailFromAttribute(product);
 
   return (
-    <View style={viewContainerStyle}>
+    <View style={[viewContainerStyle]}>
       <TouchableOpacity
         style={[styles.containerStyle(theme), columnContainerStyle]}
         onPress={() => { onRowPress(product); }}
@@ -40,7 +40,7 @@ const ProductListItem = ({
         <View style={[styles.infoStyle, infoStyle]}>
           <View style={[styles.productNameContainer]}>
               
-             <Text style={[styles.textStyle]}>{product.name}</Text>
+             <Text numberOfLines={2} style={[styles.textStyle]}>{product.name}</Text>
           </View>
           <View style={[styles.productPriceContainer,CommonStyle.paddingLR15]}>
             <Price

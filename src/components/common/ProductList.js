@@ -211,8 +211,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     //  alignItems: 'stretch',
      justifyContent: 'space-between',
-    //  borderBottomWidth: 0.3,
-    //  borderBottomColor:GlobalStyle.colorSet.LightGrey,
+     borderTopWidth: 1,
+     borderTopColor:GlobalStyle.colorSet.BorderGrey,
   },
   shortButton: {
     // flex: 1,
