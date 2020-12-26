@@ -211,7 +211,14 @@ export const getCategoryTree = refreshing => async (dispatch) => {
 
   try {
     const data = await magento.admin.getCategoriesTree();
-    dispatch({ type: MAGENTO_GET_CATEGORY_TREE, payload: data });
+    let dataToPush=[];
+    data.children_data.forEach((child) => {
+        if(child.is_active)
+        {
+          dataToPush.push(child)
+        }
+    });
+    dispatch({ type: MAGENTO_GET_CATEGORY_TREE, payload: {children_data:dataToPush} });
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CATEGORY_TREE, payload: false });
   } catch (error) {
     logError(error);
