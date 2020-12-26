@@ -44,14 +44,14 @@ const onItemPressed = (Cid,title) => {
   }
   const renderMediaItems = () => slider.map((item, index) => (
     ((slider.length-1)==index)?
-    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_id)} key={index} style={[styles.slideH,CommonStyle.border1]}>
+    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_id)} key={index} style={[styles.slideH]}>
       <FastImage
         style={styles.imageStyle}
         resizeMode="cover"
         source={{ uri:magento.getMediaUrl() + item.image }}
       />
     </TouchableOpacity>:
-     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide,CommonStyle.border1]}>
+     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide]}>
      <FastImage
        style={styles.imageStyle}
        resizeMode="cover"
