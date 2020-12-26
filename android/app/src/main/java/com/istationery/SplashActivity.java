@@ -1,4 +1,4 @@
-package com.magento_mobile_app;
+package com.istationery;
 
 import android.content.Intent;
 import android.os.Bundle;
