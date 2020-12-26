@@ -3,6 +3,7 @@ import { connect, useSelector } from 'react-redux';
 import {
   View,TouchableOpacity,Image,
   RefreshControl,Platform,
+  Text
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -109,7 +110,12 @@ Category['navigationOptions'] = screenProps => ({
       <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-  title:screenProps.navigation?.state?.params.title ,
+  headerTitle: () => <View style={[CommonStyle.headerTitle]}>
+  <Text style={[CommonStyle.lBlackRegular]} numberOfLines={1}>
+ { screenProps.navigation?.state?.params.title}
+  </Text>
+</View>,
+  // title:screenProps.navigation?.state?.params.title ,
   headerRight: () => (
     <View style={[styles.headerRight]}>
     <TouchableOpacity

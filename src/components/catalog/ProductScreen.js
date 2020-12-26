@@ -2,11 +2,11 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext, useState, useEffect } from 'react';
-import { ScrollView,Share,StatusBar,Platform,TouchableOpacity, StyleSheet, View,Image } from 'react-native';
+import { ScrollView,Share,StatusBar,Platform,TouchableOpacity,Text, StyleSheet, View,Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
-import { Button, Input, Price, Spinner, Text } from '../common';
+import { Button, Input, Price, Spinner } from '../common';
 import { translate } from '../../i18n';
 import { ThemeContext } from '../../theme';
 import {
@@ -251,7 +251,7 @@ export const ProductScreen = props => {
        
         {(!currentProduct.stocks)?
           <View>
-               <Text>{'Out of stock !'}</Text>
+               <Text style={[CommonStyle.mRedRegular]}>{'Out of stock !'}</Text>
           </View>: renderPrice()
         }
         
@@ -334,7 +334,12 @@ ProductScreen['navigationOptions'] = screenProps => ({
       <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-  title:screenProps.navigation?.state?.params.title ,
+   headerTitle: () => <View style={[CommonStyle.headerTitle]}>
+     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={1}>
+    { screenProps.navigation?.state?.params.title}
+     </Text>
+   </View>,
+  // title:screenProps.navigation?.state?.params.title ,
   headerRight: () => (
     <View style={[styles.headerRight]}>
     <TouchableOpacity

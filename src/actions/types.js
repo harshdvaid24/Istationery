@@ -136,3 +136,6 @@ export const MAGENTO_ADD_ADDRESS_SUCCESS_CLEAR = 'magento_add_address_success_cl
  * GET ORDERS LOADING
  */
 export const MAGENTO_ORDERS_LOADING = 'magento_order_loading';
+
+export const RESET_NET_CONNECTION = 'RESET_NET_CONNECTION';
+

@@ -29,7 +29,7 @@ const _colorSet = {
   whiteLight: '#f5f5f5',
   darkWhite:'#f9f8fb',
   WhiteGrey: '#fafafa',
-
+  red:'red',
   btnPrimary:'#ff9016',
   btnSecondary:'#850ef6',
   

@@ -12,7 +12,16 @@ import {
   UI_PRODUCT_UPDATE_CUSTOM_OPTIONS,
   UI_CHANGE_CURRENCY,
   UI_PRODUCT_LIST_TYPE_GRID,
+  RESET_NET_CONNECTION
 } from './types';
+
+export function resetNetConnection(data) {
+  return {
+    type: RESET_NET_CONNECTION,
+    data,
+  };
+}
+
 
 export const updateProductQtyInput = (qty, id) => ({
   type: UI_PRODUCT_QTY_INPUT,

@@ -10,6 +10,7 @@ import 'react-native-gesture-handler';
 import { Spinner } from './components/common';
 import FlashMessage from "react-native-flash-message";
 import SplashScreen from 'react-native-splash-screen'
+import OfflineNotice from './../src/components/NoInternet/OfflineNotice';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 onAppStart(store);
 
@@ -29,6 +30,7 @@ const App = () => {
             NavigationService.setTopLevelNavigator(navigatorRef);
           }}
         />
+           <OfflineNotice/>
          <FlashMessage position="top" /> 
          </SafeAreaProvider>
       </PersistGate>

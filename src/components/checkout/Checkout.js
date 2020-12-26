@@ -2,6 +2,7 @@ import React, { useContext,useState } from 'react';
 import { ScrollView, View,TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import CheckoutSection from './CheckoutSection';
+import CartBadge from '../../components/cart/CartBadge';
 import { Spinner, ModalSelect, Button, Text, Input, Price } from '../common';
 import CheckoutCustomerAccount from './CheckoutCustomerAccount';
 import CheckoutShippingMethod from './CheckoutShippingMethod';
@@ -9,8 +10,12 @@ import CheckoutPaymentMethod from './CheckoutPaymentMethod';
 import CheckoutTotals from './CheckoutTotals';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
-import CommonStyle from '../../utils/CommonStyle'
-import GlobalStyle,{W,H} from '../../utils/GlobalStyles'
+
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import {
+  NAVIGATION_SEARCH_SCREEN_PATH
+} from '../../navigation/routes';
 
 const Title = ({title}) => {
   return(
@@ -72,22 +77,40 @@ const Checkout = ({
   );
 };
 Checkout['navigationOptions'] = screenProps => ({
-  headerTitle: () => <Title title={translate('checkout.title')} />,
-  title: translate('checkout.title'),
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {screenProps.navigation.goBack() }}
       >
-      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+      <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-  headerBackTitle: ' ',
+  title: translate('checkout.title'),
+  headerRight: () => (
+    <View style={[styles.headerRight]}>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate(NAVIGATION_SEARCH_SCREEN_PATH) }}
+      >
+      <View style={[CommonStyle.marginTop5]}><Image style={CommonStyle.Icon25} source={require('../../../resources/icons/Search.png')} resizeMode='contain'/></View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={[CommonStyle.paddingLR10]}
+      onPress={() => {screenProps.navigation.navigate('Cart') }}
+      >
+
+      <CartBadge color={GlobalStyles.colorSet.btnPrimary} />
+    </TouchableOpacity>
+    </View>
+  ),
   headerStyle: {
-    backgroundColor:GlobalStyle.colorSet.white,
-    height: 50,
+    backgroundColor:'white',
+    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+    height: H(40),
     elevation: 0,
-    borderBottomColor:'transparent',
-  }
+     borderWidth:0,
+  //  borderBottomColor:'transparent',
+  },
+
 });
 
 
@@ -96,6 +119,10 @@ const styles = {
     backgroundColor: theme.colors.white,
     flex: 1,
   }),
+  headerRight:{
+    flexDirection:'row',
+    alignItems:'center'
+  },
 };
 
 const mapStateToProps = ({ checkout }) => {

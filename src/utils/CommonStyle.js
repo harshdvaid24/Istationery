@@ -1036,6 +1036,12 @@ xxlPrimaryRegular:{
 
 
 
+mRedRegular:{
+  fontSize: W(14),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.red,
+},
+
 // grey
 xsGreyRegular:{
   fontSize: W(10),
@@ -1343,6 +1349,13 @@ countCircle:{
   backgroundColor:GlobalStyle.colorSet.btnPrimary,
   justifyContent:'center',
   alignItems:'center'
+},
+headerTitle:{
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingTop:H(5),
+  height: H(30),
+  width: W(260),
 }
 
 });

@@ -47,6 +47,7 @@ const styles = {
   discountPriceText: theme => ({
     // marginTop:10,
     // fontSize:16,
+    color:GlobalStyles.colorSet.btnPrimary,
     fontWeight:'bold',
     marginEnd: theme.spacing.tiny,
   }),
@@ -54,7 +55,7 @@ const styles = {
     // marginTop:10,
     // fontSize:16,
     fontWeight:'bold',
-    color:theme.colors.black,
+    color:GlobalStyles.colorSet.btnPrimary,
     textDecorationLine: discountPrice && discountPrice < basePrice ? 'line-through' : 'none',
   }),
 };

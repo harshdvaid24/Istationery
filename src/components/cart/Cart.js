@@ -56,8 +56,8 @@ class Cart extends Component {
       marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
       height: H(40),
       elevation: 0,
-       borderWidth:0,
-    //  borderBottomColor:'transparent',
+       borderBottomWidth:0.5,
+     borderBottomColor:GlobalStyle.colorSet.BorderGrey,
     }
   });
 
@@ -142,11 +142,11 @@ class Cart extends Component {
       return (
         <View style={[styles.PriceContainer,CommonStyle.paddingLR20]}>
         <View style={[styles.totalPriceContainer,]}>
-          <Text style={[CommonStyle.lBlackRegular]}>
+          <Text style={[CommonStyle.lGreySemiBold]}>
             {`${translate('common.total')} : `}
           </Text>
 
-          <Text style={[CommonStyle.lBlackRegular]}>
+          <Text style={[CommonStyle.lGreySemiBold]}>
             { this.props.currencySymbol} {parseFloat(sum).toFixed(2)}
           </Text>
           {/* <Price
@@ -158,12 +158,12 @@ class Cart extends Component {
 
 
           {this.props.cartTotals&& this.props.cartTotals.coupon_code &&
-            <View style={[styles.totalPriceContainer,CommonStyle.paddingTop10]}>
-                <Text style={[CommonStyle.xlBlackSemiBold]}>
+            <View style={[styles.totalPriceContainer,CommonStyle.paddingTop5]}>
+                <Text style={[CommonStyle.lBlackSemiBold]}>
                     {`${translate('common.grandTotal')} : `}
                 </Text>
           
-                <Text style={[CommonStyle.xlBlackSemiBold]}>
+                <Text style={[CommonStyle.lBlackSemiBold]}>
                   { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(2)}
                 </Text>
             </View>
@@ -287,7 +287,10 @@ class Cart extends Component {
           <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR10,CommonStyle.HorizontalCenter ]}>
           {
             (this.props.cartTotals.coupon_code)?
-          <Text style={[CommonStyle.mPrimaryRegular]}>Coupon code {this.props.cartTotals.coupon_code}  is applied</Text>:
+         
+          <Text style={[CommonStyle.mPrimaryRegular,CommonStyle.marginLR10]}>{'Coupon code'} 
+          {/* {this.props.cartTotals.coupon_code}  */}
+           {' is applied'}</Text>:
             <View style={[styles.couponInputContainer(theme)]}>
               <TextInput
                 style={[CommonStyle.mBlackRegular,{height:H(40),width:W(150),fontSize:W(12)}]}
@@ -353,8 +356,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }),
   content: {
-    height:WINDOW_HEIGHT-H(100),
-    paddingBottom:H(100)
+    // height:WINDOW_HEIGHT-H(100),
+     paddingBottom:H(100),
+    height:Platform.OS === 'ios'?WINDOW_HEIGHT-H(250):WINDOW_HEIGHT-H(200),
+    // minimumHeight:WINDOW_HEIGHT
   },
   totals: theme => ({
     paddingTop: theme.spacing.small,
@@ -374,12 +379,13 @@ const styles = StyleSheet.create({
     color: theme.colors.secondary,
   }),
   footer: {
-   position:'absolute',
+  //  position:'absolute',
    width:WINDOW_WIDTH,
+  //  alignItems:'flex-end',
    height:H(150),
    paddingVertical:H(10),
    backgroundColor:GlobalStyle.colorSet.WhiteGrey,
-   bottom:0
+  //  bottom:0
   },
   buttonStyle:{
     borderRadius:3,

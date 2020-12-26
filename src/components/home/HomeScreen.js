@@ -198,7 +198,6 @@ class HomeScreen extends Component {
 
         <SmallOffers slider={this.props.new_arrivals} />
        
-        
         <Banners slider={this.props.category_block_2} />
         
         {/* <Discounts slider={this.props.category_block_1.items} /> */}
