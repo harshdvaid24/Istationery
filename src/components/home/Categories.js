@@ -34,13 +34,13 @@ let category = {
       dispatch(resetFilters());
       dispatch(setCurrentCategory({ category }));
       NavigationService.navigate(NAVIGATION_CATEGORY_PATH, {
-        title: category.name,
+        title: title,
       });
 
 }
 
   const renderMediaItems = () => slider.map((item, index) => (
-    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={styles.slide}>
+    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_name)} key={index} style={styles.slide}>
       <FastImage
         style={styles.imageStyle}
         resizeMode="contain"
