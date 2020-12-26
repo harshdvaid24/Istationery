@@ -62,14 +62,6 @@ const onItemPressed = (Cid,title) => {
 
   return (
     <View style={[styles.imageContainer, style]}>
-          <View style={[styles.textContainer]}>
-            <Text style={[CommonStyle.lBlackSemiBold]}>
-              {slider.title}
-            </Text>
-            <Text style={[CommonStyle.mGreyRegular]}>
-              {slider.Discription}
-            </Text>
-          </View>
           <View style={[CommonStyle.FlexRow,CommonStyle.FlexWrap]}>
           {(slider)?renderMediaItems():null} 
           </View>
@@ -108,11 +100,15 @@ const styles = StyleSheet.create({
   slide: {
     // height:H(160),
     width: "50%",
+    paddingHorizontal:W(2),
+    paddingVertical:H(2),
     alignItems: 'center',
     backgroundColor:GlobalStyles.colorSet.white
   },
   slideH: {
     // height:H(160),
+    paddingHorizontal:W(2),
+    paddingVertical:H(2),
     width: "100%",
     alignItems: 'center',
     backgroundColor:GlobalStyles.colorSet.white
