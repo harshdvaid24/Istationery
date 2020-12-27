@@ -50,7 +50,7 @@ export const WishlistItem = ({ item, onOptionPressed,onProduct, navigation }) =>
               <View  style={[styles.ItemTextContainer]}>
                     <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.productItem.name}</Text> 
                     <View style={[CommonStyle.marginTop5]}>
-                      <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {parseFloat(item.item.productItem.price).toFixed(2)} </Text>
+                      <Text style={[CommonStyle.lGreySemiBold]}>{'BD '} {parseFloat(item.item.productItem.price).toFixed(3)} </Text>
                     </View>
                     {/* <TouchableOpacity style={[CommonStyle.rectBtn,CommonStyle.marginTop20]} onPress={onAddToCart}>
                       <Text style={[CommonStyle.mWhitleSemiBold]}>

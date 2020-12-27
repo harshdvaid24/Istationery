@@ -91,7 +91,7 @@ class CheckoutShippingMethod extends Component {
     }
 
     const radioProps = shipping.map((item) => {
-      const label = `${item.carrier_title} - ${item.method_title} - ${currencySymbol + (item.base_amount * currencyRate).toFixed(2)}`;
+      const label = `${item.carrier_title} - ${item.method_title} - ${currencySymbol + (item.base_amount * currencyRate).toFixed(3)}`;
       return {
         label,
         value: item,

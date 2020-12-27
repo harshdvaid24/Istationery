@@ -147,7 +147,7 @@ class Cart extends Component {
           </Text>
 
           <Text style={[CommonStyle.lGreySemiBold]}>
-            { this.props.currencySymbol} {parseFloat(sum).toFixed(2)}
+            { this.props.currencySymbol} {parseFloat(sum).toFixed(3)}
           </Text>
           {/* <Price
             currencyRate={this.props.currencyRate}
@@ -164,7 +164,7 @@ class Cart extends Component {
                 </Text>
           
                 <Text style={[CommonStyle.lBlackSemiBold]}>
-                  { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(2)}
+                  { this.props.currencySymbol} {parseFloat(this.props.cartTotals.base_subtotal_with_discount).toFixed(3)}
                 </Text>
             </View>
           }

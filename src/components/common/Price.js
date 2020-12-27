@@ -6,7 +6,10 @@ import { ThemeContext } from '../../theme';
 import  CommonStyle from './../../utils/CommonStyle';
 import  GlobalStyles from './../../utils/GlobalStyles';
 
-const formatPrice = (price, currencyRate) => parseFloat((price * currencyRate).toFixed(2));
+const formatPrice = (price, currencyRate) => {
+  let tempPrice = parseFloat(price * currencyRate);
+      return tempPrice.toFixed(3);
+};
 
 /**
  * Component to display price of the product. If discount price is
@@ -32,6 +35,7 @@ const Price = ({
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}> {' '} {`${currencySymbol} ${formatPrice(discountPrice, currencyRate)}`}</Text>);
 
+    console.log("price:",basePrice);
   return (
     <View style={[styles.container, style]}>
       <Text type="label" bold={!isBold()} style={styles.basePriceText(theme,basePrice, discountPrice)}>{`${currencySymbol} ${formatPrice(basePrice, currencyRate)}`}</Text>

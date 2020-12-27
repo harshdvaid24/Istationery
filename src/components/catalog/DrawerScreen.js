@@ -29,7 +29,7 @@ const DrawerScreen = (props) => {
     const priceFilter = {
       price: {
         condition: 'from,to',
-        value: `${(minValue / currencyRate).toFixed(2)},${(maxValue / currencyRate).toFixed(2)}`,
+        value: `${(minValue / currencyRate).toFixed(3)},${(maxValue / currencyRate).toFixed(3)}`,
       },
     };
     props.addFilterData(priceFilter);
