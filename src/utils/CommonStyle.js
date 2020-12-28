@@ -245,6 +245,10 @@ const CommonStyle = StyleSheet.create({
     height: W(100),
     width: W(100),
   },
+  Icon200: {
+    height: W(200),
+    width: W(200),
+  },
   BtnOTPText: {
     fontSize: W(16),
     fontFamily: GlobalStyle.fontSet.Bold,

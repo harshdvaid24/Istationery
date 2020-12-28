@@ -38,17 +38,20 @@ const CartBadge = ({
 const styles = {
   textStyle: theme => ({
     color: theme.colors.white,
-    fontSize: 12,
+    fontSize: W(10),
     textAlign: 'center',
     backgroundColor: theme.colors.transparent,
   }),
   iconWrapper: {
-    marginTop: 5,
-    marginRight: 12,
+    marginTop: H(5),
+    marginRight: W(12),
   },
   iconBadgeStyle: {
-    minWidth: 15,
-    height: 15,
+    justifyContent:'center',
+    alignItems:'center',
+    paddingTop:H(3),
+    width: H(15),
+    height: H(15),
     backgroundColor: theme.colors.secondaryLight,
   },
 };

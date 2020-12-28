@@ -14,7 +14,7 @@ import {
   removeCouponFromCart,
   addCouponToCart,
 } from '../../actions';
-import { NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
+import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
 import { Button, Spinner, Text, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -176,10 +176,10 @@ class CheckoutTotals extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.orderId && this.props.orderId !== prevProps.orderId) {
-      this.showPopup(translate('common.order'), translate('checkout.orderSuccessMessage'));
+      this.showPopup(translate('common.order'), translate('checkout.orderSuccessMessage'),this.props.orderId);
     }
     if (this.props.errorMessage && this.props.errorMessage !== prevProps.errorMessage) {
-      this.showPopup(translate('errors.error'), this.props.errorMessage);
+      this.showPopup(translate('errors.error'), this.props.errorMessage,);
     }
     if (this.props?.totals?.coupon_code !== prevProps?.totals?.coupon_code) {
       this.setState({
@@ -188,16 +188,32 @@ class CheckoutTotals extends Component {
     }
   }
 
-  showPopup(title, message) {
+  showPopup(title, message,orderId) {
     this.props.checkoutSetActiveSection(1);
     this.props.getCart();
+
+    const {  selectedPayment } = this.props;
+   
+       let PaymentMethod =  selectedPayment.code;
+       console.log("PaymentMethod:",PaymentMethod);
+
+       if(PaymentMethod=="cashondelivery")
+       {
+        this.props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH,{orderId:orderId});
+       }
+       else{
+        this.props.navigation.navigate(NAVIGATION_PAYMENT_PATH,{orderId:orderId});
+       }
+
+   
+    // this.props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH,{orderId});
     // this.props.checkoutOrderPopupShown();
-    Alert.alert(
-      title,
-      message,
-      [{ text: translate('common.ok'), onPress: () => this.goHome() }],
-      { cancelable: false },
-    );
+    // Alert.alert(
+    //   title,
+    //   message,
+    //   [{ text: translate('common.ok'), onPress: () => this.goHome() }],
+    //   { cancelable: false },
+    // );
   }
 
   couponAction = () => {

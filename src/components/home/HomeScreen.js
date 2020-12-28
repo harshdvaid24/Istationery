@@ -14,6 +14,7 @@ import {
 } from '../../navigation/routes';
 import { getHomeData, setCurrentProduct } from '../../actions';
 
+import HomeScreenLoader from './../../components/common/SkalatonLoaders/HomeScreenLoader'
 
 import HomeSlider from './HomeSlider';
 import Banners from './Banners';
@@ -184,6 +185,7 @@ class HomeScreen extends Component {
                   backgroundColor="#F5F5F5"
                   barStyle="dark-content"
                 />
+               {(Object.keys(this.props.officeProducts).length === 0)?  <HomeScreenLoader isLoading={true}/>:null}
         <HomeSlider slider={this.props.slider} />
 
 

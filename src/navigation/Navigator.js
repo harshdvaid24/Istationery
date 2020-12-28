@@ -36,6 +36,7 @@ import SearchScreen from '../components/search/SearchScreen';
 import OrdersScreen from '../components/account/OrdersScreen';
 import OrderScreen from '../components/account/OrderScreen';
 
+
 import DrawerScreen from '../components/catalog/DrawerScreen';
 import ChangePasswordScreen from '../components/account/ChangePassword';
 
@@ -45,6 +46,7 @@ import AddressScreen from '../components/AddressList/AddressScreen';
 import AddAddressScreen from '../components/AddressList/AddAddressScreen';
 
  import {PaymentScreen} from '../components/checkout/PaymentScreen';
+ import SuccessScreen from '../components/checkout/SuccessScreen';
 
 
 import CartBadge from '../components/cart/CartBadge';
@@ -91,7 +93,7 @@ const HomeStack = createStackNavigator(
     [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
     [routes.NAVIGATION_CART_PATH]: Cart,
     [routes.NAVIGATION_SEARCH_SCREEN_PATH]: SearchScreen,
-    
+    // [routes.NAVIGATION_PAYMENT_SUCCESS_PATH]: SuccessScreen,
   },
   {
     initialRouteName: routes.NAVIGATION_HOME_SCREEN_PATH,
@@ -464,6 +466,8 @@ const Nav = createStackNavigator({
   
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
   [routes.NAVIGATION_PAYMENT_PATH]: PaymentScreen,
+  [routes.NAVIGATION_PAYMENT_SUCCESS_PATH]: SuccessScreen,
+  
 },
 {
   // getCustomActionCreators: (route, navStateKey) => {

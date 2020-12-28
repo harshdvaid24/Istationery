@@ -127,7 +127,7 @@ const Account = ({
     <View style={styles.container(theme)}>
       {renderCustomerData()}
      {console.log("total:",total)}
-     <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR5,CommonStyle.HorizontalCenter,]}>
+     <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR5,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
         
      <TouchableOpacity onPress={openOrders}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
@@ -139,7 +139,7 @@ const Account = ({
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={openWishlist}
+        {/* <TouchableOpacity onPress={openWishlist}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/coupon.png")} />
@@ -147,7 +147,7 @@ const Account = ({
                   Vouchers
                 </Text>
             </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity onPress={openWishlist}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
   },
   squareContainer:  {
     height:H(80),
-    width:W(120),
+    width:W(185),
     justifyContent:"center",
     alignItems:'center',
     backgroundColor: GlobalStyles.colorSet.white,

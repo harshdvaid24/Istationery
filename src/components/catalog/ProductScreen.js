@@ -2,7 +2,7 @@
  * Created by Dima Portenko on 14.05.2020
  */
 import React, { useContext, useState, useEffect } from 'react';
-import { ScrollView,Share,StatusBar,Platform,TouchableOpacity,Text, StyleSheet, View,Image } from 'react-native';
+import { ScrollView,Share,StatusBar,Platform,TouchableOpacity,Text, StyleSheet, View,Image,useWindowDimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
@@ -29,7 +29,7 @@ import { ReviewFormContainer } from './reviews/ReviewFormContainer';
 import { magentoOptions } from '../../config/magento';
 import CartBadge from '../../components/cart/CartBadge';
 import CommonStyle from './../../utils/CommonStyle'
-import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT,WINDOW_WIDTH} from './../../utils/GlobalStyles'
 import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
 
 export const ProductScreen = props => {
@@ -37,10 +37,12 @@ export const ProductScreen = props => {
     state => mapStateToProps(state),
   );
 
-  console.log("ProductScreen:customer:",customer);
+  const contentWidth = useWindowDimensions().width;
+  const computeEmbeddedMaxWidth = (availableWidth) => {
+    return Math.min(availableWidth, W(250));
+  };
 
- 
- console.log("current:",current);
+
   const dispatch = useDispatch();
   const params = props.navigation?.state?.params
     ? props.navigation?.state?.params
@@ -57,7 +59,7 @@ export const ProductScreen = props => {
     currentProduct,
   });
   const { description } = useProductDescription({ product });
-  console.log("product:",product);
+
   useEffect(() => {
     if (product.type_id === 'configurable') {
       dispatch(getConfigurableProductOptions(product.sku, product.id));
@@ -282,7 +284,14 @@ export const ProductScreen = props => {
           <Text bold type="subheading" style={styles.productDetailTitle}>
             {translate('product.productDetailLabel')}
           </Text>
-          <HTML html={description} />
+          <HTML 
+          contentWidth={contentWidth}
+          computeEmbeddedMaxWidth={computeEmbeddedMaxWidth}
+          source={{html:description}} 
+          enableExperimentalPercentWidth={true}
+          tagsStyles= {{ p: {marginBottom:H(20) },
+          img: {marginTop:30,  } }}
+           />
         </View>
       ) : (
         <Text style={styles.descriptionStyle}>

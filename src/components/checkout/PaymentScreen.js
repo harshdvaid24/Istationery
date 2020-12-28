@@ -11,12 +11,27 @@ import { ThemeContext } from '../../theme';
 import CommonStyle from '../../utils/CommonStyle'
 import GlobalStyle,{W,H} from '../../utils/GlobalStyles'
 import { WebView } from 'react-native-webview';
- 
+import { magentoOptions } from '../../config/magento';
+import { NAVIGATION_PAYMENT_SUCCESS_PATH } from '../../navigation/routes';
 export const PaymentScreen = props => {
   
+   const URL_CHECKOUT_SUCCESS = `${magentoOptions.url}benefit/hosted/success/`;
 
 
- 
+ const navigationStateChangedHandler = ({ url }) => {
+    console.log('Url :-', url);
+
+    console.log('Url URL_CHECKOUT_SUCCESS:-',URL_CHECKOUT_SUCCESS);
+
+    if (url == URL_CHECKOUT_SUCCESS) {
+      console.log('Url URL_CHECKOUT_SUCCESS:-');
+      props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH, { orderNo:"or9499999" });
+      // this.props.navigation.navigate('Thankyou', { isPaymentFailed: false, orderNo: this.props.navigation.state.params.orderNo });
+    } else  {
+      // this.props.navigation.navigate('NAVIGATION_PAYMENT_SUCCESS_PATH', { isPaymentFailed: true });
+    } 
+  };
+
   PaymentScreen['navigationOptions'] = screenProps => ({
     headerLeft: () => (
       <TouchableOpacity
@@ -26,7 +41,7 @@ export const PaymentScreen = props => {
         </TouchableOpacity>
     ),
     headerBackTitle: ' ',
-    headerTitle:'Cotact Us',
+    headerTitle:'Payment',
     headerStyle: {
       backgroundColor:GlobalStyle.colorSet.white,
       height: 50,
@@ -37,9 +52,12 @@ export const PaymentScreen = props => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
  
-  const url = (props.route.params) ? props.route.params.url : '';
 
- 
+ console.log("props",props);
+  const tempURL = (props.navigation.state.params) ? props.navigation.state.params.orderId:'';
+   const url = "https://staging.istationery.com/benefit/hosted/redirect?orderId="+tempURL;
+
+//  console.log("payment URL-----:",url);
   return (
     <View
         style={{
@@ -54,7 +72,11 @@ export const PaymentScreen = props => {
     
     <View style={{ height: '100%', backgroundColor: GlobalStyle.colorSet.white }}>
     <SafeAreaView style={{ flex: 1 }}>
-         <WebView source={{ uri: url }}  scalesPageToFit={true} />
+         <WebView
+           source={{ uri: url }}
+           scalesPageToFit={true}
+           onNavigationStateChange={navigationStateChangedHandler}
+            />
     </SafeAreaView>
     </View>
     </View>
