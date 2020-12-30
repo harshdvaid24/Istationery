@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,createRef } from 'react';
 import { View,Text,Platform,TouchableOpacity,Image } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -45,7 +45,19 @@ class SearchScreen extends Component {
       input: '',
     };
     this.getSearchProducts = _.debounce(this.props.getSearchProducts, 1000);
+    this.textInput = React.createRef();
+    this.focusTextInput = this.focusTextInput.bind(this);
   }
+
+  focusTextInput() {
+    // Explicitly focus the text input using the raw DOM API
+    // Note: we're accessing "current" to get the DOM node
+    this.textInput.current.focus();
+  }
+
+  componentDidMount(){
+    this.focusTextInput();
+  } 
 
   onRowPress = (product) => {
     this.props.setCurrentProduct({ product });
@@ -109,6 +121,7 @@ class SearchScreen extends Component {
           </TouchableOpacity>
           <View style={[CommonStyle.width85p]}>
               <SearchBar
+              ref={this.textInput} 
               placeholder={'Search Products'}
               onChangeText={this.updateSearch}
               value={input}

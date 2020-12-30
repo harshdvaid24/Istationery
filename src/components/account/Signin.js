@@ -106,7 +106,7 @@ const Signin = ({
       </Button>
 
 <TouchableOpacity   onPress={onSigninPress} style={styles.linkButton(theme)}>
-<Text style={styles.linkTitleButton(theme)}>{'Existing user?  '}</Text>
+<Text style={styles.linkTitleButton(theme)}>{'Already have an account?  '}</Text>
 <Text style={styles.linkTitleButton(theme)}>{'Login'}</Text>
 </TouchableOpacity>
 <TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>

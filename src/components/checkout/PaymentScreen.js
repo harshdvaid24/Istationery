@@ -12,7 +12,7 @@ import CommonStyle from '../../utils/CommonStyle'
 import GlobalStyle,{W,H} from '../../utils/GlobalStyles'
 import { WebView } from 'react-native-webview';
 import { magentoOptions } from '../../config/magento';
-import { NAVIGATION_PAYMENT_SUCCESS_PATH } from '../../navigation/routes';
+import { NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CART_PATH } from '../../navigation/routes';
 export const PaymentScreen = props => {
   
    const URL_CHECKOUT_SUCCESS = `${magentoOptions.url}benefit/hosted/success/`;
@@ -28,6 +28,7 @@ export const PaymentScreen = props => {
       props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH, { orderNo:"or9499999" });
       // this.props.navigation.navigate('Thankyou', { isPaymentFailed: false, orderNo: this.props.navigation.state.params.orderNo });
     } else  {
+      props.navigation.navigate(NAVIGATION_CART_PATH);
       // this.props.navigation.navigate('NAVIGATION_PAYMENT_SUCCESS_PATH', { isPaymentFailed: true });
     } 
   };
