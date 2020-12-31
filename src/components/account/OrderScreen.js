@@ -36,13 +36,13 @@ const OrderScreen = ({
 
   const renderItem = item => (
     <View style={styles.itemContainer(theme)}>
-      <View style={styles.row}>
+      <View style={[styles.row,CommonStyle.paddingLR10,CommonStyle.alignContentLR]}>
         <FastImage style={styles.imageStyle(theme)} resizeMode="contain" source={{ uri: image(item.item) }} />
-        <View>
-        <Text style={[CommonStyle.lBlackBold]}>{item.item.name}</Text>
+        <View style={[]}>
+        <Text   numberOfLines={1} style={[CommonStyle.lBlackBold]}>{item.item.name}</Text>
           <Text style={[CommonStyle.mGreyBold,CommonStyle.marginTop5]}>{`${translate('common.sku')}: ${item.item.sku}`}</Text>
           <View style={[styles.row,CommonStyle.marginTop5,CommonStyle.HorizontalCenter]}>
-              <Text style={[CommonStyle.mGreyBold]}>
+              <Text numberOfLines={1} style={[CommonStyle.mGreyBold]}>
               {`Qty:`}
               </Text>
               <Text  style={[CommonStyle.mGreyBold]}>
@@ -51,7 +51,7 @@ const OrderScreen = ({
           </View>
          <View style={[styles.row,CommonStyle.marginTop10]}>
               <Text style={[CommonStyle.lBlackBold]}>
-                {currencySymbol} {item.item.price}
+                {currencySymbol} {item.item.price.toFixed(3)}
              </Text>
 
           </View>
@@ -113,8 +113,11 @@ const OrderScreen = ({
               {`${translate('common.grandTotal')}: `}
             </Text>
 
+            {/* <Text style={[CommonStyle.xlBlackBold]}>
+              {currencySymbol} {item.total_due.toFixed(3)}
+            </Text> */}
             <Text style={[CommonStyle.xlBlackBold]}>
-              {currencySymbol} {item.total_due}
+              {currencySymbol} {(item.subtotal+item.shipping_amount).toFixed(3)}
             </Text>
 
 

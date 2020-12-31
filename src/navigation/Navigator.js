@@ -45,7 +45,7 @@ import WishlistScreen from '../components/Wishlist/WishlistScreen';
 import AddressScreen from '../components/AddressList/AddressScreen';
 import AddAddressScreen from '../components/AddressList/AddAddressScreen';
 
- import {PaymentScreen} from '../components/checkout/PaymentScreen';
+ import {PaymentScreen} from './../components/checkout/PaymentScreen';
  import SuccessScreen from '../components/checkout/SuccessScreen';
 
 
