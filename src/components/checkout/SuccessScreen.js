@@ -67,7 +67,7 @@ const loading = useSelector(state => state.wishlist.loading);
      <View style={[styles.ContainerStyle]}>
 
 <Text style={[CommonStyle.xlPrimarySemiBold,CommonStyle.marginTop40]}>
-       {'Order No: #'}{navigation.state.params.orderId}
+       {'Order No: #'}{navigation.state.params.orderNo}
       </Text>
 <Image style={[CommonStyle.Icon200,CommonStyle.marginTop40]} source={require("./.././../../resources/icons/nodata/store_empty.png")} />
       

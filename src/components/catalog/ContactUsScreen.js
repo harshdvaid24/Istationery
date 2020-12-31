@@ -9,7 +9,7 @@ import { Button, Input, Price, Spinner, Text } from '../common';
 import { ThemeContext } from '../../theme';
 
 import CommonStyle from '../../utils/CommonStyle'
-import GlobalStyle,{W,H} from '../../utils/GlobalStyles'
+import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 import { WebView } from 'react-native-webview';
  
 export const ContactUsScreen = props => {
@@ -28,10 +28,11 @@ export const ContactUsScreen = props => {
     headerBackTitle: ' ',
     headerTitle:'Cotact Us',
     headerStyle: {
-      backgroundColor:GlobalStyle.colorSet.white,
-      height: 50,
+      backgroundColor:'white',
+      marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+      height: H(40),
       elevation: 0,
-      borderBottomColor:'transparent',
+       borderWidth:0,
     }
 });
   const dispatch = useDispatch();
