@@ -46,7 +46,6 @@ const onItemPressed = (Cid,title) => {
   }
   const renderMediaItems = () => slider.map((item, index) => (
     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide]}>
-     {console.log("small offers:",magento.getMediaUrl()+item.image)}
       <FastImage
         style={[styles.imageStyle]}
         resizeMode="contain"
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
   },
   slide: {
     width: "100%",
-    paddingVertical:H(5),
+    // paddingVertical:H(5),
     alignItems: 'center',
     flexDirection:'row',
     // justifyContent:'center',

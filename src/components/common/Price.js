@@ -35,7 +35,7 @@ const Price = ({
   const isBold = () => discountPrice && discountPrice < basePrice;
   const renderDiscountPrice = () => (discountPrice === basePrice ? null : <Text type="label" bold={isBold()} style={styles.discountPriceText(theme)}> {' '} {`${currencySymbol} ${formatPrice(discountPrice, currencyRate)}`}</Text>);
 
-    console.log("price:",basePrice);
+    // console.log("price:",basePrice);
   return (
     <View style={[styles.container, style]}>
       <Text type="label" bold={!isBold()} style={styles.basePriceText(theme,basePrice, discountPrice)}>{`${currencySymbol} ${formatPrice(basePrice, currencyRate)}`}</Text>

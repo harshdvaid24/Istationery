@@ -51,7 +51,7 @@ const onItemPressed = (Cid,title) => {
         source={{ uri:magento.getMediaUrl() + item.image }}
       />
     </TouchableOpacity>:
-     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slide]}>
+     <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[(index%2!=0)?styles.slidepadding:styles.slide]}>
      <FastImage
        style={styles.imageStyle}
        resizeMode="cover"
@@ -100,14 +100,22 @@ const styles = StyleSheet.create({
   slide: {
     // height:H(160),
     width: "50%",
-    paddingHorizontal:W(2),
+    // paddingHorizontal:W(2),
+    paddingVertical:H(2),
+    alignItems: 'center',
+    backgroundColor:GlobalStyles.colorSet.white
+  },
+  slidepadding: {
+    // height:H(160),
+    width: "50%",
+    paddingLeft:W(5),
     paddingVertical:H(2),
     alignItems: 'center',
     backgroundColor:GlobalStyles.colorSet.white
   },
   slideH: {
     // height:H(160),
-    paddingHorizontal:W(2),
+    // paddingHorizontal:W(20),
     paddingVertical:H(2),
     width: "100%",
     alignItems: 'center',
