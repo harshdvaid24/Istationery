@@ -21,7 +21,8 @@ class CheckoutCustomerAccount extends Component {
   componentDidMount() {
     this.props.getCountries();
     // Hardcode US
-    // this.props.updateCheckoutUI('countryId', 'US');
+     this.props.updateCheckoutUI('countryId', 'BH');
+     this.updateUI('country', 'Bahrain');
     // Clear the error
     this.props.updateCheckoutUI('error', false);
     // Clear loading
@@ -32,6 +33,8 @@ class CheckoutCustomerAccount extends Component {
       this.updateUI('firstname', customer.firstname);
       this.updateUI('lastname', customer.lastname);
       this.updateUI('email', customer.email);
+      this.updateUI('countryId','BH');
+      this.updateUI('country', 'Bahrain');
     }
     if (customer && customer.addresses && customer.addresses.length) {
       const address = customer.addresses[0];
@@ -41,7 +44,8 @@ class CheckoutCustomerAccount extends Component {
         region: regionData.region,
         regionId: regionData.region_id,
       };
-      this.updateUI('countryId', address.country_id);
+      this.updateUI('countryId','BH');
+      this.updateUI('country', 'Bahrain');
       this.updateUI('region', region);
       if (address.firstname && address.firstname.length) {
         this.updateUI('firstname', address.firstname);
@@ -106,15 +110,15 @@ class CheckoutCustomerAccount extends Component {
     const address = {
       address: {
         // id: 0,
-        region: regionValue.region,
-        region_id: regionValue.regionId,
-        region_code: regionValue.regionCode,
+        // region: regionValue.region,
+        // region_id: regionValue.regionId,
+        // region_code: regionValue.regionCode,
         country_id: countryId,
         street: [street],
         // company: 'test',
         telephone,
         // fax: 'test',
-        postcode,
+        // postcode,
         city,
         firstname,
         lastname,
@@ -244,9 +248,9 @@ class CheckoutCustomerAccount extends Component {
       <ModalSelect
         disabled={data.length === 0}
         key="countries"
-        label={translate('common.country')}
+        label={this.props.country}
         attribute={translate('common.country')}
-        value={translate('common.country')}
+        value={this.props.country}
         data={data}
         onChange={this.countrySelect.bind(this)}
       />
@@ -268,13 +272,13 @@ class CheckoutCustomerAccount extends Component {
           onChangeText={value => this.updateUI('email', value)}
         />
 
-        <Input
+        {/* <Input
           secureTextEntry
           label={translate('common.password')}
           value={this.props.password}
           placeholder={translate('common.password')}
           onChangeText={value => this.updateUI('password', value)}
-        />
+        /> */}
 
         <Input
           label={translate('common.firstName')}
@@ -300,24 +304,24 @@ class CheckoutCustomerAccount extends Component {
         {this.renderUser()}
 
       <View style={[{width:'100%',flexDirection:'row'}]}>
-        <View style={[{width:'50%'}]}>
+        <View style={[{width:'100%'}]}>
            {this.renderCountries()}
         </View>
-        <View style={[{width:'50%'}]}>
+        {/* <View style={[{width:'50%'}]}>
         {this.renderRegions()}
-        </View>
+        </View> */}
       </View>
        
        
 
       
 
-        <Input
+        {/* <Input
           label={translate('common.postcode')}
           value={this.props.postcode}
           placeholder={translate('common.postcode')}
           onChangeText={value => this.updateUI('postcode', value)}
-        />
+        /> */}
 
         <Input
           label={translate('common.street')}
@@ -334,9 +338,9 @@ class CheckoutCustomerAccount extends Component {
         />
 
         <Input
-          label={translate('common.telephone')}
+          label={'Phone Number'}
           value={this.props.telephone}
-          placeholder={translate('common.telephone')}
+          placeholder={'Phone Number'}
           onChangeText={value => this.updateUI('telephone', value)}
         />
 
