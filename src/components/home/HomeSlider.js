@@ -25,7 +25,7 @@ const HomeSlider = ({
 
   return (
     <View style={[styles.imageContainer(theme), style]}>
-      <Swiper showsPagination={false} pagingEnabled autoplay={true}>
+      <Swiper key={slider.length} showsPagination={false} pagingEnabled autoplay={true}>
         {renderMediaItems()}
       </Swiper>
     </View>

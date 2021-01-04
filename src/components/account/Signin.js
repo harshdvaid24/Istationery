@@ -23,6 +23,8 @@ import {
 } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
+import GlobalStyle, { H, W } from '../../utils/GlobalStyles';
+import CommonStyle from '../../utils/CommonStyle';
 
 // This file name should be Signup
 const Signin = ({
@@ -92,7 +94,7 @@ const Signin = ({
     }
 
     return (
-      <View style={[{marginTop:10}]}>
+      <View style={[CommonStyle.marginTop20]}>
       <Button
         // disabled={
         //   firstname === ''
@@ -105,13 +107,12 @@ const Signin = ({
         {'Signup'}
       </Button>
 
-<TouchableOpacity   onPress={onSigninPress} style={styles.linkButton(theme)}>
-<Text style={styles.linkTitleButton(theme)}>{'Already have an account?  '}</Text>
-<Text style={styles.linkTitleButton(theme)}>{'Login'}</Text>
+<TouchableOpacity   onPress={onSigninPress} style={[styles.linkButton,CommonStyle.marginTop40]}>
+<Text style={[CommonStyle.mBlackBold]}>{'Already have an account?  '}</Text>
 </TouchableOpacity>
-<TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
+{/* <TouchableOpacity onPress={()=>{navigation.navigate(NAVIGATION_HOME_SCREEN_PATH)}} style={styles.link(theme)}>
         <Text style={styles.linkSkip}>Skip to continue shopping</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
   </View>
     );
   };
@@ -232,12 +233,15 @@ const styles = StyleSheet.create({
   link: theme => ({
     marginTop: theme.spacing.large,
   }),
-  linkButton: theme => ({
-    flexDirection: 'row',
+  linkButton:{
+    borderWidth:0.8,
+    borderColor:GlobalStyle.colorSet.BorderGrey,
+    borderRadius:2,
+    paddingHorizontal:W(10),
+    paddingVertical:H(7),
     alignItems:'center',
     justifyContent:'center',
-    marginTop: 30,
-  }),
+  },
   linkTitleButton:theme => ({
     textAlign: 'center',
     fontSize:20,
