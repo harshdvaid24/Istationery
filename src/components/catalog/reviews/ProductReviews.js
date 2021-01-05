@@ -19,7 +19,7 @@ export const ProductReviews = ({ product }) => {
   const [iconName, setIconName] = useState('angle-down');
   const { reviews, loading, error } = useProductReviews({ product });
 
-console.log("review:",product);
+// console.log("review:",product);
 
   useEffect(() => {
     setIconName(expanded ? 'angle-up' : 'angle-down');

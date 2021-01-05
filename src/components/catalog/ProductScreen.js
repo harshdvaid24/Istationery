@@ -275,7 +275,7 @@ export const ProductScreen = props => {
         currentProduct={currentProduct}
         setSelectedProduct={setSelectedProduct}
       />
-        }
+        {/* } */}
       </View>
      
 

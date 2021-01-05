@@ -45,7 +45,7 @@ const updateConfigurableProductPrice = async (product) => {
 };
 
 export const useOtherProducts = ({ product }) => {
-  console.log("useOtherProducts:product:",product);
+  // console.log("useOtherProducts:product:",product);
   const [othersProducts, setOtherProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

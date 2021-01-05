@@ -122,12 +122,9 @@ function Login ({
     <View style={styles.container(theme)}>
      <KeyboardAwareScrollView
        extraHeight={H(120)}
-       extraScrollHeight={0}
+       extraScrollHeight={120}
        >
-    <View style={[CommonStyle.marginTop50]}>
-    
-    </View>
-    <View style={[styles.container(theme)]}>
+    <View style={[styles.loginContainer(theme)]}>
     <FastImage
           style={[{height:H(80),width:W(140)},CommonStyle.marginBottom20]}
           resizeMode="contain"
@@ -165,6 +162,7 @@ function Login ({
       {renderButtons()}
       {renderMessages()}
     </View>
+    <View />
     </KeyboardAwareScrollView>
     </View>
   );
@@ -180,6 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.tabBarBackground,
     alignItems: 'center',
     justifyContent:'center',
+    paddingTop: theme.dimens.WINDOW_HEIGHT * 0.1,
   }),
   loginContainer :theme => ({
     flex: 1,

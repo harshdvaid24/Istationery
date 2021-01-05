@@ -16,7 +16,7 @@ export const OthersProducts = ({ product, currencySymbol, currencyRate, navigati
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const { othersProducts, loading, error } = useOtherProducts({ product });
-  console.log("Others product:",othersProducts);
+  // console.log("Others product:",othersProducts);
   if (!othersProducts?.length && !loading || error) {
     return <View />;
   }

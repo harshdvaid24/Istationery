@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Platform,
+  Linking,
   Image,
   TouchableOpacity,
   ActivityIndicator,
@@ -64,6 +65,12 @@ const Account = ({
   const onContactUs = () => {
   navigation.navigate('ContactUsScreen');
   };
+
+  const onWhatsappUs = () => {
+    Linking.openURL('whatsapp://send?text=hello&phone=97336060550')
+    };
+
+  
 
   
   const renderCustomerData = () => {
@@ -169,7 +176,7 @@ const Account = ({
 
 
      </View>
-      <TouchableOpacity onPress={openWishlist}
+      {/* <TouchableOpacity onPress={openWishlist}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/wishlist.png")} />
@@ -191,7 +198,7 @@ const Account = ({
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         
 
@@ -205,6 +212,18 @@ const Account = ({
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={onWhatsappUs}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
+                 Whatsapp Us
+                </Text>
+            </View>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+
 
         <TouchableOpacity onPress={onContactUs}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
