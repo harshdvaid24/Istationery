@@ -268,7 +268,7 @@ export const ProductScreen = props => {
         {
           (Object.keys(currentProduct.attributes).length === 0)?
       <View style={[{width:WINDOW_WIDTH-W(40)},CommonStyle.HorizontalCenter,CommonStyle.paddingTB20]}>
-        <Spinner />
+        {current.attribute_loading && <Spinner />}
       </View>:
       <ProductOptions
         product={product}
