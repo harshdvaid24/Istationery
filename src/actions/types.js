@@ -139,3 +139,5 @@ export const MAGENTO_ORDERS_LOADING = 'magento_order_loading';
 
 export const RESET_NET_CONNECTION = 'RESET_NET_CONNECTION';
 
+export const MAGENTO_ATTRIBUTE_LOADING = 'MAGENTO_ATTRIBUTE_LOADING'
+

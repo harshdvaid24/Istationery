@@ -70,7 +70,8 @@ import {
   MAGENTO_ADD_ADDRESS_ERROR,
   MAGENTO_ADD_ADDRESS_SUCCESS,
   MAGENTO_ORDERS_LOADING,
-  MAGENTO_CART_TOTAL
+  MAGENTO_CART_TOTAL,
+  MAGENTO_ATTRIBUTE_LOADING
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -324,6 +325,7 @@ export const getCustomOptions = (sku, id) => async (dispatch) => {
 };
 
 export const getConfigurableProductOptions = (sku, id) => (dispatch) => {
+  dispatch({type:MAGENTO_ATTRIBUTE_LOADING,payload:true})
   magento.admin
     .getConfigurableProductOptions(sku)
     .then((data) => {
@@ -341,8 +343,10 @@ export const getConfigurableProductOptions = (sku, id) => (dispatch) => {
                 attributeCode: attributeOptions.attribute_code,
               },
             });
+              dispatch({type:MAGENTO_ATTRIBUTE_LOADING,payload:false})
           })
           .catch((error) => {
+            dispatch({type:MAGENTO_ATTRIBUTE_LOADING,payload:false})
             logError(error);
           });
       });

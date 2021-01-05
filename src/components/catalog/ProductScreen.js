@@ -265,11 +265,11 @@ export const ProductScreen = props => {
       {/* <View style={styles.stockcontainer}>
       </View> */}
       <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
-        {/* {
-          (Object.keys(currentProduct.attributes).length === 0)? */}
-      {/* <View style={[{width:WINDOW_WIDTH-W(40)},CommonStyle.HorizontalCenter,CommonStyle.paddingTB20]}>
-        <Spinner />
-      </View>: */}
+        {
+          (Object.keys(currentProduct.attributes).length === 0)?
+      <View style={[{width:WINDOW_WIDTH-W(40)},CommonStyle.HorizontalCenter,CommonStyle.paddingTB20]}>
+        {current.attribute_loading && <Spinner />}
+      </View>:
       <ProductOptions
         product={product}
         currentProduct={currentProduct}

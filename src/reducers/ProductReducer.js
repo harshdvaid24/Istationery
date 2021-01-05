@@ -14,7 +14,8 @@ import {
   MAGENTO_RELATED_PRODUCTS_ERROR,
   MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT,
   MAGENTO_PRODUCT_STOCK_CHECK,
-  MAGENTO_ADD_WISHLIST
+  MAGENTO_ADD_WISHLIST,
+  MAGENTO_ATTRIBUTE_LOADING
 } from '../actions/types';
 import { getPriceFromChildren } from '../helper/product';
 
@@ -29,7 +30,8 @@ const INITIAL_STATE = {
       medias: {},
       stocks:{},
       qty:{},
-      item_added_in_wishlist:false
+      item_added_in_wishlist:false,
+      attribute_loading:false
     },
   },
   relatedProducts: {
@@ -82,6 +84,10 @@ export default (state = INITIAL_STATE, action) => {
       const { id, data } = action.payload;
       const current = { ...state.current, [id]: { ...state.current[id], customOptions: data } };
       return { ...state, current };
+    }
+    case MAGENTO_ATTRIBUTE_LOADING:{
+      const current = {...state.current,attribute_loading:action.payload}
+      return {...state,current}
     }
     case MAGENTO_PRODUCT_ATTRIBUTE_OPTIONS: {
       const { productId: id, attributeId, options, attributeCode } = action.payload;
