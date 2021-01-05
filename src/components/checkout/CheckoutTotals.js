@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Alert, View, StyleSheet, TextInput, Dimensions,
+  Alert, View, StyleSheet,Text, TextInput, Dimensions,
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
@@ -15,12 +15,14 @@ import {
   addCouponToCart,
 } from '../../actions';
 import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
-import { Button, Spinner, Text, Price } from '../common';
+import { Button, Spinner, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import { priceSignByCode } from '../../helper/price';
 import { Row, Spacer } from 'react-native-markup-kit';
 
+import CommonStyle from './../../utils/CommonStyle'
+import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 class CheckoutTotals extends Component {
   static contextType = ThemeContext;
 
@@ -112,6 +114,18 @@ class CheckoutTotals extends Component {
         <View style={styles.row}>
         <View style={{}}>
           <Text>
+            {`Tax: `}
+          </Text>
+          </View>
+          <Price
+            basePrice={this.props?.totals?.base_tax_amount}
+            currencySymbol={currencySymbol}
+            currencyRate={currencyRate}
+          />
+        </View>
+        <View style={styles.row}>
+        <View style={{}}>
+          <Text>
             {`${translate('common.total')}: `}
           </Text>
           </View>
@@ -155,6 +169,12 @@ class CheckoutTotals extends Component {
     }
     return (
       <View style={styles.nextButtonStyle}>
+       <View style={[CommonStyle.marginLR20,CommonStyle.marginBottom20]}>
+        <Text style={[CommonStyle.sGreyRegular]} numberOfLines={2}>
+           By placing your order, you agree to iStationery Terms & Conditions.
+        </Text>
+      </View>
+
         <Button
           onPress={this.onPlacePressed}
           disable={this.props.loading}

@@ -148,6 +148,7 @@ class CheckoutCustomerAccount extends Component {
     this.props.checkoutCustomerNextLoading(true);
     this.props.addGuestCartBillingAddress(cartId, address);
     // this.props.onNextPress(2)
+    this.props.activateNewSection(1);
   }
 
   updateUI = (key, value) => {

@@ -57,6 +57,7 @@ class CheckoutPaymentMethod extends Component {
     // 	() => {
     // this.props.checkoutCustomerNextLoading(false);
     this.props.getGuestCartPaymentMethods(cartId);
+    this.props.activateNewSection(3);
     // this.props.onNextPress(4)
     // 	},
     // 	1000

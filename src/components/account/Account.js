@@ -213,16 +213,19 @@ const Account = ({
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onWhatsappUs}
+
+
+        <TouchableOpacity onPress={onContactUs}
       style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
             <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/rating.png")} />
                  <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
-                 Whatsapp Us
+                   Rate App
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
         </TouchableOpacity>
+      
 
 
         <TouchableOpacity onPress={onContactUs}
@@ -231,6 +234,17 @@ const Account = ({
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/contactUs.png")} />
                  <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  Contact Us
+                </Text>
+            </View>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onWhatsappUs}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/whatsapp.png")} />
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
+                 Whatsapp Us
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />

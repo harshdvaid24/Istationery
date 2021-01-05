@@ -1,9 +1,9 @@
 import React, { useContext,useState } from 'react';
-import { ScrollView, View,TouchableOpacity,Image } from 'react-native';
+import { ScrollView, View,TouchableOpacity,Image,Text } from 'react-native';
 import { connect } from 'react-redux';
 import CheckoutSection from './CheckoutSection';
 import CartBadge from '../../components/cart/CartBadge';
-import { Spinner, ModalSelect, Button, Text, Input, Price } from '../common';
+import { Spinner, ModalSelect, Button, Input, Price } from '../common';
 import CheckoutCustomerAccount from './CheckoutCustomerAccount';
 import CheckoutShippingMethod from './CheckoutShippingMethod';
 import CheckoutPaymentMethod from './CheckoutPaymentMethod';
@@ -30,12 +30,30 @@ const Checkout = ({
   activeSection: _activeSection,
 }) => {
   const theme = useContext(ThemeContext);
-  // const [activeSection, setactiveState] = useState(_activeSection)
+   const [stepOneCompleted, setstepOneCompleted] = useState(false);
+   const [stepTwoCompleted, setstepTwoCompleted] = useState(false);
+   const [stepThreeCompleted, setstepThreeCompleted] = useState(false);
+   const [stepFourCompleted, setstepFourCompleted] = useState(false);
   const activeSection = Number(_activeSection);
   // console.log('FROM CHECKOUT PAGE',activeSection)
   // const activateNewSection = (sectionNumber) =>{
   //   setactiveState(sectionNumber)
   // }
+
+  const activateNewSection = (completedSection) => {
+    if(completedSection==1){
+      setstepOneCompleted(true);
+    }
+    else  if(completedSection==2){
+      setstepTwoCompleted(true);
+    }
+    else  if(completedSection==3){
+      setstepThreeCompleted(true);
+    }
+    else{
+      setstepFourCompleted(true);
+    }
+  } 
 
   return (
     <ScrollView style={styles.container(theme)}>
@@ -44,35 +62,37 @@ const Checkout = ({
         number="1"
         expanded={activeSection === 1}
       >
-        <CheckoutCustomerAccount />
+        <CheckoutCustomerAccount activateNewSection={activateNewSection} />
       </CheckoutSection>
       <CheckoutSection
         title={translate('checkout.shippingMethod')}
         number="2"
-        expanded={activeSection === 2}
+        expanded={stepOneCompleted&&activeSection === 2}
       >
       {/* {activeSection == 2 && */}
-        <CheckoutShippingMethod />
+        <CheckoutShippingMethod activateNewSection={activateNewSection} />
       {/* } */}
       </CheckoutSection>
       <CheckoutSection
         title={translate('checkout.paymentMethod')}
         number="3"
-        expanded={activeSection === 3}
+        expanded={stepTwoCompleted&&activeSection === 3}
       >
       {/* {activeSection == 3 &&   */}
-        <CheckoutPaymentMethod navigation={navigation} />
+        <CheckoutPaymentMethod activateNewSection={activateNewSection} navigation={navigation} />
         {/* } */}
       </CheckoutSection>
       <CheckoutSection
         title={translate('checkout.summary')}
         number="4"
-        expanded={activeSection === 4}
+        expanded={stepThreeCompleted&&activeSection === 4}
       >
       {/* {activeSection == 4 &&  */}
-        <CheckoutTotals navigation={navigation} />
+        <CheckoutTotals activateNewSection={activateNewSection} navigation={navigation} />
       {/* } */}
+     
       </CheckoutSection>
+     
     </ScrollView>
   );
 };

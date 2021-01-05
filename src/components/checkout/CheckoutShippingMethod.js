@@ -79,7 +79,7 @@ class CheckoutShippingMethod extends Component {
 
     this.props.checkoutCustomerNextLoading(true);
     this.props.addGuestCartShippingInfo(cartId, address);
-    // this.props.onNextPress(3)
+    this.props.activateNewSection(2);
   }
 
   renderShippingMethods() {
