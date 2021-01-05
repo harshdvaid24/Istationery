@@ -54,12 +54,12 @@ const ReviewForm = forwardRef((props, ref) => {
     if (!nickname.length || !summary.length || !review.length) {
       alert('Please fill all required fields');
     } else {
-      console.log("price:", price);
-      console.log("value:",value);
-      console.log("quality:",quality);
-      console.log("nickname:",nickname);
-      console.log("summary:",summary);
-      console.log("review:", review);
+      // console.log("price:", price);
+      // console.log("value:",value);
+      // console.log("quality:",quality);
+      // console.log("nickname:",nickname);
+      // console.log("summary:",summary);
+      // console.log("review:", review);
       // console.log("props.ratingOptions:", props.ratingOptions);
       props.onSubmit({
         price,

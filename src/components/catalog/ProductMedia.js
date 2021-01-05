@@ -11,7 +11,7 @@ const ProductMedia = (props) => {
 
   const renderMedia = () => {
     const { media } = props;
-console.log("renderMedia media:",media);
+// console.log("renderMedia media:",media);
 
     if (!media) {
       return <Spinner />;
@@ -31,8 +31,8 @@ console.log("renderMedia media:",media);
     const { media } = props;
 
     return media.map((item) => {
-      console.log('media item:',magento.getProductMediaUrl() + item.file);
-      console.log(magento.getProductMediaUrl() + item.file);
+      // console.log('media item:',magento.getProductMediaUrl() + item.file);
+      // console.log(magento.getProductMediaUrl() + item.file);
       return (
         <FastImage
           key={item.id}

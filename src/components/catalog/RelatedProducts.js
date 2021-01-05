@@ -16,7 +16,7 @@ export const RelatedProducts = ({ product, currencySymbol, currencyRate, navigat
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
   const { relatedProducts, loading, error } = useRelatedProducts({ product });
-  console.log("Related product:",relatedProducts);
+  // console.log("Related product:",relatedProducts);
   if (!relatedProducts?.length && !loading || error) {
     return <View />;
   }

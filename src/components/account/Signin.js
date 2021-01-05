@@ -15,7 +15,7 @@ import {
   Input,
 } from '../common';
 import { signIn,ResetError } from '../../actions';
-
+import FastImage from 'react-native-fast-image';
 import {
   NAVIGATION_SIGNIN_PATH,
   NAVIGATION_LOGIN_PATH,
@@ -25,6 +25,9 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import GlobalStyle, { H, W } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+
 
 // This file name should be Signup
 const Signin = ({
@@ -104,7 +107,7 @@ const Signin = ({
         // }
         onPress={onCreateAccountPress}
       >
-        {'Signup'}
+        {'Create Account'}
       </Button>
 
 <TouchableOpacity   onPress={onSigninPress} style={[styles.linkButton,CommonStyle.marginTop40]}>
@@ -129,7 +132,18 @@ const Signin = ({
 
   return (
     <View style={styles.container(theme)}>
-         <Text style={[styles.Title(theme)]}> SignUp </Text>
+     <KeyboardAwareScrollView
+       extraHeight={H(120)}
+       extraScrollHeight={120}
+       >
+        <View style={[styles.loginContainer(theme)]}>
+     <FastImage
+          style={[{height:H(80),width:W(140)},CommonStyle.marginBottom20]}
+          resizeMode="contain"
+          source={require('../../../resources/icons/logo.png')}
+        />
+
+         <Text style={[styles.Title(theme)]}> Create Account </Text>
       <Input
         autoCapitalize="none"
         underlineColorAndroid="transparent"
@@ -184,7 +198,9 @@ const Signin = ({
       />
       {renderButtons()}
       {renderMessages()}
+        </View>
       <View />
+      </KeyboardAwareScrollView>
     </View>
   );
 };
