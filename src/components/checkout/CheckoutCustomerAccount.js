@@ -54,9 +54,10 @@ class CheckoutCustomerAccount extends Component {
         this.updateUI('lastname', address.lastname);
       }
       this.updateUI('email', customer.email);
-      this.updateUI('street', address.street.length ? address.street[0] : '');
+      // this.updateUI('Address1', address.street.length ? address.street[0] : '');
+    //  this.updateUI('Address2', address.street.length ? address.street[1] : '');
       this.updateUI('city', address.city);
-      this.updateUI('postcode', address.postcode);
+      // this.updateUI('postcode', address.postcode);
       this.updateUI('telephone', address.telephone);
     }
   }
@@ -87,8 +88,6 @@ class CheckoutCustomerAccount extends Component {
             defaultBilling: true,
             firstname,
             lastname,
-            region,
-            postcode,
             street: [street],
             city,
             telephone,
@@ -114,8 +113,8 @@ class CheckoutCustomerAccount extends Component {
         // region_id: regionValue.regionId,
         // region_code: regionValue.regionCode,
         country_id: countryId,
-        street: [street],
-        // company: 'test',
+        street: ["addr1","addr2"],
+        company: 'test',
         telephone,
         // fax: 'test',
         // postcode,
@@ -305,9 +304,7 @@ class CheckoutCustomerAccount extends Component {
         {this.renderUser()}
 
       <View style={[{width:'100%',flexDirection:'row'}]}>
-        <View style={[{width:'100%'}]}>
-           {this.renderCountries()}
-        </View>
+       
         {/* <View style={[{width:'50%'}]}>
         {this.renderRegions()}
         </View> */}
@@ -325,10 +322,16 @@ class CheckoutCustomerAccount extends Component {
         /> */}
 
         <Input
-          label={translate('common.street')}
+          label={'Address 1'}
           value={this.props.street}
-          placeholder={translate('common.street')}
-          onChangeText={value => this.updateUI('street', value)}
+          placeholder={'Address 1'}
+          onChangeText={value => this.updateUI('Address1', value)}
+        />
+          <Input
+          label={'Address 2'}
+          value={this.props.street}
+          placeholder={'Address 2'}
+          onChangeText={value => this.updateUI('Address2', value)}
         />
 
         <Input
@@ -337,6 +340,10 @@ class CheckoutCustomerAccount extends Component {
           placeholder={translate('common.city')}
           onChangeText={value => this.updateUI('city', value)}
         />
+ 
+         <View style={[{width:'100%'}]}>
+           {this.renderCountries()}
+        </View>
 
         <Input
           label={'Phone Number'}
