@@ -76,6 +76,8 @@ import {
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
 import { checkoutSetActiveSection } from './UIActions';
+import moment from 'moment';
+
 
 export const initMagento = () => {
   magento.setOptions(magentoOptions);
@@ -571,7 +573,8 @@ export const getOrdersForCustomer = (customerId, refreshing) => async (dispatch)
       return order;
     });
     data.items = orders;
-    dispatch({ type: MAGENTO_GET_ORDERS, payload: data });
+    dispatch(labeling(data));
+  // dispatch({ type: MAGENTO_GET_ORDERS, payload: data });
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_ORDERS_DATA, payload: false });
     ordersLoadingEnd(dispatch);
   } catch (error) {
@@ -580,6 +583,21 @@ export const getOrdersForCustomer = (customerId, refreshing) => async (dispatch)
   }
 };
 
+export const labeling = (orders) => async(dispatch) =>{
+  const label = await magento.admin.getOrderStatusLabel();
+  const data = orders.items.sort((b, a) => moment(a.created_at).diff(b.created_at));
+  // console.log('DDAATTA',data)
+  let dataToDispatch = []
+  data.forEach((dataObject)=>{
+    label.forEach((lbl)=>{
+      if(lbl.value == dataObject.status)
+      {
+        dataToDispatch.push({...dataObject,statusData:lbl.label})
+      }
+    })
+  })
+  dispatch({ type: MAGENTO_GET_ORDERS, payload: dataToDispatch });
+} 
 // Fetch product_data for product in OrderScreen
 export const orderProductDetail = sku => async (dispatch) => {
   try {

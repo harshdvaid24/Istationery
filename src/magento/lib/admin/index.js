@@ -328,6 +328,8 @@ export default magento => ({
 
   postGuestReview: review => magento.post('/V1/mma/review/guest/post', review, ADMIN_TYPE),
   
-  getProductIsInStock: (sku) => magento.get(`/V1/stockItems/${sku}`,undefined,undefined,ADMIN_TYPE)
+  getProductIsInStock: (sku) => magento.get(`/V1/stockItems/${sku}`,undefined,undefined,ADMIN_TYPE),
+
+  getOrderStatusLabel: () =>magento.get(`/V1/mobileapi/order/getorderstatus`,undefined,undefined,ADMIN_TYPE)
 
 });

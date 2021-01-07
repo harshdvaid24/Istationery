@@ -51,7 +51,6 @@ const OrdersScreen = ({
   );
 
   const renderOrderList = () => {
-    const data = orders.sort((b, a) => moment(a.created_at).diff(b.created_at));
 
     return (
       <FlatList
@@ -61,7 +60,8 @@ const OrdersScreen = ({
             onRefresh={onRefresh}
           />
 )}
-        data={data}
+        data={orders}
+        extraData={orders}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
@@ -187,7 +187,7 @@ OrdersScreen.defaultProps = {
 const mapStateToProps = ({ account, magento }) => {
   const loading = account.loading;
   const customerId = account.customer ? account.customer.id : null;
-  const orders = account.orderData ? account.orderData.items : [];
+  const orders = account.orderData ? account.orderData : [];
   return {
     customerId,
     orders,

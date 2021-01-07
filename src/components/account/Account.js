@@ -141,7 +141,7 @@ const Account = ({
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
                <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
                <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
-                 {translate('account.myOrdersButton')} {`(${orders?orders.length:0})`} 
+                 {translate('account.myOrdersButton')} {`(${orders.length?orders.length:0})`} 
                 </Text>
             </View>
         </TouchableOpacity>
@@ -394,7 +394,7 @@ Account.propTypes = {
 
 Account.defaultProps = {
   customer: null,
-  orders: null,
+  orders: [],
   total:null,
   customerId: null,
 };
@@ -403,7 +403,7 @@ const mapStateToProps = ({ account,wishlist }) => {
   const { customer } = account;
   const customerId = account.customer ? account.customer.id : null;
   const {total} = wishlist;
-  const orders = account.orderData ? account.orderData.items : [];
+  const orders = account.orderData ? account.orderData : [];
   return { customer,customerId,total,orders };
 };
 
