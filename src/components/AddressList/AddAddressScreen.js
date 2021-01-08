@@ -63,6 +63,8 @@ console.log("isAdd:",isAdd);
     setlastName(addressDetails?addressDetails.lastname:'');
     setcity(addressDetails?addressDetails.city:'');
     setstreet(addressDetails?addressDetails.street:'');
+    // setaddress1(addressDetails?addressDetails.street[0]:'');
+    // setaddress2(addressDetails?addressDetails.street[1]:'');
     settelephone(addressDetails?addressDetails.phone:'');
     setpostcode(addressDetails?addressDetails.pincode:'');
     setregion(addressDetails?addressDetails.region:'');
@@ -80,6 +82,8 @@ const clearInput = () => {
   settelephone('');
   setpostcode('');
   setregion('');
+  // setaddress1('');
+  // setaddress2('')
   setcountryName('Bahrain');
   setcountryCode('BH');
 
@@ -91,6 +95,8 @@ const clearInput = () => {
     const [city, setcity] = useState(addressDetails?addressDetails.city:'');
     // const [company, setcompany] = useState(addressDetails?addressDetails.firstname:'');
     const [street, setstreet] = useState(addressDetails?addressDetails.street:'')
+    // const [address1, setaddress1] = useState(addressDetails?addressDetails.street[0]:'');
+    // const [address2, setaddress2] = useState(addressDetails?addressDetails.street[1]:'')
     const [telephone, settelephone] = useState(addressDetails?addressDetails.phone:'');
     const [postcode, setpostcode] = useState(addressDetails?addressDetails.pincode:'');
     const [region, setregion] = useState(addressDetails?addressDetails.region:'');
@@ -116,6 +122,8 @@ const clearInput = () => {
     const regionInput = useRef(null);
     const telephoneInput = useRef(null);
     const stateInput = useRef(null);
+    // const address1Input = useRef(null);
+    // const address2Input = useRef(null);
 
     const onAddAddressPress = () => {
       // TODO: add password validation check
@@ -128,6 +136,14 @@ const clearInput = () => {
       {
         alert('Lastname should not be empty.');
       }
+      // else if(address1=='')
+      // {
+      //   alert('Address 1 should not be empty.');
+      // }
+      // else if(address2=='')
+      // {
+      //   alert('Address 2 should not be empty.');
+      // }
       else if(street=='')
       {
         alert('Street should not be empty.');
@@ -166,6 +182,7 @@ const clearInput = () => {
                address_id:address_id,
                email:customer.email,
               country_Id:countryCode,
+              //street:[address1,address2],
               city,
               street,
               telephone,
@@ -187,6 +204,7 @@ const clearInput = () => {
               email:customer.email,
               // company,
               country_Id:countryCode,
+              //street:[address1,address2],
               city,
               street,
               telephone,
@@ -307,6 +325,32 @@ const clearInput = () => {
        onSubmitEditing={() => { cityInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
      />
+     {/* <Input
+       autoCapitalize="none"
+       underlineColorAndroid="transparent"
+       placeholder={translate('common.address1')}
+       returnKeyType="next"
+       autoCorrect={false}
+       value={address1}
+      // editable={!loading}
+       onChangeText={setaddress1}
+       assignRef={(input) => { address1Input.current = input; }}
+       onSubmitEditing={() => { address2Input.current.focus(); }}
+       containerStyle={styles.inputContainer(theme)}
+     />
+     <Input
+       autoCapitalize="none"
+       underlineColorAndroid="transparent"
+       placeholder={translate('common.address2')}
+       returnKeyType="next"
+       autoCorrect={false}
+       value={address2}
+      // editable={!loading}
+       onChangeText={setaddress2}
+       assignRef={(input) => { address2Input.current = input; }}
+       onSubmitEditing={() => { cityInput.current.focus(); }}
+       containerStyle={styles.inputContainer(theme)}
+     /> */}
       <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"

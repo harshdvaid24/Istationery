@@ -77,6 +77,7 @@ import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
 import { checkoutSetActiveSection } from './UIActions';
 import moment from 'moment';
+import SplashScreen from 'react-native-splash-screen';
 
 
 export const initMagento = () => {
@@ -201,6 +202,8 @@ const getofficeEssentialsCategoryProducts = async (categoryId, dispatch) => {
       dispatch,
       MAGENTO_UPDATE_OFFICE_PRODUCT,
     );
+    console.log('SPLASHHIDE')
+    SplashScreen.hide();
   } catch (e) {
     console.log("getofficeEssentialsCategoryProducts:e",e);
     logError(e);

@@ -26,6 +26,8 @@
     "region": "Region",
     "country": "Country",
     "firstName": "Firstname",
+    "address1":"Address 1",
+    "address2":"Address 2",
     "lastName": "Lastname",
     "postcode": "Postal code",
     "street": "Street",

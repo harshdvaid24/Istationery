@@ -15,9 +15,6 @@ import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-c
 onAppStart(store);
 
 const App = () => {
-  useEffect(()=>{
-    SplashScreen.hide();
-    });
  
  
   return(

@@ -30,6 +30,7 @@ class CheckoutCustomerAccount extends Component {
 
     const { customer } = this.props;
     if (customer) {
+      console.log(customer)
       this.updateUI('firstname', customer.firstname);
       this.updateUI('lastname', customer.lastname);
       this.updateUI('email', customer.email);
@@ -47,6 +48,8 @@ class CheckoutCustomerAccount extends Component {
       this.updateUI('countryId','BH');
       this.updateUI('country', 'Bahrain');
       this.updateUI('region', region);
+      this.updateUI('Address1', customer.addresses[0].street[0]);
+      this.updateUI('Address2', customer.addresses[0].street[1]);
       if (address.firstname && address.firstname.length) {
         this.updateUI('firstname', address.firstname);
       }
@@ -113,7 +116,7 @@ class CheckoutCustomerAccount extends Component {
         // region_id: regionValue.regionId,
         // region_code: regionValue.regionCode,
         country_id: countryId,
-        street: ["addr1","addr2"],
+        street: [this.props.Address1,this.props.Address2],
         company: 'test',
         telephone,
         // fax: 'test',
@@ -323,13 +326,13 @@ class CheckoutCustomerAccount extends Component {
 
         <Input
           label={'Address 1'}
-          value={this.props.street}
+          value={this.props.Address1}
           placeholder={'Address 1'}
           onChangeText={value => this.updateUI('Address1', value)}
         />
           <Input
           label={'Address 2'}
-          value={this.props.street}
+          value={this.props.Address2}
           placeholder={'Address 2'}
           onChangeText={value => this.updateUI('Address2', value)}
         />

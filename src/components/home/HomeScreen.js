@@ -102,7 +102,6 @@ class HomeScreen extends Component {
     if (this.props.slider.length === 0) {
       this.props.getHomeData();
     }
-    SplashScreen.hide();
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
 
