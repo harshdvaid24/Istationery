@@ -85,7 +85,7 @@ console.log("payments:",payments);
         selectedLabelColor={theme.colors.titleText}
         style={styles.radioWrap}
         radio_props={radioProps}
-        initial={-1}
+        initial={0}
         buttonSize={10}
         animation={false}
         onPress={(value) => { this.onPaymentSelect(value); }}

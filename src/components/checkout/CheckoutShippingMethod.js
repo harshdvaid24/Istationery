@@ -106,7 +106,7 @@ class CheckoutShippingMethod extends Component {
         selectedLabelColor={theme.colors.titleText}
         style={styles.radioWrap}
         radio_props={radioProps}
-        initial={-1}
+        initial={0}
         animation={false}
         onPress={(value) => { this.onShippingSelect(value); }}
       />
