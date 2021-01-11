@@ -12,9 +12,10 @@ import { useProductReviewsForm } from '../../../hooks/useProductReviewsForm';
 import Sizes from '../../../theme/dimens';
 import Colors from '../../../theme/colors';
 import Typography from '../../../theme/typography';
+import CommonStyle from '../../../utils/CommonStyle'
+import GlobalStyle,{W,H,StatusbarHeight} from '../../../utils/GlobalStyles'
 
 export const ReviewFormContainer = ({ product }) => {
-  // console.log("ReviewFormContainer:product",product);
   const [expanded, setExpanded] = useState(false);
   const [success, setSuccess] = useState(false);
   const [iconName, setIconName] = useState('angle-down');
@@ -23,7 +24,7 @@ export const ReviewFormContainer = ({ product }) => {
   const {
     postReviewLoading,
     postReview,
-    // ratingOptions,
+     ratingOptions,
     loading
   } = useProductReviewsForm({
     product,
@@ -44,25 +45,45 @@ export const ReviewFormContainer = ({ product }) => {
 
   if (success) {
     return (
-      <View style={styles.successContainer}>
-        <Text style={styles.successTitle}>Review submited - Thank you!</Text>
-        <Text style={styles.successBody}>We are processing your review. This is may take several days, so we appriciate your patience.</Text>
+      <View style={[styles.successContainer,CommonStyle.HorizontalCenter,CommonStyle.marginBottom15]}>
+        <Text style={[styles.successTitle,CommonStyle.marginBottom15]}>Review submited - Thank you!</Text>
+        <Text style={[styles.successBody,CommonStyle.TextAlineCenter]}>We are processing your review. This is may take several days, so we appriciate your patience.</Text>
       </View>
     )
   }
 
   const submitReview = (data) => {
-    const ratingData = ratingOptions.map(option => ({
-      rating_id: option.rating_id,
-      ratingCode: option.rating_code,
-      ratingValue: data[option.rating_code.toLowerCase()],
-    }));
+    // console.log("submitReview:ratingOptions:",ratingOptions);
+    let rattings = [
+        {
+          rating_id:'1',
+          ratingCode: '1',
+          ratingValue: data.quality
+        },
+        {
+          rating_id:'2',
+          ratingCode: '2',
+          ratingValue:  data.price
+        },
+        {
+            rating_id:'3',
+            ratingCode: '3',
+            ratingValue:  data.value
+        }
+      ]
+    // const ratingData = data.map(option => ({
+    //   rating_id: option.rating_id,
+    //   ratingCode: option.rating_code,
+    //   ratingValue: data[option.rating_code.toLowerCase()],
+    // }));
+    // console.log("submitReview:ratingData:",ratingData);
     const review = {
       productId: product.id,
       nickname: data.nickname,
+      validate_rating:'',
       title: data.title,
       detail: data.detail,
-      ratingData,
+      ratingData:rattings
     };
     postReview(review, (success) => {
       if (success) reviewFormRefs.current.reset();
@@ -92,7 +113,7 @@ export const ReviewFormContainer = ({ product }) => {
               productName={product.name}
               onMountRefs={refs => setReviewFormRefs(refs)}
               onSubmit={submitReview}
-              // ratingOptions={ratingOptions}
+             ratingOptions={ratingOptions}
             />
           </View>
         )

@@ -308,11 +308,9 @@ export const ProductScreen = props => {
       {magentoOptions.reviewEnabled && (
         <>
           <ProductReviews product={product} />
-          {
-            (customer!=null)?
+         
               <ReviewFormContainer product={product} />
-            : null
-          }
+           
          
         </>
       )}

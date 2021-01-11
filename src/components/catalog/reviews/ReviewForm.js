@@ -60,7 +60,7 @@ const ReviewForm = forwardRef((props, ref) => {
       // console.log("nickname:",nickname);
       // console.log("summary:",summary);
       // console.log("review:", review);
-      // console.log("props.ratingOptions:", props.ratingOptions);
+
       props.onSubmit({
         price,
         value,
