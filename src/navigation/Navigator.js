@@ -85,9 +85,10 @@ const defaultHeaderOptions = {
 
 const HomeStack = createStackNavigator(
   {
+    [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
     [routes.NAVIGATION_ADDRESS_PATH]:AddressScreen,
     [routes.ADD_ADDRESS_PATH]:AddAddressScreen,
-    [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
+    
     [routes.NAVIGATION_CATEGORY_PATH]: Category,
     [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen,
     [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
@@ -215,11 +216,13 @@ const SearchStack = createStackNavigator({
 });
 
 const CategoryStack = createStackNavigator({
+  [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
   [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: CategoryTreeScreen,
   [routes.NAVIGATION_CATEGORY_PATH]: Category,
-  [routes.NAVIGATION_SEARCH_PRODUCT_PATH]: ProductScreen,
-  [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
+  [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen
+ 
 }, {
+  initialRouteName: routes.NAVIGATION_CATEGORY_SCREEN_PATH,
   // navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions
 });
@@ -247,7 +250,7 @@ const CartStack = createStackNavigator({
 
 CartStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  let drawerLockMode = 'unlocked';
+  let drawerLockMode = 'unlocked';  
   // if (navigation.state.index > 0) {
   //   tabBarVisible = false;
   //   drawerLockMode = 'locked-closed';
@@ -297,48 +300,7 @@ const MainAppNavigator = createBottomTabNavigator(
         },
       }),
     },
-    // [routes.NAVIGATION_CATEGORY_PATH]: Category,
-    // [routes.NAVIGATION_CATEGORY_TREE_PATH]: {
-    //   screen: CategoryTree,
-    //   navigationOptions: () => ({
-    //     tabBarIcon: ({ tintColor,focused }) => {
-    //       let imagePath = null;
-    //       if(focused)
-    //       {
-    //         imagePath=require('../../resources/icons/Search_c.png')
-    //       }
-    //       else 
-    //       {
-    //         imagePath=require('../../resources/icons/Search.png')
-    //       }
-    //       return(<View style={styles.IconWrapper}><Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/></View>)
-    //     },
-    //   }),
-    // },
    
-    // [routes.NAVIGATION_CART_PATH]: {
-    //   screen: CartStack,
-    //   navigationOptions: (props) => ({
-       
-    //     tabBarIcon: ({ tintColor,focused }) => {
-    //       let imagePath = null;
-    //       if(focused)
-    //       {
-    //         imagePath=require('../../resources/icons/Bottom/wishlist_selected.png')
-    //       }
-    //       else 
-    //       {
-    //         imagePath=require('../../resources/icons/Bottom/category2.png')
-    //       }
-    //       return(<TouchableOpacity onPress={()=> props.navigation.openDrawer()} style={[styles.IconWrapper,CommonStyle.paddingLR10]}>
-    //           <Image style={CommonStyle.Icon20} source={imagePath} resizeMode='contain'/>
-    //           <Text style={[(focused)?CommonStyle.xsPrimarySemiBold:CommonStyle.xsGreyRegular,CommonStyle.marginTop2]}>
-    //                   Categories
-    //                 </Text>
-    //         </TouchableOpacity>)},
-    //   }),
-     
-    // },
     
     [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: {
       screen: CategoryStack,

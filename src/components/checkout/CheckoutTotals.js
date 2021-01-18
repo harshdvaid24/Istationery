@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import CheckBox from '@react-native-community/checkbox';
 import {
   checkoutSelectedPaymentChanged,
   checkoutCustomerNextLoading,
@@ -28,26 +29,40 @@ class CheckoutTotals extends Component {
 
   state = {
     couponCodeInput: '',
+    toggleCheckBox:false
+
   };
+  toggleTerms = () => {
+    this.setState({ toggleCheckBox:!this.state.toggleCheckBox});
+  }
+
 
   onPlacePressed = () => {
-    const { cartId, selectedPayment } = this.props;
-    const payment = {
-      paymentMethod: {
-        // po_number: selectedPayment.code,
-        method: selectedPayment.code,
-        // additional_data: [
-        // 	"string"
-        // ],
-        // extension_attributes: {
-        // 	agreement_ids: [
-        // 		"string"
-        // 	]
-        // }
-      },
-    };
-    this.props.checkoutCustomerNextLoading(true);
-    this.props.placeGuestCartOrder(cartId, payment);
+
+    if(this.state.toggleCheckBox){
+      const { cartId, selectedPayment } = this.props;
+      const payment = {
+        paymentMethod: {
+          // po_number: selectedPayment.code,
+          method: selectedPayment.code,
+          // additional_data: [
+          // 	"string"
+          // ],
+          // extension_attributes: {
+          // 	agreement_ids: [
+          // 		"string"
+          // 	]
+          // }
+        },
+      };
+      this.props.checkoutCustomerNextLoading(true);
+      this.props.placeGuestCartOrder(cartId, payment);
+    }
+    else{
+      alert('Please accept terms and conditions first.');
+    }
+
+   
   }
 
   goHome = () => {
@@ -169,8 +184,18 @@ class CheckoutTotals extends Component {
     }
     return (
       <View style={styles.nextButtonStyle}>
-       <View style={[CommonStyle.marginLR20,CommonStyle.marginBottom20]}>
-        <Text style={[CommonStyle.sGreyRegular]} numberOfLines={2}>
+       <View style={[CommonStyle.marginLR20,CommonStyle.FlexRow,CommonStyle.marginBottom20]}>
+        <CheckBox
+            value={this.state.toggleCheckBox}
+            onValueChange={this.toggleTerms}
+            onCheckColor={GlobalStyles.colorSet.btnPrimary}
+            onTintColor={GlobalStyles.colorSet.btnPrimary}
+            boxType={'square'}
+            lineWidth={2.0}
+            animationDuration={0.1}
+            style={styles.checkbox}
+          />
+        <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginLR15]} numberOfLines={2}>
            By placing your order, you agree to iStationery Terms & Conditions.
         </Text>
       </View>
@@ -209,13 +234,14 @@ class CheckoutTotals extends Component {
   }
 
   showPopup(title, message,orderId) {
+    console.log("showPopup:orderId:",orderId);
     this.props.checkoutSetActiveSection(1);
     this.props.getCart();
 
     const {  selectedPayment } = this.props;
    
        let PaymentMethod =  selectedPayment.code;
-       console.log("PaymentMethod:",PaymentMethod);
+      //  console.log("PaymentMethod:",PaymentMethod);
 
        if(PaymentMethod=="cashondelivery")
        {

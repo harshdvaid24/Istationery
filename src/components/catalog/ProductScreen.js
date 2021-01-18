@@ -33,6 +33,7 @@ import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT,WINDOW_WIDTH} from './../.
 import {NAVIGATION_SEARCH_SCREEN_PATH} from '../../navigation/routes'
 
 export const ProductScreen = props => {
+  console.log("ProductScreen:",props);
   const { cart, currencyRate, currencySymbol, customer, current } = useSelector(
     state => mapStateToProps(state),
   );

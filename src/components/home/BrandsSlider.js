@@ -26,6 +26,7 @@ const BrandsSlider = ({
         resizeMode="contain"
         source={{ uri:magento.getMediaUrl()+ item.image }}
       />
+      {console.log("brands:",magento.getMediaUrl()+ item.image)}
     </View>
   ));
 
