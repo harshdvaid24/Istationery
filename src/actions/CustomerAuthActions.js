@@ -31,16 +31,18 @@ export const signIn = customer => async (dispatch) => {
   try {
     dispatch({ type: MAGENTO_CREATE_CUSTOMER_LOADING, payload: true });
     const response = await magento.guest.createCustomer(customer);
+    console.log("magento.guest.createCustomer:",response);
     dispatch({ type: MAGENTO_CREATE_CUSTOMER_SUCCESS, payload: response });
     if (response.id && response.group_id) {
       const token = await magento.guest.auth(
         customer.customer.email,
         customer.password,
       );
+      console.log("magento.guest.auth:",token);
       if (token.message) {
         authFail(dispatch, token.message);
       } else {
-        authSuccess(dispatch, token);
+         authSuccess(dispatch, token);
       }
     } else if (response.message) {
       authFail(dispatch, response.message);

@@ -34,6 +34,7 @@ const Signin = ({
   loading,
   error,
   success,
+  customer,
   navigation,
   signIn: _signIn,
   ResetError:_ResetError
@@ -97,18 +98,26 @@ const Signin = ({
     }
 
     return (
-      <View style={[CommonStyle.marginTop20]}>
-      <Button
-        // disabled={
-        //   firstname === ''
-        //   || lastname === ''
-        //   || email === ''
-        //   || password === ''
-        // }
-        onPress={onCreateAccountPress}
-      >
-        {'Create Account'}
-      </Button>
+      <View style={[CommonStyle.marginTop20,]}>
+         <View style={[CommonStyle.marginLR50,CommonStyle.marginBottom20]}>
+          <Text style={[CommonStyle.sBlackRegular]}>
+             By creating an account you agree to the privacy policy and to the terms of use
+          </Text>
+        </View>
+          <View style={[CommonStyle.FlexRow,CommonStyle.VerticalCenter]}>
+                <Button
+              // disabled={
+              //   firstname === ''
+              //   || lastname === ''
+              //   || email === ''
+              //   || password === ''
+              // }
+              onPress={onCreateAccountPress}
+            >
+              {'Register'}
+            </Button>
+          </View>
+     
 
 <TouchableOpacity   onPress={onSigninPress} style={[styles.linkButton,CommonStyle.marginTop40]}>
 <Text style={[CommonStyle.mBlackBold]}>{'Already have an account?  '}</Text>
@@ -125,7 +134,12 @@ const Signin = ({
       return <Text style={styles.error(theme)}>{error}</Text>;
     }
 
+    // if(customer){
+    //   navigation.navigate(NAVIGATION_LOGIN_PATH);
+    // }
+
     if (success) {
+      // navigation.navigate(NAVIGATION_LOGIN_PATH);
       return <Text style={styles.success(theme)}>{success}</Text>;
     }
   };
@@ -143,7 +157,7 @@ const Signin = ({
           source={require('../../../resources/icons/logo.png')}
         />
 
-         <Text style={[styles.Title(theme)]}> Create Account </Text>
+         <Text style={[styles.Title(theme)]}> Create an account </Text>
       <Input
         autoCapitalize="none"
         underlineColorAndroid="transparent"
@@ -281,18 +295,20 @@ Signin.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType(PropTypes.string, null),
   success: PropTypes.oneOfType(PropTypes.string, null),
+  customer:PropTypes.oneOfType(PropTypes.string, null),
   signIn: PropTypes.func.isRequired,
 };
 
 Signin.defaultProps = {
   error: null,
   success: null,
+  customer:null
 };
 
 const mapStateToProps = ({ customerAuth }) => {
-  const { error, success, loading } = customerAuth;
+  const { error, success, loading,customer } = customerAuth;
 
-  return { error, success, loading };
+  return { error, success, loading,customer };
 };
 
 export default connect(mapStateToProps, { signIn,ResetError })(Signin);

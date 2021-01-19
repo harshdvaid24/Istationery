@@ -15,7 +15,7 @@ import {
   removeCouponFromCart,
   addCouponToCart,
 } from '../../actions';
-import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
+import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CONTACTUS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
 import { Button, Spinner, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -24,6 +24,7 @@ import { Row, Spacer } from 'react-native-markup-kit';
 
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 class CheckoutTotals extends Component {
   static contextType = ThemeContext;
 
@@ -32,14 +33,16 @@ class CheckoutTotals extends Component {
     toggleCheckBox:false
 
   };
-  toggleTerms = () => {
-    this.setState({ toggleCheckBox:!this.state.toggleCheckBox});
+  onLinkPressed = () => {
+      this.props.navigation.navigate(NAVIGATION_CONTACTUS_PATH);
   }
+
+  
 
 
   onPlacePressed = () => {
 
-    if(this.state.toggleCheckBox){
+   
       const { cartId, selectedPayment } = this.props;
       const payment = {
         paymentMethod: {
@@ -57,11 +60,7 @@ class CheckoutTotals extends Component {
       };
       this.props.checkoutCustomerNextLoading(true);
       this.props.placeGuestCartOrder(cartId, payment);
-    }
-    else{
-      alert('Please accept terms and conditions first.');
-    }
-
+   
    
   }
 
@@ -185,7 +184,7 @@ class CheckoutTotals extends Component {
     return (
       <View style={styles.nextButtonStyle}>
        <View style={[CommonStyle.marginLR20,CommonStyle.FlexRow,CommonStyle.marginBottom20]}>
-        <CheckBox
+        {/* <CheckBox
             value={this.state.toggleCheckBox}
             onValueChange={this.toggleTerms}
             onCheckColor={GlobalStyles.colorSet.btnPrimary}
@@ -194,10 +193,13 @@ class CheckoutTotals extends Component {
             lineWidth={2.0}
             animationDuration={0.1}
             style={styles.checkbox}
-          />
-        <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginLR15]} numberOfLines={2}>
-           By placing your order, you agree to iStationery Terms & Conditions.
-        </Text>
+          /> */}
+          <TouchableOpacity onPress={() => this.onLinkPressed() }>
+                <Text style={[CommonStyle.sGreyRegular,CommonStyle.underline,CommonStyle.marginLR10]} numberOfLines={2}>
+                  By placing your order, you agree to iStationery Terms & Conditions.
+                </Text>
+          </TouchableOpacity>
+      
       </View>
 
         <Button
