@@ -68,7 +68,6 @@ class CheckoutPaymentMethod extends Component {
   renderPaymentMethods() {
     const theme = this.context;
     const { payments } = this.props;
-console.log("payments:",payments);
     if (!payments || !payments.length) {
       return <Text>{translate('checkout.noPaymentMethod')}</Text>;
     }

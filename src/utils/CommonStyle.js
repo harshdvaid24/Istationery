@@ -925,6 +925,7 @@ width100p:{width:'100%'},
 
   marginLR5: { marginLeft: W(5), marginRight: W(5) },
   marginLR10: { marginLeft: W(10), marginRight: W(10) },
+  marginLR15: { marginLeft: W(15), marginRight: W(15) },
   marginLR20: { marginLeft: W(20), marginRight: W(20) },
   marginLR30: { marginLeft: W(30), marginRight: W(30) },
   marginLR40: { marginLeft: W(40), marginRight: W(40) },

@@ -11,7 +11,7 @@ import {
 } from '../../actions';
 import { ProductList, HeaderGridToggleIcon } from '../common';
 import NavigationService from '../../navigation/NavigationService';
-import { NAVIGATION_SEARCH_PRODUCT_PATH } from '../../navigation/routes';
+import { NAVIGATION_HOME_PRODUCT_PATH } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
@@ -61,7 +61,7 @@ class SearchScreen extends Component {
 
   onRowPress = (product) => {
     this.props.setCurrentProduct({ product });
-    NavigationService.navigate(NAVIGATION_SEARCH_PRODUCT_PATH, {
+    NavigationService.navigate(NAVIGATION_HOME_PRODUCT_PATH, {
       product,
       title: product.name,
     });

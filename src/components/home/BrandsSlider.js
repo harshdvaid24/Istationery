@@ -20,17 +20,17 @@ const BrandsSlider = ({
 // ]
 
   const renderMediaItems = () => slider.map((item, index) => (
-    <View key={index} style={styles.slide}>
+    <View key={index} style={[styles.slide]}>
       <FastImage
-        style={styles.imageStyle}
-        resizeMode="contain"
+        style={[styles.imageStyle]}
+        resizeMode="stretch"
         source={{ uri:magento.getMediaUrl()+ item.image }}
       />
     </View>
   ));
 
   return (
-    <View style={[styles.imageContainer, style]}>
+    <View style={[styles.imageContainer]}>
       <Text style={[CommonStyle.lPrimarySemiBold,CommonStyle.marginLR10,CommonStyle.marginTB10]}> Brands </Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
          {/* <Swiper showsPagination={false} pagingEnabled autoplay={false}> */}
@@ -54,8 +54,8 @@ BrandsSlider.defaultProps = {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    height:H(170),
-    alignItems: 'center',
+    height:H(190),
+     alignItems: 'center',
     // paddingHorizontal:W(10)
     // width: W(200),
   },
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     width: W(200),
   },
   slide: {
-    alignItems: 'center',
-    paddingHorizontal:W(10),
+    // alignItems: 'center',
+    // paddingHorizontal:W(10),
     backgroundColor:GlobalStyles.colorSet.white
   },
 });

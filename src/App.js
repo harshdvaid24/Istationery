@@ -12,10 +12,14 @@ import FlashMessage from "react-native-flash-message";
 import SplashScreen from 'react-native-splash-screen'
 import OfflineNotice from './../src/components/NoInternet/OfflineNotice';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
+var Fabric = require('react-native-fabric');
+var { Crashlytics } = Fabric;
+
 onAppStart(store);
 
 const App = () => {
  
+  // Crashlytics.crash();
  
   return(
   <Provider store={store}>

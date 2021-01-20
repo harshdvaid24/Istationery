@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import CheckBox from '@react-native-community/checkbox';
 import {
   checkoutSelectedPaymentChanged,
   checkoutCustomerNextLoading,
@@ -14,7 +15,7 @@ import {
   removeCouponFromCart,
   addCouponToCart,
 } from '../../actions';
-import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
+import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CONTACTUS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
 import { Button, Spinner, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -23,31 +24,44 @@ import { Row, Spacer } from 'react-native-markup-kit';
 
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 class CheckoutTotals extends Component {
   static contextType = ThemeContext;
 
   state = {
     couponCodeInput: '',
+    toggleCheckBox:false
+
   };
+  onLinkPressed = () => {
+      this.props.navigation.navigate(NAVIGATION_CONTACTUS_PATH);
+  }
+
+  
+
 
   onPlacePressed = () => {
-    const { cartId, selectedPayment } = this.props;
-    const payment = {
-      paymentMethod: {
-        // po_number: selectedPayment.code,
-        method: selectedPayment.code,
-        // additional_data: [
-        // 	"string"
-        // ],
-        // extension_attributes: {
-        // 	agreement_ids: [
-        // 		"string"
-        // 	]
-        // }
-      },
-    };
-    this.props.checkoutCustomerNextLoading(true);
-    this.props.placeGuestCartOrder(cartId, payment);
+
+   
+      const { cartId, selectedPayment } = this.props;
+      const payment = {
+        paymentMethod: {
+          // po_number: selectedPayment.code,
+          method: selectedPayment.code,
+          // additional_data: [
+          // 	"string"
+          // ],
+          // extension_attributes: {
+          // 	agreement_ids: [
+          // 		"string"
+          // 	]
+          // }
+        },
+      };
+      this.props.checkoutCustomerNextLoading(true);
+      this.props.placeGuestCartOrder(cartId, payment);
+   
+   
   }
 
   goHome = () => {
@@ -169,10 +183,23 @@ class CheckoutTotals extends Component {
     }
     return (
       <View style={styles.nextButtonStyle}>
-       <View style={[CommonStyle.marginLR20,CommonStyle.marginBottom20]}>
-        <Text style={[CommonStyle.sGreyRegular]} numberOfLines={2}>
-           By placing your order, you agree to iStationery Terms & Conditions.
-        </Text>
+       <View style={[CommonStyle.marginLR20,CommonStyle.FlexRow,CommonStyle.marginBottom20]}>
+        {/* <CheckBox
+            value={this.state.toggleCheckBox}
+            onValueChange={this.toggleTerms}
+            onCheckColor={GlobalStyles.colorSet.btnPrimary}
+            onTintColor={GlobalStyles.colorSet.btnPrimary}
+            boxType={'square'}
+            lineWidth={2.0}
+            animationDuration={0.1}
+            style={styles.checkbox}
+          /> */}
+          <TouchableOpacity onPress={() => this.onLinkPressed() }>
+                <Text style={[CommonStyle.sGreyRegular,CommonStyle.underline,CommonStyle.marginLR10]} numberOfLines={2}>
+                  By placing your order, you agree to iStationery Terms & Conditions.
+                </Text>
+          </TouchableOpacity>
+      
       </View>
 
         <Button
@@ -209,13 +236,14 @@ class CheckoutTotals extends Component {
   }
 
   showPopup(title, message,orderId) {
+    console.log("showPopup:orderId:",orderId);
     this.props.checkoutSetActiveSection(1);
     this.props.getCart();
 
     const {  selectedPayment } = this.props;
    
        let PaymentMethod =  selectedPayment.code;
-       console.log("PaymentMethod:",PaymentMethod);
+      //  console.log("PaymentMethod:",PaymentMethod);
 
        if(PaymentMethod=="cashondelivery")
        {
