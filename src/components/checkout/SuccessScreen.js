@@ -51,7 +51,9 @@ const SuccessScreen = ({
 
 const dispatch = useDispatch();
 
-const loading = useSelector(state => state.wishlist.loading);
+const orderDetail = useSelector(state => state.account.orderDetail);
+console.log("orderDetail:",orderDetail);
+
   useEffect(()=>{
  
   },[]);

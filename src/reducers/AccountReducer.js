@@ -7,6 +7,7 @@ import {
   MAGENTO_ADD_ACCOUNT_ADDRESS,
   MAGENTO_UPDATE_REFRESHING_ORDERS_DATA,
   MAGENTO_ORDER_PRODUCT_DETAIL,
+  MAGENTO_GET_ORDER_DETAIL,
   MAGENTO_LOGOUT,
   MAGENTO_ADD_ACCOUNT_ADDRESS_ERROR,
   MAGENTO_GET_ADDRESS_LIST,
@@ -23,6 +24,7 @@ const INITIAL_STATE = {
   orderData: {
     items: [],
   },
+  orderDetail:{},
   products: {},
   refreshing: false,
   ui: {
@@ -86,6 +88,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         products,
       };
+    }
+
+    
+    case MAGENTO_GET_ORDER_DETAIL:{
+      return {...state,orderDetail:action.payload}
     }
 
     case MAGENTO_GET_ADDRESS_LIST:{

@@ -4,7 +4,7 @@ import { View, Text,TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 // import { Text } from './Text';
 import { Price } from './Price';
-import { getProductThumbnailFromAttribute } from '../../helper/product';
+import { getProductThumbnailFromAttribute,getProductCustomAttributeValue } from '../../helper/product';
 import { ThemeContext } from '../../theme';
 import { finalPrice } from '../../helper/price';
 import  CommonStyle from './../../utils/CommonStyle';
@@ -24,6 +24,9 @@ const ProductListItem = ({
 }) => {
   const theme = useContext(ThemeContext);
   const image = () => getProductThumbnailFromAttribute(product);
+  const isInStock =  getProductCustomAttributeValue(product,'quantity_attribute');
+  console.log("isInStock:",isInStock);
+  
 
   return (
     <View style={[viewContainerStyle]}>
@@ -43,13 +46,17 @@ const ProductListItem = ({
              <Text numberOfLines={2} style={[styles.textStyle]}>{product.name}</Text>
           </View>
           <View style={[styles.productPriceContainer,CommonStyle.paddingLR15]}>
+            {
+              (isInStock=='1')?
+           
             <Price
               style={styles.textStyle}
               basePrice={product.price}
               discountPrice={finalPrice(product.custom_attributes, product.price)}
               currencyRate={currencyRate}
               currencySymbol={currencySymbol}
-            />
+            />: <Text numberOfLines={2} style={[styles.OutofStocktextStyle]}>{'Out Of Stock'}</Text>
+            }
           </View>
         
         </View>
@@ -104,6 +111,10 @@ const styles = {
   textStyle:{
     // fontSize:W(14),
     color:GlobalStyles.colorSet.appBlack
+  },
+  OutofStocktextStyle:{
+    // fontSize:W(14),
+    color:GlobalStyles.colorSet.red
   },
   imageStyle: theme => ({
     height: theme.dimens.productListItemImageHeight,

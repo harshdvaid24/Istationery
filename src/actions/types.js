@@ -106,6 +106,8 @@ export const MAGENTO_RELATED_PRODUCTS_SUCCESS = 'magento_related_products_succes
 export const MAGENTO_RELATED_PRODUCTS_ERROR = 'magento_related_products_error';
 export const MAGENTO_RELATED_PRODUCTS_CONF_PRODUCT = 'magento_related_products_conf_product_update';
 export const MAGENTO_PRODUCT_STOCK_CHECK = 'magento_product_stock_check';
+export const MAGENTO_GET_ORDER_DETAIL = 'magento_get_order_details';
+
 export const MAGENTO_ADD_WISHLIST = 'magento_add_wishlist';
 
 

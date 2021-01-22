@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import {
   checkoutSelectedPaymentChanged,
@@ -14,6 +15,7 @@ import {
   checkoutSetActiveSection,
   removeCouponFromCart,
   addCouponToCart,
+  getOrderDetail
 } from '../../actions';
 import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CONTACTUS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
 import { Button, Spinner, Price } from '../common';
@@ -224,6 +226,7 @@ class CheckoutTotals extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.orderId && this.props.orderId !== prevProps.orderId) {
       this.showPopup(translate('common.order'), translate('checkout.orderSuccessMessage'),this.props.orderId);
+      // this.props.getOrderDetail(this.props.orderId);
     }
     if (this.props.errorMessage && this.props.errorMessage !== prevProps.errorMessage) {
       this.showPopup(translate('errors.error'), this.props.errorMessage,);
@@ -401,4 +404,5 @@ export default connect(mapStateToProps, {
   getCart,
   addCouponToCart,
   removeCouponFromCart,
+  getOrderDetail
 })(CheckoutTotals);

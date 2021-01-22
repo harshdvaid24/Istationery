@@ -330,6 +330,8 @@ export default magento => ({
   
   getProductIsInStock: (sku) => magento.get(`/V1/stockItems/${sku}`,undefined,undefined,ADMIN_TYPE),
 
+  getOrderDetails: (order_id) => magento.get(`/V1/orders/${order_id}`,undefined,undefined,ADMIN_TYPE),
+
   getOrderStatusLabel: () =>magento.get(`/V1/mobileapi/order/getorderstatus`,undefined,undefined,ADMIN_TYPE)
 
 });

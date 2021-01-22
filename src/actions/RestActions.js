@@ -43,6 +43,7 @@ import {
   MAGENTO_RESET_SEARCH_PRODUCTS,
   MAGENTO_STORE_CONFIG,
   MAGENTO_GET_ORDERS,
+  MAGENTO_GET_ORDER_DETAIL,
   MAGENTO_ORDER_PRODUCT_DETAIL,
   MAGENTO_UPDATE_CATEGORY_PRODUCTS,
   MAGENTO_UPDATE_REFRESHING_CATEGORY_PRODUCTS,
@@ -808,6 +809,16 @@ export const getproductIsInStock = (sku) => async (dispatch) =>{
   }))
   .catch((error)=>{logError(error)});
 }
+
+export const getOrderDetail = (order_id) => async (dispatch) =>{
+  console.log('order_id:',order_id);
+  magento.admin.getOrderDetails(order_id).then((data=>{
+    dispatch({type: MAGENTO_GET_ORDER_DETAIL,payload: data});
+  }))
+  .catch((error)=>{logError(error)});
+}
+
+
 
 export const toggleWishList = (id,wishListItemId,add) => (dispatch)=>{
   // if(add)
