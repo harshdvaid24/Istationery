@@ -58,13 +58,16 @@ console.log("isAdd:",isAdd);
     navigation.navigate(NAVIGATION_ADDRESS_PATH);
   }
   else{
+    let addressLine = [addressDetails.street.split(/(\r\n|\n|\r)/gm)];
+    console.log('Address Line',addressLine);
+
     setAddressId(addressDetails?addressDetails.address_id:'');
     setfirstName(addressDetails?addressDetails.firstname:'');
     setlastName(addressDetails?addressDetails.lastname:'');
     setcity(addressDetails?addressDetails.city:'');
-    setstreet(addressDetails?addressDetails.street:'');
-    // setaddress1(addressDetails?addressDetails.street[0]:'');
-    // setaddress2(addressDetails?addressDetails.street[1]:'');
+    // setstreet(addressDetails?addressDetails.street:'');
+    setaddress1(addressDetails?addressLine[0][0]:'');
+    setaddress2(addressDetails?addressLine[0][2]:'');
     settelephone(addressDetails?addressDetails.phone:'');
     setpostcode(addressDetails?addressDetails.pincode:'');
     setregion(addressDetails?addressDetails.region:'');
@@ -95,8 +98,8 @@ const clearInput = () => {
     const [city, setcity] = useState(addressDetails?addressDetails.city:'');
     // const [company, setcompany] = useState(addressDetails?addressDetails.firstname:'');
     const [street, setstreet] = useState(addressDetails?addressDetails.street:'')
-    // const [address1, setaddress1] = useState(addressDetails?addressDetails.street[0]:'');
-    // const [address2, setaddress2] = useState(addressDetails?addressDetails.street[1]:'')
+    const [address1, setaddress1] = useState(addressDetails?addressDetails.street[0]:'');
+    const [address2, setaddress2] = useState(addressDetails?addressDetails.street[1]:'')
     const [telephone, settelephone] = useState(addressDetails?addressDetails.phone:'');
     const [postcode, setpostcode] = useState(addressDetails?addressDetails.pincode:'');
     const [region, setregion] = useState(addressDetails?addressDetails.region:'');
@@ -122,8 +125,8 @@ const clearInput = () => {
     const regionInput = useRef(null);
     const telephoneInput = useRef(null);
     const stateInput = useRef(null);
-    // const address1Input = useRef(null);
-    // const address2Input = useRef(null);
+    const address1Input = useRef(null);
+    const address2Input = useRef(null);
 
     const onAddAddressPress = () => {
       // TODO: add password validation check
@@ -136,18 +139,18 @@ const clearInput = () => {
       {
         alert('Lastname should not be empty.');
       }
-      // else if(address1=='')
-      // {
-      //   alert('Address 1 should not be empty.');
-      // }
-      // else if(address2=='')
-      // {
-      //   alert('Address 2 should not be empty.');
-      // }
-      else if(street=='')
+      else if(address1=='')
       {
-        alert('Street should not be empty.');
+        alert('Address 1 should not be empty.');
       }
+      else if(address2=='')
+      {
+        alert('Address 2 should not be empty.');
+      }
+      // else if(street=='')
+      // {
+      //   alert('Street should not be empty.');
+      // }
       else if(city=='')
       {
         alert('City should not be empty.');
@@ -182,9 +185,8 @@ const clearInput = () => {
                address_id:address_id,
                email:customer.email,
               country_Id:countryCode,
-              //street:[address1,address2],
+              street:[address1,address2],
               city,
-              street,
               telephone,
               postcode,
               firstname: firstName,
@@ -204,9 +206,9 @@ const clearInput = () => {
               email:customer.email,
               // company,
               country_Id:countryCode,
-              //street:[address1,address2],
+              street:[address1,address2],
               city,
-              street,
+              // street,
               telephone,
               postcode,
               firstname: firstName,
@@ -312,7 +314,7 @@ const clearInput = () => {
        containerStyle={styles.inputContainer(theme)}
      />
     
-     <Input
+     {/* <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"
        placeholder={translate('common.street')}
@@ -324,8 +326,8 @@ const clearInput = () => {
        assignRef={(input) => { streetInput.current = input; }}
        onSubmitEditing={() => { cityInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
-     />
-     {/* <Input
+     /> */}
+     <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"
        placeholder={translate('common.address1')}
@@ -350,7 +352,7 @@ const clearInput = () => {
        assignRef={(input) => { address2Input.current = input; }}
        onSubmitEditing={() => { cityInput.current.focus(); }}
        containerStyle={styles.inputContainer(theme)}
-     /> */}
+     />
       <Input
        autoCapitalize="none"
        underlineColorAndroid="transparent"

@@ -46,7 +46,7 @@ export const AddressItem = ({ item, onRemove,OnEdit, navigation }) => {
               <View  style={[styles.ItemTextContainer]}>
                     <Text numberOfLines={1} style={[CommonStyle.lBlackRegular]}>{item.item.firstname} {item.item.lastname}</Text> 
                     <View style={[CommonStyle.marginTop5]}>
-                      <Text>{item.item.street},{item.item.city},{item.item.region}, </Text>
+                      <Text>{item.item.street.replace(/(\r\n|\n|\r)/gm, ',')},{item.item.city},{item.item.region}, </Text>
                       <Text>{item.item.country},{item.item.pincode} </Text>
                     </View>
                     <TouchableOpacity onPress={OnEditPressed} style={[CommonStyle.rectBtn,CommonStyle.marginTop20]}>
