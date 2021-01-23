@@ -12,8 +12,7 @@ import CommonStyle from '../../utils/CommonStyle'
 import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 import { WebView } from 'react-native-webview';
  
-export const ContactUsScreen = props => {
-  
+export const TermsAndConditionScreen = props => {
   const dispatch = useDispatch();
   const theme = useContext(ThemeContext);
  
@@ -44,7 +43,7 @@ export const ContactUsScreen = props => {
     
     <View style={{ height: '100%', backgroundColor: GlobalStyle.colorSet.white }}>
     <SafeAreaView style={{ flex: 1 }}>
-         <WebView source={{ uri: 'https://staging.istationery.com/mobile-contact-us' }}  scalesPageToFit={true} />
+         <WebView source={{ uri: 'https://staging.istationery.com/mobile-privacy-policy'}}  scalesPageToFit={true} />
     </SafeAreaView>
     </View>
     </View>
@@ -60,21 +59,22 @@ const styles = StyleSheet.create({
 
 });
 
-ContactUsScreen['navigationOptions'] = screenProps => ({
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {props.navigation.goBack() }}
-      >
-      <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
-      </TouchableOpacity>
-  ),
-  headerBackTitle: ' ',
-  headerTitle:'Contact Us',
-  headerStyle: {
-    backgroundColor:'white',
-    marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
-    height: H(40),
-    elevation: 0,
-     borderWidth:0,
-  }
+TermsAndConditionScreen['navigationOptions'] = screenProps => ({
+    headerLeft: () => (
+      <TouchableOpacity
+        onPress={() => {props.navigation.goBack() }}
+        >
+        <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
+        </TouchableOpacity>
+    ),
+    headerBackTitle: ' ',
+    headerTitle:'Terms And Condition',
+    headerStyle: {
+      backgroundColor:'white',
+      marginTop:Platform.OS === 'ios' ? (WINDOW_HEIGHT>812)?H(0):0 : H(StatusbarHeight),
+      height: H(40),
+      elevation: 0,
+       borderWidth:0,
+    }
 });
+
