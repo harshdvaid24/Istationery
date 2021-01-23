@@ -16,6 +16,7 @@ export const NAVIGATION_ADDRESS_PATH = 'AddressListScreen';
 
 export const NAVIGATION_PAYMENT_PATH = 'PaymentScreen';
 export const NAVIGATION_PAYMENT_SUCCESS_PATH = 'SuccessScreen';
+export const NAVIGATION_TERMS_AND_CONDITION = 'TermsAndConditionScreen'
 
 
 export const NAVIGATION_LOGIN_PATH = 'Login';

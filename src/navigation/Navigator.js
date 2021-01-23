@@ -57,6 +57,7 @@ import { theme } from '../theme';
 import { ProductScreen } from '../components/catalog/ProductScreen';
 import { H,W } from '../utils/GlobalStyles';
 import Categories from '../components/home/Categories';
+import { TermsAndConditionScreen } from '../components/catalog/TermsAndConditionScreen';
 
 
 const defaultHeader = {
@@ -429,6 +430,7 @@ const Nav = createStackNavigator({
   [routes.NAVIGATION_CHECKOUT_PATH]: Checkout,
   [routes.NAVIGATION_PAYMENT_PATH]: PaymentScreen,
   [routes.NAVIGATION_PAYMENT_SUCCESS_PATH]: SuccessScreen,
+  [routes.NAVIGATION_TERMS_AND_CONDITION]:TermsAndConditionScreen,
   
 },
 {

@@ -58,7 +58,7 @@ console.log("isAdd:",isAdd);
     navigation.navigate(NAVIGATION_ADDRESS_PATH);
   }
   else{
-    let addressLine = [addressDetails.street.split(/(\r\n|\n|\r)/gm)];
+    let addressLine = [addressDetails?addressDetails.street.split(/(\r\n|\n|\r)/gm):[]];
     console.log('Address Line',addressLine);
 
     setAddressId(addressDetails?addressDetails.address_id:'');

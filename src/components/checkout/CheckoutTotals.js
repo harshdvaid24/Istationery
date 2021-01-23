@@ -15,7 +15,7 @@ import {
   removeCouponFromCart,
   addCouponToCart,
 } from '../../actions';
-import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CONTACTUS_PATH,NAVIGATION_HOME_STACK_PATH } from '../../navigation/routes';
+import { NAVIGATION_PAYMENT_PATH,NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CONTACTUS_PATH,NAVIGATION_HOME_STACK_PATH, NAVIGATION_TERMS_AND_CONDITION } from '../../navigation/routes';
 import { Button, Spinner, Price } from '../common';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
@@ -34,7 +34,7 @@ class CheckoutTotals extends Component {
 
   };
   onLinkPressed = () => {
-      this.props.navigation.navigate(NAVIGATION_CONTACTUS_PATH);
+      this.props.navigation.navigate(NAVIGATION_TERMS_AND_CONDITION);
   }
 
   
