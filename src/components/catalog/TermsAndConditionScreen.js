@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 TermsAndConditionScreen['navigationOptions'] = screenProps => ({
     headerLeft: () => (
       <TouchableOpacity
-        onPress={() => {props.navigation.goBack() }}
+        onPress={() => {screenProps.navigation.goBack() }}
         >
         <Image style={[CommonStyle.Icon25,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
         </TouchableOpacity>
