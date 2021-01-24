@@ -226,7 +226,7 @@ class CheckoutTotals extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.orderId && this.props.orderId !== prevProps.orderId) {
       this.showPopup(translate('common.order'), translate('checkout.orderSuccessMessage'),this.props.orderId);
-      // this.props.getOrderDetail(this.props.orderId);
+      // console.log('ORDER SUCCESS OBJECT',this.props.orderDetail)
     }
     if (this.props.errorMessage && this.props.errorMessage !== prevProps.errorMessage) {
       this.showPopup(translate('errors.error'), this.props.errorMessage,);

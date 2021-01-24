@@ -47,29 +47,15 @@ const SuccessScreen = ({
   setCurrentProduct: _setCurrentProduct,
 }) => {
 
- console.log("navigation.state.params.orderNo:",navigation);
-
-const dispatch = useDispatch();
 
 const orderDetail = useSelector(state => state.account.orderDetail);
 console.log("orderDetail:",orderDetail);
-
-  useEffect(()=>{
- 
-  },[]);
-
-  
-
-
-
-
-
 
   return (
      <View style={[styles.ContainerStyle]}>
 
 <Text style={[CommonStyle.xlPrimarySemiBold,CommonStyle.marginTop40]}>
-       {'Order No: #'}{navigation.state.params.orderId}
+       {'Order No: #'}{orderDetail.increment_id}
       </Text>
 <Image style={[CommonStyle.Icon200,CommonStyle.marginTop40]} source={require("./.././../../resources/icons/nodata/store_empty.png")} />
       

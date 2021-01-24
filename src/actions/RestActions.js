@@ -726,6 +726,7 @@ export const placeGuestCartOrder = (cartId, payment) => async (dispatch) => {
     } else {
       data = await magento.guest.placeGuestCartOrder(cartId, payment);
     }
+    dispatch(getOrderDetail(data))
     dispatch({ type: MAGENTO_PLACE_GUEST_CART_ORDER, payload: data });
     dispatch({ type: UI_CHECKOUT_CUSTOMER_NEXT_LOADING, payload: false });
   } catch (error) {
