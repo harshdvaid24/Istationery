@@ -30,9 +30,9 @@ class CheckoutPaymentMethod extends Component {
     else{
       // alert(payment.code);
       let URL = "'https://staging.istationery.com/mobile-contact-us";
-      this.props.navigation.navigate('PaymentScreen',{url:URL});
+      // this.props.navigation.navigate('PaymentScreen',{url:URL});
     }
-    // this.props.checkoutSelectedPaymentChanged(payment);
+     this.props.checkoutSelectedPaymentChanged(payment);
   }
 
   onNextPressed = () => {

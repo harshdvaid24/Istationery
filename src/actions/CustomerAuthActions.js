@@ -133,6 +133,7 @@ const authSuccess = async (dispatch, token,SuccessScreen) => {
 
 const authFail = (dispatch, message) => {
   dispatch(errorMessage(message));
+  dispatch(getCart());
   dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
 };
 

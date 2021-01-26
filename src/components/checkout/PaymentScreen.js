@@ -16,19 +16,20 @@ import { NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CART_PATH } from '../../navi
 export const PaymentScreen = props => {
   
    const URL_CHECKOUT_SUCCESS = `${magentoOptions.url}benefit/hosted/success/`;
-
+   const URL_CHECKOUT_FAILED = `${magentoOptions.url}benefit/hosted/failed/`;
+  
 
  const navigationStateChangedHandler = ({ url }) => {
     console.log('Url :-', url);
 
-    console.log('Url URL_CHECKOUT_SUCCESS:-',URL_CHECKOUT_SUCCESS);
+    // console.log('Url URL_CHECKOUT_SUCCESS:-',URL_CHECKOUT_SUCCESS);
 
     if (url == URL_CHECKOUT_SUCCESS) {
       console.log('Url URL_CHECKOUT_SUCCESS:-');
-      props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH, { orderNo:"or9499999" });
+       props.navigation.navigate(NAVIGATION_PAYMENT_SUCCESS_PATH, { orderNo:"or9499999" });
       // this.props.navigation.navigate('Thankyou', { isPaymentFailed: false, orderNo: this.props.navigation.state.params.orderNo });
-    } else  {
-      props.navigation.navigate(NAVIGATION_CART_PATH);
+    } else if(url == URL_CHECKOUT_FAILED) {
+       props.navigation.navigate(NAVIGATION_CART_PATH);
       // this.props.navigation.navigate('NAVIGATION_PAYMENT_SUCCESS_PATH', { isPaymentFailed: true });
     } 
   };

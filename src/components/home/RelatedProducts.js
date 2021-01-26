@@ -16,7 +16,7 @@ const RelatedProducts = ({
   const theme = useContext(ThemeContext);
 
   const keyExtractor = item => item.id.toString();
-  console.log("Related products:Flatlist array:products.items:",products.items);
+  // console.log("Related products:Flatlist array:products.items:",products.items);
   return (
     <View style={[styles.container(theme), style]}>
       <Text type="heading" style={styles.title(theme)}>
