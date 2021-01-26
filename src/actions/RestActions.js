@@ -542,8 +542,11 @@ export const cartItemProduct = sku => async (dispatch) => {
 };
 
 export const getCartTotal = (cartId) => async(dispatch) => {
+  if(cartId)
+  {
   const totals = await magento.admin.getCartTotals(cartId);
   dispatch({type:MAGENTO_CART_TOTAL, payload:totals})
+  }
 } 
 
 const ordersLoading = (dispatch) =>{
@@ -718,8 +721,9 @@ export const getCountries = () => (dispatch) => {
     });
 };
 
-export const placeGuestCartOrder = (cartId, payment) => async (dispatch) => {
+export const placeGuestCartOrder = (cartId, payment, account) => async (dispatch) => {
   try {
+    console.log('DATA_GOT',account)
     let data;
     if (magento.isCustomerLogin()) {
       data = await magento.customer.placeCartOrder(payment);
@@ -728,7 +732,7 @@ export const placeGuestCartOrder = (cartId, payment) => async (dispatch) => {
     }
     dispatch(getOrderDetail(data))
     dispatch({ type: MAGENTO_PLACE_GUEST_CART_ORDER, payload: data });
-    dispatch({ type: UI_CHECKOUT_CUSTOMER_NEXT_LOADING, payload: false });
+    dispatch(createCustomerCart(account.id))
   } catch (error) {
     logError(error);
     const message = error.message ? error.message : 'Place order error';
@@ -815,6 +819,7 @@ export const getOrderDetail = (order_id) => async (dispatch) =>{
   console.log('order_id:',order_id);
   magento.admin.getOrderDetails(order_id).then((data=>{
     dispatch({type: MAGENTO_GET_ORDER_DETAIL,payload: data});
+    dispatch({ type: UI_CHECKOUT_CUSTOMER_NEXT_LOADING, payload: false });
   }))
   .catch((error)=>{logError(error)});
 }

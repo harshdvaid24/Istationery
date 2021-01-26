@@ -45,7 +45,7 @@ class CheckoutTotals extends Component {
   onPlacePressed = () => {
 
    
-      const { cartId, selectedPayment } = this.props;
+      const { cartId, selectedPayment, customer } = this.props;
       const payment = {
         paymentMethod: {
           // po_number: selectedPayment.code,
@@ -61,7 +61,7 @@ class CheckoutTotals extends Component {
         },
       };
       this.props.checkoutCustomerNextLoading(true);
-      this.props.placeGuestCartOrder(cartId, payment);
+      this.props.placeGuestCartOrder(cartId, payment, customer);
    
    
   }
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
   }),
 });
 
-const mapStateToProps = ({ cart, checkout, magento }) => {
+const mapStateToProps = ({ cart, checkout, magento, account }) => {
   const { cartId, couponLoading, couponError,quote } = cart;
   const { loading } = checkout.ui;
   const {
@@ -377,6 +377,7 @@ const mapStateToProps = ({ cart, checkout, magento }) => {
     displayCurrencySymbol: currencySymbol,
     displayCurrencyExchangeRate: currencyRate,
   } = magento.currency;
+  const {customer} = account
   return {
     cartId,
     payments,
@@ -391,7 +392,8 @@ const mapStateToProps = ({ cart, checkout, magento }) => {
     currencyRate,
     couponError,
     couponLoading,
-    quote
+    quote,
+    customer
   };
 };
 
