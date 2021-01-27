@@ -417,8 +417,8 @@ export const createCustomerCart = customerId => async (dispatch) => {
   }
 };
 
-export const getCart = (refreshing = false) => async (dispatch, getState) => {
-  console.log("getCart:");
+export const getCart = (refreshing = false,forceNewCart=true) => async (dispatch, getState) => {
+  console.log("GET_GUEST_CART");
   if (refreshing) {
     console.log("getCart:refreshing:");
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: true });
@@ -440,7 +440,8 @@ export const getCart = (refreshing = false) => async (dispatch, getState) => {
       console.log("getCart: CustomerLogin:cart:",cart);
     } else {
       console.log("getCart:not CustomerLogin:");
-      if(cartId){
+      if(cartId && forceNewCart){
+        console.log('GET_CART_FROM_IF',cartId,forceNewCart)
         try{
           console.log("getCart:not CustomerLogin:cartId:",cartId);
           cart = await magento.guest.getGuestCart(cartId);
@@ -450,7 +451,8 @@ export const getCart = (refreshing = false) => async (dispatch, getState) => {
         }
       }
 
-      if(!cartId || !cart){
+      if(!cartId || !cart || !forceNewCart){
+        console.log('from_else_condition')
         console.log("getCart: not CustomerLogin:not cartid:");
         cartId = await magento.guest.createGuestCart();
         console.log("getCart: not CustomerLogin:not cartid:",cartId);
@@ -721,9 +723,9 @@ export const getCountries = () => (dispatch) => {
     });
 };
 
-export const placeGuestCartOrder = (cartId, payment, account) => async (dispatch) => {
+export const placeGuestCartOrder = (cartId, payment, account=false) => async (dispatch) => {
   try {
-    console.log('DATA_GOT',account)
+    console.log('PLACE_ORDER_CART',account)
     let data;
     if (magento.isCustomerLogin()) {
       data = await magento.customer.placeCartOrder(payment);
@@ -732,7 +734,15 @@ export const placeGuestCartOrder = (cartId, payment, account) => async (dispatch
     }
     dispatch(getOrderDetail(data))
     dispatch({ type: MAGENTO_PLACE_GUEST_CART_ORDER, payload: data });
-    dispatch(createCustomerCart(account.id))
+    if(account=='null' || account == null || account==undefined)
+    {
+      console.log('FROM_IF_CONDITION_PLACE_ORDER');
+      dispatch(getCart(false,false))
+    }
+    else{
+      console.log('FROM_ELSE_CONDITION_PLACE_ORDER')
+      dispatch(createCustomerCart(account.id))
+    }
   } catch (error) {
     logError(error);
     const message = error.message ? error.message : 'Place order error';
