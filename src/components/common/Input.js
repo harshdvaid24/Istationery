@@ -15,6 +15,7 @@ const Input = ({
   containerStyle,
   labelStyle,
   inputStyle,
+  keyboardType,
   ...props
 }) => {
   const theme = useContext(ThemeContext);
@@ -30,6 +31,7 @@ const Input = ({
         placeholder={placeholder}
         placeholderTextColor={theme.colors.bodyText}
         autoCorrect={false}
+        keyboardType={(keyboardType)?keyboardType:'default'}
         style={[styles.inputStyle(theme), inputStyle,]}
         value={value}
         onChangeText={onChangeText}
