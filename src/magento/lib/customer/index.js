@@ -5,6 +5,8 @@ export default magento => ({
 
   getCustomerCart: () => magento.get('/V1/carts/mine', undefined, undefined, CUSTOMER_TYPE),
 
+  getCopyGuestCart:(id,customer_id) => magento.put(`/V1/guest-carts/${id}`,{customerId:customer_id,storeId:1},CUSTOMER_TYPE),
+
   createCart: customerId => magento.post(`/V1/customers/${customerId}/carts`, undefined, CUSTOMER_TYPE),
 
   addItemToCart: item => magento.post('/V1/carts/mine/items', item, CUSTOMER_TYPE),

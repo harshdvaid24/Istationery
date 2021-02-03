@@ -433,7 +433,10 @@ export const getCart = (refreshing = false,forceNewCart=true) => async (dispatch
         console.log("getCart:isCustomerLogin:cartId:",cartId);
         /*Merge Cart*/
         /*the code to merge cart will be here*/
-
+      const customer = await magento.customer.getCurrentCustomer();
+      console.log('NEW DATA FOR CART GUEST',customer);
+      const copyGuestToLoggedInUser = await magento.customer.getCopyGuestCart(cartId,customer.id);
+      console.log('COPY_SUCCESS_OR_NOT',copyGuestToLoggedInUser);
         AsyncStorage.removeItem('cartId');
       }
       cart = await magento.customer.getCustomerCart();
