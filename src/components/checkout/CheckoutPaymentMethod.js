@@ -71,8 +71,13 @@ class CheckoutPaymentMethod extends Component {
     if (!payments || !payments.length) {
       return <Text>{translate('checkout.noPaymentMethod')}</Text>;
     }
+    console.log("payments:",payments);
 
-    const radioProps = payments.map(item => ({
+    let items = payments.filter(function(item) { 
+      return item.title !== 'Credit Card'; 
+    });
+
+    const radioProps = items.map(item => ({
       label: item.title,
       value: item,
     }));
