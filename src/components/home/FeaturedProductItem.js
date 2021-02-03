@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { Text, Price } from '../common';
-import { getProductThumbnailFromAttribute } from '../../helper/product';
+import { getProductThumbnailFromAttribute,getProductCustomAttributeValue } from '../../helper/product';
 import { ThemeContext } from '../../theme';
 import { finalPrice } from '../../helper/price';
 import { useSelector } from 'react-redux';
@@ -18,6 +18,8 @@ const FeaturedProductItem = ({
 }) => {
   const theme = useContext(ThemeContext);
   const [themeStyles, setThemeStyle] = useState({});
+  const isInStock =  getProductCustomAttributeValue(product,'quantity_attribute');
+
   const [imageURI, setImageURI] = useState('');
   const price = useMemo(
     () => finalPrice(product.custom_attributes, product.price),
@@ -53,13 +55,16 @@ const FeaturedProductItem = ({
           </View>
 
           <View style={[styles.productPriceContainer,CommonStyle.paddingLR15]}>
+          {
+              (isInStock=='1')?
             <Price
               style={styles.textStyle}
               basePrice={product.price}
               discountPrice={finalPrice(product.custom_attributes, product.price)}
               currencyRate={currencyRate}
               currencySymbol={currencySymbol}
-            />
+            />: <Text numberOfLines={2} style={[styles.OutofStocktextStyle]}>{'Out Of Stock'}</Text>
+            }
           </View>
         </View>
       </TouchableOpacity>
@@ -86,6 +91,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }),
+  OutofStocktextStyle:{
+    // fontSize:W(14),
+    color:GlobalStyles.colorSet.red
+  },
   productPriceContainer:{
     // borderWidth: 1,
     height:H(35),
