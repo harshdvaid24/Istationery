@@ -324,6 +324,8 @@ PODS:
     - Crashlytics
     - Fabric
     - React
+  - ReactNativeLocalization (2.1.6):
+    - React
   - RNCAsyncStorage (1.12.1):
     - React-Core
   - RNCCheckbox (0.5.7):
@@ -399,6 +401,7 @@ DEPENDENCIES:
   - ReactCommon/callinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
+  - ReactNativeLocalization (from `../node_modules/react-native-localization`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCCheckbox (from `../node_modules/@react-native-community/checkbox`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
@@ -496,6 +499,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeFabric:
     :path: "../node_modules/react-native-fabric"
+  ReactNativeLocalization:
+    :path: "../node_modules/react-native-localization"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNCCheckbox:
@@ -567,6 +572,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   ReactNativeFabric: d05320ff347d5c72567c115b97edeead111ac4d2
+  ReactNativeLocalization: 9abfb1717d6c6f2e3a4e444c4402d52acbf784cc
   RNCAsyncStorage: cb9a623793918c6699586281f0b51cbc38f046f9
   RNCCheckbox: 500919ac122273ea8eef93dae01431091968c14a
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459

@@ -15,6 +15,7 @@ import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CommonStyle from '../../utils/CommonStyle';
 
+import {IsValidateEmail,checkPhoneNumber} from '../../utils/commonFunction'
 class CheckoutCustomerAccount extends Component {
   static contextType = ThemeContext;
 
@@ -146,6 +147,11 @@ class CheckoutCustomerAccount extends Component {
       useForShipping: true,
     };
 
+    if(!IsValidateEmail,checkPhoneNumber(email)){
+      alert("Please enter valid Email address");
+      return;
+    }
+    
     // this.props.createCustomer(customer);
     this.props.checkoutCustomerNextLoading(true);
     this.props.addGuestCartBillingAddress(cartId, address);
@@ -177,12 +183,34 @@ class CheckoutCustomerAccount extends Component {
 
   renderButton() {
     const theme = this.context;
+    const {
+      email,
+      password,
+      postcode,
+      countryId,
+      firstname,
+      lastname,
+      telephone,
+      city,
+      street,
+      region,
+      cartId,
+      Address1,
+      Address2
+    } = this.props;
+    console.log("email:",email);
+    console.log("firstname:",firstname);
+    console.log("lastname:",lastname);
+    console.log("telephone:",telephone);
+    console.log("Address1:",Address1);
+    console.log("Address2:",Address2);
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
     return (
       <View style={styles.nextButtonStyle}>
         <Button
+          disabled={(email!=''&&firstname!=''&&lastname!=''&&Address1&&Address1!=''&&Address2&&Address2!='',city!=''&&telephone!='')?false:true}
           onPress={this.onNextPressed}
           style={styles.buttonStyle(theme)}
         >
@@ -271,6 +299,7 @@ class CheckoutCustomerAccount extends Component {
           autoCapitalize="none"
           label={translate('common.email')}
           value={this.props.email}
+          keyboardType={'email-address'}
           placeholder={translate('common.email')}
           onChangeText={value => this.updateUI('email', value)}
         />
@@ -352,6 +381,7 @@ class CheckoutCustomerAccount extends Component {
           label={'Phone Number'}
           value={this.props.telephone}
           placeholder={'Phone Number'}
+          keyboardType={'phone-pad'}
           onChangeText={value => this.updateUI('telephone', value)}
         />
 
