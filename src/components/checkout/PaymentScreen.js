@@ -15,7 +15,7 @@ import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/Glob
 import { WebView } from 'react-native-webview';
 import { magentoOptions } from '../../config/magento';
 import { NAVIGATION_PAYMENT_SUCCESS_PATH,NAVIGATION_CART_PATH } from '../../navigation/routes';
-import { getCart } from '../../actions';
+import { getCart,refreshCart } from '../../actions';
 export const PaymentScreen = props => {
   
    const URL_CHECKOUT_SUCCESS = `${magentoOptions.url}benefit/hosted/success/`;
@@ -35,7 +35,7 @@ export const PaymentScreen = props => {
       // this.props.navigation.navigate('Thankyou', { isPaymentFailed: false, orderNo: this.props.navigation.state.params.orderNo });
     } else if(url == URL_CHECKOUT_FAILED || url==URL_CHECKOUT_FAILED2) {
       console.log('PAYMENT_FAILED')
-      dispatch(getCart(false,false))
+      dispatch(refreshCart())
        props.navigation.navigate(NAVIGATION_CART_PATH);
       // this.props.navigation.navigate('NAVIGATION_PAYMENT_SUCCESS_PATH', { isPaymentFailed: true });
     }
