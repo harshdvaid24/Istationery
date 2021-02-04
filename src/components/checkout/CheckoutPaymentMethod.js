@@ -17,8 +17,10 @@ class CheckoutPaymentMethod extends Component {
 
   componentDidMount() {
     const { payments, selectedPayment } = this.props;
+    console.log("componentDidMount:",payments);
+    console.log("componentDidMount:selectedPayment:",selectedPayment);
     if (!selectedPayment && payments.length) {
-      this.props.checkoutSelectedPaymentChanged(payments[0]);
+      this.props.checkoutSelectedPaymentChanged(payments[1]);
     }
   }
 
@@ -95,6 +97,7 @@ class CheckoutPaymentMethod extends Component {
         onPress={(value) => { this.onPaymentSelect(value); }}
       />
     );
+    
   }
 
   renderButton() {
