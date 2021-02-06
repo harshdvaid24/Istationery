@@ -85,9 +85,11 @@ class Cart extends Component {
   componentDidMount() {
     this.props.removeCouponFromCart(this.props.cart.id)
     this.updateCartItemsProducts();
+    //  this.props.refreshCart();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    // this.props.refreshCart();
     if (
       prevProps.cart.items
       && this.props.cart.items
@@ -255,32 +257,32 @@ class Cart extends Component {
                   barStyle="dark-content"
                 />
 
-        <View style={[styles.content,]}>
-          <ScrollView>
-
-         
+        <View style={[styles.content]}>
+       
+         {(this.props.couponLoading||this.props.refreshing)
+                ? (
+                  <View style={[styles.content]}>
+                    <Spinner />
+                  </View>
+                )
+                :
           <FlatList
-            refreshControl={(
-              <RefreshControl
+            refreshControl={<RefreshControl
                 refreshing={this.props.refreshing}
                 onRefresh={this.onRefresh}
               />
-            )}
+            }
             data={[...items]}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
-          />
-           </ScrollView>
+          />}
+         
         </View>
      
      
         {
-              this.props.couponLoading
-                ? (
-                  <View style={[styles.footer]}>
-                    <Spinner />
-                  </View>
-                )
+              (this.props.couponLoading||this.props.refreshing)
+                ? null
                 : (
        <View style={[styles.footer]}>
       
@@ -333,10 +335,13 @@ class Cart extends Component {
   render() {
     const { items } = this.props.cart;
 
-    if (items && items.length) {
+    if ((this.props.refreshing) ||(items && items.length)) {
       return this.renderCart();
     }
-    return this.renderEmptyCart();
+    else{
+      return this.renderEmptyCart();
+    }
+    
   }
 }
 
@@ -359,7 +364,6 @@ const styles = StyleSheet.create({
     // height:WINDOW_HEIGHT-H(100),
      paddingBottom:H(100),
     height:Platform.OS === 'ios'?WINDOW_HEIGHT-H(250):WINDOW_HEIGHT-H(200),
-    // minimumHeight:WINDOW_HEIGHT
   },
   totals: theme => ({
     paddingTop: theme.spacing.small,

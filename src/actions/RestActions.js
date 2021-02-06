@@ -406,6 +406,8 @@ export const setCurrentProduct = product => ({
 });
 
 export const createCustomerCart = customerId => async (dispatch) => {
+  dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: true });
+
   if (customerId) {
     try {
       const cartId = await magento.admin.getCart(customerId);
@@ -418,11 +420,9 @@ export const createCustomerCart = customerId => async (dispatch) => {
 };
 
 export const getCart = (refreshing = false,forceNewCart=true) => async (dispatch, getState) => {
-  console.log("GET_GUEST_CART");
-  if (refreshing) {
-    console.log("getCart:refreshing:");
+  console.log("GET_GUEST_CART");  
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_CART_ITEM_PRODUCT, payload: true });
-  }
+
 
   try {
     let cart;

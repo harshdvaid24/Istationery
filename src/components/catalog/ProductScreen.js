@@ -22,6 +22,7 @@ import { ProductOptions } from './ProductOptions';
 import { ProductCustomOptions } from './ProductCustomOptions';
 import { useAddToCart } from '../../hooks/useAddToCart';
 import { useProductDescription } from '../../hooks/useProductDescription';
+import { getProductCustomAttributeValue } from '../../helper/product';
 import { RelatedProducts } from './RelatedProducts';
 import { OthersProducts } from './OthersProducts';
 import { ProductReviews } from './reviews/ProductReviews';
@@ -51,6 +52,9 @@ export const ProductScreen = props => {
   const [product] = useState(params.product);
   const [qty,setQty] = useState(1);
   const [currentProduct, setCurProduct] = useState(current[product.id]);
+
+  const isInStock =  getProductCustomAttributeValue(currentProduct.product,'quantity_attribute');
+  console.log("currentProduct:",currentProduct);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { onPressAddToCart } = useAddToCart({
     product,
@@ -102,7 +106,7 @@ export const ProductScreen = props => {
     }
     return (
       <View style={[styles.addTocartSection]}>
-       <Button style={[styles.buttonStyle]} disabled={!currentProduct.stocks} onPress={onPressAddToCart}>
+       <Button style={[styles.buttonStyle]} disabled={!isInStock} onPress={onPressAddToCart}>
         {translate('product.addToCartButton')}
       </Button>
       </View>
@@ -252,7 +256,7 @@ export const ProductScreen = props => {
      
       <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
        
-        {(!currentProduct.stocks)?
+        {(!isInStock)?
           <View>
                <Text style={[CommonStyle.mRedRegular]}>{'Out of stock !'}</Text>
           </View>: renderPrice()
