@@ -82,7 +82,7 @@ const OrderScreen = ({
       <View style={[styles.bottomSection]}>
         <View style={[CommonStyle.FlexRow,CommonStyle.marginTB5,CommonStyle.alignContentLR]}>
          <Text style={[CommonStyle.mGreyBold]}>{`${translate('orderListItem.status')}:`}</Text>
-         <Text style={[CommonStyle.mBlackBold]}>{`${item.status}`}</Text>
+         <Text style={[CommonStyle.mBlackBold]}>{`${item.statusData.toUpperCase()}`}</Text>
         </View>
         <View style={[CommonStyle.FlexRow,CommonStyle.marginTB5,CommonStyle.alignContentLR]}>
             <Text style={[CommonStyle.mGreyBold]}>

@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import HTML from 'react-native-render-html';
 import { Button, Input, Price, Spinner, Text } from '../common';
 import { ThemeContext } from '../../theme';
-import { getCart,refreshCart } from '../../actions';
 import CommonStyle from '../../utils/CommonStyle'
 
 import GlobalStyles,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
