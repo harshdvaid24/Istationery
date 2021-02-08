@@ -36,7 +36,7 @@
 export const magentoOptions = {
   url: 'https://www.istationery.com/',
   reviewEnabled:true,
-  home_cms_block_id: '207',
+  home_cms_block_id: '208',
   store: 'default', // store code // Stores > All Stores > Store View > Code
   authentication: {
     integration: {
