@@ -53,7 +53,7 @@ export const ProductScreen = props => {
   const [qty,setQty] = useState(1);
   const [currentProduct, setCurProduct] = useState(current[product.id]);
 
-  const isInStock =  getProductCustomAttributeValue(currentProduct.product,'quantity_attribute');
+  const isInStock =  getProductCustomAttributeValue(currentProduct.product,'quantity_status');
   console.log("currentProduct:",currentProduct);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { onPressAddToCart } = useAddToCart({

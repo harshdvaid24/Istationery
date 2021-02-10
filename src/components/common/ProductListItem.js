@@ -24,7 +24,7 @@ const ProductListItem = ({
 }) => {
   const theme = useContext(ThemeContext);
   const image = () => getProductThumbnailFromAttribute(product);
-  const isInStock =  getProductCustomAttributeValue(product,'quantity_attribute');
+  const isInStock =  getProductCustomAttributeValue(product,'quantity_status');
   console.log("isInStock:",isInStock);
   
 

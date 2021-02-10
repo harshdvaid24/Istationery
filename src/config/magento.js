@@ -41,7 +41,7 @@ export const magentoOptions = {
   authentication: {
     integration: {
       // access_token: '67lctablgnnuxadnwopus7o73wvr9efp',
-      access_token: 'c5eph7dafa9micii92x6gjelpl1hlnmo',
+      access_token: '0our5bxgbgzdvxlcjdhgqbfpapta0byv',
       
     },
   },

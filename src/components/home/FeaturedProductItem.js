@@ -18,7 +18,7 @@ const FeaturedProductItem = ({
 }) => {
   const theme = useContext(ThemeContext);
   const [themeStyles, setThemeStyle] = useState({});
-  const isInStock =  getProductCustomAttributeValue(product,'quantity_attribute');
+  const isInStock =  getProductCustomAttributeValue(product,'quantity_status');
 
   const [imageURI, setImageURI] = useState('');
   const price = useMemo(

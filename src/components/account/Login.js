@@ -39,8 +39,10 @@ function Login ({
 }) {
   const theme = useContext(ThemeContext);
   // Internal State
-  const [email, setEmail] = useState('dummy.bhupendra@gmail.com');
-  const [password, setPassword] = useState('Abcd@1234');
+  // const [email, setEmail] = useState('dummy.bhupendra@gmail.com');
+  // const [password, setPassword] = useState('Abcd@1234');
+  const [email, setEmail] = useState('test.codedecorator@gmail.com');
+  const [password, setPassword] = useState('test@123');
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
   // Reference
