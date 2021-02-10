@@ -40,8 +40,8 @@ export const magentoOptions = {
   store: 'default', // store code // Stores > All Stores > Store View > Code
   authentication: {
     integration: {
-      // access_token: '67lctablgnnuxadnwopus7o73wvr9efp',
-      access_token: '0our5bxgbgzdvxlcjdhgqbfpapta0byv',
+      access_token: '67lctablgnnuxadnwopus7o73wvr9efp',// false token
+      // access_token: '0our5bxgbgzdvxlcjdhgqbfpapta0byv',// true token
       
     },
   },

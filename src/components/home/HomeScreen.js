@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Platform,
   ScrollView, View, StyleSheet,StatusBar, RefreshControl,
-  TouchableOpacity,Image
+  TouchableOpacity,Image,
+  BackHandler,
+  Linking,
+  AppState,Alert
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import DeviceInfo from 'react-native-device-info';
+
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { MaterialHeaderButtons, Text, Item } from '../common';
@@ -94,9 +99,13 @@ class HomeScreen extends Component {
      
   });
 
-  
+  state = {
+    appState: AppState.currentState
+  };
 
   componentDidMount() {
+    AppState.addEventListener("change", this._handleAppStateChange);
+    this.checkUpdateNeeded();
     console.log("WINDOW_HEIGHT:WINDOW_HEIGHT:",WINDOW_HEIGHT);
     const { navigation } = this.props;
     if (this.props.slider.length === 0) {
@@ -104,6 +113,42 @@ class HomeScreen extends Component {
     }
     navigation.setParams({ toggleDrawer: this.toggleDrawer });
   }
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = nextAppState => {
+    console.log("_handleAppStateChange:-------------------");
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === "active"
+    ) {
+      this.checkUpdateNeeded();
+    }
+    this.setState({ appState: nextAppState });
+  };
+
+   checkUpdateNeeded = async () => {
+     console.log("checkUpdateNeeded:-------------------");
+    if(DeviceInfo.getVersion() < "1.1"){
+      // if(true){
+     Alert.alert(
+       'Update Application', 'Application needs to be updated to latest version.',
+       [
+           {
+               text: 'Update Now',
+               onPress: () => { 
+                 BackHandler.exitApp()
+                 Linking.openURL('https:google.com')
+               },
+               style: 'cancel',
+           },
+           
+       ],
+       { cancelable: false },
+   );
+    }
+ }
 
   toggleDrawer = () => {
     const { navigation } = this.props;
