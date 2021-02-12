@@ -54,6 +54,7 @@ export const ProductScreen = props => {
   const [currentProduct, setCurProduct] = useState(current[product.id]);
 
   const isInStock =  getProductCustomAttributeValue(currentProduct.product,'quantity_status');
+  console.log("currentProduct:isInStock:",isInStock);
   console.log("currentProduct:",currentProduct);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { onPressAddToCart } = useAddToCart({
@@ -106,7 +107,7 @@ export const ProductScreen = props => {
     }
     return (
       <View style={[styles.addTocartSection]}>
-       <Button style={[styles.buttonStyle]} disabled={!isInStock} onPress={onPressAddToCart}>
+       <Button style={[styles.buttonStyle]} disabled={isInStock=='0'} onPress={onPressAddToCart}>
         {translate('product.addToCartButton')}
       </Button>
       </View>
@@ -256,7 +257,7 @@ export const ProductScreen = props => {
      
       <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
        
-        {(!isInStock)?
+        {(isInStock=='0')?
           <View>
                <Text style={[CommonStyle.mRedRegular]}>{'Out of stock !'}</Text>
           </View>: renderPrice()

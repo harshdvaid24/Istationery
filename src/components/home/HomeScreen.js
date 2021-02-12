@@ -106,7 +106,6 @@ class HomeScreen extends Component {
   componentDidMount() {
     AppState.addEventListener("change", this._handleAppStateChange);
     this.checkUpdateNeeded();
-    console.log("WINDOW_HEIGHT:WINDOW_HEIGHT:",WINDOW_HEIGHT);
     const { navigation } = this.props;
     if (this.props.slider.length === 0) {
       this.props.getHomeData();
@@ -127,11 +126,20 @@ class HomeScreen extends Component {
     }
     this.setState({ appState: nextAppState });
   };
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.app_version !== this.props.app_version) {
+      this.checkUpdateNeeded();
+    }
+  }
 
+  
    checkUpdateNeeded = async () => {
      console.log("checkUpdateNeeded:-------------------");
-    if(DeviceInfo.getVersion() < "1.1"){
-      // if(true){
+     let version = (Platform.OS==='ios')?this.props.app_version[0].ios:this.props.app_version[0].android;
+     console.log("checkUpdateNeeded:version:",version);
+     console.log("checkUpdateNeeded:DeviceInfo.getVersion():",DeviceInfo.getVersion());
+     if((this.props.app_version!='') && DeviceInfo.getVersion() != version){
+      // if(false){
      Alert.alert(
        'Update Application', 'Application needs to be updated to latest version.',
        [
@@ -203,6 +211,7 @@ class HomeScreen extends Component {
   render() {
     const theme = this.context;
     console.log("this.props.brand_block:",this.props.brand_block);
+    console.log("Home:app_version:",this.props.app_version);
     if (this.props.errorMessage) {
       return (
         <View style={styles.errorContainer}>
@@ -300,6 +309,7 @@ HomeScreen.propTypes = {
   currencySymbol: PropTypes.string.isRequired,
   currencyRate: PropTypes.number.isRequired,
   refreshing: PropTypes.bool,
+  app_version: PropTypes.string.isRequired
 };
 
 HomeScreen.defaultProps = {
@@ -310,12 +320,15 @@ HomeScreen.defaultProps = {
   toys:[],
   promotional_block1:[],
   category_block_2:[],
-  brand_block:[]
+  brand_block:[],
+  app_version:''
 };
 
 
 const mapStateToProps = (state) => {
+  console.log("mapStateToProps:state",state);
   const { refreshing } = state.home;
+  const { app_version } = state.customerAuth;
   const {
     errorMessage,
     currency: {
@@ -329,6 +342,7 @@ const mapStateToProps = (state) => {
     errorMessage,
     currencySymbol,
     currencyRate,
+    app_version
   };
 };
 

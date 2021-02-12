@@ -33,6 +33,8 @@ export default magento => ({
 
   createCustomer: customer => magento.post('/V1/customers', customer, GUEST_TYPE),
 
+  getAppVersions: platform => magento.post('/V1/mobileapi/systemconfig', platform, GUEST_TYPE),
+
   auth: (username, password) => {
     if (username) {
       const path = '/V1/integration/customer/token';

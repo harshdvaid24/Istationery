@@ -305,6 +305,7 @@ export default magento => ({
 
   getCart: customerId => magento.post(`/V1/customers/${customerId}/carts`, undefined, ADMIN_TYPE),
 
+  // retrives home screen banners
   getCmsBlock: id => magento.get(`/V1/cmsBlock/${id}`, undefined, undefined, ADMIN_TYPE),
 
   removeItemFromCart: (cartId, itemId) => magento.delete(`/V1/carts/${cartId}/items/${itemId}`, undefined, ADMIN_TYPE),

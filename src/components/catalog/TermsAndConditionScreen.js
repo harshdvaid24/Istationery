@@ -43,7 +43,7 @@ export const TermsAndConditionScreen = props => {
     
     <View style={{ height: '100%', backgroundColor: GlobalStyle.colorSet.white }}>
     <SafeAreaView style={{ flex: 1 }}>
-         <WebView source={{ uri: 'https://staging.istationery.com/mobile-privacy-policy'}}  scalesPageToFit={true} />
+         <WebView source={{ uri: 'https://www.istationery.com/mobile-privacy-policy'}}  scalesPageToFit={true} />
     </SafeAreaView>
     </View>
     </View>

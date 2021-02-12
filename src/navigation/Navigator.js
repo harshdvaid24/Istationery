@@ -220,6 +220,7 @@ const CategoryStack = createStackNavigator({
   [routes.NAVIGATION_HOME_SCREEN_PATH]: HomeScreen,
   [routes.NAVIGATION_CATEGORY_SCREEN_PATH]: CategoryTreeScreen,
   [routes.NAVIGATION_CATEGORY_PATH]: Category,
+  [routes.NAVIGATION_DRAWER_SCREEN]: DrawerScreen,
   [routes.NAVIGATION_HOME_PRODUCT_PATH]: ProductScreen
  
 }, {

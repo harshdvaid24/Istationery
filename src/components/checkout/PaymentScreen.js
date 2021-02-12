@@ -19,9 +19,9 @@ import { getCart,refreshCart } from '../../actions';
 export const PaymentScreen = props => {
   
    const URL_CHECKOUT_SUCCESS = `${magentoOptions.url}benefit/hosted/success/`;
-   const URL_CHECKOUT_SUCCESS2= `https://staging.istationery.com/checkout/onepage/success/`
+   const URL_CHECKOUT_SUCCESS2= `https://www.istationery.com/checkout/onepage/success/`
    const URL_CHECKOUT_FAILED = `${magentoOptions.url}benefit/hosted/failed/`;
-   const URL_CHECKOUT_FAILED2 = `https://staging.istationery.com/checkout/cart/`;
+   const URL_CHECKOUT_FAILED2 = `https://www.istationery.com/checkout/cart/`;
    
 
  const navigationStateChangedHandler = ({ url }) => {
@@ -73,7 +73,7 @@ export const PaymentScreen = props => {
 
  console.log("props",props);
   const tempURL = (props.navigation.state.params) ? props.navigation.state.params.orderId:'';
-   const url = "https://staging.istationery.com/benefit/hosted/redirect?orderId="+tempURL;
+   const url = "https://www.istationery.com/benefit/hosted/redirect?orderId="+tempURL;
 
 //  console.log("payment URL-----:",url);
   return (

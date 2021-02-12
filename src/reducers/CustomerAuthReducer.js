@@ -5,6 +5,7 @@ import {
   MAGENTO_CREATE_CUSTOMER_LOADING,
   MAGENTO_CREATE_CUSTOMER_SUCCESS,
   MAGENTO_CREATE_CUSTOMER_ERROR,
+  GET_APP_VERSIONS,
   MAGENTO_AUTH_LOADING,
   MAGENTO_AUTH,
   MAGENTO_AUTH_ERROR,
@@ -17,6 +18,7 @@ import {
 const INITIAL_STATE = {
   customer: null,
   token: null,
+  app_version:'',
   /**
    * Login/Signin Screen
    */
@@ -60,6 +62,14 @@ export default (state = INITIAL_STATE, action) => {
         error: null,
         success: null,
       };
+      case GET_APP_VERSIONS:{
+        console.log("Reducer:GET_APP_VERSIONS:",action.payload);
+        return {
+          ...state,
+          app_version: action.payload,
+        };
+      }
+       
     case MAGENTO_CREATE_CUSTOMER_SUCCESS:
       return {
         ...state,

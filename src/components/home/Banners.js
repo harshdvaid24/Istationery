@@ -44,7 +44,7 @@ const onItemPressed = (Cid,title) => {
   }
   const renderMediaItems = () => slider.map((item, index) => (
     ((slider.length-1)==index)?
-    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.category_id)} key={index} style={[styles.slideH]}>
+    <TouchableOpacity onPress={ () => onItemPressed(item.category_id,item.title)} key={index} style={[styles.slideH]}>
       <FastImage
         style={styles.imageStyle}
         resizeMode="cover"

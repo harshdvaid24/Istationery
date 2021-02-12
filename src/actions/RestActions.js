@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import _ from 'lodash';
+import {Platform
+} from 'react-native';
 import { magento } from '../magento';
 import { magentoOptions } from '../config/magento';
 import {
@@ -28,6 +30,7 @@ import {
   MAGENTO_GET_COUNTRIES,
   MAGENTO_GET_CURRENCY,
   MAGENTO_CREATE_CUSTOMER,
+  GET_APP_VERSIONS,
   UI_CHECKOUT_ACTIVE_SECTION,
   UI_CHECKOUT_CUSTOMER_NEXT_LOADING,
   HOME_SCREEN_DATA,
@@ -143,6 +146,23 @@ async function getCurrencyToBeDisplayed(currencyData) {
 }
 
 export const getHomeData = refreshing => async (dispatch) => {
+  console.log("getHomeData:");
+  let iosVersion = {
+    "storeCode":"default",
+    "path":"mobile_api_section/general/ios"
+  };
+  let androidVersion = {
+    "storeCode":"default",
+    "path":"mobile_api_section/general/android"
+  };
+  if(Platform.OS==='ios'){
+    console.log("ios:");
+    dispatch(getAppVersions(iosVersion));
+  }
+  else{
+    dispatch(getAppVersions(androidVersion));
+  }
+  
   if (refreshing) {
     dispatch({ type: MAGENTO_UPDATE_REFRESHING_HOME_DATA, payload: true });
   }
@@ -758,6 +778,17 @@ export const createCustomer = customer => (dispatch) => {
     .createCustomer(customer)
     .then((data) => {
       dispatch({ type: MAGENTO_CREATE_CUSTOMER, payload: data });
+    })
+    .catch((error) => {
+      logError(error);
+    });
+};
+export const getAppVersions = version => (dispatch) => {
+  console.log("getHomeData:getAppVersions:version:",version);
+  magento.guest
+    .getAppVersions(version).then((data) => {
+      console.log("getAppVersions:data:",data);
+       dispatch({ type: GET_APP_VERSIONS, payload: data });
     })
     .catch((error) => {
       logError(error);
