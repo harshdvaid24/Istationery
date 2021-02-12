@@ -42,7 +42,7 @@ export const signIn = customer => async (dispatch) => {
       if (token.message) {
         authFail(dispatch, token.message);
       } else {
-         authSuccess(dispatch, token);
+         authSuccess(dispatch, token, NAVIGATION_ACCOUNT_STACK_PATH);
       }
     } else if (response.message) {
       authFail(dispatch, response.message);
