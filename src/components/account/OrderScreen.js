@@ -109,6 +109,17 @@ const OrderScreen = ({
             />
         </View>
 
+        <View style={[CommonStyle.FlexRow,CommonStyle.marginTB5,CommonStyle.alignContentLR]}>
+            <Text style={[CommonStyle.mGreyBold]}>
+              {`Tax:`}
+            </Text>
+            <Price
+              basePrice={item.base_tax_amount}
+              currencyRate={1}
+              currencySymbol={currencySymbol}
+            />
+        </View>
+
        
 
         <View style={[CommonStyle.FlexRow,CommonStyle.marginTB10,CommonStyle.alignContentLR]}>
@@ -120,7 +131,7 @@ const OrderScreen = ({
               {currencySymbol} {item.total_due.toFixed(3)}
             </Text> */}
             <Text style={[CommonStyle.xlBlackBold]}>
-              {currencySymbol} {(item.subtotal+item.shipping_amount).toFixed(3)}
+              {currencySymbol} {(item.base_total_due).toFixed(3)}
             </Text>
 
 

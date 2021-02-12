@@ -47,10 +47,10 @@ class Magento {
   }
 
   get(path, params, data, type = ADMIN_TYPE) {
-    console.log("parsms:path:",path);
-    console.log("parsms:params:",params);
-    console.log("data:",data);
-    console.log("type:",type);
+    console.log("Get:path:",path);
+    console.log("Get:params:",params);
+    console.log("Get:data:",data);
+    console.log("Get:type:",type);
     return this.send(path, 'GET', params, data, type);
   }
 

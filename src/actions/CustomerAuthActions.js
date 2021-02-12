@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import { magento } from '../magento';
+import { store, persistor } from './../store';
+import { onAppStart } from './../helper/app';
 import { getCart } from './RestActions';
 import {
   MAGENTO_PASSWORD_RESET_LOADING,
@@ -31,17 +33,19 @@ export const signIn = customer => async (dispatch) => {
   try {
     dispatch({ type: MAGENTO_CREATE_CUSTOMER_LOADING, payload: true });
     const response = await magento.guest.createCustomer(customer);
-    console.log("magento.guest.createCustomer:",response);
     dispatch({ type: MAGENTO_CREATE_CUSTOMER_SUCCESS, payload: response });
     if (response.id && response.group_id) {
       const token = await magento.guest.auth(
         customer.customer.email,
         customer.password,
       );
-      console.log("magento.guest.auth:",token);
       if (token.message) {
         authFail(dispatch, token.message);
       } else {
+        dispatch({ type: MAGENTO_LOGIN_SUCCESS });
+       await AsyncStorage.setItem('customerToken', token);
+        await magento.setCustomerToken(token);
+         onAppStart(store);
          authSuccess(dispatch, token, NAVIGATION_ACCOUNT_STACK_PATH);
       }
     } else if (response.message) {
@@ -78,8 +82,6 @@ export const auth = (username, password) => async (dispatch) => {
   try {
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: true });
     const response = await magento.guest.auth(username, password);
-    console.log('token');
-    console.log('auth:response:',response);
     magento.setCustomerToken(response);
     if (response.message) {
       authFail(dispatch, response.message);
@@ -96,8 +98,6 @@ export const wishlistAuth = (username, password) => async (dispatch) => {
   try {
     dispatch({ type: MAGENTO_AUTH_LOADING, payload: true });
     const response = await magento.guest.auth(username, password);
-    console.log('token');
-    console.log('auth:response:',response);
     magento.setCustomerToken(response);
     if (response.message) {
       authFail(dispatch, response.message);
@@ -113,17 +113,21 @@ export const wishlistAuth = (username, password) => async (dispatch) => {
 
 const authSuccess = async (dispatch, token,SuccessScreen) => {
   dispatch({ type: MAGENTO_AUTH, payload: token });
-
   try {
-    await AsyncStorage.setItem('customerToken', token);
-    dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
-    dispatch(getCart());
-    if(SuccessScreen==NAVIGATION_ACCOUNT_STACK_PATH){
-      NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
-    }
-    else if(SuccessScreen==NAVIGATION_WISHLIST_STACK_PATH){
-      NavigationService.navigate(NAVIGATION_WISHLIST_STACK_PATH);
-    }
+    await AsyncStorage.removeItem('customerToken').then((data) => {
+           AsyncStorage.setItem('customerToken', token).then((data) => {
+            dispatch({ type: MAGENTO_AUTH_LOADING, payload: false });
+            dispatch(getCart());
+            if(SuccessScreen==NAVIGATION_ACCOUNT_STACK_PATH){
+              NavigationService.navigate(NAVIGATION_ACCOUNT_STACK_PATH);
+            }
+            else if(SuccessScreen==NAVIGATION_WISHLIST_STACK_PATH){
+              NavigationService.navigate(NAVIGATION_WISHLIST_STACK_PATH);
+            }
+          });
+        });
+   
+   
     
   } catch (e) {
     logError(e);
@@ -148,6 +152,7 @@ export const ReseterrorMessage = error => ({ type: MAGENTO_AUTH_ERROR_RESET, pay
 export const logout = () => (dispatch) => {
   dispatch({ type: MAGENTO_AUTH, payload: '' });
   dispatch({ type: MAGENTO_LOGOUT });
+  AsyncStorage.removeItem('cartId');
   dispatch(getCart());
   NavigationService.navigate(NAVIGATION_LOGIN_STACK_PATH);
   AsyncStorage.setItem('customerToken', '');

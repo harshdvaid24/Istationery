@@ -39,9 +39,8 @@ const Account = ({
   useEffect(() => {
     //console
     // ComponentDidMount
-   console.log("useEffect:Account:");
-   console.log("useEffect:customer:",customer);
-    if (!customer) {
+
+    if (!customer||customer==null) {
       console.log("useEffect:!customer:",customer);
       _currentCustomer();
     }
@@ -56,7 +55,7 @@ const Account = ({
       // _wishlistItem();
       // _getOrdersForCustomer(customerId);
     }
-  },[]);
+  },[customer,customerId]);
 
   const onLogoutPress = () => {
     _logout();

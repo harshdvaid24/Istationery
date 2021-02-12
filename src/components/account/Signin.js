@@ -27,7 +27,16 @@ import GlobalStyle, { H, W } from '../../utils/GlobalStyles';
 import CommonStyle from '../../utils/CommonStyle';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
+import {
+  IsValidateEmail,
+  isEmptyField,
+  checkPhoneNumber,
+  checkOnlyAlphabatic,
+  validPasswordLength,
+  validWebsite,
+  showAlert,
+  DateFomat
+} from './../../utils/commonFunction';
 
 // This file name should be Signup
 const Signin = ({
@@ -46,12 +55,18 @@ const Signin = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // Reference
+  const firstnameInput = useRef(null);
   const lastnameInput = useRef(null);
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
 
   const onCreateAccountPress = () => {
     // TODO: add password validation check
+    var pswdRegX = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+  
+   
+
+
     _ResetError("");
     if(firstname=='')
     {
@@ -70,15 +85,27 @@ const Signin = ({
       alert('Password should not be empty.');
     }
     else {
-      const customer = {
-        customer: {
-          email,
-          firstname,
-          lastname,
-        },
-        password,
-      };
-      _signIn(customer);
+       
+         if (!IsValidateEmail(email)) {
+          alert("Email is Invalid");
+        }
+      
+
+       else if(!pswdRegX.test(password)){
+        alert('Password should have minimum 8 characters, at least one number,one alphabet,one special character.')
+      }
+      else {
+        const customer = {
+          customer: {
+            email,
+            firstname,
+            lastname,
+          },
+          password,
+        };
+        _signIn(customer);
+      }
+     
     }
 
    
@@ -167,6 +194,7 @@ const Signin = ({
         value={firstname}
         editable={!loading}
         onChangeText={setFirstname}
+        assignRef={(input) => { firstnameInput.current = input; }}
         onSubmitEditing={() => { lastnameInput.current.focus(); }}
         containerStyle={styles.inputContainer(theme)}
       />

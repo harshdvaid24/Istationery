@@ -53,7 +53,7 @@ const OrderListItem = ({
             {`${translate('orderListItem.orderTotal')}: `}
           </Text>
           <Price
-            basePrice={item.base_subtotal}
+             basePrice={item.grand_total}
             currencySymbol={currencySymbol}
             currencyRate={1}
           />
