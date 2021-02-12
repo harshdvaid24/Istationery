@@ -109,7 +109,7 @@ const styles = {
     flex: 2,
   },
   textStyle:{
-    // fontSize:W(14),
+     fontSize:W(13),
     color:GlobalStyles.colorSet.appBlack
   },
   OutofStocktextStyle:{
@@ -117,7 +117,7 @@ const styles = {
     color:GlobalStyles.colorSet.red
   },
   imageStyle: theme => ({
-    height: theme.dimens.productListItemImageHeight,
+    height: H(100),
     margin: theme.spacing.small,
     // borderWidth: 1,
     borderColor: theme.colors.border,

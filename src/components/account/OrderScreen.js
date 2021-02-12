@@ -35,20 +35,23 @@ const OrderScreen = ({
   };
 
   const renderItem = item => (
-    <View style={styles.itemContainer(theme)}>
+    <View style={[styles.itemContainer(theme),]}>
       <View style={[styles.row,CommonStyle.paddingLR10,CommonStyle.alignContentLR]}>
-        <FastImage style={styles.imageStyle(theme)} resizeMode="contain" source={{ uri: image(item.item) }} />
-        <View style={[]}>
-        <Text   numberOfLines={1} style={[CommonStyle.lBlackBold]}>{item.item.name}</Text>
-          <Text style={[CommonStyle.mGreyBold,CommonStyle.marginTop5]}>{`${translate('common.sku')}: ${item.item.sku}`}</Text>
-          <View style={[styles.row,CommonStyle.marginTop5,CommonStyle.HorizontalCenter]}>
-              <Text numberOfLines={1} style={[CommonStyle.mGreyBold]}>
-              {`Qty:`}
-              </Text>
-              <Text  style={[CommonStyle.mGreyBold]}>
-              {` ${item.item.qty_ordered}`}
-              </Text>
-          </View>
+        <View style={[CommonStyle.width25p,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+            <FastImage style={styles.imageStyle(theme)} resizeMode="contain" source={{ uri: image(item.item) }} />
+        </View>
+       
+        <View style={[CommonStyle.width75p,CommonStyle.paddingL15]}>
+            <Text   numberOfLines={2} style={[CommonStyle.mBlackSemiBold]}>{item.item.name}</Text>
+            <Text style={[CommonStyle.mGreySemiBold,CommonStyle.marginTop5]}>{`${translate('common.sku')}: ${item.item.sku}`}</Text>
+            <View style={[styles.row,CommonStyle.marginTop5,CommonStyle.HorizontalCenter]}>
+                <Text numberOfLines={1} style={[CommonStyle.mGreySemiBold]}>
+                {`Qty:`}
+                </Text>
+                <Text  style={[CommonStyle.mGreyBold]}>
+                {` ${item.item.qty_ordered}`}
+                </Text>
+            </View>
          <View style={[styles.row,CommonStyle.marginTop10]}>
               <Text style={[CommonStyle.lBlackBold]}>
                 {currencySymbol} {item.item.price.toFixed(3)}

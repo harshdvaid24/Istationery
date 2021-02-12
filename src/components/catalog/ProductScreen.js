@@ -130,7 +130,7 @@ export const ProductScreen = props => {
     return(
     <TouchableOpacity
       // onPress={current.item_added_in_wishlist?' ': onToggleWishlist}
-       style={[styles.shareContainer]}>
+       style={[styles.wishlistContainer]}>
        <Image
          resizeMode={'contain'}
          style={styles.minusButtonImage}
@@ -240,22 +240,32 @@ export const ProductScreen = props => {
                     source={require('./../../../resources/icons/minus.png')}
                   />
                 </TouchableOpacity>
-              </View>
-      
-              {renderAddWishlistButton()}
+            </View>
+
+            <View style={[CommonStyle.FlexRow,CommonStyle.width30p,CommonStyle.alignContentLR]}>
+            {renderAddWishlistButton()}
 
               <TouchableOpacity
-                 onPress={onShare}
+                onPress={onShare}
                   style={[styles.shareContainer]}>
                   <Image
                     resizeMode={'contain'}
                     style={styles.minusButtonImage}
                     source={require('./../../../resources/icons/sharing.png')}
                   />
-            </TouchableOpacity>
+              </TouchableOpacity>
+
+
+            </View>
+      
+             
 
      
-      <View style={[CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
+      
+      
+      
+      </View>
+      <View style={[CommonStyle.marginLR20,CommonStyle.marginTop30,CommonStyle.marginBottom20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
        
         {(isInStock=='0')?
           <View>
@@ -263,9 +273,6 @@ export const ProductScreen = props => {
           </View>: renderPrice()
         }
         
-      </View>
-      
-      
       </View>
       {/* <View style={styles.stockcontainer}>
       </View> */}
@@ -528,6 +535,14 @@ shareContainer:{
     borderColor:GlobalStyle.colorSet.BorderGrey,
     borderRadius:H(7),
     backgroundColor:GlobalStyle.colorSet.white
+},
+wishlistContainer:{
+  padding:H(6),
+  borderWidth:1,
+  borderColor:GlobalStyle.colorSet.BorderGrey,
+  borderRadius:H(7),
+  backgroundColor:GlobalStyle.colorSet.white,
+  marginRight:W(10)
 },
 headerRight:{
   flexDirection:'row',
