@@ -333,6 +333,8 @@ export default magento => ({
 
   getOrderDetails: (order_id) => magento.get(`/V1/orders/${order_id}`,undefined,undefined,ADMIN_TYPE),
 
-  getOrderStatusLabel: () =>magento.get(`/V1/mobileapi/order/getorderstatus`,undefined,undefined,ADMIN_TYPE)
+  getOrderStatusLabel: () =>magento.get(`/V1/mobileapi/order/getorderstatus`,undefined,undefined,ADMIN_TYPE),
+
+  getProductRewardsData: (data) => magento.post(`/V1/rewards/mine/highlight/product`,data,ADMIN_TYPE)
 
 });
