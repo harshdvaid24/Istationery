@@ -930,6 +930,8 @@ width100p:{width:'100%'},
   marginLR30: { marginLeft: W(30), marginRight: W(30) },
   marginLR40: { marginLeft: W(40), marginRight: W(40) },
   marginLR50: { marginLeft: W(50), marginRight: W(50) },
+  marginL10: { marginLeft: W(10)},
+  marginL20: { marginLeft: W(20)},
 
   marginTB2: { marginTop: W(2), marginBottom: W(2) },
   marginTB5: { marginTop: W(5), marginBottom: W(5) },
@@ -1077,6 +1079,12 @@ xlGreyRegular:{
   fontFamily: GlobalStyle.fontSet.Regular,
   color: GlobalStyle.colorSet.LightGrey,
 },
+xxlGreyRegular:{
+  fontSize: W(20),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.LightGrey,
+},
+
 
 
 

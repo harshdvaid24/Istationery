@@ -43,15 +43,29 @@ const CategoryTreeListScreenItem = (props) => {
 
   const renderExpandButton = () => {
     if (props.category?.children_data?.length) {
-      return (
-        <TouchableOpacity onPress={onExpandPress} style={[CommonStyle.paddingTB10,CommonStyle.paddingLR10,CommonStyle.width15p]} onPress={onExpandPress}>
-          {(expanded)?
-           <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackDown.png")} />:
-           <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackRight.png")} />
-          }
-        </TouchableOpacity>
-      );
+      if(props.category.level==2){
+        return (
+          <TouchableOpacity onPress={onExpandPress} style={[CommonStyle.paddingTB10,CommonStyle.width10p]} onPress={onExpandPress}>
+            {(expanded)?
+             <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down-arrow-primary.png")} />:
+             <Image style={[CommonStyle.marginLR10,{height:H(30),width:W(15)}]} source={require("./.././../../resources/icons/right_arrow.png")} />
+            }
+          </TouchableOpacity>
+        );
+      }
+      else{
+        return (
+          <TouchableOpacity onPress={onExpandPress} style={[CommonStyle.paddingTB10,CommonStyle.width15p]} onPress={onExpandPress}>
+            {(expanded)?
+             <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down-arrow-primary.png")} />:
+             <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/right-arrow-primary.png")} />
+            }
+          </TouchableOpacity>
+        );
+      }
+     
     }
+    
   };
 
   const renderItem = () => {
@@ -64,16 +78,35 @@ const CategoryTreeListScreenItem = (props) => {
 
     return (
       <View style={[]}>
+      {
+        (props.category?.level==2)?
         <TouchableOpacity
           onPress={onRowPress}
           style={[styles.rowStyles(theme)]}
         >
+          <View style={[CommonStyle.width90p,CommonStyle.FlexRow,CommonStyle.HorizontalCenter]}>
+          <Image resizeMode={'stretch'} style={[CommonStyle.Icon40,{position:'absolute',top:H(14),zIndex:2,left:W(30)}]} source={require("./.././../../resources/icons/wishlist.png")} />
+             <Image resizeMode={'stretch'} style={[{height:H(60),width:W(120)}]} source={require("./.././../../resources/icons/right_slider.png")} />
+             <View style={[CommonStyle.width70p]}>
+                <Text numberOfLines={1} style={[CommonStyle.mBlackRegular,CommonStyle.marginL10]} >{category.name.toUpperCase()}</Text>
+             </View>
+           
+          </View>
+          
+          {renderExpandButton()}
+        </TouchableOpacity>:
+     
+        <TouchableOpacity
+          onPress={onRowPress}
+          style={[styles.SubrowStyles(theme)]}
+        >
           <View style={[CommonStyle.width85p,CommonStyle.paddingLR20]}>
-             <Text numberOfLines={1} style={[CommonStyle.lGreyRegular]} >{category.name}</Text>
+             <Text numberOfLines={1} style={[CommonStyle.mGreyRegular]} >{category.name.toUpperCase()}</Text>
           </View>
           
           {renderExpandButton()}
         </TouchableOpacity>
+      }
       </View>
     );
   };
@@ -107,6 +140,17 @@ const styles = {
     // /borderColor: theme.colors.lightBorder,
   }),
   rowStyles: theme => ({
+    flex: 1,
+    height:H(60),
+    flexDirection: 'row',
+    alignItems:'center',
+    justifyContent: 'space-between',
+     borderWidth: 0.5,
+    borderColor: GlobalStyles.colorSet.BorderGrey,
+    marginBottom: H(5),
+    backgroundColor: theme.colors.white,
+  }),
+  SubrowStyles: theme => ({
     flex: 1,
     height:H(40),
     flexDirection: 'row',

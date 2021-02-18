@@ -12,6 +12,7 @@ const CategoryTreeList = ({
   const theme = useContext(ThemeContext);
 
   const renderItem = (category) => {
+    console.log("renderItem:Category:",category);
     return <CategoryTreeListItem category={category.item} expanded={true} />;
   };
 

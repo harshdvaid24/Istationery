@@ -46,8 +46,8 @@ const CategoryTreeListItem = (props) => {
       return (
         <TouchableOpacity onPress={onExpandPress} style={[CommonStyle.paddingTB10,CommonStyle.paddingLR10,CommonStyle.width20p]} onPress={onExpandPress}>
           {(expanded)?
-            <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackDown.png")} />:
-           <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/blackRight.png")} />
+            <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/down-arrow-primary.png")} />:
+           <Image style={[CommonStyle.Icon20,CommonStyle.marginLR10]} source={require("./.././../../resources/icons/right-arrow-primary.png")} />
           }
         </TouchableOpacity>
       );
