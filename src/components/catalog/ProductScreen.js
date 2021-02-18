@@ -14,7 +14,8 @@ import {
   getCustomOptions,
   updateProductQtyInput,
   getproductIsInStock,
-  toggleWishList
+  toggleWishList,
+  getProductRewards
 } from '../../actions';
 import { ProductMediaContainer } from './ProductMediaContainer';
 import { finalPrice } from '../../helper/price';
@@ -65,15 +66,19 @@ export const ProductScreen = props => {
   });
   const { description } = useProductDescription({ product });
 
+
+  console.log('FROM_DETAIL_PAGE',current);
+
   useEffect(() => {
     if (product.type_id === 'configurable') {
       console.log("product:before:",product);
       dispatch(getConfigurableProductOptions(product.sku, product.id));
     }
     dispatch(
+      getProductRewards(customer!=null?customer.id:0,product.id),
+      dispatch(getproductIsInStock(product.sku)),
       getCustomOptions(product.sku, product.id),
-      dispatch(getproductIsInStock(product.sku))
-)}, []); // eslint-disable-line
+      )}, []); // eslint-disable-line
 
   useEffect(() => {
     setCurProduct(current[product.id]);
@@ -276,6 +281,8 @@ export const ProductScreen = props => {
       </View>
       {/* <View style={styles.stockcontainer}>
       </View> */}
+
+      <View style={CommonStyle.marginLR20}>{current.rewards_data && current.rewards_data.visible && <Text>Rewards : {current.rewards_data.caption_text}</Text>}</View>
       <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
         {
           (Object.keys(currentProduct.attributes).length === 0)?

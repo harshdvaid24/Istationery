@@ -75,7 +75,9 @@ import {
   MAGENTO_ADD_ADDRESS_SUCCESS,
   MAGENTO_ORDERS_LOADING,
   MAGENTO_CART_TOTAL,
-  MAGENTO_ATTRIBUTE_LOADING
+  MAGENTO_ATTRIBUTE_LOADING,
+  SET_PRODUCT_REWARDS,
+  RESET_PRODUCT_REWARDS
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -1001,3 +1003,16 @@ export const clearEditAddress = () => {
 //   }
   
 // }
+
+export const getProductRewards = (customer_id,product_id) =>{
+  return async(dispatch)=>{
+    dispatch({type:RESET_PRODUCT_REWARDS})
+    let data = {customer_id:customer_id,productId:product_id}
+    await magento.admin.getProductRewardsData(data).then((res)=>{
+      console.log('FROM REWARDS POINT DATA',res)
+      dispatch({type:SET_PRODUCT_REWARDS,payload:res})
+    }).catch((err)=>{
+      logError(err)
+    })
+  }
+}
