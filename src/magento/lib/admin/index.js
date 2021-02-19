@@ -54,6 +54,7 @@ export default magento => ({
       'searchCriteria[filterGroups][0][filters][0][conditionType]': 'eq',
       'searchCriteria[pageSize]': 20,
       'searchCriteria[currentPage]': 1,
+      'searchCriteria[sortOrders][0][field]':'created_at'
     };
 
     return magento.get(path, params, undefined, ADMIN_TYPE);
@@ -203,7 +204,7 @@ export default magento => ({
       params['searchCriteria[sortOrders][0][field]'] = getSortFieldName(sortOrder);
       params['searchCriteria[sortOrders][0][direction]'] = getSortDirection(sortOrder);
     }
-
+    params['searchCriteria[sortOrders][0][field]'] = 'created_at';
     params['searchCriteria[pageSize]'] = pageSize;
     params['searchCriteria[currentPage]'] = currentPage;
 
@@ -240,6 +241,7 @@ export default magento => ({
       'searchCriteria[filterGroups][2][filters][0][field]': 'status',
       'searchCriteria[filterGroups][2][filters][0][value]': '1',
       'searchCriteria[filterGroups][2][filters][0][conditionType]': 'eq',
+      'searchCriteria[sortOrders][0][field]':'created_at',
       'searchCriteria[pageSize]': pageSize,
       'searchCriteria[currentPage]': currentPage,
     };

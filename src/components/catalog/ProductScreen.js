@@ -360,8 +360,8 @@ ProductScreen['navigationOptions'] = screenProps => ({
       <Image style={[CommonStyle.Icon25,CommonStyle.marginTB10,CommonStyle.marginLR20]} source={require("./.././../../resources/icons/back.png")} />
       </TouchableOpacity>
   ),
-   headerTitle: () => <View style={[CommonStyle.headerTitle]}>
-     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={1}>
+   headerTitle: () => <View style={[CommonStyle.headerTitle,CommonStyle.border1]}>
+     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={2}>
     { screenProps.navigation?.state?.params.title}
      </Text>
    </View>,
