@@ -80,7 +80,8 @@ import {
   RESET_PRODUCT_REWARDS,
   SET_FILTER_FOR_CATEGORY,
   RESET_FILTER_FOR_CATEGORY,
-  GET_REWARD_POINTS
+  GET_REWARD_POINTS,
+  GET_REWARD_HISTORY
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -1045,6 +1046,18 @@ export const getFiltersForCategory = (categoryId) =>{
       console.log('getFiltersForCategory:err',err);
       logError(err)
     })
+  }
+}
+
+export const getRewardHistory = (customer_id) =>{
+  return async(dispatch)=>{
+    dispatch({type:MAGENTO_ORDERS_LOADING,payload:true})
+    magento.customer.getCustomerRewardHistory(customer_id).then((res)=>{
+      console.log('History',res)
+      dispatch({type:GET_REWARD_HISTORY, payload:res})
+    dispatch({type:MAGENTO_ORDERS_LOADING,payload:false})
+    }).
+    catch((err)=>{console.log(err);logError(err)})
   }
 }
 

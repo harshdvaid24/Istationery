@@ -42,4 +42,6 @@ export default magento => ({
   rewardspointBalance:(customer_id) => magento.get(`/V1/rewards/mine/balance?customer_id=${customer_id}`,undefined,undefined,CUSTOMER_TYPE),
 
   addAddressCustomer:(userDetail) => magento.post(`/V1/mobileapi/customer/saveaddress`,userDetail,undefined,CUSTOMER_TYPE),
+
+  getCustomerRewardHistory:(customer_id) => magento.get(`/V1/rewards/mine/history?customer_id=${customer_id}`,undefined,undefined,CUSTOMER_TYPE)
 });

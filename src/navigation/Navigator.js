@@ -58,6 +58,7 @@ import { ProductScreen } from '../components/catalog/ProductScreen';
 import { H,W } from '../utils/GlobalStyles';
 import Categories from '../components/home/Categories';
 import { TermsAndConditionScreen } from '../components/catalog/TermsAndConditionScreen';
+import RewardHistoryScreen from '../components/account/RewardHistoryScreen';
 
 
 const defaultHeader = {
@@ -176,6 +177,7 @@ const AccountStack = createStackNavigator({
   [routes.NAVIGATION_ORDERS_PATH]: OrdersScreen,
   [routes.NAVIGATION_ORDER_PATH]: OrderScreen,
   [routes.ADD_ADDRESS_PATH]: AddAddressScreen,
+  [routes.NAVIGATION_REWARD_HISTORY]: RewardHistoryScreen
 }, {
   navigationOptions: defaultHeader,
   defaultNavigationOptions: defaultHeaderOptions

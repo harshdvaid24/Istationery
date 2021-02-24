@@ -15,7 +15,7 @@ import { Button } from '../common';
 import { logout, currentCustomer,wishListItem,getOrdersForCustomer,getRewardsBalance } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
   NAVIGATION_ADDRESS_PATH,
-  NAVIGATION_SEARCH_SCREEN_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
+  NAVIGATION_SEARCH_SCREEN_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH, NAVIGATION_REWARD_HISTORY } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CartBadge from '../../components/cart/CartBadge';
@@ -132,6 +132,10 @@ const Account = ({
     navigation.navigate(NAVIGATION_WISHLIST_PATH);
   }
 
+  const onRewardHistoryClick = () =>{
+    navigation.navigate(NAVIGATION_REWARD_HISTORY)
+  }
+
   
 
   return (
@@ -221,6 +225,17 @@ const Account = ({
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
                  <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myAddressButton')}
+                </Text>
+            </View>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onRewardHistoryClick}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
+                 {translate('account.rewardHistory')}
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
