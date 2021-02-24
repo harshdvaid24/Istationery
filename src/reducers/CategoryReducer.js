@@ -8,6 +8,8 @@ import {
   MAGENTO_UPDATE_CATEGORY_PRODUCTS,
   MAGENTO_UPDATE_REFRESHING_CATEGORY_PRODUCTS,
   MAGENTO_GET_FILTERED_PRODUCTS,
+  SET_FILTER_FOR_CATEGORY,
+  RESET_FILTER_FOR_CATEGORY
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,6 +18,7 @@ const INITIAL_STATE = {
   totalCount: 0,
   loadingMore: false,
   refreshing: false,
+  filterOptions:[]
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -58,6 +61,21 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         refreshing: action.payload,
       };
+      case SET_FILTER_FOR_CATEGORY:
+        {
+          console.log("SET_FILTER_FOR_CATEGORY:",action.payload);
+          return {
+          ...state,
+          filterOptions: action.payload,
+        };}
+
+        case RESET_FILTER_FOR_CATEGORY:
+          return {
+            ...state,
+            filterOptions: action.payload,
+          };
+
+
     case MAGENTO_UPDATE_CONF_PRODUCT: {
       const { sku, children } = action.payload;
       const products = state.products.map((product) => {

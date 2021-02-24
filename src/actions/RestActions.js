@@ -77,7 +77,9 @@ import {
   MAGENTO_CART_TOTAL,
   MAGENTO_ATTRIBUTE_LOADING,
   SET_PRODUCT_REWARDS,
-  RESET_PRODUCT_REWARDS
+  RESET_PRODUCT_REWARDS,
+  SET_FILTER_FOR_CATEGORY,
+  RESET_FILTER_FOR_CATEGORY
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -407,9 +409,11 @@ const updateConfigurableProductPrice = async (
 };
 
 export const getProductMedia = ({ sku, id }) => (dispatch) => {
+  console.log("getProductMedia:",media);
   magento.admin
     .getProductMedia(sku)
     .then((media) => {
+        console.log("getProductMedia:media:",media);
       dispatch({ type: MAGENTO_GET_PRODUCT_MEDIA, payload: { sku, media, id } });
     })
     .catch((error) => {
@@ -950,6 +954,17 @@ export const wishListItem = () => async (dispatch) =>{
   })
 }
 
+//to get the total item in wishlist 
+export const getRewardsBalance = () => async (dispatch) =>{
+  await magento.customer.rewardspointBalance().then((data)=>{
+     console.log(" magento.customer.rewardspointBalance():",data);  
+    dispatch({type:MAGENTO_WISHLIST_TOTAL_ITEMS, payload:data[0].total_items});
+  })
+}
+
+
+
+
 export const addAddress = (userDetail) => {
   return async dispatch => {
   addressListLoading(dispatch);
@@ -1016,3 +1031,20 @@ export const getProductRewards = (customer_id,product_id) =>{
     })
   }
 }
+
+export const getFiltersForCategory = (categoryId) =>{
+  console.log("getFiltersForCategory:categoryId:",categoryId);
+  return async(dispatch)=>{
+    dispatch({type:RESET_FILTER_FOR_CATEGORY})
+    let data = {categoryId:categoryId}
+    await magento.admin.getFilters(data).then((res)=>{
+      console.log('getFiltersForCategory:',res)
+      dispatch({type:SET_FILTER_FOR_CATEGORY,payload:res})
+    }).catch((err)=>{
+      console.log('getFiltersForCategory:err',err);
+      logError(err)
+    })
+  }
+}
+
+

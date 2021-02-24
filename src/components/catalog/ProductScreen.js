@@ -15,7 +15,8 @@ import {
   updateProductQtyInput,
   getproductIsInStock,
   toggleWishList,
-  getProductRewards
+  getProductRewards,
+  
 } from '../../actions';
 import { ProductMediaContainer } from './ProductMediaContainer';
 import { finalPrice } from '../../helper/price';
@@ -368,7 +369,7 @@ ProductScreen['navigationOptions'] = screenProps => ({
       </TouchableOpacity>
   ),
    headerTitle: () => <View style={[CommonStyle.headerTitle]}>
-     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={1}>
+     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={2}>
     { screenProps.navigation?.state?.params.title}
      </Text>
    </View>,

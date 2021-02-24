@@ -47,7 +47,7 @@
   },
   "errors": {
     "error": "Error",
-    "noProduct": "No products found"
+    "noProduct": "Opps, No products found"
   },
   "account": {
     "title": "Account",

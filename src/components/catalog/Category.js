@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import {
+  getFiltersForCategory
+} from '../../actions';
+import {useDispatch} from 'react-redux'
+import {
   View,TouchableOpacity,Image,
   RefreshControl,Platform,
   Text
@@ -40,6 +44,7 @@ const Category = ({
   updateProductsForCategoryOrChild: _updateProductsForCategoryOrChild,
 }) => {
   const theme = useContext(ThemeContext);
+  const dispatch = useDispatch();
   const listTypeGrid = useSelector(({ ui }) => ui.listTypeGrid );
 console.log("products:",products);
 console.log("height:",WINDOW_HEIGHT);
@@ -47,6 +52,7 @@ console.log("height:",WINDOW_HEIGHT);
   useEffect(() => {
     _addFilterData({ categoryScreen: true });
     console.log(" _getProductsForCategoryOrChild:category:",category);
+    dispatch(getFiltersForCategory(category.id));
     _getProductsForCategoryOrChild(category);
   }, []);
 

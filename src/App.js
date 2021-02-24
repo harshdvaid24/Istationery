@@ -14,11 +14,11 @@ import OfflineNotice from './../src/components/NoInternet/OfflineNotice';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context'
 var Fabric = require('react-native-fabric');
 var { Crashlytics } = Fabric;
-
+import { LogBox } from 'react-native';
 onAppStart(store);
 
 const App = () => {
- 
+  console.disableYellowBox = true;
   // Crashlytics.crash();
  
   return(

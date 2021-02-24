@@ -173,29 +173,49 @@ export default magento => ({
     }]);
 
     if (typeof filter !== 'undefined') {
-      Object.keys(filter)
-        .forEach((key) => {
-          let value = filter[key];
-          let condition = null;
-          if (typeof value === 'object') {
-            condition = value.condition;
-            value = value.value;
-            if (condition.includes('from')) {
-              const conditions = condition.split(',');
-              const values = value.split(',');
-              searchCriteria.groups.push([{
-                field: key,
-                value: values[0],
-                conditionType: conditions[0],
-              }]);
-              searchCriteria.groups.push([{
-                field: key,
-                value: values[1],
-                conditionType: conditions[1],
-              }]);
-            }
-          }
+
+        console.log("filter---:",filter);
+     filter.forEach((item) => {
+       console.log("filter---item::",item);
+       let field =  item.field;
+          let value = item.value;
+          let condition = item.condition_type;
+          searchCriteria.groups.push([{
+            field:field,
+            value: value,
+            conditionType: condition,
+          }]);
         });
+    
+    // searchCriteria.groups.push([{
+    //   field: "ink_type",
+    //   value: '5746',
+    //   conditionType: 'eq',
+    // }]);
+
+      // Object.keys(filter)
+      //   .forEach((key) => {
+      //     let value = filter[key];
+      //     let condition = null;
+      //     if (typeof value === 'object') {
+      //       condition = value.condition;
+      //       value = value.value;
+      //       if (condition.includes('from')) {
+      //         const conditions = condition.split(',');
+      //         const values = value.split(',');
+      //         searchCriteria.groups.push([{
+      //           field: key,
+      //           value: values[0],
+      //           conditionType: conditions[0],
+      //         }]);
+      //         searchCriteria.groups.push([{
+      //           field: key,
+      //           value: values[1],
+      //           conditionType: conditions[1],
+      //         }]);
+      //       }
+      //     }
+      //   });
     }
     
     const params = getParamsFromSearchCriterias(searchCriteria);
@@ -270,6 +290,16 @@ export default magento => ({
         });
     }
 
+    // if (typeof filter !== 'undefined') {
+    //  filter.forEach((item) => {
+    //       let value = item.value;
+    //       let condition = item.condition_type;
+    //           params['searchCriteria[filterGroups][3][filters][0][field]'] = item.field;
+    //           params['searchCriteria[filterGroups][3][filters][0][value]'] = value;
+    //           params['searchCriteria[filterGroups][3][filters][0][condition_type]'] = condition;
+    //     });
+    // }
+    console.log("params:",params);
     return magento.admin.getProductsWithSearchCritaria(params);
   },
 
@@ -335,6 +365,8 @@ export default magento => ({
 
   getOrderStatusLabel: () =>magento.get(`/V1/mobileapi/order/getorderstatus`,undefined,undefined,ADMIN_TYPE),
 
-  getProductRewardsData: (data) => magento.post(`/V1/rewards/mine/highlight/product`,data,ADMIN_TYPE)
+  getProductRewardsData: (data) => magento.post(`/V1/rewards/mine/highlight/product`,data,ADMIN_TYPE),
+
+  getFilters: (data) => magento.post(`/V1/mobileapi/category/filter`,data,ADMIN_TYPE)
 
 });

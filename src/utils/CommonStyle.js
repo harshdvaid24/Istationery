@@ -1369,8 +1369,8 @@ headerTitle:{
   justifyContent: 'center',
   alignItems: 'center',
   paddingTop:H(5),
-  height: H(30),
-  width: W(260),
+  minHeight: H(40),
+  width: W(230),
 }
 
 });

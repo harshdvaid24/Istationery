@@ -39,5 +39,7 @@ export default magento => ({
 
   wishlistItem:() => magento.get(`/V1/ipwishlist/info`,undefined,undefined,CUSTOMER_TYPE),
 
+  rewardspointBalance:() => magento.get(`/V1/rewards/mine/balance`,undefined,undefined,CUSTOMER_TYPE),
+
   addAddressCustomer:(userDetail) => magento.post(`/V1/mobileapi/customer/saveaddress`,userDetail,undefined,CUSTOMER_TYPE),
 });

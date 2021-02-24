@@ -1,5 +1,5 @@
-import React, { Component, useContext, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, useContext, useState,useEffect } from 'react';
+import { connect,useSelector } from 'react-redux';
 import {
   View,
   FlatList,
@@ -17,16 +17,34 @@ import { translate } from '../../i18n';
 import CommonStyle from './../../utils/CommonStyle'
 import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from './../../utils/GlobalStyles'
 
-
+import FiltersList from './FiltersList'
+import { cos } from 'react-native-reanimated';
 
 const DrawerScreen = (props) => {
   const [maxValue, setMaxValue] = useState('');
   const [minValue, setMinValue] = useState('');
+
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  
   const theme = useContext(ThemeContext);
+
+
+const filterOptions = useSelector((state) => state.category.filterOptions);
+
+// console.log("filterOptions:",filterOptions);
+
+useEffect(() => {
+ 
+}, [filterOptions])
+
 
   const onApplyPressed = () => {
     const { currencyRate } = props;
     const priceFilter = {
+      price: {
+        condition: 'from,to',
+        value: `${(minValue / currencyRate).toFixed(3)},${(maxValue / currencyRate).toFixed(3)}`,
+      },
       price: {
         condition: 'from,to',
         value: `${(minValue / currencyRate).toFixed(3)},${(maxValue / currencyRate).toFixed(3)}`,
@@ -42,6 +60,51 @@ const DrawerScreen = (props) => {
     props.navigation.goBack();
   };
 
+  const getSelectedFilters = (params) => {
+    // console.log("drawer params:",params);
+    let temp_selected_filters =[];
+    params.map((item) =>{
+      temp_selected_filters.push({
+        field:item.code,value:item.value,condition_type:'eq'
+      })
+      
+    })
+    console.log("drawer params:temp_selected_filters:",temp_selected_filters);
+    setSelectedFilters(temp_selected_filters);
+  }
+
+  const onFilterPressed = (params) => {
+   
+    const Filter = [
+      {field:'ink_type',value:'5746',condition_type:'eq'},
+      {field:'brand',value:'5478',condition_type:'eq'}
+    ]
+
+
+    // const Filter = {
+    //   ink_type:{
+    //       condition_type:'eq',
+    //       value:'5746'
+    //     },
+    //   category:{
+    //       condition_type:'eq',
+    //       value:'28'
+    //     }
+    //   }
+    
+    console.log("drawer params:selectedFilters:",selectedFilters);
+
+    // const filterParams = params;
+    props.addFilterData(selectedFilters);
+    if (props.filters.categoryScreen) {
+      props.getProductsForCategoryOrChild(props.category, null, props.filters.sortOrder, selectedFilters);
+      props.addFilterData({ categoryScreen: false });
+    } else {
+      props.getSearchProducts(props.searchInput, null, props.filters.sortOrder, selectedFilters);
+    }
+    props.navigation.goBack();
+  };
+
   const {
     container,
     InputContainer,
@@ -53,6 +116,7 @@ const DrawerScreen = (props) => {
 
   return (
     <View style={container(theme)}>
+{/*      
       <View style={InputContainer(theme)}>
         <Text type="heading" style={textStyle(theme)}>Price:</Text>
         <Input
@@ -76,6 +140,21 @@ const DrawerScreen = (props) => {
          <Text style={[CommonStyle.mWhitleSemiBold]}>{translate('common.apply')}</Text> 
         </TouchableOpacity>
       </View>
+    */}
+
+   
+
+    <FiltersList 
+    data ={filterOptions}
+    getSelectedFilters={getSelectedFilters}
+     />
+ <View style={[styles.buttonStyleWrap]}>
+        <TouchableOpacity onPress={onFilterPressed} style={CommonStyle.BottomPrimaryColorSaveBtnSection}>
+         <Text style={[CommonStyle.mWhitleSemiBold]}>{translate('common.apply')}</Text> 
+        </TouchableOpacity>
+      </View>
+
+
     </View>
   );
 };
@@ -142,7 +221,9 @@ const styles = StyleSheet.create({
     backgroundColor:GlobalStyle.colorSet.btnPrimary
   },
   buttonStyleWrap: {
-    flex: 1,
+    height:H(70),
+    backgroundColor:GlobalStyle.colorSet.white,
+    width:'100%',
     alignItems:'center',
     justifyContent: 'flex-end',
   },

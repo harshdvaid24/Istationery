@@ -1,5 +1,6 @@
-import React,{useContext} from 'react';
+import React,{useContext,useEffect} from 'react';
 import { FlatList, SafeAreaView,View } from 'react-native';
+
 import PropTypes from 'prop-types';
 import CategoryTreeListItem from './CategoryTreeListItem';
 import { ThemeContext } from '../../theme';
@@ -10,9 +11,16 @@ const CategoryTreeList = ({
 }) => {
 
   const theme = useContext(ThemeContext);
+ 
+
+  console.log("CategoryTreeList:");
+
+  useEffect(() => {
+    // dispatch(getFiltersForCategory())
+   
+  }, [])
 
   const renderItem = (category) => {
-    console.log("renderItem:Category:",category);
     return <CategoryTreeListItem category={category.item} expanded={true} />;
   };
 

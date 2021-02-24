@@ -157,7 +157,7 @@ const ProductList = ({
     if (!searchIndicator) {
       return (
         <View style={styles.notFoundTextWrap}>
-          <Text style={styles.notFoundText}>{translate('errors.noProduct')}</Text>
+          <Text style={CommonStyle.xlGreyRegular}>{translate('errors.noProduct')}</Text>
         </View>
       );
     }
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
   notFoundTextWrap: {
     flex: 1,
     justifyContent: 'center',
+    alignItems:'center'
   },
   notFoundText: {
     textAlign: 'center',

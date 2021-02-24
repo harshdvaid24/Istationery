@@ -12,7 +12,7 @@ export const ProductMediaContainer = ({ product, selectedProductSku }) => {
   // console.log("current:",current);
   useEffect(() => {
     const { media_gallery_entries } = current[product.id].product || {};
-    // console.log("media_gallery_entries:",media_gallery_entries);
+     console.log("ProductMediaContainer:media_gallery_entries:",media_gallery_entries);
 
     if (!media_gallery_entries || !media_gallery_entries[product.sku]) {
       dispatch(getProductMedia({ sku: product.sku, id: product.id }));
