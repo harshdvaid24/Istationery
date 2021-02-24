@@ -54,7 +54,8 @@
     "contactInformation": "Contact Information",
     "logoutButton": "LOG OUT",
     "myOrdersButton": "My Orders",
-    "myAddressButton": "My Address"
+    "myAddressButton": "My Address",
+    "myRewards": "My Rewards"
   },
   "addAccountAddress": {
     "title": "My Address"

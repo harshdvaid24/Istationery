@@ -16,7 +16,8 @@ import {
   MAGENTO_DELETE_ADDRESS_ERROR,
   MAGENTO_ADD_ADDRESS_ERROR,
   MAGENTO_ADD_ADDRESS_SUCCESS,
-  MAGENTO_ORDERS_LOADING
+  MAGENTO_ORDERS_LOADING,
+  GET_REWARD_POINTS
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -42,6 +43,7 @@ const INITIAL_STATE = {
   deleteError:false,
   error:false,
   success:false,
+  rewardPoints:0
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -116,6 +118,9 @@ export default (state = INITIAL_STATE, action) => {
     }
     case MAGENTO_ORDERS_LOADING:{
       return {...state,loading:action.payload}
+    }
+    case GET_REWARD_POINTS:{
+      return{...state,rewardPoints:action.payload}
     }
     default:
       return state;

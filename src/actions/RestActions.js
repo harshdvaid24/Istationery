@@ -79,7 +79,8 @@ import {
   SET_PRODUCT_REWARDS,
   RESET_PRODUCT_REWARDS,
   SET_FILTER_FOR_CATEGORY,
-  RESET_FILTER_FOR_CATEGORY
+  RESET_FILTER_FOR_CATEGORY,
+  GET_REWARD_POINTS
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -955,10 +956,10 @@ export const wishListItem = () => async (dispatch) =>{
 }
 
 //to get the total item in wishlist 
-export const getRewardsBalance = () => async (dispatch) =>{
-  await magento.customer.rewardspointBalance().then((data)=>{
-     console.log(" magento.customer.rewardspointBalance():",data);  
-    dispatch({type:MAGENTO_WISHLIST_TOTAL_ITEMS, payload:data[0].total_items});
+export const getRewardsBalance = (id) => async (dispatch) =>{
+  console.log('GET_REWARD_POINT')
+  await magento.customer.rewardspointBalance(id).then((data)=>{
+    dispatch({type:GET_REWARD_POINTS, payload:data});
   })
 }
 
