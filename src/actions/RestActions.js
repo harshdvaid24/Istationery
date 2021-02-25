@@ -80,6 +80,7 @@ import {
   RESET_PRODUCT_REWARDS,
   SET_FILTER_FOR_CATEGORY,
   RESET_FILTER_FOR_CATEGORY,
+  APPLIED_FILTER,
   GET_REWARD_POINTS,
   GET_REWARD_HISTORY
 } from './types';
@@ -288,6 +289,7 @@ export const resetFilters = () => ({
 });
 
 export const getProductsForCategoryOrChild = (category, offset, sortOrder, filter) => async (dispatch) => {
+  dispatch({type:APPLIED_FILTER,payload:[]})
   if (offset) {
     dispatch({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: true });
   }
@@ -1047,6 +1049,15 @@ export const getFiltersForCategory = (categoryId) =>{
     })
   }
 }
+
+export const setAppliedFilters = (appliedFilters) =>{
+  console.log("setAppliedFilters:appliedFilters:",appliedFilters);
+  return async(dispatch)=>{
+    dispatch({type:APPLIED_FILTER,payload:appliedFilters})
+  }
+}
+
+
 
 export const getRewardHistory = (customer_id) =>{
   return async(dispatch)=>{

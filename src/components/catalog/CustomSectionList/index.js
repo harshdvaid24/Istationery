@@ -9,7 +9,7 @@ import {
 
 const CustomSectionList = (props) => {
 
-  // console.log("props.data:",props.data);
+  console.log("CustomSectionList:props.data:",props.data);
   const [activeFilterType, setActiveFilterType] = useState(props.activeFilterType);
   const [Data, setData] = useState(props.data);
 
@@ -17,6 +17,7 @@ const CustomSectionList = (props) => {
   
 
 useEffect(() => {
+  console.log("CustomSectionList:props.data:",props.data);
   setData(props.data);
   setActiveFilterType(props.activeFilterType);
   setAllselectedFilters(props.AllselectedFilters);

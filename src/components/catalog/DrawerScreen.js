@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
-  getProductsForCategoryOrChild, addFilterData, getSearchProducts,
+  getProductsForCategoryOrChild, addFilterData, getSearchProducts,setAppliedFilters
 } from '../../actions';
 import { Button, Input } from '../common';
 import { ThemeContext } from '../../theme';
@@ -24,6 +24,7 @@ const DrawerScreen = (props) => {
   const [maxValue, setMaxValue] = useState('');
   const [minValue, setMinValue] = useState('');
 
+  const [selectedFiltersparams, setSelectedFiltersparams] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   
   const theme = useContext(ThemeContext);
@@ -31,7 +32,7 @@ const DrawerScreen = (props) => {
 
 const filterOptions = useSelector((state) => state.category.filterOptions);
 
-// console.log("filterOptions:",filterOptions);
+console.log("filterOptions:",filterOptions);
 
 useEffect(() => {
  
@@ -62,6 +63,7 @@ useEffect(() => {
 
   const getSelectedFilters = (params) => {
     // console.log("drawer params:",params);
+    setSelectedFiltersparams(params);
     let temp_selected_filters =[];
     params.map((item) =>{
       temp_selected_filters.push({
@@ -95,9 +97,11 @@ useEffect(() => {
     console.log("drawer params:selectedFilters:",selectedFilters);
 
     // const filterParams = params;
+    props.setAppliedFilters(selectedFiltersparams);
     props.addFilterData(selectedFilters);
     if (props.filters.categoryScreen) {
       props.getProductsForCategoryOrChild(props.category, null, props.filters.sortOrder, selectedFilters);
+     
       props.addFilterData({ categoryScreen: false });
     } else {
       props.getSearchProducts(props.searchInput, null, props.filters.sortOrder, selectedFilters);
@@ -255,5 +259,5 @@ const mapStateToProps = ({ category, filters, search, magento }) => {
 };
 
 export default connect(mapStateToProps, {
-  getProductsForCategoryOrChild, addFilterData, getSearchProducts,
+  getProductsForCategoryOrChild, addFilterData, getSearchProducts,setAppliedFilters
 })(DrawerScreen);
