@@ -13,7 +13,7 @@ import {
   TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
-import { cartItemProduct, refreshCart, removeCouponFromCart,addCouponToCart,getCartTotal } from '../../actions';
+import { cartItemProduct, refreshCart, removeCouponFromCart,addCouponToCart,getCartTotal, getCartReward } from '../../actions';
 import CartListItem from './CartListItem';
 import NavigationService from '../../navigation/NavigationService';
 import CommonStyle from './../../utils/CommonStyle'
@@ -113,6 +113,10 @@ class Cart extends Component {
     const { items } = this.props.cart;
     // console.log('FROM_CART_MAIN_PAGE',this.props.cart.id)\
     this.props.getCartTotal(this.props.cart.id);
+    if(this.props.customer)
+    {
+      this.props.getCartReward(this.props.customer.id);
+    }
 
     if (!items) {
       return;
@@ -245,6 +249,8 @@ class Cart extends Component {
       buttonStyle,
     } = styles;
 
+    console.log('From Cart account',this.props.customer)
+    console.log('CART REWARD',this.props.cartRewards);
     return (
       <View style={[styles.container(theme),]}>
       <KeyboardAwareScrollView
@@ -285,7 +291,10 @@ class Cart extends Component {
                 ? null
                 : (
        <View style={[styles.footer]}>
-      
+       {this.props.customer && 
+          <View style={{width:'100%',justifyContent:'center',alignItems:'center',paddingBottom:H(10)}}>
+          <Text>You can earn <Text style={{color:this.props.cartRewards?.caption_color}}>{this.props.cartRewards?.caption_text}</Text> for completing your purchase</Text>
+          </View>}
           <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR10,CommonStyle.HorizontalCenter ]}>
           {
             (this.props.cartTotals.coupon_code)?
@@ -441,8 +450,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ cart, magento,checkout }) => {
-  const { products,cartId, couponLoading, couponError,quote,cartTotals } = cart;
+const mapStateToProps = ({ cart, magento,checkout,account }) => {
+  const { products,cartId, couponLoading, couponError,quote,cartTotals,cartRewards } = cart;
+  const {customer} = account
   const {
     currency: {
       displayCurrencySymbol: currencySymbol,
@@ -460,7 +470,9 @@ const mapStateToProps = ({ cart, magento,checkout }) => {
     currencySymbol,
     cart: cart.quote,
     refreshing: cart.refreshing,
+    customer,
+    cartRewards
   };
 };
 
-export default connect(mapStateToProps, { cartItemProduct, refreshCart,addCouponToCart,getCartTotal,removeCouponFromCart })(Cart);
+export default connect(mapStateToProps, { cartItemProduct, refreshCart,addCouponToCart,getCartTotal,removeCouponFromCart, getCartReward })(Cart);

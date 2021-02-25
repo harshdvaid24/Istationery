@@ -84,3 +84,14 @@ export const refreshCart = () => async (dispatch, getState) => {
     }
   }
 };
+
+export const getCartReward = (customer_id)=>{
+  return async(dispatch)=>{
+    magento.customer.getCartRewardSummary(customer_id).then((data)=>{
+      dispatch({type:types.GET_CART_REWARD, payload:data})
+    }).catch((err)=>{
+      console.log(err); 
+      logError(err)
+    })
+  }
+}

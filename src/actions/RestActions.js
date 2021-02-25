@@ -413,7 +413,6 @@ const updateConfigurableProductPrice = async (
 };
 
 export const getProductMedia = ({ sku, id }) => (dispatch) => {
-  console.log("getProductMedia:",media);
   magento.admin
     .getProductMedia(sku)
     .then((media) => {

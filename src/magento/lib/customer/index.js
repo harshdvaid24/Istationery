@@ -43,5 +43,7 @@ export default magento => ({
 
   addAddressCustomer:(userDetail) => magento.post(`/V1/mobileapi/customer/saveaddress`,userDetail,undefined,CUSTOMER_TYPE),
 
-  getCustomerRewardHistory:(customer_id) => magento.get(`/V1/rewards/mine/history?customer_id=${customer_id}`,undefined,undefined,CUSTOMER_TYPE)
+  getCustomerRewardHistory:(customer_id) => magento.get(`/V1/rewards/mine/history?customer_id=${customer_id}`,undefined,undefined,CUSTOMER_TYPE),
+
+  getCartRewardSummary:(customer_id) => magento.get(`/V1/rewards/mine/highlight/checkout?customer_id=${customer_id}`,undefined,undefined,CUSTOMER_TYPE)
 });
