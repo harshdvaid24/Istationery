@@ -79,7 +79,8 @@ import {
   SET_PRODUCT_REWARDS,
   RESET_PRODUCT_REWARDS,
   SET_FILTER_FOR_CATEGORY,
-  RESET_FILTER_FOR_CATEGORY
+  RESET_FILTER_FOR_CATEGORY,
+  APPLIED_FILTER
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -286,6 +287,7 @@ export const resetFilters = () => ({
 });
 
 export const getProductsForCategoryOrChild = (category, offset, sortOrder, filter) => async (dispatch) => {
+  dispatch({type:APPLIED_FILTER,payload:[]})
   if (offset) {
     dispatch({ type: MAGENTO_LOAD_MORE_CATEGORY_PRODUCTS, payload: true });
   }
@@ -1046,5 +1048,14 @@ export const getFiltersForCategory = (categoryId) =>{
     })
   }
 }
+
+export const setAppliedFilters = (appliedFilters) =>{
+  console.log("setAppliedFilters:appliedFilters:",appliedFilters);
+  return async(dispatch)=>{
+    dispatch({type:APPLIED_FILTER,payload:appliedFilters})
+  }
+}
+
+
 
 

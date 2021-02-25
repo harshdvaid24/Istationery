@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import {
     View, Text, StyleSheet, TouchableOpacity,SectionList,Image, LayoutAnimation, Platform, UIManager,
   } from 'react-native';
-
+  import {useSelector} from 'react-redux'
   import CommonStyle from '../../utils/CommonStyle'
   import GlobalStyle,{W,H,StatusbarHeight,WINDOW_HEIGHT} from '../../utils/GlobalStyles'
   
@@ -11,15 +11,18 @@ import {
 
 const FiltersList = (props) => {
 
-  // console.log("props.data:",props.data);
+  //  console.log("FiltersList:props.data:",props.data);
 const [Data, setData] = useState(props.data);
 const [parsedData, setparsedData] = useState([]);
 
+const setselectedFilters1 = useSelector(state => state.category.applied_filters);
+ console.log("FiltersList:useSelector setselectedFilters1:",setselectedFilters1);
 // const [AllselectedFilters, setselectedFilters] = useState([
 //   {field:'ink_type',value:'5746',condition_type:'eq'},
 //   {field:'cat',value:'28',condition_type:'eq'}
 // ])
-const [AllselectedFilters, setselectedFilters] = useState([])
+const [AllselectedFilters, setselectedFilters] = useState(setselectedFilters1)
+// console.log("FiltersList:setselectedFilters1:AllselectedFilters:",AllselectedFilters);
 const [activeFilterType, setActiveFilterType] = useState('');
 
 useEffect(() => {
@@ -27,7 +30,19 @@ useEffect(() => {
   if(props.data){
     calculateData(props.data);
   }
+  console.log("FiltersList:1 useEffect:props.data",props.data);
 }, [props.data])
+
+useEffect(() => {
+    if(setselectedFilters1&&setselectedFilters1.length!=0 && parsedData.length!=0){
+
+      setselectedFilters1.map((filterItem) =>{
+      applyFilter(filterItem.value);
+      })
+     
+    }
+    console.log("FiltersList:2 useEffect:setselectedFilters1",setselectedFilters1);
+}, [parsedData])
 
 
 
@@ -47,8 +62,8 @@ const onFilterTypeSelect = (selectedFilterType) => {
  };
  
 
-const calculateData = (data) => {
-    // console.log("calculateData:",data);
+const  calculateData =  async (data)  => {
+     console.log("FiltersList:3 calculateData:data:",data);
     
 let newData = [];
 data.map((item) => {
@@ -74,11 +89,13 @@ data.map((item) => {
     }
     
     )});
-  setparsedData(newData);
+    await setparsedData(newData);
+  console.log("calculateData:parsedData:",parsedData);
 }
 
 const applyFilter= (selectedFilter) => {
-  
+  console.log("FiltersList:4 applyFilter:parsedData:",parsedData);
+  console.log("FiltersList:4 applyFilter:selectedFilter:",selectedFilter);
   let newData = parsedData;
   let selected =  AllselectedFilters;
 
@@ -87,15 +104,14 @@ const applyFilter= (selectedFilter) => {
         
                   if (selectedFilter == category.value) {
                       if(category.isActive == true){
-                        console.log("category.isActive == true:",selected);
                          selected = selected.filter(item => {
-                            console.log("category.isActive == true:filter:item.value:",item.value);
-                            console.log("category.isActive == true:filter:category.value:",category.value);
                           item.value !== category.value});
                           category.isActive =false;
                       }
                       else{
-                        selected.push(category);
+                        if (selected.indexOf(category) == -1) {
+                          selected.push(category);
+                      }
                         category.isActive =true; 
                       }
                   }
@@ -104,7 +120,7 @@ const applyFilter= (selectedFilter) => {
 
       setselectedFilters(selected);
       console.log("applyFilter:selected:",selected);
-  // console.log("applyFilter:newData:",newData);
+   console.log("applyFilter:newData:",newData);
   setparsedData(newData);
   // console.log("applyFilter:parsedData:",parsedData);
 
