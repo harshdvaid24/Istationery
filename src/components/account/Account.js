@@ -12,10 +12,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { Button } from '../common';
-import { logout, currentCustomer,wishListItem,getOrdersForCustomer } from '../../actions';
+import { logout, currentCustomer,wishListItem,getOrdersForCustomer,getRewardsBalance } from '../../actions';
 import { NAVIGATION_ORDERS_PATH,
   NAVIGATION_ADDRESS_PATH,
-  NAVIGATION_SEARCH_SCREEN_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH } from '../../navigation/routes';
+  NAVIGATION_SEARCH_SCREEN_PATH,NAVIGATION_WISHLIST_PATH, NAVIGATION_CHANGE_PASSWORD_PATH, NAVIGATION_REWARD_HISTORY } from '../../navigation/routes';
 import { ThemeContext } from '../../theme';
 import { translate } from '../../i18n';
 import CartBadge from '../../components/cart/CartBadge';
@@ -27,10 +27,12 @@ const Account = ({
   orders,
   navigation,
   customerId,
+  rewardPoints,
   currentCustomer: _currentCustomer,
   wishlistItem:_wishlistItem,
   getOrdersForCustomer:_getOrdersForCustomer,
   logout: _logout,
+  GetRewardPoints:_GetRewardPoints,
   total:total
 }) => {
   const theme = useContext(ThemeContext);
@@ -47,10 +49,13 @@ const Account = ({
     else {
       _wishlistItem();
       _getOrdersForCustomer(customerId);
+      _GetRewardPoints(customerId);
+
       // const unsun
       const unsubscribe = navigation.addListener('didFocus', () => {
         _wishlistItem();
         _getOrdersForCustomer(customerId);
+        _GetRewardPoints(customerId);
       });
       // _wishlistItem();
       // _getOrdersForCustomer(customerId);
@@ -127,6 +132,10 @@ const Account = ({
     navigation.navigate(NAVIGATION_WISHLIST_PATH);
   }
 
+  const onRewardHistoryClick = () =>{
+    navigation.navigate(NAVIGATION_REWARD_HISTORY)
+  }
+
   
 
   return (
@@ -145,6 +154,15 @@ const Account = ({
             </View>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={[CommonStyle.FlexRow,styles.squareContainer]}>
+            <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
+               <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
+                 {translate('account.myRewards')} {`(${rewardPoints!=0?rewardPoints:0})`} 
+                </Text>
+            </View>
+        </TouchableOpacity>
         {/* <TouchableOpacity onPress={openWishlist}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
@@ -207,6 +225,17 @@ const Account = ({
                <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
                  <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
                  {translate('account.myAddressButton')}
+                </Text>
+            </View>
+            <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onRewardHistoryClick}
+      style={[CommonStyle.FlexRow,styles.HeaderSubContainer,CommonStyle.marginTop2,CommonStyle.alignContentLR,CommonStyle.HorizontalCenter]}>
+            <View style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
+               <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/account/addresses.png")} />
+                 <Text style={[CommonStyle.mGreyRegular,CommonStyle.marginLR10]}>
+                 {translate('account.rewardHistory')}
                 </Text>
             </View>
             <Image style={[CommonStyle.Icon20]} source={require("./.././../../resources/icons/right.png")} />
@@ -346,7 +375,7 @@ const styles = StyleSheet.create({
   },
   squareContainer:  {
     height:H(80),
-    width:W(185),
+    width:W(125),
     justifyContent:"center",
     alignItems:'center',
     backgroundColor: GlobalStyles.colorSet.white,
@@ -396,14 +425,15 @@ Account.defaultProps = {
   orders: [],
   total:null,
   customerId: null,
+  rewardPoints:null,
 };
 
 const mapStateToProps = ({ account,wishlist }) => {
-  const { customer } = account;
+  const { customer,rewardPoints } = account;
   const customerId = account.customer ? account.customer.id : null;
   const {total} = wishlist;
   const orders = account.orderData ? account.orderData : [];
-  return { customer,customerId,total,orders };
+  return { customer,customerId,total,orders,rewardPoints };
 };
 
-export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem, getOrdersForCustomer:getOrdersForCustomer, })(Account);
+export default connect(mapStateToProps, { logout, currentCustomer,  wishlistItem:wishListItem, getOrdersForCustomer:getOrdersForCustomer, GetRewardPoints:getRewardsBalance })(Account);

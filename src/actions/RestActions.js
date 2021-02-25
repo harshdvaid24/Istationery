@@ -80,7 +80,9 @@ import {
   RESET_PRODUCT_REWARDS,
   SET_FILTER_FOR_CATEGORY,
   RESET_FILTER_FOR_CATEGORY,
-  APPLIED_FILTER
+  APPLIED_FILTER,
+  GET_REWARD_POINTS,
+  GET_REWARD_HISTORY
 } from './types';
 import { logError } from '../helper/logger';
 import { priceSignByCode } from '../helper/price';
@@ -957,10 +959,10 @@ export const wishListItem = () => async (dispatch) =>{
 }
 
 //to get the total item in wishlist 
-export const getRewardsBalance = () => async (dispatch) =>{
-  await magento.customer.rewardspointBalance().then((data)=>{
-     console.log(" magento.customer.rewardspointBalance():",data);  
-    dispatch({type:MAGENTO_WISHLIST_TOTAL_ITEMS, payload:data[0].total_items});
+export const getRewardsBalance = (id) => async (dispatch) =>{
+  console.log('GET_REWARD_POINT')
+  await magento.customer.rewardspointBalance(id).then((data)=>{
+    dispatch({type:GET_REWARD_POINTS, payload:data});
   })
 }
 
@@ -1057,5 +1059,17 @@ export const setAppliedFilters = (appliedFilters) =>{
 }
 
 
+
+export const getRewardHistory = (customer_id) =>{
+  return async(dispatch)=>{
+    dispatch({type:MAGENTO_ORDERS_LOADING,payload:true})
+    magento.customer.getCustomerRewardHistory(customer_id).then((res)=>{
+      console.log('History',res)
+      dispatch({type:GET_REWARD_HISTORY, payload:res})
+    dispatch({type:MAGENTO_ORDERS_LOADING,payload:false})
+    }).
+    catch((err)=>{console.log(err);logError(err)})
+  }
+}
 
 
