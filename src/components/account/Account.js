@@ -147,7 +147,7 @@ const Account = ({
      <TouchableOpacity onPress={openOrders}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
+               <Image style={[CommonStyle.Icon30]} resizeMode={'contain'} source={require("./.././../../resources/icons/account/orders.png")} />
                <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                  {translate('account.myOrdersButton')} {`(${orders.length?orders.length:0})`} 
                 </Text>
@@ -157,7 +157,7 @@ const Account = ({
         <TouchableOpacity
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/orders.png")} />
+               <Image style={[CommonStyle.Icon30]} resizeMode={'contain'} source={require("./.././../../resources/icons/account/rewards.png")} />
                <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                  {translate('account.myRewards')} {`(${rewardPoints!=0?rewardPoints:0})`} 
                 </Text>
@@ -176,7 +176,7 @@ const Account = ({
         <TouchableOpacity onPress={openWishlist}
           style={[CommonStyle.FlexRow,styles.squareContainer]}>
             <View style={[CommonStyle.HorizontalCenter,CommonStyle.VerticalCenter]}>
-               <Image style={[CommonStyle.Icon30]} source={require("./.././../../resources/icons/account/wishlist.png")} />
+               <Image style={[CommonStyle.Icon30]} resizeMode={'contain'} source={require("./.././../../resources/icons/account/wishlist.png")} />
                  <Text style={[CommonStyle.sGreyRegular,CommonStyle.marginTop10]}>
                   Wishlist
                    {` (${total}) `}
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
   },
   squareContainer:  {
     height:H(80),
-    width:W(125),
+    width:W(115),
     justifyContent:"center",
     alignItems:'center',
     backgroundColor: GlobalStyles.colorSet.white,

@@ -58,7 +58,7 @@ import { ProductScreen } from '../components/catalog/ProductScreen';
 import { H,W } from '../utils/GlobalStyles';
 import Categories from '../components/home/Categories';
 import { TermsAndConditionScreen } from '../components/catalog/TermsAndConditionScreen';
-import RewardHistoryScreen from '../components/account/RewardHistoryScreen';
+import RewardHistoryScreen from '../components/RewardsHistoryScreen';
 
 
 const defaultHeader = {

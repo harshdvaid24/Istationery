@@ -1312,6 +1312,17 @@ sWhiteSemiBold:{
 },
 
 
+mLightRed:{
+  fontSize: W(14),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.lightRed,
+},
+mLightGreen:{
+  fontSize: W(14),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.green,
+},
+
 
 textareaContainer: {
   marginHorizontal:W(20),

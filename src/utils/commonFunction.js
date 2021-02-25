@@ -45,7 +45,7 @@ export const validWebsite = (url) => {
 }
 
 
-
+// DD/mm/YYYY
 export const DateFomat = (date) => {
     var selected = date; 
     var dd = selected.getDate(); 
@@ -62,6 +62,27 @@ export const DateFomat = (date) => {
    return formatedDate 
 }
 
+
+// DD/Mon/YYYY
+export const DateFomat2 = (date) => {
+    var selected = date; 
+    var dd = selected.getDate();
+    
+    let monthNames =["Jan","Feb","Mar","Apr",
+                      "May","Jun","Jul","Aug",
+                      "Sep", "Oct","Nov","Dec"];
+
+    let monthIndex = selected.getMonth();
+    let monthName = monthNames[monthIndex];
+
+    var yyyy = selected.getFullYear(); 
+    if (dd < 10) { 
+        dd = '0' + dd; 
+    } 
+   
+    var formatedDate = dd + ' ' + monthName + ', ' + yyyy; 
+   return formatedDate 
+}
 
 
 

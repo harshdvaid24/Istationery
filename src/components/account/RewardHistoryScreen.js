@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList } from 'react
 import { NAVIGATION_SEARCH_SCREEN_PATH } from '../../navigation/routes';
 import CommonStyle from '../../utils/CommonStyle';
 import GlobalStyle, { H, StatusbarHeight, WINDOW_HEIGHT } from '../../utils/GlobalStyles';
-import CartBadge from '../cart/CartBadge';
 import RewardHistoryItem from './RewardHistoryItem';
 import {useSelector,useDispatch} from 'react-redux'
 import { getRewardHistory } from '../../actions';
@@ -23,14 +22,6 @@ const RewardHistoryScreen = ({navigation}) => {
     },[])
     return (
         <View>
-           <View style={{flexDirection:'row',width:'95%',marginLeft:'2.5%',justifyContent:'space-between',borderBottomWidth:1,marginTop:H(10),paddingVertical:H(10),borderTopWidth:1}}>
-            <Text>Date</Text>
-            <Text>Change</Text>
-            <Text>Comment</Text>
-            <Text>Action</Text>
-            <Text>Points Left</Text>
-
-        </View>
             <FlatList
               data={historyData}
               renderItem={({item})=><RewardHistoryItem item={item}/>}
