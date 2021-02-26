@@ -18,6 +18,8 @@ import {
   PermissionsAndroid,
   NativeModules,
 } from 'react-native';
+import ProgressCircle from 'react-native-progress-circle'
+
 import {Spinner} from '../common'
 import { translate } from '../../i18n';
 import CartBadge from '../cart/CartBadge';
@@ -31,6 +33,7 @@ import {
 
  import styles from './styles';
 import { Item } from './Item';
+import GlobalStyle from '../../utils/GlobalStyles';
 
 const RewardHistoryScreen = (props) => {
 
@@ -80,6 +83,45 @@ useEffect(()=>{
   return (
      <View style={[CommonStyle.paddingTB20,styles.emptyListContainerStyle]}>
 
+      <View style={[CommonStyle.VerticalCenter,CommonStyle.HorizontalCenter,CommonStyle.marginTB20]}>
+        <Image style={[styles.Icon,CommonStyle.marginBottom20]} resizeMode={'contain'} source={require("./.././../../resources/icons/rewardpoint.png")} />
+        <Text style={[CommonStyle.lBlackSemiBold]}>REWARDS POINTS</Text>
+      </View>
+
+        <View style={[styles.graphSec]}>
+            <View style={[CommonStyle.marginLR10]}>
+                <ProgressCircle
+                      percent={30}
+                      radius={H(55)}
+                      borderWidth={8}
+                      color={GlobalStyles.colorSet.btnPrimary}
+                      shadowColor={GlobalStyle.colorSet.white}
+                      bgColor={GlobalStyle.colorSet.BorderGrey}
+                  >
+                     <Text style={[CommonStyle.xsBlackRegular]}>Current Balance</Text>
+                     <Text style={[CommonStyle.xlBlackSemiBold]}>2628</Text>
+                  </ProgressCircle>
+            </View>
+
+            <View style={[CommonStyle.marginLR10]}>
+                <ProgressCircle
+                      percent={70}
+                      radius={H(55)}
+                      borderWidth={8}
+                      color={GlobalStyles.colorSet.btnPrimary}
+                      shadowColor={GlobalStyle.colorSet.white}
+                      bgColor={GlobalStyle.colorSet.BorderGrey}
+                  >
+                     <Text style={[CommonStyle.xsBlackRegular]}>Used Point</Text>
+                     <Text style={[CommonStyle.xlBlackSemiBold]}>628</Text>
+                  </ProgressCircle>
+            </View>
+             
+        </View>
+
+      <View style={[styles.Rewardstitle,CommonStyle.marginBottom5]}>
+        <Text style={[CommonStyle.LWhiteTitle]}>Expiring Points Breakdown</Text>
+      </View>
              
       <FlatList
           data={historyData}

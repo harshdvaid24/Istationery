@@ -252,7 +252,7 @@ class Cart extends Component {
     console.log('From Cart account',this.props.customer)
     console.log('CART REWARD',this.props.cartRewards);
     return (
-      <View style={[styles.container(theme),]}>
+      <View style={[styles.container(theme)]}>
       <KeyboardAwareScrollView
        extraHeight={H(150)}
        extraScrollHeight={0}
@@ -292,8 +292,8 @@ class Cart extends Component {
                 : (
        <View style={[styles.footer]}>
        {this.props.customer && 
-          <View style={{width:'100%',justifyContent:'center',alignItems:'center',paddingBottom:H(10)}}>
-          <Text>You can earn <Text style={{color:this.props.cartRewards?.caption_color}}>{this.props.cartRewards?.caption_text}</Text> for completing your purchase</Text>
+          <View style={[CommonStyle.VerticalCenter,CommonStyle.HorizontalCenter,CommonStyle.marginBottom10]}>
+              <Text style={[CommonStyle.sBlackRegular]}>You can earn <Text style={{color:this.props.cartRewards?.caption_color}}>{this.props.cartRewards?.caption_text}</Text> for completing this order</Text>
           </View>}
           <View style={[CommonStyle.FlexRow,CommonStyle.paddingLR10,CommonStyle.HorizontalCenter ]}>
           {
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
   content: {
     // height:WINDOW_HEIGHT-H(100),
      paddingBottom:H(100),
-    height:Platform.OS === 'ios'?WINDOW_HEIGHT-H(250):WINDOW_HEIGHT-H(200),
+    height:Platform.OS === 'ios'?WINDOW_HEIGHT-H(270):WINDOW_HEIGHT-H(220),
   },
   totals: theme => ({
     paddingTop: theme.spacing.small,
@@ -395,7 +395,7 @@ const styles = StyleSheet.create({
   //  position:'absolute',
    width:WINDOW_WIDTH,
   //  alignItems:'flex-end',
-   height:H(150),
+   height:H(170),
    paddingVertical:H(10),
    backgroundColor:GlobalStyle.colorSet.WhiteGrey,
   //  bottom:0

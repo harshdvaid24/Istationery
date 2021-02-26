@@ -62,6 +62,23 @@ export const DateFomat = (date) => {
    return formatedDate 
 }
 
+// mm/DD/YYYY
+export const DateFomat3 = (date) => {
+    var selected = date; 
+    var dd = selected.getDate(); 
+    var mm = selected.getMonth() + 1; 
+
+    var yyyy = selected.getFullYear(); 
+    if (dd < 10) { 
+        dd = '0' + dd; 
+    } 
+    if (mm < 10) { 
+        mm = '0' + mm; 
+    } 
+    var formatedDate = mm + '/' + dd + '/' + yyyy; 
+   return formatedDate 
+}
+
 
 // DD/Mon/YYYY
 export const DateFomat2 = (date) => {

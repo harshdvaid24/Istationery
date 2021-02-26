@@ -245,6 +245,10 @@ const CommonStyle = StyleSheet.create({
     height: W(100),
     width: W(100),
   },
+  Icon150: {
+    height: W(150),
+    width: W(150),
+  },
   Icon200: {
     height: W(200),
     width: W(200),
@@ -987,6 +991,11 @@ width100p:{width:'100%'},
 
 
 //Black
+xsBlackRegular:{
+  fontSize: W(10),
+  fontFamily: GlobalStyle.fontSet.Regular,
+  color: GlobalStyle.colorSet.black,
+},
 sBlackRegular:{
   fontSize: W(12),
   fontFamily: GlobalStyle.fontSet.Regular,
