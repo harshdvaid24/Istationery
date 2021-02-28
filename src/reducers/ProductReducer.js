@@ -18,6 +18,7 @@ import {
   MAGENTO_ATTRIBUTE_LOADING,
   SET_PRODUCT_REWARDS,
   RESET_PRODUCT_REWARDS,
+  MAGENTO_REWARDS_LOADING
 } from '../actions/types';
 import { getPriceFromChildren } from '../helper/product';
 
@@ -35,7 +36,7 @@ const INITIAL_STATE = {
       item_added_in_wishlist:false,
       attribute_loading:false,
       rewards_data:{},
-     
+      rewards_loading:false
     },
   },
   relatedProducts: {
@@ -218,6 +219,13 @@ export default (state = INITIAL_STATE, action) => {
       return{...state,current}
     }
    
+    case MAGENTO_REWARDS_LOADING:{
+      const current = {...state.current,rewards_loading:action.payload}
+      return{...state,current}
+    }
+   
+    
+
     default:
       return state;
   }

@@ -31,7 +31,8 @@ const _colorSet = {
   WhiteGrey: '#fafafa',
   red:'red',
   // btnPrimary:'#ff9016',
-  btnPrimary:'#E15815',
+  btnPrimary:'#FF5100',
+  backagroundOrange:'#ffdbc2',
   btnSecondary:'#850ef6',
   
   appBlack: '#686868',

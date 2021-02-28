@@ -82,6 +82,7 @@ import {
   RESET_FILTER_FOR_CATEGORY,
   APPLIED_FILTER,
   GET_REWARD_POINTS,
+  MAGENTO_REWARDS_LOADING,
   GET_REWARD_HISTORY
 } from './types';
 import { logError } from '../helper/logger';
@@ -1025,10 +1026,12 @@ export const clearEditAddress = () => {
 export const getProductRewards = (customer_id,product_id) =>{
   return async(dispatch)=>{
     dispatch({type:RESET_PRODUCT_REWARDS})
+    dispatch({type:MAGENTO_REWARDS_LOADING,payload:true})
     let data = {customer_id:customer_id,productId:product_id}
     await magento.admin.getProductRewardsData(data).then((res)=>{
       console.log('FROM REWARDS POINT DATA',res)
       dispatch({type:SET_PRODUCT_REWARDS,payload:res})
+      dispatch({type:MAGENTO_REWARDS_LOADING,payload:false})
     }).catch((err)=>{
       logError(err)
     })

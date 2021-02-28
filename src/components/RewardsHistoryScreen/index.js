@@ -40,7 +40,7 @@ const RewardHistoryScreen = (props) => {
 const dispatch = useDispatch();
 const customerData = useSelector(state => state.account.customer);
 const historyData = useSelector(state => state.account.reward_history)
-const loading = useSelector(state => state.wishlist.loading);
+const loading = useSelector(state => state.account.loading);
 
 useEffect(()=>{
   const unsubscribe = props.navigation.addListener('didFocus', () => {

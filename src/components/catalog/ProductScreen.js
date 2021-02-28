@@ -271,8 +271,14 @@ export const ProductScreen = props => {
       
       
       </View>
-      <View style={[CommonStyle.marginLR20,CommonStyle.marginTop30,CommonStyle.marginBottom20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
-       
+
+        <View style={[CommonStyle.FlexWrap,CommonStyle.marginLR20,CommonStyle.marginTop30]}> 
+            <Text style={[CommonStyle.lBlackSemiBold]} numberOfLines={2}>
+                      { props.navigation?.state?.params.title}
+                </Text>
+        </View>
+
+      <View style={[CommonStyle.marginLR20,CommonStyle.marginTop10,CommonStyle.marginBottom20,CommonStyle.alignContentLR,CommonStyle.FlexRow]}>
         {(isInStock=='0')?
           <View>
                <Text style={[CommonStyle.mRedRegular]}>{'Out of stock !'}</Text>
@@ -280,10 +286,22 @@ export const ProductScreen = props => {
         }
         
       </View>
-      {/* <View style={styles.stockcontainer}>
-      </View> */}
+        {
+          (current.rewards_loading)?<Spinner /> :<View>
+        {current.rewards_data && current.rewards_data.visible && 
+            <View style={[styles.rewardsContainer,CommonStyle.marginLR20]}>
+                <Text style={[CommonStyle.sBlackRegular]}> {'You can earn '}</Text>
+                <Text style={[CommonStyle.sPrimarySemiBold]} > {current.rewards_data.caption_text}{''}</Text>
+                <Text style={[CommonStyle.sBlackRegular]}> {' with this purchase!'}</Text>
+            </View>
+        }
+      </View>
+        }
+      <View>
 
-      <View style={CommonStyle.marginLR20}>{current.rewards_data && current.rewards_data.visible && <Text>Rewards : {current.rewards_data.caption_text}</Text>}</View>
+      </View>
+     
+      
       <View style={[CommonStyle.FlexRow,CommonStyle.marginLR20,CommonStyle.alignContentLR,CommonStyle.FlexWrap]}>
         {
           (Object.keys(currentProduct.attributes).length === 0)?
@@ -307,8 +325,8 @@ export const ProductScreen = props => {
       <Text style={styles.errorStyle(theme)}>{cart.errorMessage}</Text>
       <View style={[CommonStyle.marginLR20]}>
       {description !== '' ? (
-        <View style={styles.descriptionStyle}>
-          <Text bold type="subheading" style={styles.productDetailTitle}>
+        <View style={[styles.descriptionStyle]}>
+          <Text style={[CommonStyle.mBlackSemiBold,CommonStyle.marginBottom15]}>
             {translate('product.productDetailLabel')}
           </Text>
           <HTML 
@@ -317,7 +335,7 @@ export const ProductScreen = props => {
           source={{html:description}} 
           enableExperimentalPercentWidth={true}
           tagsStyles= {{ p: {marginBottom:H(20) },
-          img: {marginTop:30,  } }}
+          img: {marginTop:H(30)} }}
            />
         </View>
       ) : (
@@ -369,8 +387,8 @@ ProductScreen['navigationOptions'] = screenProps => ({
       </TouchableOpacity>
   ),
    headerTitle: () => <View style={[CommonStyle.headerTitle]}>
-     <Text style={[CommonStyle.lBlackRegular]} numberOfLines={2}>
-    { screenProps.navigation?.state?.params.title}
+     <Text style={[CommonStyle.lBlackSemiBold]} numberOfLines={1}>
+        {'Product Detail'}
      </Text>
    </View>,
   // title:screenProps.navigation?.state?.params.title ,
@@ -420,6 +438,15 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-between'
   },
+  rewardsContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    height:H(37),
+    borderRadius:H(5),
+    marginHorizontal:W(20),
+    backgroundColor:GlobalStyle.colorSet.backagroundOrange
+  },
   qtyContainer:{
     flexDirection:'row',
     alignItems:'center',
@@ -433,6 +460,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     width:"90%",
     alignSelf: 'center',
+    backgroundColor:GlobalStyle.colorSet.btnPrimary,
   },
   addTocartSection:{
     height:H(60),
@@ -453,10 +481,10 @@ const styles = StyleSheet.create({
   descriptionTitleStyle: theme => ({
     color:theme.colors.black,
     fontSize:16,
-    marginTop:30,
+    // marginTop:30,
   }),
   descriptionStyle: theme => ({
-    marginHorizontal:20,
+    marginHorizontal:W(20),
     padding: theme.spacing.large,
     lineHeight: 25,
   }),

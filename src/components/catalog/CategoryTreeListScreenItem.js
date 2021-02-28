@@ -9,7 +9,7 @@ import { setCurrentCategory, resetFilters } from '../../actions/index';
 import { NAVIGATION_CATEGORY_PATH } from '../../navigation/routes';
 import NavigationService from '../../navigation/NavigationService';
 import { ThemeContext } from '../../theme';
-
+import { magentoOptions } from '../../config/magento';
 import CommonStyle from '../../utils/CommonStyle'
 import GlobalStyles,{W,H} from '../../utils/GlobalStyles'
 const CategoryTreeListScreenItem = (props) => {
@@ -34,6 +34,7 @@ const CategoryTreeListScreenItem = (props) => {
    
     const { category } = props;
     console.log("category:",category);
+    
     dispatch(resetFilters());
     dispatch(setCurrentCategory({ category }));
     NavigationService.navigate(NAVIGATION_CATEGORY_PATH, {
@@ -70,12 +71,16 @@ const CategoryTreeListScreenItem = (props) => {
 
   const renderItem = () => {
     const { category } = props;
+    console.log("renderItem:category:",category);
     const titleStyle = {
       fontSize:16,
       paddingLeft: 10 * category.level,
       color:'#92959e'
     };
-
+       let baseUrl =  magentoOptions.url;
+   
+    const URL = baseUrl+'pub/media/wysiwyg/mobile/categories/'+category.id+'.png';
+    console.log("renderItem:URL:",URL);
     return (
       <View style={[]}>
       {
@@ -85,7 +90,7 @@ const CategoryTreeListScreenItem = (props) => {
           style={[styles.rowStyles(theme)]}
         >
           <View style={[CommonStyle.width90p,CommonStyle.FlexRow,CommonStyle.HorizontalCenter]}>
-          <Image resizeMode={'stretch'} style={[CommonStyle.Icon40,{position:'absolute',top:H(14),zIndex:2,left:W(30)}]} source={require("./.././../../resources/icons/wishlist.png")} />
+          <Image resizeMode={'stretch'} style={[CommonStyle.Icon40,{position:'absolute',top:H(14),zIndex:2,left:W(30)}]} source={{uri:URL}} />
              <Image resizeMode={'stretch'} style={[{height:H(60),width:W(120)}]} source={require("./.././../../resources/icons/right_slider.png")} />
              <View style={[CommonStyle.width70p]}>
                 <Text numberOfLines={1} style={[CommonStyle.mBlackRegular,CommonStyle.marginL10]} >{category.name.toUpperCase()}</Text>
