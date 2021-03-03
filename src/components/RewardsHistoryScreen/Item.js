@@ -48,7 +48,7 @@ export const Item = ({item}) => {
              
       <View  style={[styles.Col1,CommonStyle.alignItemsRight]}>
                         <View  style={[CommonStyle.FlexRow,CommonStyle.HorizontalCenter]}>
-                           <Text numberOfLines={1} style={[CommonStyle.mGreyRegular]}>{parseFloat(item.item.points_left).toFixed(2)}</Text>
+                           <Text numberOfLines={1} style={[CommonStyle.mGreyRegular]}>{parseFloat(item.item.amount).toFixed(2)}</Text>
                         </View>
               </View>  
               <View  style={[CommonStyle.alignItemsLeft,styles.Col2]}>

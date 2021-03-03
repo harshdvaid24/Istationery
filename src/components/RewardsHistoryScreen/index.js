@@ -36,17 +36,45 @@ import { Item } from './Item';
 import GlobalStyle from '../../utils/GlobalStyles';
 
 const RewardHistoryScreen = (props) => {
-
+console.log("RewardHistoryScreen:",props);
 const dispatch = useDispatch();
 const customerData = useSelector(state => state.account.customer);
 const historyData = useSelector(state => state.account.reward_history)
 const loading = useSelector(state => state.account.loading);
 
+const [total, setTotal] = useState(0);
+const [usedPoints, setUsedPoints] = useState(0);
+const currentBalance = props.navigation?.state?.params?.bal;
+
+const [BalPercentage, setBalPercentage] = useState(0)
+const [usedPercentage, setUsedPercentage] = useState(0)
+
+
 useEffect(()=>{
   const unsubscribe = props.navigation.addListener('didFocus', () => {
     dispatch(getRewardHistory(customerData?.id))
   });
-},[])
+    let temp_total = 0;
+    let temp_usedPoints = 0;
+
+  
+  if(historyData.length!=0){
+   
+    historyData.map((Item)=>{
+      if(Item.amount<0){
+        temp_usedPoints=temp_usedPoints+Math.abs(Item.amount); 
+      }
+    })
+    setUsedPoints(temp_usedPoints);
+    setTotal(temp_usedPoints+parseInt(currentBalance));
+    setBalPercentage((parseInt(currentBalance)/total)*100);
+    setUsedPercentage((usedPoints/total)*100);
+  }
+
+
+
+
+},[historyData])
 
 
 
@@ -91,7 +119,7 @@ useEffect(()=>{
         <View style={[styles.graphSec]}>
             <View style={[CommonStyle.marginLR10]}>
                 <ProgressCircle
-                      percent={30}
+                      percent={BalPercentage}
                       radius={H(55)}
                       borderWidth={8}
                       color={GlobalStyles.colorSet.btnPrimary}
@@ -99,13 +127,14 @@ useEffect(()=>{
                       bgColor={GlobalStyle.colorSet.BorderGrey}
                   >
                      <Text style={[CommonStyle.xsBlackRegular]}>Current Balance</Text>
-                     <Text style={[CommonStyle.xlBlackSemiBold]}>2628</Text>
+                     <Text style={[CommonStyle.xlBlackSemiBold]}>{parseInt(currentBalance)}</Text>
+                     {/* <Text style={[CommonStyle.xlBlackSemiBold]}>{parseInt(total)}</Text> */}
                   </ProgressCircle>
             </View>
 
             <View style={[CommonStyle.marginLR10]}>
                 <ProgressCircle
-                      percent={70}
+                      percent={usedPercentage}
                       radius={H(55)}
                       borderWidth={8}
                       color={GlobalStyles.colorSet.btnPrimary}
@@ -113,7 +142,7 @@ useEffect(()=>{
                       bgColor={GlobalStyle.colorSet.BorderGrey}
                   >
                      <Text style={[CommonStyle.xsBlackRegular]}>Used Point</Text>
-                     <Text style={[CommonStyle.xlBlackSemiBold]}>628</Text>
+                     <Text style={[CommonStyle.xlBlackSemiBold]}>{usedPoints}</Text>
                   </ProgressCircle>
             </View>
              

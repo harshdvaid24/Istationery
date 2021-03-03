@@ -133,7 +133,7 @@ const Account = ({
   }
 
   const onRewardHistoryClick = () =>{
-    navigation.navigate(NAVIGATION_REWARD_HISTORY)
+    navigation.navigate(NAVIGATION_REWARD_HISTORY,{bal:rewardPoints})
   }
 
   
